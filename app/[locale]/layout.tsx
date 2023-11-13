@@ -11,11 +11,10 @@ import siteMetadata from '@/data/siteMetadata'
 import { ThemeProviders } from './theme-providers'
 import { Metadata } from 'next'
 import { dir } from 'i18next'
-
-const languages = ['en', 'fr']
+import { locales } from './i18n/settings'
 
 export async function generateStaticParams() {
-  return languages.map((locale) => ({ locale }))
+  return locales.map((locale) => ({ locale }))
 }
 
 const space_grotesk = Space_Grotesk({
