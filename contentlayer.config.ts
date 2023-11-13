@@ -22,7 +22,6 @@ import rehypePresetMinify from 'rehype-preset-minify'
 import siteMetadata from './data/siteMetadata'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer.js'
 
-
 const root = process.cwd()
 const isProduction = process.env.NODE_ENV === 'production'
 
@@ -46,24 +45,24 @@ const computedFields: ComputedFields = {
 /**
  * Count the occurrences of all tags across blog posts and write to json file
  */
- function createTagCount(allBlogs) {
+function createTagCount(allBlogs) {
   const tagCount = {
     fr: {},
     en: {},
-  };
+  }
 
   allBlogs.forEach((file) => {
     if (file.tags && (!isProduction || file.draft !== true)) {
       file.tags.forEach((tag) => {
-        const formattedTag = GithubSlugger.slug(tag);
+        const formattedTag = GithubSlugger.slug(tag)
         if (file.language === 'fr') {
-          tagCount.fr[formattedTag] = (tagCount.fr[formattedTag] || 0) + 1;
+          tagCount.fr[formattedTag] = (tagCount.fr[formattedTag] || 0) + 1
         } else if (file.language === 'en') {
-          tagCount.en[formattedTag] = (tagCount.en[formattedTag] || 0) + 1;
+          tagCount.en[formattedTag] = (tagCount.en[formattedTag] || 0) + 1
         }
-      });
+      })
     }
-  });
+  })
 
   writeFileSync('./app/[locale]/tag-data.json', JSON.stringify(tagCount))
 }
@@ -82,7 +81,6 @@ function createSearchIndex(allBlogs) {
 }
 
 export const Blog = defineDocumentType(() => ({
-
   name: 'Blog',
   filePathPattern: 'blog/**/*.mdx',
   contentType: 'mdx',
@@ -95,14 +93,14 @@ export const Blog = defineDocumentType(() => ({
     draft: { type: 'boolean' },
     summary: { type: 'string' },
     images: { type: 'json' },
-    authors: { type: 'list', of: { type: 'string' } , required: true  },
+    authors: { type: 'list', of: { type: 'string' }, required: true },
     layout: { type: 'string' },
     bibliography: { type: 'string' },
     canonicalUrl: { type: 'string' },
   },
   computedFields: {
     ...computedFields,
-  
+
     structuredData: {
       type: 'json',
       resolve: (doc) => ({
@@ -160,9 +158,9 @@ export default makeSource({
       rehypePresetMinify,
     ],
   },
-/*   onSuccess: async (importData) => {
-     const { allBlogs } = await importData()
-     createTagCount(allBlogs)
-     createSearchIndex(allBlogs)
-   }, */
+  onSuccess: async (importData) => {
+    const { allBlogs } = await importData()
+    createTagCount(allBlogs)
+    createSearchIndex(allBlogs)
+  },
 })
