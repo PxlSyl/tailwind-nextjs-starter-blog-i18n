@@ -1,0 +1,28 @@
+{
+    "greeting": "Les plus récents",
+    "description": "Un blog crée grâce à Next.js, i18n et Tailwind.css",
+    "more": "Lire la suite",
+    "all": "Tous les articles",
+
+    "moreaboutme": "Plus à mon sujet",
+   
+    "featured": "A la une",
+    "morefeatured": "Plus d'articles à la une",
+    "morerecent": "Plus d'articles récents",
+    
+    "search": "Recherche",
+    "comment": "Charger les commentaires",
+    "pub": "Publié le",
+    "authors": "Auteurs",
+    "name": "Nom",
+    "nexta": "Article Suivant",
+    "preva": "Article Précédent",
+    "nextp": "Suivant",
+    "prevp": "Précédent",
+    "of": "sur",
+    "back": "Retour sur le blog",
+    "twitter": "Discuter sur Twitter",
+    "github": "Voir sur GitHub",
+    "draft": "En Chantier",
+    "noposts": "Aucun article trouvé"
+}

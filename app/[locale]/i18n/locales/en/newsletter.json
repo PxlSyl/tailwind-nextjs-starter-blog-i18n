@@ -1,0 +1,9 @@
+{
+  "mail": "Email address",
+  "title": "Subscribe to the newsletter",
+  "messageError": "Your e-mail adress is invalid or you are already subscribed!",
+  "placeholderSuccess": "You're subscribed !  🎉",
+  "placeholderDefault": "Enter your email",
+  "buttonSuccess": "Thank you!",
+  "buttonDefault": "Sign up"
+}
