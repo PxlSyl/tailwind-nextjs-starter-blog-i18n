@@ -41,7 +41,7 @@ export const SearchProvider = ({ children }) => {
               keywords: post?.summary || '',
               section: 'Blog',
               subtitle: post.tags.join(', '),
-              perform: () => router.push(`/${locale}${post.path}`),
+              perform: () => router.push(`/${locale}/${post.path}`),
             }))
         },
       }}
