@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import siteMetadata from '@/data/siteMetadata'
+import { maintitle, maindescription } from '@/data/localeMetadata'
 
 interface PageSEOProps {
   title: string
@@ -9,20 +10,26 @@ interface PageSEOProps {
   [key: string]: any
 }
 
-export function genPageMetadata({ title, description, image, ...rest }: PageSEOProps): Metadata {
+export function genPageMetadata({
+  title,
+  description,
+  image,
+  params: { locale },
+  ...rest
+}: PageSEOProps): Metadata {
   return {
     title,
     openGraph: {
-      title: `${title} | ${siteMetadata.title}`,
-      description: description || siteMetadata.description,
+      title: `${title} | ${maintitle[locale]}`,
+      description: description || maindescription[locale],
       url: './',
-      siteName: siteMetadata.title,
+      siteName: maintitle[locale],
       images: image ? [image] : [siteMetadata.socialBanner],
-      locale: 'en',
+      locale: locale,
       type: 'website',
     },
     twitter: {
-      title: `${title} | ${siteMetadata.title}`,
+      title: `${title} | ${maintitle[locale]}`,
       card: 'summary_large_image',
       images: image ? [image] : [siteMetadata.socialBanner],
     },

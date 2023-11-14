@@ -8,7 +8,7 @@ import Header from '@/components/Header'
 import SectionContainer from '@/components/SectionContainer'
 import Footer from '@/components/Footer'
 import siteMetadata from '@/data/siteMetadata'
-import { title, description } from '@/data/localeMetadata'
+import { maintitle, maindescription } from '@/data/localeMetadata'
 import { ThemeProviders } from './theme-providers'
 import { Metadata } from 'next'
 import { dir } from 'i18next'
@@ -28,17 +28,17 @@ export async function generateMetadata({ params: { locale } }): Promise<Metadata
   return {
     metadataBase: new URL(siteMetadata.siteUrl),
     title: {
-      default: title[locale],
-      template: `%s | ${title[locale]}`,
+      default: maintitle[locale],
+      template: `%s | ${maintitle[locale]}`,
     },
-    description: description[locale],
+    description: maindescription[locale],
     openGraph: {
-      title: title[locale],
-      description: description[locale],
+      title: maintitle[locale],
+      description: maindescription[locale],
       url: './',
-      siteName: title[locale],
+      siteName: maintitle[locale],
       images: [siteMetadata.socialBanner],
-      locale: siteMetadata.locale,
+      locale: locale,
       type: 'website',
     },
     alternates: {
@@ -59,7 +59,7 @@ export async function generateMetadata({ params: { locale } }): Promise<Metadata
       },
     },
     twitter: {
-      title: `${siteMetadata.title}.${locale}`,
+      title: maintitle[locale],
       card: 'summary_large_image',
       images: [siteMetadata.socialBanner],
     },

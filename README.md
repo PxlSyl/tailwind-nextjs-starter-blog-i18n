@@ -25,4 +25,8 @@ Things to do/missing :
 
 Everything else is currently working as expected.
 
+Possible SEO solution (not integrated yet) for i18n integration:
+
+- [next-roots](https://github.com/svobik7/next-roots)
+
 Any help for improvments and/or bug report is welcome!

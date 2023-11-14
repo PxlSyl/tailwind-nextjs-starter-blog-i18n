@@ -1,6 +1,6 @@
 import 'css/prism.css'
 import 'katex/dist/katex.css'
-
+import { Metadata } from 'next'
 import { components } from '@/components/MDXComponents'
 import { MDXLayoutRenderer } from 'pliny/mdx-components'
 import { sortPosts, coreContent, allCoreContent } from 'pliny/utils/contentlayer'
@@ -9,8 +9,8 @@ import type { Authors, Blog } from 'contentlayer/generated'
 import PostSimple from '@/layouts/PostSimple'
 import PostLayout from '@/layouts/PostLayout'
 import PostBanner from '@/layouts/PostBanner'
-import { Metadata } from 'next'
 import siteMetadata from '@/data/siteMetadata'
+import { maintitle } from '@/data/localeMetadata'
 import { createTranslation } from 'app/[locale]/i18n/server'
 import { notFound } from 'next/navigation'
 
@@ -54,7 +54,7 @@ export async function generateMetadata({
     openGraph: {
       title: post.title,
       description: post.summary,
-      siteName: siteMetadata.title,
+      siteName: maintitle[locale],
       locale: post.language,
       type: 'article',
       publishedTime: publishedAt,

@@ -1,12 +1,25 @@
+import { Metadata } from 'next'
 import Link from '@/components/Link'
 import Tag from '@/components/Tag'
 import { slug } from 'github-slugger'
 import tagData from 'app/[locale]/tag-data.json'
 import { genPageMetadata } from 'app/[locale]/seo'
+import { createTranslation } from '../i18n/server'
 
-export const metadata = genPageMetadata({ title: 'Tags', description: 'Things I blog about' })
+type Props = {
+  params: { locale: any }
+}
 
-export default async function Page({ params: { locale } }) {
+export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
+  const { t } = await createTranslation(locale, 'SEO')
+  return genPageMetadata({
+    title: 'Tags',
+    description: t('tags'),
+    params: { locale: locale },
+  })
+}
+
+export default async function Page({ params: { locale } }: Props) {
   const tagCounts = tagData[locale]
   const tagKeys = Object.keys(tagCounts)
 

@@ -4,12 +4,12 @@ type Metadata = {
   [locale: string]: string
 }
 
-export const title: Metadata = {
+export const maintitle: Metadata = {
   en: siteMetadata.titleEn,
   fr: siteMetadata.titleFr,
 }
 
-export const description: Metadata = {
+export const maindescription: Metadata = {
   en: siteMetadata.descriptionEn,
   fr: siteMetadata.descriptionFr,
 }

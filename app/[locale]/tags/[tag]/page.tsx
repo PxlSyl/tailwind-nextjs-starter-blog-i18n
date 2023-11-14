@@ -1,3 +1,4 @@
+import { Metadata } from 'next'
 import { slug } from 'github-slugger'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 import siteMetadata from '@/data/siteMetadata'
@@ -5,13 +6,21 @@ import ListLayout from '@/layouts/ListLayoutWithTags'
 import { allBlogs } from 'contentlayer/generated'
 import tagData from 'app/[locale]/tag-data.json'
 import { genPageMetadata } from 'app/[locale]/seo'
-import { Metadata } from 'next'
+import { maintitle } from '@/data/localeMetadata'
 
-export async function generateMetadata({ params: { tag, locale } }): Promise<Metadata> {
+type Props = {
+  params: { tag: string; locale: any }
+}
+
+export async function generateMetadata({ params: { tag, locale } }: Props): Promise<Metadata> {
   const dtag = decodeURI(tag)
+  function capitalizeFirstLetter(str: string): string {
+    return str.charAt(0).toUpperCase() + str.slice(1)
+  }
+  const capitalizedDtag = capitalizeFirstLetter(dtag)
   return genPageMetadata({
-    title: dtag,
-    description: `${siteMetadata.title} ${dtag} tagged content`,
+    title: capitalizedDtag,
+    description: `${maintitle[locale]} ${dtag} tagged content`,
     locale: locale,
     alternates: {
       canonical: './',
@@ -19,6 +28,7 @@ export async function generateMetadata({ params: { tag, locale } }): Promise<Met
         'application/rss+xml': `${siteMetadata.siteUrl}/tags/${dtag}/feed.xml`,
       },
     },
+    params: { locale: locale },
   })
 }
 
