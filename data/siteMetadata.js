@@ -1,11 +1,9 @@
-/* @type {import("pliny/config").PlinyConfig } */
+/** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  titleEn: 'Next.js i18n Starter Blog',
-  titleFr: 'Starter Blog Next.js i18n',
+  title: 'Next.js i18n Starter Blog',
   author: 'Tails Azimuth',
   headerTitle: 'TailwindBlog',
-  descriptionEn: 'A blog created with Next.js, i18n and Tailwind.css',
-  descriptionFr: 'Un blog crée avec tailwind, i18n et next.js',
+  description: 'A blog created with Next.js, i18n and Tailwind.css',
   language: 'en' || 'fr',
   theme: 'system', // system, dark or light
   siteUrl: 'https://tailwind-nextjs-starter-blog-i18n.vercel.app/',

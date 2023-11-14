@@ -1,15 +1,13 @@
-import siteMetadata from './siteMetadata'
-
 type Metadata = {
   [locale: string]: string
 }
 
 export const maintitle: Metadata = {
-  en: siteMetadata.titleEn,
-  fr: siteMetadata.titleFr,
+  en: 'Next.js i18n Starter Blog',
+  fr: 'Starter Blog Next.js i18n',
 }
 
 export const maindescription: Metadata = {
-  en: siteMetadata.descriptionEn,
-  fr: siteMetadata.descriptionFr,
+  en: 'A blog created with Next.js, i18n and Tailwind.css',
+  fr: 'Un blog crée avec tailwind, i18n et next.js',
 }
