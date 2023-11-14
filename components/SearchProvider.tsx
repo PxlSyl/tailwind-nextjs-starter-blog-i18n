@@ -5,10 +5,12 @@ import { useParams, useRouter } from 'next/navigation'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import { Blog } from 'contentlayer/generated'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
+import { useTranslation } from 'app/[locale]/i18n/client'
 
 export const SearchProvider = ({ children }) => {
   const router = useRouter()
   const locale = useParams()?.locale as LocaleTypes
+  const { t } = useTranslation(locale, '')
   return (
     <KBarSearchProvider
       kbarConfig={{
@@ -39,7 +41,7 @@ export const SearchProvider = ({ children }) => {
               id: post.path,
               name: post.title,
               keywords: post?.summary || '',
-              section: 'Blog',
+              section: t('content'),
               subtitle: post.tags.join(', '),
               perform: () => router.push(`/${locale}/${post.path}`),
             }))
