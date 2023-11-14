@@ -1,4 +1,4 @@
-/** @type {import("pliny/config").PlinyConfig } */
+/* @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
   titleEn: 'Next.js i18n Starter Blog',
   titleFr: 'Starter Blog Next.js i18n',
