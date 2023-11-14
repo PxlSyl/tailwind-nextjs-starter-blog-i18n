@@ -42,5 +42,5 @@ export function middleware(request: NextRequest) {
 export const config = {
   // Do not run the middleware on the following paths
   matcher:
-  '/((?!api|static|.*\\..*|_next).*)',
+  '/((?!api|static|.*\\..*|_next).*)|favicon.ico',
 };
