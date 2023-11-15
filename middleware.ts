@@ -35,5 +35,5 @@ export const config = {
   // Do not run the middleware on the following paths
   // prettier-ignore
   matcher:
-  '/((?!api|static|data|css|scripts|.*\\..*|_next).*|favicon.ico)',
+  '/((?!api|static|data|css|scripts|.*\\..*|_next).*|robots.txt|sitemap.xml|favicon.ico)',
 }
