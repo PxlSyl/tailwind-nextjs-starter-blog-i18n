@@ -47,8 +47,8 @@ const Header = () => {
             </Link>
           ))}
         <SearchButton />
-        <LangSwitch />
         <ThemeSwitch />
+        <LangSwitch />
         <MobileNav />
       </div>
     </header>
