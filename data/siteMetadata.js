@@ -4,7 +4,7 @@ const siteMetadata = {
   author: 'Tails Azimuth',
   headerTitle: 'TailwindBlog',
   description: 'A blog created with Next.js, i18n and Tailwind.css',
-  language: 'en' || 'fr',
+  language: 'en',
   theme: 'system', // system, dark or light
   siteUrl: 'https://tailwind-nextjs-starter-blog-i18n.vercel.app/',
   siteRepo: 'https://github.com/PxlSyl/tailwind-nextjs-starter-blog-i18n',
@@ -17,7 +17,7 @@ const siteMetadata = {
   facebook: 'https://facebook.com',
   youtube: 'https://youtube.com',
   linkedin: 'https://www.linkedin.com',
-  locale: 'en' || 'fr',
+  locale: 'en',
   analytics: {
     // If you want to use an analytics provider you have to add it to the
     // content security policy in the `next.config.js` file.
