@@ -22,7 +22,7 @@ export default async function BlogPage({ params: { locale } }: Props) {
   const { t } = await createTranslation(locale, 'home')
   const posts = allCoreContent(sortPosts(allBlogs))
   // Filter posts based on the current locale
-  const filteredPosts = posts.filter((post) => post.language === locale)
+  const filteredPosts = posts.filter((post) => post.draft === false && post.language === locale)
   const pageNumber = 1
   const initialDisplayPosts = filteredPosts.slice(
     POSTS_PER_PAGE * (pageNumber - 1),
