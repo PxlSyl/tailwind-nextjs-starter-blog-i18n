@@ -25,6 +25,8 @@ Things to do/missing :
 
 - Fix urls (remove /blog/fr or /blog/en to /blog/ )
 
+- Fix robots.txt file
+
 Everything else is currently working as expected.
 
 I had to make significant changes regarding SEO within the pages, but I ended up finding a solution that worked. Here is another possible solution for i18n integration:
