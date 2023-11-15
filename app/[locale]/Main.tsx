@@ -5,9 +5,23 @@ import { formatDate } from 'pliny/utils/formatDate'
 import NewsletterForm from '@/components/NewsletterForm'
 import { createTranslation } from './i18n/server'
 
+interface Post {
+  slug: string
+  date: string
+  title: string
+  summary?: string | undefined
+  tags: string[]
+  language: string
+}
+
+interface HomeProps {
+  posts: Post[]
+  params: { locale: any }
+}
+
 const MAX_DISPLAY = 5
 
-export default async function Home({ posts, params: { locale } }) {
+export default async function Home({ posts, params: { locale } }: HomeProps) {
   const { t } = await createTranslation(locale, 'home')
   return (
     <>

@@ -1,5 +1,6 @@
 'use client'
 // use this component in layout.tsx to customize kbar search
+import { ReactNode } from 'react'
 import { KBarSearchProvider } from 'pliny/search/KBar'
 import { useParams, useRouter } from 'next/navigation'
 import { CoreContent } from 'pliny/utils/contentlayer'
@@ -7,7 +8,11 @@ import { Blog } from 'contentlayer/generated'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { useTranslation } from 'app/[locale]/i18n/client'
 
-export const SearchProvider = ({ children }) => {
+interface Props {
+  children: ReactNode
+}
+
+export const SearchProvider = ({ children }: Props) => {
   const router = useRouter()
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, '')

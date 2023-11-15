@@ -1,7 +1,12 @@
 import Link from 'next/link'
 import { slug } from 'github-slugger'
 
-const Tag = ({ text, params: { locale } }) => {
+interface TagProps {
+  text: string
+  params: { locale: any }
+}
+
+const Tag: React.FC<TagProps> = ({ text, params: { locale } }) => {
   // Define the link URL based on the locale
   const tagLink = `/${locale}/tags/${slug(text)}`
 

@@ -3,7 +3,11 @@ import siteMetadata from '@/data/siteMetadata'
 import SocialIcon from '@/components/social-icons'
 import { createTranslation } from 'app/[locale]/i18n/server'
 
-export default async function Footer({ params: { locale } }) {
+type Props = {
+  params: { locale: any }
+}
+
+export default async function Footer({ params: { locale } }: Props) {
   const { t } = await createTranslation(locale, 'footer')
   return (
     <footer>

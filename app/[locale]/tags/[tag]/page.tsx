@@ -32,7 +32,7 @@ export async function generateMetadata({ params: { tag, locale } }: Props): Prom
   })
 }
 
-export const generateStaticParams = async ({ params: { locale } }) => {
+export const generateStaticParams = async ({ params: { locale } }: Props) => {
   const tagCounts = tagData[locale]
   const tagKeys = Object.keys(tagCounts)
   const paths = tagKeys.map((tag) => ({
@@ -41,7 +41,7 @@ export const generateStaticParams = async ({ params: { locale } }) => {
   return paths
 }
 
-export default function TagPage({ params: { tag, locale } }) {
+export default function TagPage({ params: { tag, locale } }: Props) {
   const dtag = decodeURI(tag)
   // Capitalize first letter and convert space to dash
   const title = dtag[0].toUpperCase() + dtag.split(' ').join('-').slice(1)

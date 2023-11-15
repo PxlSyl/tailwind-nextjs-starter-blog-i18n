@@ -3,9 +3,13 @@ import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 import { allBlogs } from 'contentlayer/generated'
 import { createTranslation } from 'app/[locale]/i18n/server'
 
+type Props = {
+  params: { locale: any; page: string }
+}
+
 const POSTS_PER_PAGE = 5
 
-export const generateStaticParams = async ({ params: { locale } }) => {
+export const generateStaticParams = async ({ params: { locale } }: Props) => {
   const filteredPosts = allBlogs.filter((post) => post.language === locale)
   const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE)
   const paths = Array.from({ length: totalPages }, (_, i) => ({ page: (i + 1).toString() }))
@@ -13,7 +17,7 @@ export const generateStaticParams = async ({ params: { locale } }) => {
   return paths
 }
 
-export default async function Page({ params: { locale, page } }) {
+export default async function Page({ params: { locale, page } }: Props) {
   const { t } = await createTranslation(locale, 'home')
   const posts = allCoreContent(sortPosts(allBlogs))
   // Filter posts based on the current locale

@@ -11,7 +11,6 @@ import PostLayout from '@/layouts/PostLayout'
 import PostBanner from '@/layouts/PostBanner'
 import siteMetadata from '@/data/siteMetadata'
 import { maintitle } from '@/data/localeMetadata'
-import { createTranslation } from 'app/[locale]/i18n/server'
 import { notFound } from 'next/navigation'
 
 const defaultLayout = 'PostLayout'
@@ -77,8 +76,11 @@ export const generateStaticParams = async () => {
   return paths
 }
 
-export default async function Page({ params: { slug, locale } }) {
-  const { t } = await createTranslation(locale, 'home')
+interface PageProps {
+  params: { slug: string[]; locale: any }
+}
+
+export default async function Page({ params: { slug, locale } }: PageProps) {
   const dslug = decodeURI(slug.join('/'))
   // Filter out drafts in production + locale filtering
   const sortedCoreContents = allCoreContent(
@@ -92,10 +94,12 @@ export default async function Page({ params: { slug, locale } }) {
   const prev = sortedCoreContents[postIndex + 1]
   const next = sortedCoreContents[postIndex - 1]
   const post = allBlogs.filter((p) => p.language === locale).find((p) => p.slug === dslug) as Blog
-  const author = allAuthors.find((a) => a.default === true && a.language === locale) as Authors
+  const author = allAuthors.filter((p) => p.language === locale).find((p) => p.default === true)
   const authorList = post.authors || author
   const authorDetails = authorList.map((author) => {
-    const authorResults = allAuthors.find((p) => p.slug === author)
+    const authorResults = allAuthors
+      .filter((p) => p.language === locale)
+      .find((p) => p.slug === author)
     return coreContent(authorResults as Authors)
   })
   const mainContent = coreContent(post)
