@@ -5,6 +5,7 @@ import { fallbackLng } from './i18n/settings'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const siteUrl = siteMetadata.siteUrl
+  const secondLng = 'fr'
 
   const blogRoutes = allBlogs
     .filter((p) => p.language === fallbackLng)
@@ -13,10 +14,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: post.lastmod || post.date,
     }))
 
-  const blogRoutesFR = allBlogs
-    .filter((p) => p.language === 'fr')
+  const secondBlogRoutes = allBlogs
+    .filter((p) => p.language === secondLng)
     .map((post) => ({
-      url: `${siteUrl}/fr/${post.path}`,
+      url: `${siteUrl}/${secondLng}/${post.path}`,
       lastModified: post.lastmod || post.date,
     }))
 
@@ -25,10 +26,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date().toISOString().split('T')[0],
   }))
 
-  const routesFR = ['', 'blog', 'projects', 'tags', 'about'].map((route) => ({
-    url: `${siteUrl}/fr/${route}`,
+  const secondRoutes = ['', 'blog', 'projects', 'tags', 'about'].map((route) => ({
+    url: `${siteUrl}/${secondLng}/${route}`,
     lastModified: new Date().toISOString().split('T')[0],
   }))
 
-  return [...routes, ...routesFR, ...blogRoutes, ...blogRoutesFR]
+  return [...routes, ...secondRoutes, ...blogRoutes, ...secondBlogRoutes]
 }
