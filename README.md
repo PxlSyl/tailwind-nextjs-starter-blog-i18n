@@ -1,4 +1,4 @@
-Still in dev, will add a doc later! I was able to deploy if you want to have a look, but there's still some bugs/issues to fix.
+Still in dev, will add a doc later! I was able to deploy if you want to have a look, but there's still some small issues to fix.
 
 This repository is a fork from [Tailwind Nextjs Starter Blog](https://github.com/timlrx/tailwind-nextjs-starter-blog) with internationalization.
 
@@ -25,11 +25,11 @@ Things to do/missing :
 
 - Fix urls (remove /blog/fr or /blog/en to /blog/ )
 
-- Fix robots.txt file
-
 Everything else is currently working as expected.
 
-I had to make significant changes regarding SEO within the pages, but I ended up finding a solution that worked. Here is another possible solution for i18n integration:
+I had to make significant changes regarding SEO within the pages, but I ended up finding a solution that worked, with a perfect SEO score!
+
+Here is another possible solution for i18n integration regarding SEO, and even translated url :
 
 - [next-roots](https://github.com/svobik7/next-roots)
 
