@@ -8,7 +8,7 @@ import type { Blog } from 'contentlayer/generated'
 import Link from '@/components/Link'
 import Tag from '@/components/Tag'
 import tagData from 'app/[locale]/tag-data.json'
-import { fallbackLng } from 'app/[locale]/i18n/settings'
+import { fallbackLng } from 'app/[locale]/i18n/locales'
 import { useTranslation } from 'app/[locale]/i18n/client'
 
 interface PaginationProps {
