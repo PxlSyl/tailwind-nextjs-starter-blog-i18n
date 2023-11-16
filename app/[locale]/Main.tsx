@@ -36,7 +36,7 @@ export default async function Home({ posts, params: { locale } }: HomeProps) {
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
           {!posts.length && t('noposts')}
           {posts
-            .filter((p) => p.draft === false && p.language === locale)
+            .filter((p) => p.language === locale)
             .slice(0, MAX_DISPLAY)
             .map((post) => {
               const { slug, date, title, summary, tags, language } = post
