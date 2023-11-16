@@ -23,8 +23,6 @@ Things to do/missing :
 
 - Fix author not displayed in the new postLayout.
 
-- Fix urls (remove /blog/fr or /blog/en to /blog/ )
-
 Everything else is currently working as expected.
 
 I had to make significant changes regarding SEO within the pages, but I ended up finding a solution that worked, with a perfect SEO score!

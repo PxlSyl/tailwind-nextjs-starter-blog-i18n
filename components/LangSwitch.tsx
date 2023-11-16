@@ -4,19 +4,22 @@ import React from 'react'
 import { useRouter, usePathname, useParams, useSelectedLayoutSegments } from 'next/navigation'
 import { LocaleTypes, locales } from 'app/[locale]/i18n/settings'
 import { useTranslation } from 'app/[locale]/i18n/client'
+import { allBlogs } from '.contentlayer/generated'
 
 const LangSwitch = () => {
   const pathname = usePathname()
   const router = useRouter()
   const urlSegments = useSelectedLayoutSegments()
   const locale = useParams()?.locale as LocaleTypes
+
   const { t } = useTranslation(locale, '')
 
   const handleLocaleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newLocale = event.target.value
     const newUrl = `/${newLocale}/${urlSegments.join('/')}`
     // Shenanigan to redirect the user to the blog page when reading a post and changing the locale
-    if (pathname.includes(`/blog/${locale}`)) {
+    const postpath = allBlogs.find((p) => pathname.includes(p.slug) && p.language === locale)
+    if (postpath) {
       router.push(`/${newLocale}/blog`)
     }
     // This is used by the Header component which is used in `app/[locale]/layout.tsx` file,

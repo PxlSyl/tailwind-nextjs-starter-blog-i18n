@@ -1,8 +1,11 @@
+/* workaround script for windows users only, see there : https://github.com/timlrx/tailwind-nextjs-starter-blog/issues/704 
+command : node ./scripts/postContentlayer.mjs */
 import { writeFileSync } from 'fs'
 import GithubSlugger from 'github-slugger'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer.js'
 import { allBlogs } from '../.contentlayer/generated/index.mjs'
 import siteMetadata from '../data/siteMetadata.js'
+import { fallbackLng, secondLng } from '../app/[locale]/i18n/locales.js'
 
 const isProduction = process.env.NODE_ENV === 'production'
 
@@ -11,18 +14,18 @@ const isProduction = process.env.NODE_ENV === 'production'
  */
 export async function createTagCount() {
   const tagCount = {
-    fr: {},
-    en: {},
+    [fallbackLng]: {},
+    [secondLng]: {},
   }
 
   allBlogs.forEach((file) => {
     if (file.tags && (!isProduction || file.draft !== true)) {
       file.tags.forEach((tag) => {
         const formattedTag = GithubSlugger.slug(tag)
-        if (file.language === 'fr') {
-          tagCount.fr[formattedTag] = (tagCount.fr[formattedTag] || 0) + 1
-        } else if (file.language === 'en') {
-          tagCount.en[formattedTag] = (tagCount.en[formattedTag] || 0) + 1
+        if (file.language === fallbackLng) {
+          tagCount[fallbackLng][formattedTag] = (tagCount[fallbackLng][formattedTag] || 0) + 1
+        } else if (file.language === secondLng) {
+          tagCount[secondLng][formattedTag] = (tagCount[secondLng][formattedTag] || 0) + 1
         }
       })
     }
