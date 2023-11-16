@@ -21,6 +21,7 @@ import rehypePrismPlus from 'rehype-prism-plus'
 import rehypePresetMinify from 'rehype-preset-minify'
 import siteMetadata from './data/siteMetadata'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer.js'
+import { fallbackLng, secondLng } from 'app/[locale]/i18n/settings'
 
 const root = process.cwd()
 const isProduction = process.env.NODE_ENV === 'production'
@@ -44,21 +45,22 @@ const computedFields: ComputedFields = {
 
 /**
  * Count the occurrences of all tags across blog posts and write to json file
+ * Add logic to your own locales and project
  */
 function createTagCount(allBlogs) {
   const tagCount = {
-    fr: {},
-    en: {},
+    [fallbackLng]: {},
+    [secondLng]: {},
   }
 
   allBlogs.forEach((file) => {
     if (file.tags && (!isProduction || file.draft !== true)) {
-      file.tags.forEach((tag) => {
+      file.tags.forEach((tag: string) => {
         const formattedTag = GithubSlugger.slug(tag)
-        if (file.language === 'fr') {
-          tagCount.fr[formattedTag] = (tagCount.fr[formattedTag] || 0) + 1
-        } else if (file.language === 'en') {
-          tagCount.en[formattedTag] = (tagCount.en[formattedTag] || 0) + 1
+        if (file.language === fallbackLng) {
+          tagCount[fallbackLng][formattedTag] = (tagCount[fallbackLng][formattedTag] || 0) + 1
+        } else if (file.language === secondLng) {
+          tagCount[secondLng][formattedTag] = (tagCount[secondLng][formattedTag] || 0) + 1
         }
       })
     }
@@ -158,9 +160,9 @@ export default makeSource({
       rehypePresetMinify,
     ],
   },
-  onSuccess: async (importData) => {
+  /* onSuccess: async (importData) => {
     const { allBlogs } = await importData()
     createTagCount(allBlogs)
     createSearchIndex(allBlogs)
-  },
+  },*/
 })
