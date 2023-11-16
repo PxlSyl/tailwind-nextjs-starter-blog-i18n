@@ -1,6 +1,6 @@
 Still in dev, will add a doc later! I was able to deploy if you want to have a look, but there's still some small issues to fix.
 
-This repository is a fork from [Tailwind Nextjs Starter Blog](https://github.com/timlrx/tailwind-nextjs-starter-blog) with internationalization.
+This repository is a fork from the V.2 version (next-js app router) of [Tailwind Nextjs Starter Blog](https://github.com/timlrx/tailwind-nextjs-starter-blog) with internationalization.
 
 For translations, the chosen library is not next-translate as in the alternative V.1 from [GautierArcin](https://github.com/GautierArcin/tailwind-nextjs-starter-blog/tree/demo/next-translate), but the following libraries :
 
