@@ -90,6 +90,7 @@ export const Blog = defineDocumentType(() => ({
     title: { type: 'string', required: true },
     date: { type: 'date', required: true },
     language: { type: 'string', required: true },
+    localeid: { type: 'string', required: true },
     tags: { type: 'list', of: { type: 'string' }, default: [] },
     lastmod: { type: 'date' },
     draft: { type: 'boolean' },
@@ -160,9 +161,9 @@ export default makeSource({
       rehypePresetMinify,
     ],
   },
-  onSuccess: async (importData) => {
+  /* onSuccess: async (importData) => {
     const { allBlogs } = await importData()
     createTagCount(allBlogs)
     createSearchIndex(allBlogs)
-  },
+  },*/
 })
