@@ -26,9 +26,9 @@ const LangSwitch = () => {
     // Shenanigan to redirect the user to the blog page when reading a post and changing the locale
     const postpath = allBlogs.find((p: Blog) => pathname.includes(p.slug) && p.language === locale)
     const newpath = allBlogs.find(
-      (p: Blog) => p.localeid === postpath?.localeid && p.language === newLocale
+      (p: Blog) => p.localeid === postpath!.localeid && p.language === newLocale
     )
-    if (newpath?.localeid !== undefined) {
+    if (newpath) {
       router.push(`/${newLocale}/blog/${newpath.slug}`)
     } else if (postpath) {
       router.push(`/${newLocale}/blog`)
