@@ -1,13 +1,14 @@
 ---
-title: Sortie du Starter Blog Tailwind Next-js V 2.0
+title: Présentation du Starter Blog Tailwind Next-js V 2.0
 date: '2023-08-05'
 lastmod: '2023-08-05'
 language: fr
+localeid: 'releasev2'
 tags: ['next-js', 'tailwind', 'guide', 'fonctionnalites']
 authors: ['default']
 images: ['/static/images/twitter-card.png']
 draft: false
-summary: Sortie du modèle Starter Blog Tailwind Next-js v2.0, refactorisé avec le répertoire Nextjs App et la configuration des composants React Server. Découvrez les nouvelles fonctionnalités et comment migrer à partir de la V1.
+summary: Présentation du modèle Starter Blog Tailwind Next-js v2.0, refactorisé avec le répertoire Nextjs App et la configuration des composants React Server. Découvrez les nouvelles fonctionnalités et comment migrer à partir de la V1.
 ---
 
 ## Introduction
@@ -20,9 +21,9 @@ Bienvenue dans le nouveau modèle de Starter Blog Tailwind Nextjs v2.0. Cette ve
 
 ![Github Traffic](/static/images/github-traffic.png)
 
-Le modèle a été publié pour la première fois en janvier 2021 et a depuis été utilisé par des milliers d'utilisateurs. Il est présenté sur [Modèles Next.js](https://vercel.com/templates/next.js/tailwind-css-starter-blog), [Tailwind Awesome](https://www.tailwindawesome.com/resources /tailwind-nextjs-starter-blog) parmi d'autres sites de référencement. Il attire chaque jour plus de 200 visiteurs uniques, avec entre 1 500 et 2 000 pages vues, avec 1,3 000 forks et de nombreux autres clones.
+Le modèle a été publié pour la première fois en janvier 2021 et a depuis été utilisé par des milliers d'utilisateurs. Il a été présenté sur [Modèles Next.js](https://vercel.com/templates/next.js/tailwind-css-starter-blog), [Tailwind Awesome](https://www.tailwindawesome.com/resources /tailwind-nextjs-starter-blog) parmi d'autres sites de référencement. Il attire chaque jour plus de 200 visiteurs uniques, avec entre 1 500 et 2 000 pages vues, avec 13 000 forks et de nombreux autres clones.
 
-Un grand merci à la communauté d'utilisateurs et de contributeurs pour avoir fait de ce modèle un succès ! J'ai créé un petit montage vidéo des blogs (tout en nettoyant la liste dans le readme) pour mettre en valeur la diversité des blogs créés à l'aide du modèle et célébrer cette étape importante:
+Un grand merci à la communauté d'utilisateurs et de contributeurs pour avoir fait de ce modèle un succès ! J'ai créé un petit montage vidéo des blogs (tout en nettoyant la liste dans le readme) pour mettre en valeur la diversité des blogs créés grâce au modèle et célébrer cette étape importante:
 
 <video controls>
   <source
@@ -31,21 +32,21 @@ Un grand merci à la communauté d'utilisateurs et de contributeurs pour avoir f
   />
 </video>
 
-La version 2 s'appuie sur le succès de la version précédente et introduit de nombreuses nouvelles fonctionnalités et améliorations. La base de code a été refactorisée pour prendre en charge le répertoire d'applications Next.js et les composants du serveur React. Markdown / MDX est désormais traité à l'aide de Contentlayer, un SDK de contenu de type sécurisé qui valide et transforme votre contenu en données JSON de type sécurisé. Il s'intègre à Pline, une nouvelle bibliothèque qui fournit des composants Next.js prêts à l'emploi pour améliorer votre site statique avec des analyses, des commentaires et un abonnement à la newsletter. Un nouveau composant de recherche de palette de commandes (⌘-k) est également ajouté au modèle.
+La version 2 s'appuie sur le succès de la version précédente et introduit de nombreuses nouvelles fonctionnalités et améliorations. La base de code a été refactorisée pour prendre en charge l'app router de Next.js et les composants React server. Markdown / MDX est désormais traité à l'aide de Contentlayer, un SDK de contenu "typesafe" grâce à typescript, qui valide et transforme votre contenu en données JSON de type sécurisé. Il s'intègre à Pliny, une nouvelle bibliothèque qui fournit des composants Next.js prêts à l'emploi pour améliorer votre site statique avec des analyses, des commentaires et un abonnement à la newsletter. Un nouveau composant de recherche avec palette de commandes (⌘-k) a également été ajouté au modèle.
 
 Plongeons dans les nouvelles fonctionnalités et améliorations de la V2.
 
 ## Répertoire d'application Next.js et composants Server React
 
-Maintenant que le [Routeur d'application Next.js](https://nextjs.org/docs/app) est enfin stable et est principalement compatible avec Page Router, la base de code a été migrée vers une nouvelle configuration. Cela permet une approche de rendu hybride, avec l'utilisation de composants React Server générés côté serveur pour des chargements de pages plus rapides et des tailles de bundle plus petites, tout en conservant la possibilité de saupoudrer les composants React côté client pour l'interactivité.[^1]
+Maintenant que l'[app router de Next.js](https://nextjs.org/docs/app) est enfin stable et est principalement compatible avec Page Router, la base de code a été migrée vers une nouvelle configuration. Cela permet une approche de rendu hybride, avec l'utilisation de composants React Server générés côté serveur pour des chargements de pages plus rapides et des tailles de bundle plus petites, tout en conservant la possibilité d'intégrer les composants React côté client pour l'interactivité.[^1]
 
-Avec des possibilités supplémentaires vient un [nouveau paradigme](https://nextjs.org/docs/getting-started/react-essentials) à apprendre. J'ai migré la base de code pour utiliser au maximum les nouvelles fonctionnalités. Cela inclut des modifications dans la structure des dossiers, la division des composants en composants serveur et clients, l'exploitation de la récupération de données côté serveur et l'utilisation des [métadonnées] recommandées (https://nextjs.org/docs/app/building-your-application/optimizing/metadata ), API pour le SEO.
+Avec des possibilités supplémentaires survient un [nouveau paradigme](https://nextjs.org/docs/getting-started/react-essentials) et son lot d'apprentissage. J'ai migré la base de code pour utiliser au maximum les nouvelles fonctionnalités. Cela inclut des modifications dans la structure des dossiers, la division des composants en composants serveur et clients, l'exploitation de la récupération de données côté serveur et l'utilisation des [métadonnées] recommandées (https://nextjs.org/docs/app/building-your-application/optimizing/metadata ), API pour le SEO.
 
 Bien que cela simplifie dans une certaine mesure la base de code, cela rend aussi la migration à partir de l'ancienne base de code plus difficile. Si vous souhaitez migrer, je vous recommande de partir d'un nouveau modèle et de copier vos personnalisations et votre contenu existant. Consultez la section [recommandations de migration](#migration-recommendations) pour plus de détails.
 
 ## Typescript First
 
-La base de code a été migrée vers Typescript. Alors que la version précédente du modèle était disponible en Javascript et Typescript, j'ai décidé de réduire la charge de maintenance et de me concentrer sur Typescript. Cela permet également une meilleure vérification du type et une meilleure complétion du code dans les IDE.
+La base de code a été migrée vers Typescript. Alors que la version précédente du modèle était disponible en Javascript et Typescript, j'ai décidé de réduire la charge de maintenance et de me concentrer sur Typescript. Cela permet également une meilleure vérification de type et une meilleure complétion du code dans les IDE.
 
 Typescript correspond également parfaitement à notre nouveau processeur remark sécurisé - Contentlayer.
 

@@ -19,7 +19,12 @@ const LangSwitch = () => {
     const newUrl = `/${newLocale}/${urlSegments.join('/')}`
     // Shenanigan to redirect the user to the blog page when reading a post and changing the locale
     const postpath = allBlogs.find((p) => pathname.includes(p.slug) && p.language === locale)
-    if (postpath) {
+    const newpath = allBlogs.find(
+      (p) => p.localeid === postpath?.localeid && p.language === newLocale
+    )
+    if (newpath?.localeid !== undefined) {
+      router.push(`/${newLocale}/blog/${newpath.slug}`)
+    } else if (postpath) {
       router.push(`/${newLocale}/blog`)
     }
     // This is used by the Header component which is used in `app/[locale]/layout.tsx` file,
