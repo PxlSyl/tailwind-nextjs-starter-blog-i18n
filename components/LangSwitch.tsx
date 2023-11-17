@@ -1,4 +1,3 @@
-import React from 'react'
 import { useRouter, usePathname, useParams, useSelectedLayoutSegments } from 'next/navigation'
 import { LocaleTypes, locales } from 'app/[locale]/i18n/settings'
 import { useTranslation } from 'app/[locale]/i18n/client'
