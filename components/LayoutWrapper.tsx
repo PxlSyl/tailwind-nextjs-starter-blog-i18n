@@ -3,10 +3,11 @@ import SectionContainer from './SectionContainer'
 import Footer from './Footer'
 import { ReactNode } from 'react'
 import Header from './Header'
+import { LocaleTypes } from 'app/[locale]/i18n/settings'
 
 interface Props {
   children: ReactNode
-  params: { locale: any }
+  params: { locale: LocaleTypes }
 }
 
 const inter = Inter({

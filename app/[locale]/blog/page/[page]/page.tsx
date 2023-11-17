@@ -2,9 +2,10 @@ import ListLayout from '@/layouts/ListLayoutWithTags'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 import { allBlogs } from 'contentlayer/generated'
 import { createTranslation } from 'app/[locale]/i18n/server'
+import { LocaleTypes } from 'app/[locale]/i18n/settings'
 
 type Props = {
-  params: { locale: any; page: string }
+  params: { locale: LocaleTypes; page: string }
 }
 
 const POSTS_PER_PAGE = 5

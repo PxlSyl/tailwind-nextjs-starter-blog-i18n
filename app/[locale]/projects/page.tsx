@@ -3,9 +3,10 @@ import projectsData from '@/data/projectsData'
 import Card from '@/components/Card'
 import { genPageMetadata } from 'app/[locale]/seo'
 import { createTranslation } from '../i18n/server'
+import { LocaleTypes } from '../i18n/settings'
 
 type Props = {
-  params: { locale: any }
+  params: { locale: LocaleTypes }
 }
 
 export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {

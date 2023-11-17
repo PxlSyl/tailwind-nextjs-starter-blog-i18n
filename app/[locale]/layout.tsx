@@ -12,7 +12,7 @@ import { maintitle, maindescription } from '@/data/localeMetadata'
 import { ThemeProviders } from './theme-providers'
 import { Metadata } from 'next'
 import { dir } from 'i18next'
-import { locales } from './i18n/settings'
+import { LocaleTypes, locales } from './i18n/settings'
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }))
@@ -71,7 +71,7 @@ export default function RootLayout({
   params: { locale },
 }: {
   children: React.ReactNode
-  params: { locale: string }
+  params: { locale: LocaleTypes }
 }) {
   return (
     <html

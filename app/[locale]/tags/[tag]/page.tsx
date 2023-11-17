@@ -7,9 +7,10 @@ import { allBlogs } from 'contentlayer/generated'
 import tagData from 'app/[locale]/tag-data.json'
 import { genPageMetadata } from 'app/[locale]/seo'
 import { maintitle } from '@/data/localeMetadata'
+import { LocaleTypes } from 'app/[locale]/i18n/settings'
 
 type Props = {
-  params: { tag: string; locale: any }
+  params: { tag: string; locale: LocaleTypes }
 }
 
 export async function generateMetadata({ params: { tag, locale } }: Props): Promise<Metadata> {

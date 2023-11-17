@@ -2,9 +2,10 @@ import Link from './Link'
 import siteMetadata from '@/data/siteMetadata'
 import SocialIcon from '@/components/social-icons'
 import { createTranslation } from 'app/[locale]/i18n/server'
+import { LocaleTypes } from 'app/[locale]/i18n/settings'
 
 type Props = {
-  params: { locale: any }
+  params: { locale: LocaleTypes }
 }
 
 export default async function Footer({ params: { locale } }: Props) {

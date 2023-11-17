@@ -4,9 +4,10 @@ import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 import { allBlogs } from 'contentlayer/generated'
 import { genPageMetadata } from 'app/[locale]/seo'
 import { createTranslation } from '../i18n/server'
+import { LocaleTypes } from '../i18n/settings'
 
 type Props = {
-  params: { locale: any }
+  params: { locale: LocaleTypes }
 }
 
 const POSTS_PER_PAGE = 5

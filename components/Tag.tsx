@@ -1,9 +1,10 @@
 import Link from 'next/link'
 import { slug } from 'github-slugger'
+import { LocaleTypes } from 'app/[locale]/i18n/settings'
 
 interface TagProps {
   text: string
-  params: { locale: any }
+  params: { locale: LocaleTypes }
 }
 
 const Tag: React.FC<TagProps> = ({ text, params: { locale } }) => {

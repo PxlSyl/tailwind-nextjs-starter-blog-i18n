@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from './Image'
 import Link from './Link'
+import { LocaleTypes } from 'app/[locale]/i18n/settings'
 
 interface CardProps {
   title: string
@@ -8,7 +9,7 @@ interface CardProps {
   imgSrc?: string
   href?: string
   t: (key: string) => string
-  params: { locale: any }
+  params: { locale: LocaleTypes }
 }
 
 const Card: React.FC<CardProps> = ({ title, description, imgSrc, href, t, params: { locale } }) => (

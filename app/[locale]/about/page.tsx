@@ -5,9 +5,10 @@ import AuthorLayout from '@/layouts/AuthorLayout'
 import { coreContent } from 'pliny/utils/contentlayer'
 import { genPageMetadata } from 'app/[locale]/seo'
 import { createTranslation } from '../i18n/server'
+import { LocaleTypes } from '../i18n/settings'
 
 type Props = {
-  params: { locale: any }
+  params: { locale: LocaleTypes }
 }
 
 export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {

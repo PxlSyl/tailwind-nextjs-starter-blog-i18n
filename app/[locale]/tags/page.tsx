@@ -5,9 +5,10 @@ import { slug } from 'github-slugger'
 import tagData from 'app/[locale]/tag-data.json'
 import { genPageMetadata } from 'app/[locale]/seo'
 import { createTranslation } from '../i18n/server'
+import { LocaleTypes } from '../i18n/settings'
 
 type Props = {
-  params: { locale: any }
+  params: { locale: LocaleTypes }
 }
 
 export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {

@@ -12,6 +12,11 @@ import PostBanner from '@/layouts/PostBanner'
 import siteMetadata from '@/data/siteMetadata'
 import { maintitle } from '@/data/localeMetadata'
 import { notFound } from 'next/navigation'
+import { LocaleTypes } from 'app/[locale]/i18n/settings'
+
+interface PageProps {
+  params: { slug: string[]; locale: LocaleTypes }
+}
 
 const defaultLayout = 'PostLayout'
 const layouts = {
@@ -22,7 +27,7 @@ const layouts = {
 
 export async function generateMetadata({
   params: { slug, locale },
-}): Promise<Metadata | undefined> {
+}: PageProps): Promise<Metadata | undefined> {
   const dslug = decodeURI(slug.join('/'))
   const post = allBlogs.find((p) => p.slug === dslug && p.language === locale)
   if (!post) {
@@ -74,10 +79,6 @@ export async function generateMetadata({
 export const generateStaticParams = async () => {
   const paths = allBlogs.map((p) => ({ slug: p.slug.split('/') }))
   return paths
-}
-
-interface PageProps {
-  params: { slug: string[]; locale: any }
 }
 
 export default async function Page({ params: { slug, locale } }: PageProps) {

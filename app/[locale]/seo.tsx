@@ -1,12 +1,14 @@
 import { Metadata } from 'next'
 import siteMetadata from '@/data/siteMetadata'
 import { maintitle, maindescription } from '@/data/localeMetadata'
+import { LocaleTypes } from './i18n/settings'
 
 interface PageSEOProps {
   title: string
   description?: string
   image?: string
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  params: { locale: LocaleTypes }
   [key: string]: any
 }
 

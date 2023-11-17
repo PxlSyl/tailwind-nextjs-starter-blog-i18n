@@ -4,6 +4,7 @@ import siteMetadata from '@/data/siteMetadata'
 import { formatDate } from 'pliny/utils/formatDate'
 import NewsletterForm from '@/components/NewsletterForm'
 import { createTranslation } from './i18n/server'
+import { LocaleTypes } from './i18n/settings'
 
 interface Post {
   slug: string
@@ -17,7 +18,7 @@ interface Post {
 
 interface HomeProps {
   posts: Post[]
-  params: { locale: any }
+  params: { locale: LocaleTypes }
 }
 
 const MAX_DISPLAY = 5
