@@ -9,13 +9,14 @@ import PageTitle from '@/components/PageTitle'
 import SectionContainer from '@/components/SectionContainer'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
+import { LocaleTypes } from 'app/[locale]/i18n/settings'
 
 interface LayoutProps {
   content: CoreContent<Blog>
   children: ReactNode
   next?: { path: string; title: string }
   prev?: { path: string; title: string }
-  params: { locale: string }
+  params: { locale: LocaleTypes }
 }
 
 export default function PostMinimal({

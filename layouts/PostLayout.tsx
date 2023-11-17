@@ -10,6 +10,7 @@ import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import { createTranslation } from 'app/[locale]/i18n/server'
+import { LocaleTypes } from 'app/[locale]/i18n/settings'
 
 const editUrl = (path) => `${siteMetadata.siteRepo}/blob/main/data/${path}`
 const discussUrl = (path) =>
@@ -28,7 +29,7 @@ interface LayoutProps {
   next?: { path: string; title: string }
   prev?: { path: string; title: string }
   children: ReactNode
-  params: { locale: any }
+  params: { locale: LocaleTypes }
 }
 
 export default async function PostLayout({

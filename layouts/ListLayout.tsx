@@ -9,14 +9,15 @@ import Link from '@/components/Link'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import { fallbackLng } from 'app/[locale]/i18n/locales'
+import { LocaleTypes } from 'app/[locale]/i18n/settings'
 
 interface PaginationProps {
   totalPages: number
   currentPage: number
-  params: { locale: string }
+  params: { locale: LocaleTypes }
 }
 interface ListLayoutProps {
-  params: { locale: string }
+  params: { locale: LocaleTypes }
   posts: CoreContent<Blog>[]
   title: string
   initialDisplayPosts?: CoreContent<Blog>[]
