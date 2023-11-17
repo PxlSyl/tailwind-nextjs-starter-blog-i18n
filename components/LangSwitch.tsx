@@ -6,6 +6,12 @@ import { LocaleTypes, locales } from 'app/[locale]/i18n/settings'
 import { useTranslation } from 'app/[locale]/i18n/client'
 import { allBlogs } from '.contentlayer/generated'
 
+interface Blog {
+  localeid?: string
+  slug: string
+  language: string
+}
+
 const LangSwitch = () => {
   const pathname = usePathname()
   const router = useRouter()
@@ -18,9 +24,9 @@ const LangSwitch = () => {
     const newLocale = event.target.value
     const newUrl = `/${newLocale}/${urlSegments.join('/')}`
     // Shenanigan to redirect the user to the blog page when reading a post and changing the locale
-    const postpath = allBlogs.find((p) => pathname.includes(p.slug) && p.language === locale)
+    const postpath = allBlogs.find((p: Blog) => pathname.includes(p.slug) && p.language === locale)
     const newpath = allBlogs.find(
-      (p) => p.localeid === postpath?.localeid && p.language === newLocale
+      (p: Blog) => p.localeid === postpath?.localeid && p.language === newLocale
     )
     if (newpath?.localeid !== undefined) {
       router.push(`/${newLocale}/blog/${newpath.slug}`)
