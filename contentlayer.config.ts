@@ -22,6 +22,7 @@ import rehypePresetMinify from 'rehype-preset-minify'
 import siteMetadata from './data/siteMetadata'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer.js'
 import { fallbackLng, secondLng } from './app/[locale]/i18n/locales'
+import { allBlogs } from 'contentlayer/generated'
 
 const root = process.cwd()
 const isProduction = process.env.NODE_ENV === 'production'
@@ -43,10 +44,30 @@ const computedFields: ComputedFields = {
   toc: { type: 'string', resolve: (doc) => extractTocHeadings(doc.body.raw) },
 }
 
+async function generateSlugMap(allBlogs) {
+  const slugMap = {}
+
+  // Process each blog post
+  allBlogs.forEach((blog) => {
+    const { localeid, language, slug } = blog
+    const formattedLng = language === fallbackLng ? fallbackLng : secondLng
+
+    if (!slugMap[localeid]) {
+      slugMap[localeid] = {}
+    }
+
+    // Add the slug to the map for the specific language
+    slugMap[localeid][formattedLng] = slug
+  })
+
+  writeFileSync('./app/[locale]/localeid-map.json', JSON.stringify(slugMap, null, 2))
+}
+
 /**
  * Count the occurrences of all tags across blog posts and write to json file
  * Add logic to your own locales and project
  */
+
 function createTagCount(allBlogs) {
   const tagCount = {
     [fallbackLng]: {},
@@ -163,6 +184,7 @@ export default makeSource({
   },
   onSuccess: async (importData) => {
     const { allBlogs } = await importData()
+    generateSlugMap(allBlogs)
     createTagCount(allBlogs)
     createSearchIndex(allBlogs)
   },

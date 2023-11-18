@@ -9,6 +9,25 @@ import { fallbackLng, secondLng } from '../app/[locale]/i18n/locales.js'
 
 const isProduction = process.env.NODE_ENV === 'production'
 
+export async function generateSlugMap() {
+  const slugMap = {}
+
+  // Process each blog post
+  allBlogs.forEach((blog) => {
+    const { localeid, language, slug } = blog
+    const formattedLng = language === fallbackLng ? fallbackLng : secondLng
+
+    if (!slugMap[localeid]) {
+      slugMap[localeid] = {}
+    }
+
+    // Add the slug to the map for the specific language
+    slugMap[localeid][formattedLng] = slug
+  })
+
+  writeFileSync('./app/[locale]/localeid-map.json', JSON.stringify(slugMap, null, 2))
+}
+
 /**
  * Count the occurrences of all tags across blog posts and write to json file
  */
@@ -48,6 +67,7 @@ export async function createSearchIndex() {
 }
 
 async function postContentlayer() {
+  await generateSlugMap()
   await createTagCount()
   await createSearchIndex()
 }

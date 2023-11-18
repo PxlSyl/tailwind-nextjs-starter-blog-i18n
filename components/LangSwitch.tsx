@@ -2,6 +2,7 @@ import { useRouter, usePathname, useParams, useSelectedLayoutSegments } from 'ne
 import { LocaleTypes, locales } from 'app/[locale]/i18n/settings'
 import { useTranslation } from 'app/[locale]/i18n/client'
 import { allBlogs } from '.contentlayer/generated'
+import slugMap from 'app/[locale]/localeid-map.json'
 
 const LangSwitch = () => {
   const pathname = usePathname()
@@ -14,14 +15,16 @@ const LangSwitch = () => {
   const handleLocaleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newLocale = event.target.value
     const newUrl = `/${newLocale}/${urlSegments.join('/')}`
-    const postpath = allBlogs.find((p) => pathname.includes(p.slug) && p.language === locale)
 
-    if (postpath) {
-      const newpath = allBlogs.find(
-        (p) => p.localeid === postpath.localeid && p.language === newLocale
-      )
-      if (newpath) {
-        router.push(`/${newLocale}/blog/${newpath.slug}`)
+    // Find the current post based on the current locale and slug
+    const currentPost = allBlogs.find((p) => pathname.includes(p.slug) && p.language === locale)
+
+    if (currentPost) {
+      // Find the corresponding slug in the new language
+      const newSlug = slugMap[currentPost.localeid]?.[newLocale]
+
+      if (newSlug) {
+        router.push(`/${newLocale}/blog/${newSlug}`)
       } else {
         router.push(`/${newLocale}/blog`)
       }
