@@ -17,7 +17,7 @@ const LangSwitch = () => {
     const newUrl = `/${newLocale}/${urlSegments.join('/')}`
 
     // Find the current post based on the current locale and slug
-    const currentPost = allBlogs.find((p) => pathname.includes(p.slug) && p.language === locale)
+    const currentPost = allBlogs.find((p) => pathname.includes(p.slug))
 
     if (currentPost) {
       // Find the corresponding slug in the new language

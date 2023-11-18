@@ -32,3 +32,9 @@ Here is another possible solution for i18n integration regarding SEO, and even t
 - [next-roots](https://github.com/svobik7/next-roots)
 
 Any help for improvments and/or bug report is welcome!
+
+Important notes :
+
+- I'm currently busy writing the documentation, which will be available soon on the deployment demo (with main changes, knowns issues etc.)
+
+- Don't update the dependencies : it will break your app since some things have to be fixed on these libraries side.
