@@ -182,10 +182,10 @@ export default makeSource({
       rehypePresetMinify,
     ],
   },
-  onSuccess: async (importData) => {
+  /* onSuccess: async (importData) => {
     const { allBlogs } = await importData()
     generateSlugMap(allBlogs)
     createTagCount(allBlogs)
     createSearchIndex(allBlogs)
-  },
+  },*/
 })

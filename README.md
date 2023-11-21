@@ -17,8 +17,6 @@ Things to do/missing :
 
 - Fix translation in the not-found page. This is related to how the not-found function currently works, so we have to wait for a fix on next-js side, see here : [i18n for not-found page](https://github.com/vercel/next.js/discussions/50518)
 
-- Add translation to the search bar (but I don't know to what extent this is possible, since the search modals are taken from external libraries, unless you completely rewrite the search components)
-
 - Tried to update rss.mjs script for first deployment purpose, but don't know if it's correct for language setup (but tried my best) If you're an experienced dev, let me know what you think.
 
 - Fix author not displayed in the new postLayout.

@@ -9,5 +9,8 @@
   "scrollcomment": "Scroll to comment",
   "scrolltop": "Scroll to top",
   "darkmode": "Toggle dark mode",
-  "content": "Content"
+  "content": "Content",
+  "kbarplaceholder": "Type a command or search",
+  "loading": "Loading...",
+  "noresults": "No results for your search..."
 }

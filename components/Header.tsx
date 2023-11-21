@@ -8,7 +8,7 @@ import Link from './Link'
 import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
 import LangSwitch from './LangSwitch'
-import SearchButton from './SearchButton'
+import SearchButton from './search/SearchButton'
 import { useTranslation } from 'app/[locale]/i18n/client'
 import type { LocaleTypes } from 'app/[locale]/i18n/settings'
 
