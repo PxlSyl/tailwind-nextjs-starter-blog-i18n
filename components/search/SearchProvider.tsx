@@ -49,7 +49,7 @@ export const SearchProvider = ({ children }: Props) => {
               keywords: post?.summary || '',
               section: t('content'),
               subtitle: post.tags.join(', '),
-              perform: () => router.push(`/blog/${post.path}`),
+              perform: () => router.push(`/${locale}/${post.path}`),
             }))
         },
       }}
