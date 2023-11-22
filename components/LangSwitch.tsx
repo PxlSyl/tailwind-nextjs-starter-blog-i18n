@@ -1,19 +1,18 @@
-import { useRouter, usePathname, useParams, useSelectedLayoutSegments } from 'next/navigation'
+import { useState } from 'react'
+import { usePathname, useParams, useSelectedLayoutSegments } from 'next/navigation'
 import { LocaleTypes, locales } from 'app/[locale]/i18n/settings'
-import { useTranslation } from 'app/[locale]/i18n/client'
 import { allBlogs } from '.contentlayer/generated'
 import slugMap from 'app/[locale]/localeid-map.json'
+import Link from 'next/link'
 
 const LangSwitch = () => {
   const pathname = usePathname()
-  const router = useRouter()
   const urlSegments = useSelectedLayoutSegments()
   const locale = useParams()?.locale as LocaleTypes
 
-  const { t } = useTranslation(locale, '')
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  const handleLocaleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const newLocale = event.target.value
+  const handleLocaleChange = (newLocale: string): string => {
     const newUrl = `/${newLocale}/${urlSegments.join('/')}`
 
     // Find the current post based on the current locale and slug
@@ -24,33 +23,60 @@ const LangSwitch = () => {
       const newSlug = slugMap[currentPost.localeid]?.[newLocale]
 
       if (newSlug) {
-        router.push(`/${newLocale}/blog/${newSlug}`)
+        return `/${newLocale}/blog/${newSlug}`
       } else {
-        router.push(`/${newLocale}/blog`)
+        return `/${newLocale}/blog`
       }
-    } else if (pathname !== newUrl) {
-      router.push(newUrl)
     }
+
+    return newUrl
+  }
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen)
+  }
+
+  const closeMenu = () => {
+    setIsMenuOpen(false)
   }
 
   return (
-    <div>
-      <label htmlFor={t('lang')} className="sr-only">
-        {t('lang')}
-      </label>
-      <select
-        id={t('lang')}
-        aria-label={t('lang')}
-        onChange={handleLocaleChange}
-        defaultValue={locale}
-        className="cursor-pointer rounded-md font-semibold dark:border-gray-600 dark:bg-gray-800 dark:text-white"
-      >
-        {locales.map((e: string) => (
-          <option value={e} key={e}>
-            {e}
-          </option>
-        ))}
-      </select>
+    <div className="relative inline-block text-left">
+      <div>
+        <button
+          type="button"
+          className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 dark:bg-gray-800 dark:text-white"
+          id="options-menu"
+          aria-haspopup="true"
+          aria-expanded={isMenuOpen}
+          onClick={toggleMenu}
+        >
+          {locale}
+        </button>
+      </div>
+      {isMenuOpen && (
+        <div
+          className="absolute right-0 mt-2 w-12 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-700"
+          role="menu"
+          aria-orientation="vertical"
+          aria-labelledby="options-menu"
+          onBlur={closeMenu}
+        >
+          <div className="py-1" role="none">
+            {locales.map((newLocale: string) => (
+              <Link key={newLocale} href={handleLocaleChange(newLocale)} locale={false}>
+                <p
+                  className="dark: block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
+                  role="menuitem"
+                  onClick={closeMenu}
+                >
+                  {newLocale}
+                </p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
