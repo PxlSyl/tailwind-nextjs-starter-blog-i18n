@@ -50,7 +50,6 @@ const LangSwitch = () => {
           aria-haspopup="true"
           aria-expanded={isMenuOpen}
           onClick={toggleMenu}
-          onKeyDown={(e) => e.key === 'Enter' && toggleMenu()}
         >
           {locale}
         </button>
