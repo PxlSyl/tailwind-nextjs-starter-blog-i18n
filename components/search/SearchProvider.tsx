@@ -41,14 +41,16 @@ export const SearchProvider = ({ children }: Props) => {
           },
         ], */
         onSearchDocumentsLoad(json) {
-          return json.map((post: CoreContent<Blog>) => ({
-            id: post.path,
-            name: post.title,
-            keywords: post?.summary || '',
-            section: t('content'),
-            subtitle: post.tags.join(', '),
-            perform: () => router.push(`/blog/${post.path}`),
-          }))
+          return json
+            .filter((post: CoreContent<Blog>) => post.language === locale)
+            .map((post: CoreContent<Blog>) => ({
+              id: post.path,
+              name: post.title,
+              keywords: post?.summary || '',
+              section: t('content'),
+              subtitle: post.tags.join(', '),
+              perform: () => router.push(`/blog/${post.path}`),
+            }))
         },
       }}
     >
