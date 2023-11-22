@@ -7,6 +7,7 @@ For translations, the chosen library is not next-translate as in the alternative
 - i18next
 - i18next-browser-languagedetector
 - i18next-resources-to-backend
+- react-i18next
 
 Indeed, with the new version of next-js and the dir app, it was easier for me to find information and
 tutorials to make everything works as expected. (I first tried with next-translate, but there are too many unresolved problems currently with this library and the new features linked to the next-js app directory)
