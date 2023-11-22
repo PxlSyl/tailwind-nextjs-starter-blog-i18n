@@ -44,7 +44,7 @@ const LangSwitch = () => {
   useOuterClick(menubarRef, closeMenu)
 
   return (
-    <div className="relative inline-block text-left">
+    <div ref={menubarRef} className="relative inline-block text-left">
       <div>
         <button
           type="button"
@@ -59,7 +59,6 @@ const LangSwitch = () => {
       </div>
       {isMenuOpen && (
         <div
-          ref={menubarRef}
           className="absolute right-0 mt-2 w-12 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-700"
           role="menu"
           aria-orientation="vertical"
