@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import { useRef, useState } from 'react'
 import { usePathname, useParams, useSelectedLayoutSegments } from 'next/navigation'
+import { useOuterClick } from './util/useOuterClick'
 import { LocaleTypes, locales } from 'app/[locale]/i18n/settings'
 import { allBlogs } from '.contentlayer/generated'
 import slugMap from 'app/[locale]/localeid-map.json'
@@ -39,6 +40,8 @@ const LangSwitch = () => {
   const closeMenu = () => {
     setIsMenuOpen(false)
   }
+  const menubarRef = useRef<HTMLDivElement>(null)
+  useOuterClick(menubarRef, closeMenu)
 
   return (
     <div className="relative inline-block text-left">
@@ -56,6 +59,7 @@ const LangSwitch = () => {
       </div>
       {isMenuOpen && (
         <div
+          ref={menubarRef}
           className="absolute right-0 mt-2 w-12 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-700"
           role="menu"
           aria-orientation="vertical"
