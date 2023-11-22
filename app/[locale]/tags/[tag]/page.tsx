@@ -8,6 +8,7 @@ import tagData from 'app/[locale]/tag-data.json'
 import { genPageMetadata } from 'app/[locale]/seo'
 import { maintitle } from '@/data/localeMetadata'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
+import { capitalizeFirstLetter } from '@/components/util/capitalizeFirstLetter'
 
 type Props = {
   params: { tag: string; locale: LocaleTypes }
@@ -15,9 +16,6 @@ type Props = {
 
 export async function generateMetadata({ params: { tag, locale } }: Props): Promise<Metadata> {
   const dtag = decodeURI(tag)
-  function capitalizeFirstLetter(str: string): string {
-    return str.charAt(0).toUpperCase() + str.slice(1)
-  }
   const capitalizedDtag = capitalizeFirstLetter(dtag)
   return genPageMetadata({
     title: capitalizedDtag,
