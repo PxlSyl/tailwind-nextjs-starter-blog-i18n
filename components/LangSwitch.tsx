@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { usePathname, useParams, useSelectedLayoutSegments } from 'next/navigation'
 import { LocaleTypes, locales } from 'app/[locale]/i18n/settings'
 import { allBlogs } from '.contentlayer/generated'
@@ -50,6 +50,7 @@ const LangSwitch = () => {
           aria-haspopup="true"
           aria-expanded={isMenuOpen}
           onClick={toggleMenu}
+          onKeyDown={(e) => e.key === 'Enter' && toggleMenu()}
         >
           {locale}
         </button>
