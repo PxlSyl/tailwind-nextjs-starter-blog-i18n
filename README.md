@@ -20,8 +20,6 @@ Things to do/missing :
 
 - Tried to update rss.mjs script for first deployment purpose, but don't know if it's correct for language setup (but tried my best) If you're an experienced dev, let me know what you think.
 
-- Fix author not displayed in the new postLayout.
-
 Everything else is currently working as expected.
 
 I had to make significant changes regarding SEO within the pages, but I ended up finding a solution that worked, with a perfect SEO score!
