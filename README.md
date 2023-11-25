@@ -1,4 +1,4 @@
-Still in dev, will add a doc later! I was able to deploy if you want to have a look, but there's still some small issues to fix.
+Fully operational, let me know if you have some problems or issues.
 
 This repository is a fork from the V.2 version (next-js app router) of [Tailwind Nextjs Starter Blog](https://github.com/timlrx/tailwind-nextjs-starter-blog) with internationalization.
 
@@ -11,6 +11,10 @@ For translations, the chosen library is not next-translate as in the alternative
 
 Indeed, with the new version of next-js and the dir app, it was easier for me to find information and
 tutorials to make everything works as expected. (I first tried with next-translate, but there are too many unresolved problems currently with this library and the new features linked to the next-js app directory)
+
+In addition, unlike version v1, I made it possible to display each post and its translation. Let's say you are reading an article, but you prefer to read it in another language, instead of redirecting you to a 404 (V1) error page, this will display the article in the corresponding language!
+
+But for this, you must assign a unique identifier (LocaleID in your MDX files) for the post, and for the corresponding post in the translated language. If no matching post is found, the router will redirect to the blog's overview page.
 
 To be able to test the code and the translations and be sure that everything works, I translated all the mdx articles - from the original repository - into French.
 
