@@ -21,7 +21,9 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
 
 export default async function Page({ params: { locale } }: Props) {
   const { t } = await createTranslation(locale, 'about')
-  const author = allAuthors.find((a) => a.default === true && a.language === locale) as Authors
+  const author = allAuthors.find(
+    (a) => a.slug.includes('default') && a.language === locale
+  ) as Authors
   const mainContent = coreContent(author)
 
   return (

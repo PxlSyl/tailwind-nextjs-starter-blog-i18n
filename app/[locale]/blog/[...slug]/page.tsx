@@ -33,7 +33,9 @@ export async function generateMetadata({
   if (!post) {
     return
   }
-  const author = allAuthors.filter((a) => a.language === locale).find((a) => a.default === true)
+  const author = allAuthors
+    .filter((a) => a.language === locale)
+    .find((a) => a.slug.includes('default'))
   const authorList = post.authors || author
   const authorDetails = authorList.map((author) => {
     const authorResults = allAuthors
@@ -97,7 +99,9 @@ export default async function Page({ params: { slug, locale } }: PageProps) {
   const prev = sortedCoreContents[postIndex + 1]
   const next = sortedCoreContents[postIndex - 1]
   const post = allBlogs.filter((p) => p.language === locale).find((p) => p.slug === dslug) as Blog
-  const author = allAuthors.find((a) => a.default === true && a.language === locale) as Authors
+  const author = allAuthors
+    .filter((a) => a.language === locale)
+    .find((a) => a.slug.includes('default'))
   const authorList = post.authors || author
   const authorDetails = authorList.map((author) => {
     const authorResults = allAuthors
