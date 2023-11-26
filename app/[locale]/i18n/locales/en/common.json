@@ -12,5 +12,6 @@
   "content": "Content",
   "kbarplaceholder": "Type a command or search",
   "loading": "Loading...",
-  "noresults": "No results for your search..."
+  "noresults": "No results for your search...",
+  "poststagged": "View posts tagged"
 }

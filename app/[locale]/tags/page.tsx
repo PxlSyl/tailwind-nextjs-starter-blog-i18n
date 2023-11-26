@@ -21,6 +21,7 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
 }
 
 export default async function Page({ params: { locale } }: Props) {
+  const { t } = await createTranslation(locale, '')
   const tagCounts = tagData[locale]
   const tagKeys = Object.keys(tagCounts)
 
@@ -37,15 +38,15 @@ export default async function Page({ params: { locale } }: Props) {
         </div>
         <div className="flex max-w-lg flex-wrap">
           {tagKeys.length === 0 && 'No tags found.'}
-          {sortedTags.map((t) => (
-            <div key={t} className="mb-2 mr-5 mt-2">
-              <Tag text={t} params={{ locale: locale }} />
+          {sortedTags.map((tag) => (
+            <div key={tag} className="mb-2 mr-5 mt-2">
+              <Tag text={tag} params={{ locale: locale }} />
               <Link
-                href={`/${locale}/tags/${slug(t)}`}
+                href={`/${locale}/tags/${slug(tag)}`}
                 className="-ml-2 text-sm font-semibold uppercase text-gray-600 dark:text-gray-300"
-                aria-label={`View posts tagged ${t}`}
+                aria-label={`${t('poststagged')}${tag}`}
               >
-                {` (${tagCounts[t]})`}
+                {` (${tagCounts[tag]})`}
               </Link>
             </div>
           ))}
