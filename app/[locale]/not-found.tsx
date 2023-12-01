@@ -1,10 +1,13 @@
-import Link from '@/components/Link'
-import { createTranslation } from './i18n/server'
-import i18next from 'i18next'
+'use client'
 
-export default async function NotFound() {
-  const locale: 'en' | 'fr' = i18next.language as 'en' | 'fr'
-  const { t } = await createTranslation(locale, '404')
+import Link from '@/components/Link'
+import { useTranslation } from 'app/[locale]/i18n/client'
+import type { LocaleTypes } from 'app/[locale]/i18n/settings'
+import { useParams } from 'next/navigation'
+
+export default function NotFound() {
+  const locale = useParams()?.locale as LocaleTypes
+  const { t } = useTranslation(locale, '')
   return (
     <div className="flex flex-col items-start justify-start md:mt-24 md:flex-row md:items-center md:justify-center md:space-x-6">
       <div className="space-x-2 pb-8 pt-6 md:space-y-5">

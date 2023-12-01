@@ -24,5 +24,6 @@
     "twitter": "Discuter sur Twitter",
     "github": "Voir sur GitHub",
     "draft": "En Chantier",
-    "noposts": "Aucun article trouvé"
+    "noposts": "Aucun article trouvé",
+    "poststagged": "Voir les posts balisés"
 }
