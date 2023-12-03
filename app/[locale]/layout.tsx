@@ -13,6 +13,7 @@ import { ThemeProviders } from './theme-providers'
 import { Metadata } from 'next'
 import { dir } from 'i18next'
 import { LocaleTypes, locales } from './i18n/settings'
+import TwSizeIndicator from '@/components/helper/TwSizeIndicator'
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }))
@@ -90,6 +91,7 @@ export default function RootLayout({
       <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
       <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
       <body className="bg-white text-black antialiased dark:bg-gray-950 dark:text-white">
+        <TwSizeIndicator />
         <ThemeProviders>
           <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
           <SectionContainer>
