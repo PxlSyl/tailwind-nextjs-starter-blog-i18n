@@ -36,6 +36,8 @@ Any help for improvments and/or bug report is welcome!
 
 Important notes :
 
+- I use a custom Link component for language selection : I prefer this over html select element (easier to customize) The small drawback is it needs more boilerplate code. If you prefer, you're free to adapt and use the select element instead, but I'll keep it as it is for the template.
+
 - I'm currently busy writing the documentation, which will be available soon on the deployment demo (with main changes, knowns issues etc.)
 
 - Don't update the dependencies : it will break your app since some things have to be fixed on these libraries side.
