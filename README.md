@@ -48,6 +48,8 @@ For now :
 
 - Smooth page transitions thanks to framer-motion (see the template.tsx file in app folder, and have a look at next js documentation for [template](https://nextjs.org/docs/app/api-reference/file-conventions/template) features if you want informations about how templates works)
 
+Note : this is a basic but efficient implementation. I strongly encourage you to dig deeper into framer-motion and next app router usage.
+
 - New great audioplayer component for mdx files (in case you do podcasts, or even music), thanks to [react-h5-audio-player](https://github.com/lhz516/react-h5-audio-player)
 
 - Tailwind screen size indicator : little helper for developement mode and responsive design (see TwSizeIndicator.tsx in /components/helper)
