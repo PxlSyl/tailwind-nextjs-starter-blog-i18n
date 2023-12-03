@@ -1586,6 +1586,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.10.2":
+  version: 7.23.5
+  resolution: "@babel/runtime@npm:7.23.5"
+  dependencies:
+    regenerator-runtime: "npm:^0.14.0"
+  checksum: 0f1669f639af30a0a2948ffcefa2c61935f337b0777bd94f8d7bc66bba8e7d4499e725caeb0449540d9c6d67399b733c4e719babb43ce9a0f33095aa01b42b37
+  languageName: node
+  linkType: hard
+
 "@babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.16.3, @babel/runtime@npm:^7.22.5, @babel/runtime@npm:^7.23.2, @babel/runtime@npm:^7.8.4":
   version: 7.23.2
   resolution: "@babel/runtime@npm:7.23.2"
@@ -2348,6 +2357,24 @@ __metadata:
   version: 2.0.1
   resolution: "@humanwhocodes/object-schema@npm:2.0.1"
   checksum: dbddfd0465aecf92ed845ec30d06dba3f7bb2496d544b33b53dac7abc40370c0e46b8787b268d24a366730d5eeb5336ac88967232072a183905ee4abf7df4dab
+  languageName: node
+  linkType: hard
+
+"@iconify/react@npm:^4.1.1":
+  version: 4.1.1
+  resolution: "@iconify/react@npm:4.1.1"
+  dependencies:
+    "@iconify/types": "npm:^2.0.0"
+  peerDependencies:
+    react: ">=16"
+  checksum: 66405fe14dbf7a2f4cc9bae364a1f4a0b2cebdd74c8eb4fe6eb369050e2f34989fccb4d0ac259f8a3873d66eb506bbbd7a12e3251f5ee9023f374250ddc2a6c0
+  languageName: node
+  linkType: hard
+
+"@iconify/types@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@iconify/types@npm:2.0.0"
+  checksum: 1b3425ecbc0eef44f23d3f27355ae7ef306d5119c566f013ef1849995b016e1fdcc5af6b74c3bc0554485d70cf5179cb9c1095b14d662a55abcae1148e1a13c9
   languageName: node
   linkType: hard
 
@@ -9567,6 +9594,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-h5-audio-player@npm:^3.9.0":
+  version: 3.9.0
+  resolution: "react-h5-audio-player@npm:3.9.0"
+  dependencies:
+    "@babel/runtime": "npm:^7.10.2"
+    "@iconify/react": "npm:^4.1.1"
+  peerDependencies:
+    react: ^16.3.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.3.0 || ^17.0.0 || ^18.0.0
+  checksum: a2cc36744d9491e05618a701e21b651a796fb3cd4f0aff5efc7e8b6db498dcb3aa071a10d49675b5be2f74534e52aa6cafc8cf286c0dc20403724354d6898772
+  languageName: node
+  linkType: hard
+
 "react-i18next@npm:^13.3.1":
   version: 13.5.0
   resolution: "react-i18next@npm:13.5.0"
@@ -11060,6 +11100,7 @@ __metadata:
     prettier-plugin-tailwindcss: "npm:^0.4.1"
     react: "npm:18.2.0"
     react-dom: "npm:18.2.0"
+    react-h5-audio-player: "npm:^3.9.0"
     react-i18next: "npm:^13.3.1"
     reading-time: "npm:1.5.0"
     rehype-autolink-headings: "npm:^6.1.0"
