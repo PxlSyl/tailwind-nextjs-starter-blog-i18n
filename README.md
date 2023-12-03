@@ -39,3 +39,15 @@ Important notes :
 - I'm currently busy writing the documentation, which will be available soon on the deployment demo (with main changes, knowns issues etc.)
 
 - Don't update the dependencies : it will break your app since some things have to be fixed on these libraries side.
+
+What's more?
+
+This repository will sometimes be updated with new features (not present in the original repository)
+
+For now :
+
+- Smooth page transitions thanks to framer-motion (see the template.tsx file in app folder, and have a look at next js documentation for [template](https://nextjs.org/docs/app/api-reference/file-conventions/template) features if you want informations about how templates works)
+
+- New great audioplayer component for mdx files (in case you do podcasts, or even music), thanks to [react-h5-audio-player](https://github.com/lhz516/react-h5-audio-player)
+
+- Tailwind screen size indicator : little helper for developement mode and responsive design (see TwSizeIndicator.tsx in /components/helper)
