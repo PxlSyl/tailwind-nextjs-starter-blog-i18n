@@ -6,7 +6,7 @@ on the [timlrx](https://github.com/timlrx/tailwind-nextjs-starter-blog) github.
 
 # Changes:
 
-## Bookstores
+## Libraries
 
 For translations, the chosen library is not next-translate as in V.1 of GautierArcin, but the following libraries:
 
