@@ -100,7 +100,7 @@ export default function RootLayout({
                 <Header />
                 <main className="mb-auto">{children}</main>
               </SearchProvider>
-              <Footer params={{ locale: locale }} />
+              <Footer />
             </div>
           </SectionContainer>
         </ThemeProviders>
