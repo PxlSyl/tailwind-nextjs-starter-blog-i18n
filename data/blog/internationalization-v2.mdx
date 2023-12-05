@@ -154,7 +154,7 @@ export const defaultNS = 'common'
 export function getOptions(locale = fallbackLng, ns = defaultNS): InitOptions {
    return {
      debug:true,
-     supportedLngs: local,
+     supportedLngs: locales,
      fallbackLng,
      lng: local,
      fallbackNS:defaultNS,
@@ -522,7 +522,7 @@ Metadata type = {
 }
 /* Add or modify the title here depending on the chosen languages: */
 export const maintitle: Metadata = {
-   in: 'Next.js i18n Starter Blog',
+   en: 'Next.js i18n Starter Blog',
   fr: 'Starter Blog Next.js i18n',
 }
 /* Add or modify the description here depending on the chosen languages: */
