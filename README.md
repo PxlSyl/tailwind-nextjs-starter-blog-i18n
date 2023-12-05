@@ -141,9 +141,9 @@ export const defaultNS = 'common'
 export function getOptions(locale = fallbackLng, ns = defaultNS): InitOptions {
    return {
      debug:true,
-     supportedLngs: local,
+     supportedLngs: locales,
      fallbackLng,
-     lng: local,
+     lng: locale,
      fallbackNS:defaultNS,
      defaultNS,
      ns,
@@ -509,7 +509,7 @@ Metadata type = {
 }
 /* Add or modify the title here depending on the chosen languages: */
 export const maintitle: Metadata = {
-   in: 'Next.js i18n Starter Blog',
+   en: 'Next.js i18n Starter Blog',
   fr: 'Starter Blog Next.js i18n',
 }
 /* Add or modify the description here depending on the chosen languages: */
@@ -577,13 +577,11 @@ const projectsData: ProjectsData = {
 export default projectsData
 ```
 
-Again, simply modify the logic keeping the same general structure, and according to your chosen languages/and/or
-number of languages.
+Again, simply modify the logic keeping the same general structure, and according to your chosen languages/and/or number of languages.
 
 ## “Sitemap” logic
 
-There too, there were necessary modifications. This file is located in the "app" folder, and allows Google robots
-to understand how your site is built, so it is essential for indexing and SEO:
+There too, there were necessary modifications. This file is located in the "app" folder, and allows Google robots to understand how your site is built, so it is essential for indexing and SEO:
 
 ```ts:sitemap.ts
 import { MetadataRoute } from 'next'
