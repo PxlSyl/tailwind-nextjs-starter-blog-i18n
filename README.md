@@ -351,7 +351,7 @@ They are not differentiated within different folders (even if this could - and s
 So it may seem a little messy and it would be better to organize the posts by language in a subfolder,
 but I didn't want the language to appear twice in the url...
 
-There is surely a possibility to correct this, by forcing next.js to rewrite the paths, but for the moment I have not
+There is surely a possibility to correct this, by forcing next.js to rewrite the paths, but for the moment I
 didn't take the time to implement the functionality.
 
 - Headers of your posts:
