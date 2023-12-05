@@ -30,7 +30,10 @@ const generateRss = (config, posts, locale, page = 'feed.xml') => `
       <language>${locale}</language>
       <managingEditor>${config.email} (${config.author})</managingEditor>
       <webMaster>${config.email} (${config.author})</webMaster>
-      ${posts.date && `<lastBuildDate>${new Date(posts[0].date).toLocaleDateString(locale)}</lastBuildDate>`}
+      ${
+        posts.date &&
+        `<lastBuildDate>${new Date(posts[0].date).toLocaleDateString(locale)}</lastBuildDate>`
+      }
       <atom:link href="${config.siteUrl}/${page}" rel="self" type="application/rss+xml"/>
       ${posts.map((post) => generateRssItem(config, post, locale, defaultLocale)).join('')}
     </channel>
@@ -44,9 +47,9 @@ async function generateRSS(config, allBlogs, locale, page = 'feed.xml') {
   // RSS for blog post
   if (publishPosts.length > 0) {
     const rss = generateRss(config, sortPosts(publishPosts))
-    const directoryPath = path.join('public', locale);
-    mkdirSync(directoryPath, { recursive: true }); // Create the directory if it doesn't exist
-    writeFileSync(path.join(directoryPath, page), rss);
+    const directoryPath = path.join('public', locale)
+    mkdirSync(directoryPath, { recursive: true }) // Create the directory if it doesn't exist
+    writeFileSync(path.join(directoryPath, page), rss)
   }
 
   if (publishPosts.length > 0) {
@@ -56,7 +59,7 @@ async function generateRSS(config, allBlogs, locale, page = 'feed.xml') {
       )
       const rss = generateRss(config, filteredPosts, `tags/${tag}/${page}`)
       const rssPath = path.join('public', locale, 'tags', tag)
-      mkdirSync(rssPath, { recursive: true }); // Create the directory if it doesn't exist
+      mkdirSync(rssPath, { recursive: true }) // Create the directory if it doesn't exist
       writeFileSync(path.join(rssPath, page), rss)
     }
   }

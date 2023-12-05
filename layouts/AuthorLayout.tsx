@@ -55,9 +55,9 @@ export default function AuthorLayout({ children, content }: Props) {
               {siteMetadata.formspree === false ? (
                 <SocialIcon kind="mail" href={`mailto:${email}`} />
               ) : (
-                <div onClick={ContactClick}>
+                <button onClick={ContactClick}>
                   <SocialIcon kind="mail" />
-                </div>
+                </button>
               )}
               <SocialIcon kind="github" href={github} />
               <SocialIcon kind="linkedin" href={linkedin} />

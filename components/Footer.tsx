@@ -30,9 +30,9 @@ export default function Footer() {
             {siteMetadata.formspree === false ? (
               <SocialIcon kind="mail" href={`mailto:${siteMetadata.email}`} />
             ) : (
-              <div onClick={ContactClick}>
+              <button onClick={ContactClick}>
                 <SocialIcon kind="mail" />
-              </div>
+              </button>
             )}
             <SocialIcon kind="github" href={siteMetadata.github} size={6} />
             <SocialIcon kind="facebook" href={siteMetadata.facebook} size={6} />
