@@ -20,7 +20,6 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
 }
 
 export default async function Page({ params: { locale } }: Props) {
-  const { t } = await createTranslation(locale, 'about')
   const author = allAuthors.find(
     (a) => a.slug.includes('default') && a.language === locale
   ) as Authors
@@ -28,7 +27,7 @@ export default async function Page({ params: { locale } }: Props) {
 
   return (
     <>
-      <AuthorLayout content={mainContent} t={t}>
+      <AuthorLayout content={mainContent}>
         <MDXLayoutRenderer code={author.body.code} />
       </AuthorLayout>
     </>

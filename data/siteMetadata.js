@@ -86,6 +86,7 @@ const siteMetadata = {
     //   indexName: 'docsearch',
     // },
   },
+  formspree: true,
 }
 
 module.exports = siteMetadata

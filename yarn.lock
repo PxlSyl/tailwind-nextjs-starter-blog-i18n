@@ -2299,6 +2299,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@formspree/core@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "@formspree/core@npm:3.0.1"
+  dependencies:
+    "@stripe/stripe-js": "npm:^1.35.0"
+  checksum: 144d13da2bb7f6f3d660f79c1a8a476fb33ea77d5595d055e9ff96908c4b4ba97e962713c453d1b18ea1a5612626995d29f358e4cab8910c6ea28f62554945fc
+  languageName: node
+  linkType: hard
+
+"@formspree/react@npm:^2.5.1":
+  version: 2.5.1
+  resolution: "@formspree/react@npm:2.5.1"
+  dependencies:
+    "@formspree/core": "npm:^3.0.1"
+    "@stripe/react-stripe-js": "npm:^1.7.1"
+    "@stripe/stripe-js": "npm:^1.35.0"
+  peerDependencies:
+    react: ^16.8 || ^17.0 || ^18.0
+    react-dom: ^16.8 || ^17.0 || ^18.0
+  checksum: 6627d66a251aa1b51263c662999618025333ec05c063b7984b3b86afb0aec12979257a2f7ec4a1a52e854e13956a32d754d33f8065b0933530c42227798045a8
+  languageName: node
+  linkType: hard
+
 "@giscus/react@npm:^2.3.0":
   version: 2.3.0
   resolution: "@giscus/react@npm:2.3.0"
@@ -3017,6 +3040,26 @@ __metadata:
   version: 1.5.1
   resolution: "@rushstack/eslint-patch@npm:1.5.1"
   checksum: 147895437808d72e72673c9f23f2cce54b2e85b8f8b6a8aa3ff78e5fce483fe32d38d42807f8724c6d3e5fbcf9a3f8e9f1418fde1400c055b7bff34ebfac85b3
+  languageName: node
+  linkType: hard
+
+"@stripe/react-stripe-js@npm:^1.7.1":
+  version: 1.16.5
+  resolution: "@stripe/react-stripe-js@npm:1.16.5"
+  dependencies:
+    prop-types: "npm:^15.7.2"
+  peerDependencies:
+    "@stripe/stripe-js": ^1.44.1
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: b6413e1122fac91834919cea2683c31a9ee2525ce90b78b86b0337e8f506aeff5049fb1fd097019b34e70d4bc6657b98ae40c352e433d01ec47d8ceae459dd15
+  languageName: node
+  linkType: hard
+
+"@stripe/stripe-js@npm:^1.35.0":
+  version: 1.54.2
+  resolution: "@stripe/stripe-js@npm:1.54.2"
+  checksum: 52d6e814dd6e4979a050d9c06d8aa463f583138bb6b1aaf6e8856e92dcfa3ce7fd2231ce86882b44ffd0299b8e1d93f6c6dd9d1461b957ef2a6d548a801e506f
   languageName: node
   linkType: hard
 
@@ -4302,6 +4345,13 @@ __metadata:
     strip-ansi: "npm:^6.0.1"
     wrap-ansi: "npm:^7.0.0"
   checksum: eaa5561aeb3135c2cddf7a3b3f562fc4238ff3b3fc666869ef2adf264be0f372136702f16add9299087fb1907c2e4ec5dbfe83bd24bce815c70a80c6c1a2e950
+  languageName: node
+  linkType: hard
+
+"clsx@npm:^1.1.1":
+  version: 1.2.1
+  resolution: "clsx@npm:1.2.1"
+  checksum: 5ded6f61f15f1fa0350e691ccec43a28b12fb8e64c8e94715f2a937bc3722d4c3ed41d6e945c971fc4dcc2a7213a43323beaf2e1c28654af63ba70c9968a8643
   languageName: node
   linkType: hard
 
@@ -9512,7 +9562,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.8.1":
+"prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -9625,10 +9675,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-icons@npm:^4.12.0":
+  version: 4.12.0
+  resolution: "react-icons@npm:4.12.0"
+  peerDependencies:
+    react: "*"
+  checksum: 5cc20509ca0b182f1e7bf42c271846c48f688c8922e2439f48728805adc93ba18476a13588cbe91ee43a2d03b2787e0dc0b5cc4b9c4e4ae3426f4464b3c1b734
+  languageName: node
+  linkType: hard
+
 "react-is@npm:^16.13.1":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
   checksum: 5aa564a1cde7d391ac980bedee21202fc90bdea3b399952117f54fb71a932af1e5902020144fb354b4690b2414a0c7aafe798eb617b76a3d441d956db7726fdf
+  languageName: node
+  linkType: hard
+
+"react-toastify@npm:^9.1.3":
+  version: 9.1.3
+  resolution: "react-toastify@npm:9.1.3"
+  dependencies:
+    clsx: "npm:^1.1.1"
+  peerDependencies:
+    react: ">=16"
+    react-dom: ">=16"
+  checksum: 12667aa10e6cf3f74be2e3c704c2d5570dd7de66fff89ae38fbfab1122e9a9f632de1cb712fe44a9a60b8ecca7590578157cb4ca6c4e8105a8cf80936a94e181
   languageName: node
   linkType: hard
 
@@ -11066,6 +11137,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "tailwind-nextjs-starter-blog-i18n@workspace:."
   dependencies:
+    "@formspree/react": "npm:^2.5.1"
     "@next/bundle-analyzer": "npm:14.0.3"
     "@svgr/webpack": "npm:^8.0.1"
     "@tailwindcss/forms": "npm:^0.5.4"
@@ -11102,6 +11174,8 @@ __metadata:
     react-dom: "npm:18.2.0"
     react-h5-audio-player: "npm:^3.9.0"
     react-i18next: "npm:^13.3.1"
+    react-icons: "npm:^4.12.0"
+    react-toastify: "npm:^9.1.3"
     reading-time: "npm:1.5.0"
     rehype-autolink-headings: "npm:^6.1.0"
     rehype-citation: "npm:^1.0.2"
@@ -11115,6 +11189,7 @@ __metadata:
     tailwindcss: "npm:^3.3.3"
     typescript: "npm:^5.1.3"
     unist-util-visit: "npm:^4.1.0"
+    zustand: "npm:^4.4.7"
   languageName: unknown
   linkType: soft
 
@@ -11635,6 +11710,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"use-sync-external-store@npm:1.2.0":
+  version: 1.2.0
+  resolution: "use-sync-external-store@npm:1.2.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: a676216affc203876bd47981103f201f28c2731361bb186367e12d287a7566763213a8816910c6eb88265eccd4c230426eb783d64c373c4a180905be8820ed8e
+  languageName: node
+  linkType: hard
+
 "util-deprecate@npm:^1.0.2, util-deprecate@npm:~1.0.1":
   version: 1.0.2
   resolution: "util-deprecate@npm:1.0.2"
@@ -11985,6 +12069,26 @@ __metadata:
   version: 3.22.4
   resolution: "zod@npm:3.22.4"
   checksum: 73622ca36a916f785cf528fe612a884b3e0f183dbe6b33365a7d0fc92abdbedf7804c5e2bd8df0a278e1472106d46674281397a3dd800fa9031dc3429758c6ac
+  languageName: node
+  linkType: hard
+
+"zustand@npm:^4.4.7":
+  version: 4.4.7
+  resolution: "zustand@npm:4.4.7"
+  dependencies:
+    use-sync-external-store: "npm:1.2.0"
+  peerDependencies:
+    "@types/react": ">=16.8"
+    immer: ">=9.0"
+    react: ">=16.8"
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    immer:
+      optional: true
+    react:
+      optional: true
+  checksum: 572e42d912362eb3aabde9a37bca47caa547391fc4563e41444d9aef7ca453ca730ee1f00aae4b25c2635ca293d69c23ab0a41688cd4db8394545732a2d9c236
   languageName: node
   linkType: hard
 
