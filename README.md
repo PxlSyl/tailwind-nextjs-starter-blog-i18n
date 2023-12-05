@@ -665,7 +665,7 @@ This repository will sometimes be updated with new features (not present in the 
 
 For the moment :
 
-- Smooth page transitions thanks to framer-motion (see the template.tsx file in the app folder and take a look at the following next.js documentation
+- Smooth page transitions thanks to [Framer Motion](https://github.com/framer/motion) (see the template.tsx file in the app folder and take a look at the following next.js documentation
   for file functionality [template](https://nextjs.org/docs/app/api-reference/file-conventions/template))
   Note: This is a basic but effective implementation. I strongly encourage you to experiment with framer-motion and its use within the new
   router.
