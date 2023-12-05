@@ -124,7 +124,7 @@ module.exports = { fallbackLng, secondLng}
 
 - settings.ts
 
-This is a configuration file, which allows you to define a local object as well as the corresponding options:
+This is a configuration file, which allows you to define a locales object as well as the corresponding options:
 
 ```ts:settings.ts
 import type { InitOptions } from 'i18next'
