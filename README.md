@@ -528,7 +528,7 @@ The logic needed for the "projects" tab resides in the following file, also pres
 ```ts:projectsData.ts
 type Project = {
    title: string
-   description: thong
+   description: string
    imgSrc: string
    href: string
 }
