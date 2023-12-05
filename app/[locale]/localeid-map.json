@@ -35,9 +35,6 @@
     "en": "new-features-in-v1",
     "fr": "nouvelles-fonctionnalites-v1"
   },
-  "introducingstarterblogi18n": {
-    "fr": "presentation-starter-blog-tailwind-nextjs-i18n-v2.0"
-  },
   "releasev2": {
     "fr": "presentation-starter-blog-tailwind-nextjs-v2.0",
     "en": "release-of-tailwind-nextjs-starter-blog-v2.0"
@@ -45,5 +42,9 @@
   "nestedroutes": {
     "en": "nested-route/introducing-multi-part-posts-with-nested-routing",
     "fr": "route-imbriquee/presentation-publications-en-plusieurs-parties-routage-imbrique"
+  },
+  "introducingstarterblogi18n": {
+    "fr": "internationalisation-v2",
+    "en": "internationalization-v2"
   }
 }
