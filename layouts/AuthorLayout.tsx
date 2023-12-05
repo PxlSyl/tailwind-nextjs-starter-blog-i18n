@@ -8,27 +8,16 @@ import { useParams } from 'next/navigation'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { useTranslation } from 'app/[locale]/i18n/client'
 
-import siteMetadata from '@/data/siteMetadata'
-import { useContactModal } from '@/components/contact/store'
-import { ContactModal } from '@/components/contact'
-
 interface Props {
   children: ReactNode
   content: Omit<Authors, '_id' | '_raw' | 'body'>
 }
 
 export default function AuthorLayout({ children, content }: Props) {
-  const { name, avatar, occupation, company, email, twitter, linkedin, github } = content
+  const { name, avatar, occupation, company, twitter, linkedin, github } = content
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, '')
-  const contactModal = useContactModal()
 
-  const handleContactClick = (): void => {
-    contactModal.onOpen()
-  }
-  function ContactClick(): void {
-    handleContactClick()
-  }
   return (
     <>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
@@ -52,13 +41,6 @@ export default function AuthorLayout({ children, content }: Props) {
             <div className="text-gray-500 dark:text-gray-400">{occupation}</div>
             <div className="text-gray-500 dark:text-gray-400">{company}</div>
             <div className="flex space-x-3 pt-6">
-              {siteMetadata.formspree === false ? (
-                <SocialIcon kind="mail" href={`mailto:${email}`} />
-              ) : (
-                <button onClick={ContactClick}>
-                  <SocialIcon kind="mail" />
-                </button>
-              )}
               <SocialIcon kind="github" href={github} />
               <SocialIcon kind="linkedin" href={linkedin} />
               <SocialIcon kind="twitter" href={twitter} />
@@ -69,7 +51,6 @@ export default function AuthorLayout({ children, content }: Props) {
           </div>
         </div>
       </div>
-      <ContactModal />
     </>
   )
 }
