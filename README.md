@@ -668,7 +668,7 @@ For the moment :
   Note: This is a basic but effective implementation. I strongly encourage you to experiment with framer-motion and its use within the new
   router.
 
-- New component: excellent audio player for mdx files (in case you make podcasts, or even music), thanks to [react-h5-audio-player](https://github.com/lhz516/react -h5-audio-player)
+- New component: excellent audio player for mdx files (in case you make podcasts, or even music), thanks to [react-h5-audio-player](https://github.com/lhz516/react-h5-audio-player)
 
 - Tailwind screen size indicator: a little help for development mode and responsive design (see TwSizeIndicator.tsx in /components/helper)
 
