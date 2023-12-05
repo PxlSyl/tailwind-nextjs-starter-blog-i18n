@@ -4,6 +4,8 @@ In this post we will discuss the i18n implementation and how it changes compared
 For a better understanding of the basic functionalities, you will need to consult the other posts, or the original documentation
 on the [timlrx](https://github.com/timlrx/tailwind-nextjs-starter-blog) github.
 
+Using the repo? Let me know and I'll start a list if you want your own blog listed there.
+
 # Changes:
 
 ## Libraries
