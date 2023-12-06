@@ -668,7 +668,7 @@ For the moment :
 - Smooth page transitions thanks to [Framer Motion](https://github.com/framer/motion) (see the template.tsx file in the app folder and take a look at the following next.js documentation
   for file functionality [template](https://nextjs.org/docs/app/api-reference/file-conventions/template))
   Note: This is a basic but effective implementation. I strongly encourage you to experiment with framer-motion and its use within the new
-  router.
+  router. I also added some Framer Motion flavor to the formspree contact modal, and to the ListLayoutWithTags.tsx component
 
 - New component: excellent audio player for mdx files (in case you make podcasts, or even music), thanks to [react-h5-audio-player](https://github.com/lhz516/react-h5-audio-player)
 
