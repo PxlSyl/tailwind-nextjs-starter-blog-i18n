@@ -674,4 +674,9 @@ For the moment :
 
 - Tailwind screen size indicator: a little help for development mode and responsive design (see TwSizeIndicator.tsx in /components/helper)
 
+- [Formspree](https://formspree.io/) support for the mail icon, with a beautiful modal dialog. Formspree allows your users to contact you and send you messages directly from your site, with anti-spam protection. Simply create a free basic account, get the environment key from your formspree account and copy it into the .env file.
+
+  If you don't want to use Formspree, go to the siteMetadata.js file and set formspree to "false".
+  ​
+
 Author: [pxlsyl](https://pxlsyl.art)

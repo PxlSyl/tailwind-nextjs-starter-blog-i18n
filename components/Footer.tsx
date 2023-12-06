@@ -7,8 +7,8 @@ import { useParams } from 'next/navigation'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { useTranslation } from 'app/[locale]/i18n/client'
 
-import { useContactModal } from '@/components/contact/store'
-import { ContactModal } from '@/components/contact'
+import { useContactModal } from './formspree/store'
+import { ContactModal } from './formspree'
 
 export default function Footer() {
   const locale = useParams()?.locale as LocaleTypes
@@ -29,10 +29,10 @@ export default function Footer() {
           <div className="mb-3 flex space-x-4">
             <div className="flex items-center">
               {siteMetadata.formspree === false ? (
-                <SocialIcon kind="mail" href={`mailto:${siteMetadata.email}`} />
+                <SocialIcon kind="mail" href={`mailto:${siteMetadata.email}`} size={6} />
               ) : (
                 <button className="flex items-center focus:outline-none" onClick={ContactClick}>
-                  <SocialIcon kind="mail" />
+                  <SocialIcon kind="mail" size={6} />
                 </button>
               )}
             </div>
