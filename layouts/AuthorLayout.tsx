@@ -1,22 +1,20 @@
-'use client'
 import { ReactNode } from 'react'
 import type { Authors } from 'contentlayer/generated'
 import SocialIcon from '@/components/social-icons'
 import Image from '@/components/Image'
 
-import { useParams } from 'next/navigation'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
-import { useTranslation } from 'app/[locale]/i18n/client'
+import { createTranslation } from 'app/[locale]/i18n/server'
 
 interface Props {
   children: ReactNode
   content: Omit<Authors, '_id' | '_raw' | 'body'>
+  params: { locale: LocaleTypes }
 }
 
-export default function AuthorLayout({ children, content }: Props) {
+export default async function AuthorLayout({ children, content, params: { locale } }: Props) {
   const { name, avatar, occupation, company, twitter, linkedin, github } = content
-  const locale = useParams()?.locale as LocaleTypes
-  const { t } = useTranslation(locale, '')
+  const { t } = await createTranslation(locale, 'about')
 
   return (
     <>

@@ -27,7 +27,7 @@ export default async function Page({ params: { locale } }: Props) {
 
   return (
     <>
-      <AuthorLayout content={mainContent}>
+      <AuthorLayout params={{ locale: locale }} content={mainContent}>
         <MDXLayoutRenderer code={author.body.code} />
       </AuthorLayout>
     </>
