@@ -12,7 +12,7 @@ import { ContactModal } from './formspree'
 
 export default function Footer() {
   const locale = useParams()?.locale as LocaleTypes
-  const { t } = useTranslation(locale, '')
+  const { t } = useTranslation(locale, 'footer')
   const contactModal = useContactModal()
 
   const handleContactClick = (): void => {
