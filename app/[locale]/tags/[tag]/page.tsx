@@ -1,9 +1,6 @@
 import { Metadata } from 'next'
-import { slug } from 'github-slugger'
-import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 import siteMetadata from '@/data/siteMetadata'
-import ListLayout from '@/layouts/ListLayoutWithTags'
-import { allBlogs } from 'contentlayer/generated'
+import ClientTagPage from './client'
 import tagData from 'app/[locale]/tag-data.json'
 import { genPageMetadata } from 'app/[locale]/seo'
 import { maintitle } from '@/data/localeMetadata'
@@ -41,18 +38,12 @@ export const generateStaticParams = async ({ params: { locale } }: TagsProps) =>
 }
 
 export default function TagPage({ params: { tag, locale } }: TagsProps) {
-  const dtag = decodeURI(tag)
-  // Capitalize first letter and convert space to dash
-  const title = dtag[0].toUpperCase() + dtag.split(' ').join('-').slice(1)
-  const filteredPosts = allCoreContent(
-    sortPosts(
-      allBlogs.filter((post) => {
-        return post.language === locale
-      })
-    ).filter((post) => {
-      return post.tags && post.tags.map((t) => slug(t)).includes(dtag)
-    })
+  return (
+    <ClientTagPage
+      params={{
+        tag: tag,
+        locale: locale,
+      }}
+    />
   )
-
-  return <ListLayout posts={filteredPosts} title={title} params={{ locale: locale }} />
 }
