@@ -11,7 +11,7 @@ import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import { createTranslation } from 'app/[locale]/i18n/server'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 
-interface LayoutProps {
+interface PostSimpleProps {
   content: CoreContent<Blog>
   children: ReactNode
   next?: { path: string; title: string }
@@ -25,7 +25,7 @@ export default async function PostLayout({
   prev,
   children,
   params: { locale },
-}: LayoutProps) {
+}: PostSimpleProps) {
   const { slug, date, title, language } = content
   const { t } = await createTranslation(locale, 'home')
   return (

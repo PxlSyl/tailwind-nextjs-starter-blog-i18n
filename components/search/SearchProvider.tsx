@@ -8,11 +8,11 @@ import { Blog } from 'contentlayer/generated'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { useTranslation } from 'app/[locale]/i18n/client'
 
-interface Props {
+interface SearchProviderProps {
   children: ReactNode
 }
 
-export const SearchProvider = ({ children }: Props) => {
+export const SearchProvider = ({ children }: SearchProviderProps) => {
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, '')
   const router = useRouter()

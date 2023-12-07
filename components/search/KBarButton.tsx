@@ -1,4 +1,4 @@
-import { DetailedHTMLProps, HTMLAttributes } from 'react'
+import React, { DetailedHTMLProps, HTMLAttributes } from 'react'
 import { useKBar } from 'kbar'
 
 /**
@@ -6,10 +6,9 @@ import { useKBar } from 'kbar'
  *
  * @return {*}
  */
-export const KBarButton = ({
-  children,
-  ...rest
-}: DetailedHTMLProps<HTMLAttributes<HTMLButtonElement>, HTMLButtonElement>) => {
+export const KBarButton: React.FC<
+  DetailedHTMLProps<HTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
+> = ({ children, ...rest }) => {
   const { query } = useKBar()
 
   return (

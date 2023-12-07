@@ -7,11 +7,11 @@ import { useParams } from 'next/navigation'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { useTranslation } from 'app/[locale]/i18n/client'
 
-type Props = {
+type CommentsProps = {
   slug: string
 }
 
-export default function Comments({ slug }: Props) {
+export default function Comments({ slug }: CommentsProps) {
   const [loadComments, setLoadComments] = useState(false)
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, 'home')

@@ -4,7 +4,7 @@ import Footer from './Footer'
 import { ReactNode } from 'react'
 import Header from './Header'
 
-interface Props {
+interface LayoutWrapperProps {
   children: ReactNode
 }
 
@@ -12,7 +12,7 @@ const inter = Inter({
   subsets: ['latin'],
 })
 
-const LayoutWrapper = ({ children }: Props) => {
+const LayoutWrapper = ({ children }: LayoutWrapperProps) => {
   return (
     <SectionContainer>
       <div className={`${inter.className} flex h-screen flex-col justify-between font-sans`}>

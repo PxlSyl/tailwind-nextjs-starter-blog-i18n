@@ -11,7 +11,7 @@ import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 
-interface LayoutProps {
+interface PostBannerProps {
   content: CoreContent<Blog>
   children: ReactNode
   next?: { path: string; title: string }
@@ -25,7 +25,7 @@ export default function PostMinimal({
   prev,
   children,
   params: { locale },
-}: LayoutProps) {
+}: PostBannerProps) {
   const { slug, title, images } = content
   const displayImage =
     images && images.length > 0 ? images[0] : 'https://picsum.photos/seed/picsum/800/400'

@@ -7,11 +7,11 @@ import { genPageMetadata } from 'app/[locale]/seo'
 import { createTranslation } from '../i18n/server'
 import { LocaleTypes } from '../i18n/settings'
 
-type Props = {
+type TagsProps = {
   params: { locale: LocaleTypes }
 }
 
-export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
+export async function generateMetadata({ params: { locale } }: TagsProps): Promise<Metadata> {
   const { t } = await createTranslation(locale, 'SEO')
   return genPageMetadata({
     title: 'Tags',
@@ -20,7 +20,7 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
   })
 }
 
-export default async function Page({ params: { locale } }: Props) {
+export default async function Page({ params: { locale } }: TagsProps) {
   const { t } = await createTranslation(locale, '')
   const tagCounts = tagData[locale]
   const tagKeys = Object.keys(tagCounts)

@@ -14,7 +14,7 @@ import { maintitle } from '@/data/localeMetadata'
 import { notFound } from 'next/navigation'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 
-interface PageProps {
+interface BlogPageProps {
   params: { slug: string[]; locale: LocaleTypes }
 }
 
@@ -27,7 +27,7 @@ const layouts = {
 
 export async function generateMetadata({
   params: { slug, locale },
-}: PageProps): Promise<Metadata | undefined> {
+}: BlogPageProps): Promise<Metadata | undefined> {
   const dslug = decodeURI(slug.join('/'))
   const post = allBlogs.find((p) => p.slug === dslug && p.language === locale)
   if (!post) {
@@ -85,7 +85,7 @@ export const generateStaticParams = async () => {
   return paths
 }
 
-export default async function Page({ params: { slug, locale } }: PageProps) {
+export default async function Page({ params: { slug, locale } }: BlogPageProps) {
   const dslug = decodeURI(slug.join('/'))
   // Filter out drafts in production + locale filtering
   const sortedCoreContents = allCoreContent(
