@@ -1,3 +1,4 @@
+import { POSTS_PER_PAGE } from '@/data/postsPerPage'
 import ListLayout from '@/layouts/ListLayoutWithTags'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 import { allBlogs } from 'contentlayer/generated'
@@ -7,8 +8,6 @@ import { LocaleTypes } from 'app/[locale]/i18n/settings'
 type BlogPageProps = {
   params: { locale: LocaleTypes; page: string }
 }
-
-const POSTS_PER_PAGE = 5
 
 export const generateStaticParams = async ({ params: { locale } }: BlogPageProps) => {
   const filteredPosts = allBlogs.filter((post) => post.language === locale)

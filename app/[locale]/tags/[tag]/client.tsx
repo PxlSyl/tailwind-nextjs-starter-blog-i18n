@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
+import { POSTS_PER_PAGE } from '@/data/postsPerPage'
 import { slug } from 'github-slugger'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 import ListLayout from '@/layouts/ListLayoutWithTags'
@@ -11,8 +12,6 @@ import { LocaleTypes } from 'app/[locale]/i18n/settings'
 type TagsProps = {
   params: { tag: string; locale: LocaleTypes }
 }
-
-const POSTS_PER_PAGE = 5
 
 export default function ClientTagPage({ params: { tag, locale } }: TagsProps) {
   const dtag = decodeURI(tag)

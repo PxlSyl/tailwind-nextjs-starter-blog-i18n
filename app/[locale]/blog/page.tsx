@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { POSTS_PER_PAGE } from '@/data/postsPerPage'
 import ListLayout from '@/layouts/ListLayoutWithTags'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 import { allBlogs } from 'contentlayer/generated'
@@ -9,8 +10,6 @@ import { LocaleTypes } from '../i18n/settings'
 type BlogPageProps = {
   params: { locale: LocaleTypes }
 }
-
-const POSTS_PER_PAGE = 5
 
 export async function generateMetadata({ params: { locale } }: BlogPageProps): Promise<Metadata> {
   return genPageMetadata({
