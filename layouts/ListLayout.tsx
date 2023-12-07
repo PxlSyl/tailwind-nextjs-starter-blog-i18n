@@ -110,7 +110,7 @@ export default function ListLayout({
           </h1>
           <div className="relative max-w-lg">
             <label>
-              <span className="sr-only">Search articles</span>
+              <span className="sr-only"> {t('searchposts')}</span>
               <input
                 aria-label="Search articles"
                 type="text"
@@ -135,13 +135,13 @@ export default function ListLayout({
             </svg>
           </div>
         </div>
-        <ul>
-          {!filteredBlogPosts.length && 'No posts found.'}
+        <motion.ul variants={container} initial="hidden" animate="show">
+          {!filteredBlogPosts.length && t('noposts')}
           {displayPosts.map((post) => {
             const { path, date, title, summary, tags, language } = post
             if (language === locale) {
               return (
-                <li key={path} className="py-4">
+                <motion.li variants={item} key={path} className="py-4">
                   <article className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
                     <dl>
                       <dt className="sr-only">Published on</dt>
@@ -167,11 +167,11 @@ export default function ListLayout({
                       </div>
                     </div>
                   </article>
-                </li>
+                </motion.li>
               )
             }
           })}
-        </ul>
+        </motion.ul>
       </div>
       {pagination && pagination.totalPages > 1 && !searchValue && (
         <Pagination
