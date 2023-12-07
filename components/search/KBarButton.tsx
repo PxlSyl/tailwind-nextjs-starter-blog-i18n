@@ -1,5 +1,10 @@
-import React, { DetailedHTMLProps, HTMLAttributes } from 'react'
+import React, { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react'
 import { useKBar } from 'kbar'
+
+interface KbarButtonProps {
+  children: ReactNode
+  [key: string]: any
+}
 
 /**
  * Button wrapper component that triggers the KBar modal on click.
@@ -8,7 +13,7 @@ import { useKBar } from 'kbar'
  */
 export const KBarButton: React.FC<
   DetailedHTMLProps<HTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
-> = ({ children, ...rest }) => {
+> = ({ children, ...rest }: KbarButtonProps) => {
   const { query } = useKBar()
 
   return (
