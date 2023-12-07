@@ -41,8 +41,16 @@ export default function ClientTagPage({ params: { tag, locale } }: TagsProps) {
 
   useEffect(() => {
     const handleScroll = () => {
-      const { scrollTop, scrollHeight, clientHeight } = document.documentElement
-      if (scrollTop + clientHeight >= scrollHeight - 10 && !loading) {
+      const { innerHeight } = window
+
+      // Check if user has scrolled to the bottom with a small threshold
+      if (
+        innerHeight &&
+        document.documentElement &&
+        document.documentElement.scrollHeight - innerHeight <=
+          document.documentElement.scrollTop + 10 &&
+        !loading
+      ) {
         loadMorePosts()
       }
     }
