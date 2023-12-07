@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import { usePathname, useParams, useSelectedLayoutSegments } from 'next/navigation'
 import { useOuterClick } from './util/useOuterClick'
 import { LocaleTypes, locales } from 'app/[locale]/i18n/settings'
+import { fallbackLng, secondLng } from 'app/[locale]/i18n/locales'
 import { allBlogs } from '.contentlayer/generated'
 import slugMap from 'app/[locale]/localeid-map.json'
 import Link from 'next/link'
@@ -20,11 +21,12 @@ const LangSwitch = () => {
     const currentPost = allBlogs.find((p) => pathname.includes(p.slug))
 
     if (currentPost) {
+      const folder = newLocale === fallbackLng ? 'posts' : 'articles'
       // Find the corresponding slug in the new language
       const newSlug = slugMap[currentPost.localeid]?.[newLocale]
 
       if (newSlug) {
-        return `/${newLocale}/blog/${newSlug}`
+        return `/${newLocale}/blog/${folder}/${newSlug}`
       } else {
         return `/${newLocale}/blog`
       }

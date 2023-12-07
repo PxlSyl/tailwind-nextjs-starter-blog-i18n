@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { usePathname } from 'next/navigation'
+import { motion } from 'framer-motion'
 import { formatDate } from 'pliny/utils/formatDate'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Blog } from 'contentlayer/generated'
@@ -9,6 +10,7 @@ import Link from '@/components/Link'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import { fallbackLng } from 'app/[locale]/i18n/locales'
+import { useTranslation } from 'app/[locale]/i18n/client'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 
 interface PaginationProps {
@@ -24,7 +26,23 @@ interface ListLayoutProps {
   pagination?: PaginationProps
 }
 
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+}
+
+const item = {
+  hidden: { opacity: 0, x: -25, y: 0 },
+  show: { opacity: 1, x: 0, y: 0 },
+}
+
 function Pagination({ totalPages, currentPage, params: { locale } }: PaginationProps) {
+  const { t } = useTranslation(locale, 'home')
   const pathname = usePathname()
   const basePath =
     locale === fallbackLng ? pathname.split('/')[1] : pathname.split('/').slice(1, 3).join('/')
@@ -36,7 +54,7 @@ function Pagination({ totalPages, currentPage, params: { locale } }: PaginationP
       <nav className="flex justify-between">
         {!prevPage && (
           <button className="cursor-auto disabled:opacity-50" disabled={!prevPage}>
-            Previous
+            {t('prevp')}
           </button>
         )}
         {prevPage && (
@@ -44,7 +62,7 @@ function Pagination({ totalPages, currentPage, params: { locale } }: PaginationP
             href={currentPage - 1 === 1 ? `/${basePath}/` : `/${basePath}/page/${currentPage - 1}`}
             rel="prev"
           >
-            Previous
+            {t('prevp')}
           </Link>
         )}
         <span>
@@ -52,12 +70,12 @@ function Pagination({ totalPages, currentPage, params: { locale } }: PaginationP
         </span>
         {!nextPage && (
           <button className="cursor-auto disabled:opacity-50" disabled={!nextPage}>
-            Next
+            {t('nextp')}
           </button>
         )}
         {nextPage && (
           <Link href={`/${basePath}/page/${currentPage + 1}`} rel="next">
-            Next
+            {t('nextp')}
           </Link>
         )}
       </nav>
@@ -72,6 +90,7 @@ export default function ListLayout({
   initialDisplayPosts = [],
   pagination,
 }: ListLayoutProps) {
+  const { t } = useTranslation(locale, 'home')
   const [searchValue, setSearchValue] = useState('')
   const filteredBlogPosts = posts.filter((post) => {
     const searchContent = post.title + post.summary + post.tags?.join(' ')
