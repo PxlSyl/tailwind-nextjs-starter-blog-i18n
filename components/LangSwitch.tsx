@@ -21,12 +21,11 @@ const LangSwitch = () => {
     const currentPost = allBlogs.find((p) => pathname.includes(p.slug))
 
     if (currentPost) {
-      const folder = newLocale === fallbackLng ? 'posts' : 'articles'
       // Find the corresponding slug in the new language
       const newSlug = slugMap[currentPost.localeid]?.[newLocale]
 
       if (newSlug) {
-        return `/${newLocale}/blog/${folder}/${newSlug}`
+        return `/${newLocale}/blog/${newSlug}`
       } else {
         return `/${newLocale}/blog`
       }
