@@ -360,12 +360,9 @@ export const config = {
 
 Tous les articles sont regroupés au sein du dossier "data/blog"
 
-Ils ne sont pas différenciés au sein de dossiers différents (même si cela pourrait -et devrait- changer à l'avenir)
-Du coup cela peut sembler un peu desordonné et ce serait mieux d'organiser les articles par langue dans un sous-dossier, 
-mais je ne voulais pas que la langue apparaisse deux fois dans l'url...
-
-Il y a sûrement une possibilité de corriger cela, en forçant next.js à réecrire les chemins, mais pour le moment je n'ai 
-pas pris le temps d'implémenter la fonctionnalité.
+Ils sont organisés en sous-dossiers : "data/blog/posts" pour l'anglais, et "data/blog/articles" pour le français. 
+Si vous ajoutez/modifiez une langue, je vous recommande simplement de créer un dossier avec comme nom la 
+traduction de "posts" pour la langue choisie.
 
 - En-têtes de vos articles :
 

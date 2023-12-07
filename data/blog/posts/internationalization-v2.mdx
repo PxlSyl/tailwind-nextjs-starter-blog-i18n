@@ -358,14 +358,11 @@ export const config = {
 
 ## Posts
 
-All posts are grouped within the “data/blog” folder
+All posts are grouped within the “data/blog” folder.
 
-They are not differentiated within different folders (even if this could - and should - change in the future)
-So it may seem a little messy and it would be better to organize the posts by language in a subfolder,
-but I didn't want the language to appear twice in the url...
-
-There is surely a possibility to correct this, by forcing next.js to rewrite the paths, but for the moment 
-didn't take the time to implement the functionality.
+They are organized into subfolders: "data/blog/posts" for English, and "data/blog/articles" for French (articles is the
+French translation of "posts") If you add/modify a language, I simply recommend that you create a folder with
+the name of the translation of "posts" for the chosen language.
 
 - Headers of your posts:
 
