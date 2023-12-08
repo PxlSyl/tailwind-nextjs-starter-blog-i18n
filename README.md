@@ -6,6 +6,14 @@ on [timlrx](https://github.com/timlrx/tailwind-nextjs-starter-blog) github.
 
 Using the repo? Let me know and I'll start a list if you want your own blog listed there.
 
+## Motivation
+
+I am currently redesigning my website, (not yet published) which uses the router page, and part of the code for the internationalized blog of V.1.
+I want to migrate to the app router, but for that, I first had to learn how to internationalize a site with the router app, so I took this repository as training.
+
+I am also preparing a much more complete template for artists, content creators and developers, which I will use for my own site and which will be available soon.
+​
+
 # Changes:
 
 ## New features
