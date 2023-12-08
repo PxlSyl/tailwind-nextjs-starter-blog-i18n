@@ -25,7 +25,7 @@ const projectsData: ProjectsData = {
         to the desired date and press "Go". No more worrying about lost keys or
         forgotten headphones with this simple yet affordable solution.`,
       imgSrc: '/static/images/time-machine.jpg',
-      href: '/blog/the-time-machine',
+      href: '/blog/posts/the-time-machine',
     },
   ],
 
@@ -43,7 +43,7 @@ const projectsData: ProjectsData = {
         à la date souhaitée et appuyez sur "Go". Ne vous inquiétez plus des clés perdues ou
         écouteurs oubliés avec cette solution simple mais abordable.`,
       imgSrc: '/static/images/time-machine.jpg',
-      href: '/blog/la-machine-a-remonter-le-temps',
+      href: '/blog/articles/la-machine-a-remonter-le-temps',
     },
   ],
 }
