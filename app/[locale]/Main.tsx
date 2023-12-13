@@ -70,7 +70,7 @@ export default async function Home({ posts, params: { locale } }: HomeProps) {
                               </div>
                             </div>
                             <div className="prose max-w-none text-gray-500 dark:text-gray-400">
-                              {summary}
+                              {summary!.length > 149 ? `${summary!.substring(0, 149)}...` : summary}
                             </div>
                           </div>
                           <div className="text-base font-medium leading-6">

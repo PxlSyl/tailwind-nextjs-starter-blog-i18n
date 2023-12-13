@@ -163,7 +163,7 @@ export default function ListLayout({
                         </div>
                       </div>
                       <div className="prose max-w-none text-gray-500 dark:text-gray-400">
-                        {summary}
+                        {summary!.length > 149 ? `${summary!.substring(0, 149)}...` : summary}
                       </div>
                     </div>
                   </article>
