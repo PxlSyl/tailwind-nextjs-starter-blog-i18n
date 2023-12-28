@@ -16,7 +16,7 @@ export const ContactModal = (): JSX.Element => {
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, 'contact')
   const contactModal = useContactModal()
-  const [state, handleSubmit, reset] = useForm(`${process.env.NEXT_FORMSPREE_KEY}`)
+  const [state, handleSubmit, reset] = useForm('xdojkndq')
   const [name, setName] = useState<string>('')
   const [email, setEmail] = useState<string>('')
   const [message, setMessage] = useState<string>('')
