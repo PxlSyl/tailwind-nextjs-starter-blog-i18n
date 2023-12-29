@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { usePathname, useParams, useSelectedLayoutSegments } from 'next/navigation'
+import { usePathname, useParams, useSelectedLayoutSegments, useRouter } from 'next/navigation'
 import { useOuterClick } from './util/useOuterClick'
 import { LocaleTypes, locales } from 'app/[locale]/i18n/settings'
 import { allBlogs } from '.contentlayer/generated'
@@ -10,6 +10,7 @@ const LangSwitch = () => {
   const pathname = usePathname()
   const urlSegments = useSelectedLayoutSegments()
   const locale = useParams()?.locale as LocaleTypes
+  const router = useRouter()
 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
@@ -40,8 +41,15 @@ const LangSwitch = () => {
   const closeMenu = () => {
     setIsMenuOpen(false)
   }
+
   const menubarRef = useRef<HTMLDivElement>(null)
   useOuterClick(menubarRef, closeMenu)
+
+  const handleLinkClick = (newLocale: string) => {
+    const resolvedUrl = handleLocaleChange(newLocale)
+    router.push(resolvedUrl)
+    closeMenu()
+  }
 
   return (
     <div ref={menubarRef} className="relative inline-block text-left">
@@ -59,25 +67,26 @@ const LangSwitch = () => {
       </div>
       {isMenuOpen && (
         <div
-          className="absolute right-0 mt-2 w-12 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-700"
+          className="absolute right-0 mt-2 w-12 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:rounded-md dark:bg-gray-700 dark:ring-1 dark:ring-gray-700"
           role="menu"
           aria-orientation="vertical"
           aria-labelledby="options-menu"
           onBlur={closeMenu}
         >
-          <div className="py-1" role="none">
+          <ul className="py-1" role="none" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
             {locales.map((newLocale: string) => (
-              <Link key={newLocale} href={handleLocaleChange(newLocale)} locale={false}>
+              <li key={newLocale}>
                 <button
-                  className="dark: block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
+                  onClick={() => handleLinkClick(newLocale)}
+                  className="rounded-md px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
                   role="menuitem"
-                  onClick={closeMenu}
+                  style={{ display: 'block', width: '100%', textDecoration: 'none' }}
                 >
                   {newLocale}
                 </button>
-              </Link>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       )}
     </div>
