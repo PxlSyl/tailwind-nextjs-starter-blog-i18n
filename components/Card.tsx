@@ -78,7 +78,7 @@ const Card: React.FC<CardProps> = ({ title, description, imgSrc, href }) => {
               className="text-base font-medium leading-6 text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
               aria-label={`${t('linkto')}${title}`}
             >
-              {t('learn')} &rarr;
+              {href.startsWith('http') ? `${t('visit')}` : `${t('read')}`} &rarr;
             </Link>
           )}
         </div>
