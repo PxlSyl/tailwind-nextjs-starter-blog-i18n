@@ -4,7 +4,6 @@ import { useOuterClick } from './util/useOuterClick'
 import { LocaleTypes, locales } from 'app/[locale]/i18n/settings'
 import { allBlogs } from '.contentlayer/generated'
 import slugMap from 'app/[locale]/localeid-map.json'
-import Link from 'next/link'
 
 const LangSwitch = () => {
   const pathname = usePathname()
