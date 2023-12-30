@@ -1,7 +1,7 @@
 /* workaround script for windows users only, see there : https://github.com/timlrx/tailwind-nextjs-starter-blog/issues/704 
 command : node ./scripts/postContentlayer.mjs */
 import { writeFileSync } from 'fs'
-import GithubSlugger from 'github-slugger'
+import { slug } from 'github-slugger'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer.js'
 import { allBlogs } from '../.contentlayer/generated/index.mjs'
 import siteMetadata from '../data/siteMetadata.js'
@@ -40,7 +40,7 @@ export async function createTagCount() {
   allBlogs.forEach((file) => {
     if (file.tags && (!isProduction || file.draft !== true)) {
       file.tags.forEach((tag) => {
-        const formattedTag = GithubSlugger.slug(tag)
+        const formattedTag = slug(tag)
         if (file.language === fallbackLng) {
           tagCount[fallbackLng][formattedTag] = (tagCount[fallbackLng][formattedTag] || 0) + 1
         } else if (file.language === secondLng) {

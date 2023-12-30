@@ -19,7 +19,7 @@
     "contentlayer": "0.3.4",
     "esbuild": "0.18.11",
     "framer-motion": "^10.16.12",
-    "github-slugger": "^1.4.0",
+    "github-slugger": "^2.0.0",
     "gray-matter": "^4.0.2",
     "i18next": "^23.6.0",
     "i18next-browser-languagedetector": "^7.1.0",
