@@ -31,12 +31,16 @@ For the moment :
 
 - Tailwind screen size indicator: a little help for development mode and responsive design (see TwSizeIndicator.tsx in /components/helper)
 
-- [Formspree](https://formspree.io/) support for the mail icon, with a beautiful modal dialog. Formspree allows your users to contact you and send you messages directly from your site, with anti-spam protection. Simply create a free basic account, get the key from your formspree account and then replace the key with your own here, in components/formspree/index.tsx :
+- [Formspree](https://formspree.io/) support for the mail icon, with a beautiful modal dialog. Formspree allows your users to contact you and send you messages directly from your site, with anti-spam protection. Simply create a free basic account, read the docs and get the key from your formspree account and then replace the key with your own here, in components/formspree/index.tsx :
 
 ```ts:formspree/index.tsx
 /* Line 19*/
  const [state, handleSubmit, reset] = useForm('xdojkndq')
 ```
+
+IMPORTANT NOTE: you must replace the key in useform like this : useform('[your key]'). The provided key is
+a test one of mine. You can use it to verify if the toast box is functional for example, but you must know
+that I'll receive all your test messages.
 
 If you don't want to use Formspree, go to the siteMetadata.js file and set formspree to "false".
 
