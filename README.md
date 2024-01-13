@@ -667,11 +667,10 @@ If you prefer to use Algolia, it will be up to you to implement it on your site,
 
 ## Things to do :
 
-- Fixed the translation in page 404. This is related to the current functioning of the not-found function,
+- Fix the translation in page 404. This is related to the current functioning of the not-found function,
   so we have to wait for a fix from next-js side see here: [i18n for not-found page](https://github.com/vercel/next.js/discussions/50518)
 
-- I tried to update the rss.mjs script for first deployment purposes, but I don't know if it is correct for the language configuration
-  (but I did my best). If you are an experienced developer, let me know what you think.
+- Fix Robot.ts, sitemap.ts and rss.mjs (I don't have that much time, so if you end up with a solution, please make a pr or open a new issue)
 
 Everything else is currently working as expected.
 
