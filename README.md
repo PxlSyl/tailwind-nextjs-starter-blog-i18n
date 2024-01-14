@@ -19,7 +19,7 @@ Normal version :
 
 I18 version :
 
-​- [Pablo Pikassiet Next Starter I18n](https://github.com/PxlSyl/pablo-pikassiet-next-starter-i18n)
+- [Pablo Pikassiet Next Starter I18n](https://github.com/PxlSyl/pablo-pikassiet-next-starter-i18n)
 
 # Changes:
 
