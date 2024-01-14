@@ -6,6 +6,8 @@ on [timlrx](https://github.com/timlrx/tailwind-nextjs-starter-blog) github.
 
 Using the repo? Let me know and I'll start a list if you want your own blog listed there.
 
+If you find this project useful, please give it a ⭐ to show your support.
+
 ## Motivation
 
 I am currently redesigning my website, (not yet published) which uses the router page, and part of the code for the internationalized blog of V.1.
