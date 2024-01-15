@@ -13,5 +13,10 @@
   "kbarplaceholder": "Taper une commande ou chercher",
   "loading": "Chargement...",
   "noresults": "Aucun résultat pour la recherche...",
-  "poststagged": "Voir les posts balisés"
+  "poststagged": "Voir les posts balisés",
+  "share": "Partager:",
+  "facebookshare": "bouton de partage facebook",
+  "twittershare": "bouton de partage twitter",
+  "linkedinshare": "bouton de partage linkedin",
+  "pinterestshare": "bouton de partage pinterest"
 }

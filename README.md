@@ -40,7 +40,7 @@ For the moment :
   Note: This is a basic but effective implementation. I strongly encourage you to experiment with framer-motion and its use within the new
   router. I also added some Framer Motion flavor to the formspree contact modal, and to the ListLayoutWithTags.tsx component
 
-- New component: excellent audio player for mdx files (in case you make podcasts, or even music), thanks to [react-h5-audio-player](https://github.com/lhz516/react-h5-audio-player)
+- New MDX component: excellent audio player for mdx files (in case you make podcasts, or even music), thanks to [react-h5-audio-player](https://github.com/lhz516/react-h5-audio-player)
 
 - Tailwind screen size indicator: a little help for development mode and responsive design (see TwSizeIndicator.tsx in /components/helper)
 
@@ -56,6 +56,8 @@ a test one of mine. You can use it to verify if the toast box is functional for 
 that I'll receive all your test messages.
 
 If you don't want to use Formspree, go to the siteMetadata.js file and set formspree to "false".
+
+- Share compoment now included : you or your users can share your blog posts on Facebook, Twitter or Linkedin with ease! What is a 2024 modern blog without this possibility?
 
 ## Libraries
 

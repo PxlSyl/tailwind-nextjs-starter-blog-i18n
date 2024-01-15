@@ -9,6 +9,7 @@ import PageTitle from '@/components/PageTitle'
 import SectionContainer from '@/components/SectionContainer'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
+import Share from '@/components/Share'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 
 interface PostBannerProps {
@@ -48,6 +49,7 @@ export default function PostMinimal({
             </div>
           </div>
           <div className="prose max-w-none py-4 dark:prose-invert">{children}</div>
+          <Share title={title} slug={slug} />
           {siteMetadata.comments && (
             <div className="pb-6 pt-6 text-center text-gray-700 dark:text-gray-300" id="comment">
               <Comments slug={slug} />
