@@ -35,6 +35,8 @@ This repository will sometimes be updated with new features (not present in the 
 
 For the moment :
 
+- Share compoment now included : you or your users can share your blog posts on Facebook, Twitter or Linkedin with ease! What's a 2024 modern blog without this possibility?
+
 - Smooth page transitions thanks to [Framer Motion](https://github.com/framer/motion) (see the template.tsx file in the app folder and take a look at the following next.js documentation
   for file functionality [template](https://nextjs.org/docs/app/api-reference/file-conventions/template))
   Note: This is a basic but effective implementation. I strongly encourage you to experiment with framer-motion and its use within the new
@@ -56,8 +58,6 @@ a test one of mine. You can use it to verify if the toast box is functional for 
 that I'll receive all your test messages.
 
 If you don't want to use Formspree, go to the siteMetadata.js file and set formspree to "false".
-
-- Share compoment now included : you or your users can share your blog posts on Facebook, Twitter or Linkedin with ease! What is a 2024 modern blog without this possibility?
 
 ## Libraries
 
