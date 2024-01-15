@@ -10,10 +10,10 @@ If you find this project useful, please give it a ⭐ to show your support.
 
 ## Motivation
 
-I am currently redesigning my website, (not yet published) which uses the router page, and part of the code for the internationalized blog of V.1.
-I want to migrate to the app router, but for that, I first had to learn how to internationalize a site with the router app, so I took this repository as training.
+I am currently redesigning my website, which uses the router page, and part of the code for the internationalized blog of V.1.
+I wanted to migrate to the app router, but for that, I first had to learn how to internationalize a site with the router app, so I took this repository as training.
 
-I am also preparing a much more complete template for artists, content creators and developers, which I will use for my own site and which is available here :
+I also designed a much more complete template for artists, content creators and developers, which I m'using for my own site and which is available here :
 
 Normal version :
 
@@ -22,6 +22,10 @@ Normal version :
 I18 version :
 
 - [Pablo Pikassiet Next Starter I18n](https://github.com/PxlSyl/pablo-pikassiet-next-starter-i18n)
+
+My own website based on this new template :
+
+- [PxlSyl.art](https://www.pxlsyl.art/)
 
 # Changes:
 
