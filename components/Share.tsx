@@ -28,7 +28,9 @@ const Share = ({ title, description, slug, className }: ShareProps) => {
 
   return (
     <div className="m-4 mt-8 flex items-center justify-center pt-4">
-      <h5 className="text-highlighted dark:text-darkmode-highlighted mr-3">{t('share')}</h5>
+      <h5 className="text-highlighted dark:text-darkmode-highlighted mr-3 text-lg font-bold">
+        {t('share')}
+      </h5>
       <ul className={className}>
         <li className="inline-block">
           <SocialIcon
