@@ -1,6 +1,5 @@
 import { useRef, useCallback } from 'react'
 import { useOuterClick } from '../util/useOuterClick'
-import { AiOutlineClose } from 'react-icons/ai'
 import { motion } from 'framer-motion'
 
 interface cModalProps {
@@ -63,7 +62,9 @@ export const CModal: React.FC<cModalProps> = ({
               onClick={handleClose}
               className="ml-auto border-0 p-1 transition hover:opacity-70"
             >
-              <AiOutlineClose size={20} />
+              <p className="text-lg font-bold" style={{ fontSize: '1.5rem' }}>
+                &times;
+              </p>
             </button>
           </div>
           {/* Body  */}
