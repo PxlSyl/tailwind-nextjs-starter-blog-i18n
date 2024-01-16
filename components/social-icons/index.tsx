@@ -1,5 +1,7 @@
-import { Mail, Github, Facebook, Youtube, Linkedin, Twitter, Mastodon } from './icons'
+import { Mail, Github, Facebook, Youtube, Linkedin, Twitter, X, Mastodon } from './icons'
 import siteMetadata from '@/data/siteMetadata'
+
+// Twitter icon replaced with "X" brand. If you prefer the blue bird icon, replace the X with "twitter" instead
 
 const components = {
   mail: Mail,
@@ -7,7 +9,7 @@ const components = {
   facebook: Facebook,
   youtube: Youtube,
   linkedin: Linkedin,
-  twitter: Twitter,
+  twitter: X,
   mastodon: Mastodon,
 }
 
