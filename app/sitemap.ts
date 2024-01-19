@@ -1,18 +1,20 @@
-//This file is the most important for SEO purposes so be sure to configure it perfectly with your project settings
 import { MetadataRoute } from 'next'
 import { allBlogs } from 'contentlayer/generated'
 import siteMetadata from '@/data/siteMetadata'
 import { fallbackLng, secondLng } from './[locale]/i18n/locales'
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const locales = [fallbackLng, secondLng]
   const siteUrl = siteMetadata.siteUrl
+
   // blog route for english
-  const blogRoutes = allBlogs
+  const firstBlogRoutes = allBlogs
     .filter((p) => p.language === fallbackLng)
     .map((post) => ({
       url: `${siteUrl}/${fallbackLng}/${post.path}`,
       lastModified: post.lastmod || post.date,
     }))
+
   // blog route for french (or your own second language)
   const secondBlogRoutes = allBlogs
     .filter((p) => p.language === secondLng)
@@ -20,16 +22,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${siteUrl}/${secondLng}/${post.path}`,
       lastModified: post.lastmod || post.date,
     }))
-  // all routes for english
-  const routes = ['', 'blog', 'projects', 'tags', 'about'].map((route) => ({
-    url: `${siteUrl}/${fallbackLng}/${route}`,
-    lastModified: new Date().toISOString().split('T')[0],
-  }))
-  // all routes for french (or your own second language)
-  const secondRoutes = ['', 'blog', 'projects', 'tags', 'about'].map((route) => ({
-    url: `${siteUrl}/${secondLng}/${route}`,
-    lastModified: new Date().toISOString().split('T')[0],
+
+  const BlogRoutes = [...firstBlogRoutes, ...secondBlogRoutes].map((route) => ({
+    ...route,
   }))
 
-  return [...routes, ...secondRoutes, ...blogRoutes, ...secondBlogRoutes]
+  // all routes for all locales
+  const routes = locales.flatMap((locale) => {
+    return ['', 'blog', 'projects', 'tags', 'about'].map((route) => ({
+      url: `${siteUrl}/${locale}/${route}`,
+      lastModified: new Date().toISOString().split('T')[0],
+    }))
+  })
+
+  const SitemapRoutes: MetadataRoute.Sitemap = [...routes, ...BlogRoutes].map((route) => ({
+    ...route,
+  }))
+
+  return SitemapRoutes
 }
