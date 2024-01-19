@@ -28,14 +28,14 @@ const Share = ({ title, description, slug, className }: ShareProps) => {
 
   return (
     <div className="m-4 mt-8 flex items-center justify-center pt-4">
-      <h5 className="text-highlighted dark:text-darkmode-highlighted mr-3 text-lg font-bold text-primary-500">
+      <p className="text-highlighted dark:text-darkmode-highlighted mr-3 font-bold text-primary-500">
         {t('share')}
-      </h5>
+      </p>
       <ul className={className}>
         <li className="inline-block">
           <SocialIcon
             kind="facebook"
-            size={6}
+            size={5}
             aria-label={t('facebookshare')}
             href={`https://facebook.com/sharer/sharer.php?u=${siteMetadata.siteUrl}/${locale}/${targetSegment}/${slug}`}
           />
@@ -43,7 +43,7 @@ const Share = ({ title, description, slug, className }: ShareProps) => {
         <li className="ml-4 inline-block">
           <SocialIcon
             kind="twitter"
-            size={6}
+            size={5}
             aria-label={t('twittershare')}
             href={`https://twitter.com/intent/tweet/?url=${siteMetadata.siteUrl}/${locale}/${targetSegment}/${slug}&text=${title}`}
           />
@@ -51,7 +51,7 @@ const Share = ({ title, description, slug, className }: ShareProps) => {
         <li className="ml-4 inline-block">
           <SocialIcon
             kind="linkedin"
-            size={6}
+            size={5}
             aria-label={t('linkedinshare')}
             href={`https://www.linkedin.com/shareArticle?mini=true&url=${siteMetadata.siteUrl}/${locale}/${targetSegment}/${slug}&title=${title}&summary=${description}&source=${siteMetadata.siteUrl}`}
           />
@@ -59,7 +59,7 @@ const Share = ({ title, description, slug, className }: ShareProps) => {
         <li className="ml-4 inline-block">
           <SocialIcon
             kind="whatsapp"
-            size={6}
+            size={5}
             aria-label={t('whatsappshare')}
             href={`https://wa.me/?text=${siteMetadata.siteUrl}/${locale}/${targetSegment}/${slug}&text=${title}`}
           />
@@ -67,7 +67,7 @@ const Share = ({ title, description, slug, className }: ShareProps) => {
         <li className="ml-4 inline-block">
           <SocialIcon
             kind="telegram"
-            size={6}
+            size={5}
             aria-label={t('telegramshare')}
             href={`https://telegram.me/share/url?url=${siteMetadata.siteUrl}/${locale}/${targetSegment}/${slug}&text=${title}`}
           />
