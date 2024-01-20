@@ -682,54 +682,85 @@ The original repository allows support for kbar and algolia.
 Here, the search bar relies on the kbar library, and Algolia support is not planned.
 If you prefer to use Algolia, it will be up to you to implement it on your site, instead of kbar.
 
-There's an issue when using regular translations, so I implemented a workaround for that problem. Just modify the name in each menu item, based on the languages you're using.
+There's an issue when using regular translations, so I implemented a workaround for that problem. Just modify the name in each menu item, as well as the navigationSection object, based on the languages you're using.
 
 ```ts:SearchProvider.ts
- /* issue when using regular translations, this is a workaround to show how to implement translated menu titles */
+  export const SearchProvider = ({ children }: SearchProviderProps) => {
+  const locale = useParams()?.locale as LocaleTypes
+  const { t } = useTranslation(locale, '')
+  const router = useRouter()
+  /* issue when using regular translations, this is a workaround to show how to implement section titles */
+   /*Modify the following line based on your implemented languages: */
+  const navigationSection = locale === fallbackLng ? 'Navigate' : 'Naviguer'
+  return (
+    <KBarSearchProvider
+      kbarConfig={{
+        searchDocumentsPath: 'search.json',
         defaultActions: [
           {
             id: 'home',
-            /*Modify the following line based on your implemented languages: */
+             /*Modify the following line based on your implemented languages: */
             name: locale === fallbackLng ? 'Home' : 'Accueil',
             keywords: '',
             shortcut: ['h'],
-            /*Modify the following line based on your implemented languages: */
-            section: locale === fallbackLng ? 'Navigate' : 'Naviguer',
+            section: navigationSection,
             perform: () => router.push(`/${locale}`),
           },
           {
             id: 'blog',
+             /*Modify the following line based on your implemented languages: */
             name: locale === fallbackLng ? 'Blog' : 'Blog',
             keywords: '',
             shortcut: ['b'],
-            section: locale === fallbackLng ? 'Navigate' : 'Naviguer',
+            section: navigationSection,
             perform: () => router.push(`/${locale}/blog`),
           },
           {
             id: 'tags',
+             /*Modify the following line based on your implemented languages: */
             name: locale === fallbackLng ? 'Tags' : 'Tags',
             keywords: '',
             shortcut: ['t'],
-            section: locale === fallbackLng ? 'Navigate' : 'Naviguer',
+            section: navigationSection,
             perform: () => router.push(`/${locale}/tags`),
           },
           {
             id: 'projects',
+             /*Modify the following line based on your implemented languages: */
             name: locale === fallbackLng ? 'Projects' : 'Projets',
             keywords: '',
             shortcut: ['p'],
-            section: locale === fallbackLng ? 'Navigate' : 'Naviguer',
+            section: navigationSection,
             perform: () => router.push(`/${locale}/projects`),
           },
           {
             id: 'about',
+             /*Modify the following line based on your implemented languages: */
             name: locale === fallbackLng ? 'About' : 'À propos',
             keywords: '',
             shortcut: ['a'],
-            section: locale === fallbackLng ? 'Navigate' : 'Naviguer',
+            section: navigationSection,
             perform: () => router.push(`/${locale}/about`),
           },
         ],
+        onSearchDocumentsLoad(json) {
+          return json
+            .filter((post: CoreContent<Blog>) => post.language === locale)
+            .map((post: CoreContent<Blog>) => ({
+              id: post.path,
+              name: post.title,
+              keywords: post?.summary || '',
+              section: t('content'),
+              subtitle: post.tags.join(', '),
+              perform: () => router.push(`/${locale}/${post.path}`),
+            }))
+        },
+      }}
+    >
+      {children}
+    </KBarSearchProvider>
+  )
+}
 ```
 
 ## Things to do :

@@ -17,7 +17,8 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, '')
   const router = useRouter()
-
+  /* issue when using regular translations, this is a workaround to show how to implement section titles */
+  const navigationSection = locale === fallbackLng ? 'Navigate' : 'Naviguer'
   return (
     <KBarSearchProvider
       kbarConfig={{
@@ -29,7 +30,7 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
             name: locale === fallbackLng ? 'Home' : 'Accueil',
             keywords: '',
             shortcut: ['h'],
-            section: locale === fallbackLng ? 'Navigate' : 'Naviguer',
+            section: navigationSection,
             perform: () => router.push(`/${locale}`),
           },
           {
@@ -37,7 +38,7 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
             name: locale === fallbackLng ? 'Blog' : 'Blog',
             keywords: '',
             shortcut: ['b'],
-            section: locale === fallbackLng ? 'Navigate' : 'Naviguer',
+            section: navigationSection,
             perform: () => router.push(`/${locale}/blog`),
           },
           {
@@ -45,7 +46,7 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
             name: locale === fallbackLng ? 'Tags' : 'Tags',
             keywords: '',
             shortcut: ['t'],
-            section: locale === fallbackLng ? 'Navigate' : 'Naviguer',
+            section: navigationSection,
             perform: () => router.push(`/${locale}/tags`),
           },
           {
@@ -53,7 +54,7 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
             name: locale === fallbackLng ? 'Projects' : 'Projets',
             keywords: '',
             shortcut: ['p'],
-            section: locale === fallbackLng ? 'Navigate' : 'Naviguer',
+            section: navigationSection,
             perform: () => router.push(`/${locale}/projects`),
           },
           {
@@ -61,7 +62,7 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
             name: locale === fallbackLng ? 'About' : 'À propos',
             keywords: '',
             shortcut: ['a'],
-            section: locale === fallbackLng ? 'Navigate' : 'Naviguer',
+            section: navigationSection,
             perform: () => router.push(`/${locale}/about`),
           },
         ],
