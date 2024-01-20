@@ -682,6 +682,55 @@ The original repository allows support for kbar and algolia.
 Here, the search bar relies on the kbar library, and Algolia support is not planned.
 If you prefer to use Algolia, it will be up to you to implement it on your site, instead of kbar.
 
+There's an issue when using regular translations, so I implemented a workaround for that problem. Just modify the name in each menu item, based on the languages you're using.
+
+```ts:SearchProvider.ts
+ /* issue when using regular translations, this is a workaround to show how to implement translated menu titles */
+        defaultActions: [
+          {
+            id: 'home',
+            /*Modify the following line based on your implemented languages: */
+            name: locale === fallbackLng ? 'Home' : 'Accueil',
+            keywords: '',
+            shortcut: ['h'],
+            section: locale === fallbackLng ? 'Navigate' : 'Naviguer',
+            perform: () => router.push(`/${locale}`),
+          },
+          {
+            id: 'blog',
+            name: locale === fallbackLng ? 'Blog' : 'Blog',
+            keywords: '',
+            shortcut: ['b'],
+            section: locale === fallbackLng ? 'Navigate' : 'Naviguer',
+            perform: () => router.push(`/${locale}/blog`),
+          },
+          {
+            id: 'tags',
+            name: locale === fallbackLng ? 'Tags' : 'Tags',
+            keywords: '',
+            shortcut: ['b'],
+            section: locale === fallbackLng ? 'Navigate' : 'Naviguer',
+            perform: () => router.push(`/${locale}/tags`),
+          },
+          {
+            id: 'projects',
+            name: locale === fallbackLng ? 'Projects' : 'Projets',
+            keywords: '',
+            shortcut: ['p'],
+            section: locale === fallbackLng ? 'Navigate' : 'Naviguer',
+            perform: () => router.push(`/${locale}/projects`),
+          },
+          {
+            id: 'about',
+            name: locale === fallbackLng ? 'About' : 'À propos',
+            keywords: '',
+            shortcut: ['a'],
+            section: locale === fallbackLng ? 'Navigate' : 'Naviguer',
+            perform: () => router.push(`/${locale}/about`),
+          },
+        ],
+```
+
 ## Things to do :
 
 - Fix the translation in page 404. This is related to the current functioning of the not-found function,
