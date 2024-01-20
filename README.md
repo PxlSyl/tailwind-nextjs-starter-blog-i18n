@@ -693,6 +693,7 @@ There's an issue when using regular translations, so I implemented a workaround 
             name: locale === fallbackLng ? 'Home' : 'Accueil',
             keywords: '',
             shortcut: ['h'],
+            /*Modify the following line based on your implemented languages: */
             section: locale === fallbackLng ? 'Navigate' : 'Naviguer',
             perform: () => router.push(`/${locale}`),
           },
