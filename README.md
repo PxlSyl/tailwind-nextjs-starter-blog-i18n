@@ -708,7 +708,7 @@ There's an issue when using regular translations, so I implemented a workaround 
             id: 'tags',
             name: locale === fallbackLng ? 'Tags' : 'Tags',
             keywords: '',
-            shortcut: ['b'],
+            shortcut: ['t'],
             section: locale === fallbackLng ? 'Navigate' : 'Naviguer',
             perform: () => router.push(`/${locale}/tags`),
           },
