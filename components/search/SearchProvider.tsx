@@ -7,6 +7,7 @@ import { CoreContent } from 'pliny/utils/contentlayer'
 import { Blog } from 'contentlayer/generated'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { useTranslation } from 'app/[locale]/i18n/client'
+import { fallbackLng } from 'app/[locale]/i18n/locales'
 
 interface SearchProviderProps {
   children: ReactNode
@@ -21,25 +22,49 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
     <KBarSearchProvider
       kbarConfig={{
         searchDocumentsPath: 'search.json',
-        // uncomment and complete this if you want to use in your app
-        /* defaultActions: [
+        /* issue when using regular translations, this is a workaround to show how to implement translated menu titles */
+        defaultActions: [
           {
-            id: 'homepage',
-            name: 'Homepage',
+            id: 'home',
+            name: locale === fallbackLng ? 'Home' : 'Accueil',
             keywords: '',
             shortcut: ['h'],
-            section: t('home'),
-            perform: () => router.push(`/`),
+            section: locale === fallbackLng ? 'Navigate' : 'Naviguer',
+            perform: () => router.push(`/${locale}`),
+          },
+          {
+            id: 'blog',
+            name: locale === fallbackLng ? 'Blog' : 'Blog',
+            keywords: '',
+            shortcut: ['b'],
+            section: locale === fallbackLng ? 'Navigate' : 'Naviguer',
+            perform: () => router.push(`/${locale}/blog`),
+          },
+          {
+            id: 'tags',
+            name: locale === fallbackLng ? 'Tags' : 'Tags',
+            keywords: '',
+            shortcut: ['b'],
+            section: locale === fallbackLng ? 'Navigate' : 'Naviguer',
+            perform: () => router.push(`/${locale}/tags`),
           },
           {
             id: 'projects',
-            name: 'Projects',
+            name: locale === fallbackLng ? 'Projects' : 'Projets',
             keywords: '',
             shortcut: ['p'],
-            section: t('projects'),
-            perform: () => router.push(`/projects`),
+            section: locale === fallbackLng ? 'Navigate' : 'Naviguer',
+            perform: () => router.push(`/${locale}/projects`),
           },
-        ], */
+          {
+            id: 'about',
+            name: locale === fallbackLng ? 'About' : 'À propos',
+            keywords: '',
+            shortcut: ['a'],
+            section: locale === fallbackLng ? 'Navigate' : 'Naviguer',
+            perform: () => router.push(`/${locale}/about`),
+          },
+        ],
         onSearchDocumentsLoad(json) {
           return json
             .filter((post: CoreContent<Blog>) => post.language === locale)
