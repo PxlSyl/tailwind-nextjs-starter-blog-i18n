@@ -57,7 +57,7 @@ For the moment :
 
 IMPORTANT NOTE: you must replace the key in useform like this : useform('[your key]'). The provided key is
 a test one of mine. You can use it to verify if the toast box is functional for example, but you must know
-that I'll receive all your test messages.
+that I'll receive all your test messages. (You can still send me a friendly hello message!)
 
 If you don't want to use Formspree, go to the siteMetadata.js file and set formspree to "false".
 
