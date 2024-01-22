@@ -37,6 +37,27 @@ This repository will sometimes be updated with new features (not present in the 
 
 For the moment :
 
+- Series for your posts now supported, see the deployed demo!
+
+Example of including this new feature : 
+
+```mdx
+title: Internationalization of V 2.0
+series:
+  order: 4 // You must add a number for the actual order of your post in your series
+  title: "Blog Starter" // You must add the same title to all of you posts from the same series
+date: '2023-11-17'
+lastmod: '2023-11-17'
+language: en
+localeid: 'introducingstarterblogi18n'
+tags: ['next-js', 'tailwind', 'guide', 'features', 'i18n']
+authors: ['default']
+images: ['/static/images/twitter-card.png']
+draft: false
+summary: Presentation of the Starter Blog Tailwind Next-js v2.0, with addition and support for multiple languages.
+```
+
+
 - Share compoment now included : you or your users can share your blog posts on Facebook, Twitter, Linkedin, WhatsApp or Telegram with ease! What's a 2024 modern blog without this possibility?
 
 - Smooth page transitions thanks to [Framer Motion](https://github.com/framer/motion) (see the template.tsx file in the app folder and take a look at the following next.js documentation

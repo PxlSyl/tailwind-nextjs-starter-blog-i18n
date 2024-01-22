@@ -25,11 +25,39 @@ const layouts = {
   PostBanner,
 }
 
+async function getPostFromParams({ params: { slug, locale } }: BlogPageProps): Promise<any> {
+  const dslug = decodeURI(slug.join('/'))
+  const post = allBlogs.filter((p) => p.language === locale).find((p) => p.slug === dslug) as Blog
+
+  if (!post) {
+    null
+  }
+
+  if (post?.series) {
+    const seriesPosts = allBlogs
+      .filter((p) => p.language === locale && p.series?.title === post.series?.title)
+      .sort((a, b) => Number(a.series!.order) - Number(b.series!.order))
+      .map((p) => {
+        return {
+          title: p.title,
+          slug: p.slug,
+          language: p.language,
+          isCurrent: p.slug === post.slug,
+        }
+      })
+    if (seriesPosts.length > 0) {
+      return { ...post, series: { ...post.series, posts: seriesPosts } }
+    }
+  }
+
+  return post
+}
+
 export async function generateMetadata({
   params: { slug, locale },
 }: BlogPageProps): Promise<Metadata | undefined> {
   const dslug = decodeURI(slug.join('/'))
-  const post = allBlogs.find((p) => p.slug === dslug && p.language === locale)
+  const post = allBlogs.find((p) => p.slug === dslug && p.language === locale) as Blog
   if (!post) {
     return
   }
@@ -98,7 +126,7 @@ export default async function Page({ params: { slug, locale } }: BlogPageProps) 
 
   const prev = sortedCoreContents[postIndex + 1]
   const next = sortedCoreContents[postIndex - 1]
-  const post = allBlogs.filter((p) => p.language === locale).find((p) => p.slug === dslug) as Blog
+  const post = await getPostFromParams({ params: { slug, locale } })
   const author = allAuthors
     .filter((a) => a.language === locale)
     .find((a) => a.slug.includes('default'))

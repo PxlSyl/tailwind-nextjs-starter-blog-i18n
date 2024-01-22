@@ -10,6 +10,7 @@ import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import { createTranslation } from 'app/[locale]/i18n/server'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
+import { PostSeriesBox } from '@/components/PostseriesBox'
 import Share from '@/components/Share'
 
 interface PostSimpleProps {
@@ -27,7 +28,7 @@ export default async function PostLayout({
   children,
   params: { locale },
 }: PostSimpleProps) {
-  const { slug, date, title, language } = content
+  const { slug, date, title, language, series } = content
   const { t } = await createTranslation(locale, 'home')
   return (
     <SectionContainer>
@@ -51,6 +52,11 @@ export default async function PostLayout({
           </header>
           <div className="grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:divide-y-0">
             <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
+              {series && (
+                <div className="not-prose">
+                  <PostSeriesBox data={series} />
+                </div>
+              )}
               <div className="prose max-w-none pb-8 pt-10 dark:prose-invert">{children}</div>
             </div>
             <Share title={title} slug={slug} />

@@ -9,6 +9,7 @@ import PageTitle from '@/components/PageTitle'
 import SectionContainer from '@/components/SectionContainer'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
+import { PostSeriesBox } from '@/components/PostseriesBox'
 import Share from '@/components/Share'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 
@@ -27,7 +28,7 @@ export default function PostMinimal({
   children,
   params: { locale },
 }: PostBannerProps) {
-  const { slug, title, images } = content
+  const { slug, title, images, series } = content
   const displayImage =
     images && images.length > 0 ? images[0] : 'https://picsum.photos/seed/picsum/800/400'
 
@@ -48,6 +49,11 @@ export default function PostMinimal({
               <PageTitle>{title}</PageTitle>
             </div>
           </div>
+          {series && (
+            <div className="not-prose">
+              <PostSeriesBox data={series} />
+            </div>
+          )}
           <div className="prose max-w-none py-4 dark:prose-invert">{children}</div>
           <Share title={title} slug={slug} />
           {siteMetadata.comments && (
