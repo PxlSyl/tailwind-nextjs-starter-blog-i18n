@@ -37,7 +37,7 @@ This repository will sometimes be updated with new features (not present in the 
 
 For now :
 
-- Series for your posts now supported, see the deployed demo!
+- I know it's a frequently asked feature request in the original repository, so : series for your posts is now supported, see the deployed demo!
 
 Example of including this new feature : 
 
