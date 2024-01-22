@@ -45,7 +45,7 @@ Example of including this new feature :
 title: Internationalization of V 2.0
 series:
   order: 4 // You must add a number for the actual order of your post in your series
-  title: "Blog Starter" // You must add the same title to all of you posts from the same series
+  title: "Blog Starter" // You must add the same title to all of your posts from the same series
 date: '2023-11-17'
 lastmod: '2023-11-17'
 language: en
