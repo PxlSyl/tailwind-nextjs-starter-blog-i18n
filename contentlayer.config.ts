@@ -23,6 +23,7 @@ import siteMetadata from './data/siteMetadata'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer.js'
 import { fallbackLng, secondLng } from './app/[locale]/i18n/locales'
 import { allBlogs } from 'contentlayer/generated'
+import { defineNestedType } from 'contentlayer/source-files'
 
 const root = process.cwd()
 const isProduction = process.env.NODE_ENV === 'production'
@@ -103,12 +104,27 @@ function createSearchIndex(allBlogs) {
   }
 }
 
+export const Series = defineNestedType(() => ({
+  name: 'Series',
+  fields: {
+    title: {
+      type: 'string',
+      required: true,
+    },
+    order: {
+      type: 'number',
+      required: true,
+    },
+  },
+}))
+
 export const Blog = defineDocumentType(() => ({
   name: 'Blog',
   filePathPattern: 'blog/**/*.mdx',
   contentType: 'mdx',
   fields: {
     title: { type: 'string', required: true },
+    series: { type: 'nested', of: Series },
     date: { type: 'date', required: true },
     language: { type: 'string', required: true },
     localeid: { type: 'string', required: true },

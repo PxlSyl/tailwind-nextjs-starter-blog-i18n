@@ -33,7 +33,7 @@ async function getPostFromParams({ params: { slug, locale } }: BlogPageProps): P
     null
   }
 
-  if (post.series) {
+  if (post?.series) {
     const seriesPosts = allBlogs
       .filter((p) => p.language === locale && p.series?.title === post.series?.title)
       .sort((a, b) => Number(a.series!.order) - Number(b.series!.order))
