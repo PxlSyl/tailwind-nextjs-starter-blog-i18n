@@ -50,7 +50,7 @@ export default function PostMinimal({
             </div>
           </div>
           {series && (
-            <div className="not-prose">
+            <div className="not-prose mt-4">
               <PostSeriesBox data={series} />
             </div>
           )}
