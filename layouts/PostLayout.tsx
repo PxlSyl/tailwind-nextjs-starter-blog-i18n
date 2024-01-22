@@ -105,7 +105,7 @@ export default async function PostLayout({
             </dl>
             <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
               {series && (
-                <div className="not-prose">
+                <div className="not-prose mt-4">
                   <PostSeriesBox data={series} />
                 </div>
               )}
