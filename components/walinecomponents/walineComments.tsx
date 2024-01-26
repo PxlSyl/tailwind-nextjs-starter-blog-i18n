@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { init } from '@waline/client'
 import '@waline/client/style'
 import siteMetadata from '@/data/siteMetadata'
@@ -12,34 +12,29 @@ export default function WalineComments() {
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, 'home')
   const [loadComments, setLoadComments] = useState(false)
-  const commentRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    let element: HTMLDivElement | null
+
     if (loadComments) {
-      commentRef.current &&
-        init({
-          el: '#waline',
-          lang: locale,
-          reaction: true,
-          serverURL: siteMetadata.walineServer,
-          emoji: [
-            'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/weibo',
-            'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/alus',
-          ],
-          requiredMeta: ['nick'],
-        })
+      element = document.getElementById('waline') as HTMLDivElement
+      init({
+        el: '#waline',
+        lang: locale,
+        reaction: true,
+        serverURL: siteMetadata.walineServer,
+        emoji: [
+          'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/weibo',
+          'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/alus',
+        ],
+        requiredMeta: ['nick'],
+      })
+    }
+
+    return () => {
+      // Cleanup if needed
     }
   }, [loadComments, locale])
-
-  useEffect(() => {
-    let element = commentRef.current
-    if (!element) {
-      element = document.createElement('div')
-      document.body.appendChild(element)
-      commentRef.current = element
-    }
-    console.log(navigator.languages)
-  }, [loadComments])
 
   return (
     <>
@@ -51,7 +46,7 @@ export default function WalineComments() {
           {t('comment')}
         </button>
       )}
-      {loadComments && <div className="mb-6 mt-6" id="waline" ref={commentRef} />}
+      {loadComments && <div className="mb-6 mt-6" id="waline" />}
     </>
   )
 }
