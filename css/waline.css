@@ -1,0 +1,16 @@
+#waline {
+    --waline-theme-color: theme('colors.primary.500');
+    --waline-active-color: theme('colors.primary.600');
+}
+
+#waline .wl-comment {
+    @apply gap-x-4;
+}
+
+#waline .wl-panel {
+    margin: 0;
+}
+
+#waline .wl-editor {
+    width: calc(100% - 2.4rem);
+}

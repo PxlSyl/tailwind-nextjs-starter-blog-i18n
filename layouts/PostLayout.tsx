@@ -2,6 +2,7 @@ import { ReactNode } from 'react'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Blog, Authors } from 'contentlayer/generated'
 import Comments from '@/components/Comments'
+import WalineComments from '@/components/walinecomponents/walineComments'
 import Link from '@/components/Link'
 import PageTitle from '@/components/PageTitle'
 import SectionContainer from '@/components/SectionContainer'
@@ -118,14 +119,15 @@ export default async function PostLayout({
                 <Link href={editUrl(filePath)}>{t('github')}</Link>
               </div>
               <Share title={title} slug={slug} />
-              {siteMetadata.comments && (
-                <div
-                  className="pb-6 pt-6 text-center text-gray-700 dark:text-gray-300"
-                  id="comment"
-                >
+              <div
+                className="mt-10 pb-6 pt-6 text-center text-gray-700 dark:text-gray-300"
+                id="comment"
+              >
+                {siteMetadata.iswaline === true && <WalineComments />}
+                {siteMetadata.comments && siteMetadata.iscomments === true && (
                   <Comments slug={slug} />
-                </div>
-              )}
+                )}
+              </div>
             </div>
             <footer>
               <div className="divide-gray-200 text-sm font-medium leading-5 dark:divide-gray-700 xl:col-start-1 xl:row-start-2 xl:divide-y">
