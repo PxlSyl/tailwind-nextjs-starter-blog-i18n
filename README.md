@@ -60,7 +60,7 @@ draft: false
 summary: Presentation of the Starter Blog Tailwind Next-js v2.0, with addition and support for multiple languages.
 ```
 
-- Share component : you or your users can share your blog posts on Facebook, Twitter, Linkedin, WhatsApp or Telegram with ease! What's a 2024 modern blog without this possibility?
+- Share component : you or your users can share your blog posts on Facebook, Twitter, Linkedin, WhatsApp, Threads or Telegram with ease! What's a 2024 modern blog without this possibility?
 
 - Smooth page transitions thanks to [Framer Motion](https://github.com/framer/motion) (see the template.tsx file in the app folder and take a look at the following next.js documentation
   for file functionality [template](https://nextjs.org/docs/app/api-reference/file-conventions/template))
