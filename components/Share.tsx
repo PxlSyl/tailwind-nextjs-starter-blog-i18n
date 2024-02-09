@@ -50,6 +50,14 @@ const Share = ({ title, description, slug, className }: ShareProps) => {
         </li>
         <li className="ml-4 inline-block">
           <SocialIcon
+            kind="threads"
+            size={5}
+            aria-label={t('threadsshare')}
+            href={`https://threads.net/intent/post?text=${siteMetadata.siteUrl}/${locale}/${targetSegment}/${slug}`}
+          />
+        </li>
+        <li className="ml-4 inline-block">
+          <SocialIcon
             kind="linkedin"
             size={5}
             aria-label={t('linkedinshare')}

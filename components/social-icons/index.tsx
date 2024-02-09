@@ -9,6 +9,7 @@ import {
   Mastodon,
   Whatsapp,
   Telegram,
+  Threads,
 } from './icons'
 import siteMetadata from '@/data/siteMetadata'
 
@@ -24,6 +25,7 @@ const components = {
   mastodon: Mastodon,
   whatsapp: Whatsapp,
   telegram: Telegram,
+  threads: Threads,
 }
 
 type SocialIconProps = {
