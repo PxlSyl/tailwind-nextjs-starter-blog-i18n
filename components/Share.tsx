@@ -27,60 +27,64 @@ const Share = ({ title, description, slug, className }: ShareProps) => {
   }
 
   return (
-    <div className="m-4 mt-8 flex items-center justify-center pt-4">
-      <p className="text-highlighted dark:text-darkmode-highlighted mr-3 font-bold text-primary-500">
-        {t('share')}
-      </p>
-      <ul className={className}>
-        <li className="inline-block">
-          <SocialIcon
-            kind="facebook"
-            size={5}
-            aria-label={t('facebookshare')}
-            href={`https://facebook.com/sharer/sharer.php?u=${siteMetadata.siteUrl}/${locale}/${targetSegment}/${slug}`}
-          />
-        </li>
-        <li className="ml-4 inline-block">
-          <SocialIcon
-            kind="twitter"
-            size={5}
-            aria-label={t('twittershare')}
-            href={`https://twitter.com/intent/tweet/?url=${siteMetadata.siteUrl}/${locale}/${targetSegment}/${slug}&text=${title}`}
-          />
-        </li>
-        <li className="ml-4 inline-block">
-          <SocialIcon
-            kind="threads"
-            size={5}
-            aria-label={t('threadsshare')}
-            href={`https://threads.net/intent/post?text=${siteMetadata.siteUrl}/${locale}/${targetSegment}/${slug}`}
-          />
-        </li>
-        <li className="ml-4 inline-block">
-          <SocialIcon
-            kind="linkedin"
-            size={5}
-            aria-label={t('linkedinshare')}
-            href={`https://www.linkedin.com/shareArticle?mini=true&url=${siteMetadata.siteUrl}/${locale}/${targetSegment}/${slug}&title=${title}&summary=${description}&source=${siteMetadata.siteUrl}`}
-          />
-        </li>
-        <li className="ml-4 inline-block">
-          <SocialIcon
-            kind="whatsapp"
-            size={5}
-            aria-label={t('whatsappshare')}
-            href={`https://wa.me/?text=${siteMetadata.siteUrl}/${locale}/${targetSegment}/${slug}&text=${title}`}
-          />
-        </li>
-        <li className="ml-4 inline-block">
-          <SocialIcon
-            kind="telegram"
-            size={5}
-            aria-label={t('telegramshare')}
-            href={`https://telegram.me/share/url?url=${siteMetadata.siteUrl}/${locale}/${targetSegment}/${slug}&text=${title}`}
-          />
-        </li>
-      </ul>
+    <div className="m-4 mt-8 flex flex-col items-center justify-center pt-4 sm:flex-row">
+      <div className="mb-4 sm:mb-0">
+        <p className="text-highlighted dark:text-darkmode-highlighted mr-3 font-bold text-primary-500">
+          {t('share')}
+        </p>
+      </div>
+      <div>
+        <ul className={className}>
+          <li className="inline-block">
+            <SocialIcon
+              kind="facebook"
+              size={5}
+              aria-label={t('facebookshare')}
+              href={`https://facebook.com/sharer/sharer.php?u=${siteMetadata.siteUrl}/${locale}/${targetSegment}/${slug}`}
+            />
+          </li>
+          <li className="ml-4 inline-block">
+            <SocialIcon
+              kind="twitter"
+              size={5}
+              aria-label={t('twittershare')}
+              href={`https://twitter.com/intent/tweet/?url=${siteMetadata.siteUrl}/${locale}/${targetSegment}/${slug}&text=${title}`}
+            />
+          </li>
+          <li className="ml-4 inline-block">
+            <SocialIcon
+              kind="threads"
+              size={5}
+              aria-label={t('threadsshare')}
+              href={`https://threads.net/intent/post?text=${siteMetadata.siteUrl}/${locale}/${targetSegment}/${slug}`}
+            />
+          </li>
+          <li className="ml-4 inline-block">
+            <SocialIcon
+              kind="linkedin"
+              size={5}
+              aria-label={t('linkedinshare')}
+              href={`https://www.linkedin.com/shareArticle?mini=true&url=${siteMetadata.siteUrl}/${locale}/${targetSegment}/${slug}&title=${title}&summary=${description}&source=${siteMetadata.siteUrl}`}
+            />
+          </li>
+          <li className="ml-4 inline-block">
+            <SocialIcon
+              kind="whatsapp"
+              size={5}
+              aria-label={t('whatsappshare')}
+              href={`https://wa.me/?text=${siteMetadata.siteUrl}/${locale}/${targetSegment}/${slug}&text=${title}`}
+            />
+          </li>
+          <li className="ml-4 inline-block">
+            <SocialIcon
+              kind="telegram"
+              size={5}
+              aria-label={t('telegramshare')}
+              href={`https://telegram.me/share/url?url=${siteMetadata.siteUrl}/${locale}/${targetSegment}/${slug}&text=${title}`}
+            />
+          </li>
+        </ul>
+      </div>
     </div>
   )
 }
