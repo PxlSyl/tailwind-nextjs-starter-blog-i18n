@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@formspree/react": "^2.5.1",
+    "@headlessui/react": "^1.7.19",
     "@next/bundle-analyzer": "14.1.0",
     "@tailwindcss/forms": "^0.5.7",
     "@tailwindcss/typography": "^0.5.10",
