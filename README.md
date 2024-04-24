@@ -10,10 +10,12 @@ If you find this project useful, please give it a ⭐ to show your support.
 
 ## Motivation
 
-I am currently redesigning my website, which uses the router page, and part of the code for the internationalized blog of V.1.
+The original model is amazing, and all major credits for it go to its creator @Timlrx. I was using V.1 of the i18n version, which was rather complicated to use and which it seems that the creator has unfortunately abandoned. So this is my participation and my donation to the community!
+
+Also, I am currently redesigning my own website, which uses the router page, and part of the code for the internationalized blog of V.1.
 I wanted to migrate to the app router, but for that, I first had to learn how to internationalize a site with the router app, so I took this repository as training.
 
-And also, I love the idea of helping other developers to quickly start sharing their precious knowledge with the whole world, making the internet better, whether in their native language, or in English 😌
+I love the idea of helping other developers to quickly start sharing their precious knowledge with the whole world, making the internet better, whether in their native language, or in English 😌
 
 I also designed a much more complete template for artists, content creators and developers, which I m'using for my own site and which is available here :
 
