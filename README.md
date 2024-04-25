@@ -656,50 +656,6 @@ export default projectsData
 
 Again, simply modify the logic keeping the same general structure, and according to your chosen languages/and/or number of languages.
 
-## “Sitemap” logic
-
-There too, there were necessary modifications. This file is located in the "app" folder, and allows Google robots to understand how your site is built, so it is essential for indexing and SEO:
-
-```ts:sitemap.ts
-import { MetadataRoute } from 'next'
-import { allBlogs } from 'contentlayer/generated'
-import siteMetadata from '@/data/siteMetadata'
-import { fallbackLng, secondLng } from './i18n/locales'
-
-export default function sitemap(): MetadataRoute.Sitemap {
-   const siteUrl = siteMetadata.siteUrl
-   // routes for blog posts in English
-   const blogRoutes = allBlogs
-     .filter((p) => p.language === fallbackLng)
-     .map((post) => ({
-       url: `${siteUrl}/${fallbackLng}/${post.path}`,
-       lastModified: post.lastmod || post.date,
-     }))
-   // routes for blog posts in French (or your own second language)
-   const secondBlogRoutes = allBlogs
-     .filter((p) => p.language === secondLng)
-     .map((post) => ({
-       url: `${siteUrl}/${secondLng}/${post.path}`,
-       lastModified: post.lastmod || post.date,
-     }))
-   // all other routes for English
-   const routes = ['', 'blog', 'projects', 'tags', 'about'].map((route) => ({
-     url: `${siteUrl}/${fallbackLng}/${route}`,
-     lastModified: new Date().toISOString().split('T')[0],
-   }))
-   // all routes for French (or your own second language)
-   const secondRoutes = ['', 'blog', 'projects', 'tags', 'about'].map((route) => ({
-     url: `${siteUrl}/${secondLng}/${route}`,
-     lastModified: new Date().toISOString().split('T')[0],
-   }))
-
-   return [...routes, ...secondRoutes, ...blogRoutes, ...secondBlogRoutes]
-}
-
-```
-
-Note: modify this file accordingly if you add other languages.
-
 ## Search bar :
 
 The original repository allows support for kbar and algolia.
@@ -793,12 +749,9 @@ There's an issue when using regular translations, so I implemented a workaround 
 - Fix the translation in page 404. This is related to the current functioning of the not-found function,
   so we have to wait for a fix from next-js side see here: [i18n for not-found page](https://github.com/vercel/next.js/discussions/50518)
 
-- Fix Robot.ts, sitemap.ts and rss.mjs (I don't have that much time, so if you end up with a solution, please make a pr or open a new issue)
+- Fix Robot.ts, sitemap.ts and rss.mjs (I don't have that much time, so if you end up with a solution, please make a pr or open a new issue) For the moment, I cannot find a solution to have a sitemap.ts file that can generate a valid robot.txt file (I have searched and tried a lot of things), same for rss.mjs. If you find a solution on your side, don't hesitate to open a PR!
 
 Everything else is currently working as expected.
-
-So I had to make significant changes regarding SEO and metadata within the pages, but I ended up finding a solution
-which worked, with a perfect SEO score!
 
 Here is another possible solution for i18n integration regarding SEO, and even the translated URL:
 
