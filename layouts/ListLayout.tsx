@@ -1,15 +1,14 @@
 'use client'
 
 import { useState } from 'react'
-import { usePathname } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { formatDate } from 'pliny/utils/formatDate'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Blog } from 'contentlayer/generated'
 import Link from '@/components/Link'
 import Tag from '@/components/Tag'
+import Pagination from './Pagination'
 import siteMetadata from '@/data/siteMetadata'
-import { fallbackLng } from 'app/[locale]/i18n/locales'
 import { useTranslation } from 'app/[locale]/i18n/client'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 
@@ -39,48 +38,6 @@ const container = {
 const item = {
   hidden: { opacity: 0, x: -25, y: 0 },
   show: { opacity: 1, x: 0, y: 0 },
-}
-
-function Pagination({ totalPages, currentPage, params: { locale } }: PaginationProps) {
-  const { t } = useTranslation(locale, 'home')
-  const pathname = usePathname()
-  const basePath =
-    locale === fallbackLng ? pathname.split('/')[1] : pathname.split('/').slice(1, 3).join('/')
-  const prevPage = currentPage - 1 > 0
-  const nextPage = currentPage + 1 <= totalPages
-
-  return (
-    <div className="space-y-2 pb-8 pt-6 md:space-y-5">
-      <nav className="flex justify-between">
-        {!prevPage && (
-          <button className="cursor-auto disabled:opacity-50" disabled={!prevPage}>
-            {t('prevp')}
-          </button>
-        )}
-        {prevPage && (
-          <Link
-            href={currentPage - 1 === 1 ? `/${basePath}/` : `/${basePath}/page/${currentPage - 1}`}
-            rel="prev"
-          >
-            {t('prevp')}
-          </Link>
-        )}
-        <span>
-          {currentPage} of {totalPages}
-        </span>
-        {!nextPage && (
-          <button className="cursor-auto disabled:opacity-50" disabled={!nextPage}>
-            {t('nextp')}
-          </button>
-        )}
-        {nextPage && (
-          <Link href={`/${basePath}/page/${currentPage + 1}`} rel="next">
-            {t('nextp')}
-          </Link>
-        )}
-      </nav>
-    </div>
-  )
 }
 
 export default function ListLayout({

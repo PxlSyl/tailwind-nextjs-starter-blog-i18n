@@ -38,7 +38,7 @@ My own website based on this new template :
 This repository will sometimes be updated with new features (not present in the original repository)
 
 For now :
-
+- Each tag now has its own pagination! If the number of posts is greater than the one you have defined (by default, set to 5) then a new page is automatically created for subsequent posts including the same tag.
 - Waline comment system now supported! It's probably the best open source comment system right now, with even i18n and many other great features! First, follow [the official tutorial](https://waline.js.org/en/guide/get-started/) to set up the comments database and your vercel server. There's many options available, so take the time to read their documentation. Since it's Vue based, it's still compatible with Next.js, and I created a new comment component. You'll find it in "walinecomponents" folder. I also added a new css file, and you can modify the style here if needed. Once you have deployed your application for comments, modify the sitemetadata.js file. Set "iscomments" property to false, set "iswaline"
 to true and set the url of your comments server accordingly in "walineServer". If your language is not supported by waline, make a PR to their repository or ask them kindly to add your own translation (provide it yourself first). This is what I did for supporting french, and this how we work in open source world!
 
