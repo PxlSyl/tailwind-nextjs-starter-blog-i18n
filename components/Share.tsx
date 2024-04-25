@@ -69,6 +69,14 @@ const Share = ({ title, description, slug, className }: ShareProps) => {
           </li>
           <li className="ml-4 inline-block">
             <SocialIcon
+              kind="reddit"
+              size={5}
+              aria-label={t('redditshare')}
+              href={`https://www.reddit.com/submit?url=${siteMetadata.siteUrl}/${locale}/${targetSegment}/${slug}&title=${title}`}
+            />
+          </li>
+          <li className="ml-4 inline-block">
+            <SocialIcon
               kind="whatsapp"
               size={5}
               aria-label={t('whatsappshare')}
