@@ -749,7 +749,7 @@ There's an issue when using regular translations, so I implemented a workaround 
 - Fix the translation in page 404. This is related to the current functioning of the not-found function,
   so we have to wait for a fix from next-js side see here: [i18n for not-found page](https://github.com/vercel/next.js/discussions/50518)
 
-- Fix Robot.ts, sitemap.ts and rss.mjs (I don't have that much time, so if you end up with a solution, please make a pr or open a new issue) For the moment, I cannot find a solution to have a sitemap.ts file that can generate a valid robot.txt file (I have searched and tried a lot of things), same for rss.mjs. If you find a solution on your side, don't hesitate to open a PR!
+- Fix Robot.ts, sitemap.ts and rss.mjs. For the moment, I cannot find a solution to have a sitemap.ts file that can generate a valid robot.txt file (I have searched and tried a lot of things), same for rss.mjs. If you find a solution on your side, don't hesitate to open a PR!
 
 Everything else is currently working as expected.
 
