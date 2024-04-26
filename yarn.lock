@@ -1730,18 +1730,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@contentlayer2/cli@npm:0.4.1":
-  version: 0.4.1
-  resolution: "@contentlayer2/cli@npm:0.4.1"
-  dependencies:
-    "@contentlayer2/core": "npm:0.4.1"
-    "@contentlayer2/utils": "npm:0.4.1"
-    clipanion: "npm:^3.2.1"
-    typanion: "npm:^3.12.1"
-  checksum: f4672cd80da672f2254467836284ee03d6be3a1c1b40a8056eb88c844d51f4068c19611e6f46dd14ac78b42333d4b2ad9617441db4c564f19fe57d62e4f786c3
-  languageName: node
-  linkType: hard
-
 "@contentlayer2/cli@npm:0.4.2":
   version: 0.4.2
   resolution: "@contentlayer2/cli@npm:0.4.2"
@@ -1754,50 +1742,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@contentlayer2/client@npm:0.4.1":
-  version: 0.4.1
-  resolution: "@contentlayer2/client@npm:0.4.1"
-  dependencies:
-    "@contentlayer2/core": "npm:0.4.1"
-  checksum: 13c05d75f7c1cd73477bf168f3b5f3443c32fc0e5a1f812a65189dbd293a2243877a33f7a5e87bd3b514b3d208b0080b2a2107468ef3ba26cf00d92cbf53e2a0
-  languageName: node
-  linkType: hard
-
 "@contentlayer2/client@npm:0.4.2":
   version: 0.4.2
   resolution: "@contentlayer2/client@npm:0.4.2"
   dependencies:
     "@contentlayer2/core": "npm:0.4.2"
   checksum: a2bbadd30a91840c3193e7b2eb72eee29f784f3559ee1546c1f6c0d434e09c6cb182dda2e1f26716749c2f6d2b2046fcf8b9c2d95c5f3a2fd3bea65a0d1fc3b2
-  languageName: node
-  linkType: hard
-
-"@contentlayer2/core@npm:0.4.1":
-  version: 0.4.1
-  resolution: "@contentlayer2/core@npm:0.4.1"
-  dependencies:
-    "@contentlayer2/utils": "npm:0.4.1"
-    camel-case: "npm:^4.1.2"
-    comment-json: "npm:^4.2.3"
-    esbuild: "npm:0.17.x || 0.18.x || 0.19.x || 0.20.x"
-    gray-matter: "npm:^4.0.3"
-    mdx-bundler: "npm:^10.0.2"
-    rehype-stringify: "npm:^10.0.0"
-    remark-frontmatter: "npm:^5.0.0"
-    remark-parse: "npm:^11.0.0"
-    remark-rehype: "npm:^11.1.0"
-    source-map-support: "npm:^0.5.21"
-    type-fest: "npm:^4.10.0"
-    unified: "npm:^11.0.4"
-  peerDependencies:
-    esbuild: 0.17.x || 0.18.x || 0.19.x || 0.20.x
-    markdown-wasm: 1.x
-  peerDependenciesMeta:
-    esbuild:
-      optional: true
-    markdown-wasm:
-      optional: true
-  checksum: c8bc5acf9857ec8b34a109712af1a698e62d94e674de2af7cc3f9f47e908d5da129dff925f54e4b429b45915fa735cd1f18b9008057f9c82dc364a561b5df363
   languageName: node
   linkType: hard
 
@@ -1830,25 +1780,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@contentlayer2/source-files@npm:0.4.1":
-  version: 0.4.1
-  resolution: "@contentlayer2/source-files@npm:0.4.1"
-  dependencies:
-    "@contentlayer2/core": "npm:0.4.1"
-    "@contentlayer2/utils": "npm:0.4.1"
-    chokidar: "npm:^3.5.3"
-    fast-glob: "npm:^3.2.12"
-    gray-matter: "npm:^4.0.3"
-    imagescript: "npm:^1.2.16"
-    micromatch: "npm:^4.0.5"
-    ts-pattern: "npm:^5.0.6"
-    unified: "npm:^11.0.4"
-    yaml: "npm:^2.3.1"
-    zod: "npm:^3.22.4"
-  checksum: a8ef2e39932eb776f3ea095772a0960f3aa4c3340b0227b64787873fab0b2ecbea6defd4dbc2600a42ef2293ee77bb4c68c719e6d50dc1d83837b887604d097d
-  languageName: node
-  linkType: hard
-
 "@contentlayer2/source-files@npm:0.4.2":
   version: 0.4.2
   resolution: "@contentlayer2/source-files@npm:0.4.2"
@@ -1868,17 +1799,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@contentlayer2/source-remote-files@npm:0.4.1":
-  version: 0.4.1
-  resolution: "@contentlayer2/source-remote-files@npm:0.4.1"
-  dependencies:
-    "@contentlayer2/core": "npm:0.4.1"
-    "@contentlayer2/source-files": "npm:0.4.1"
-    "@contentlayer2/utils": "npm:0.4.1"
-  checksum: 1c5ac448de4be29e700235d45584e9a1b1b887fb340ebf1054f0ea7a6cc6cf8aab65dee116f2bf6731c7ad15e4ec8a07069159146bc48477b977f9be9ff14c96
-  languageName: node
-  linkType: hard
-
 "@contentlayer2/source-remote-files@npm:0.4.2":
   version: 0.4.2
   resolution: "@contentlayer2/source-remote-files@npm:0.4.2"
@@ -1887,40 +1807,6 @@ __metadata:
     "@contentlayer2/source-files": "npm:0.4.2"
     "@contentlayer2/utils": "npm:0.4.2"
   checksum: 58152fccc9e570b28c3a38662d4549bd7223533410c2838bf532c10fe916f2938f8efb64f5b5df0044f10e6969f1b2b4b0c3a7cd7c5371d732822ae883431e7b
-  languageName: node
-  linkType: hard
-
-"@contentlayer2/utils@npm:0.4.1":
-  version: 0.4.1
-  resolution: "@contentlayer2/utils@npm:0.4.1"
-  dependencies:
-    "@effect-ts/core": "npm:^0.60.5"
-    "@effect-ts/otel": "npm:^0.15.1"
-    "@effect-ts/otel-exporter-trace-otlp-grpc": "npm:^0.15.1"
-    "@effect-ts/otel-sdk-trace-node": "npm:^0.15.1"
-    "@js-temporal/polyfill": "npm:^0.4.4"
-    "@opentelemetry/api": "npm:^1.7.0"
-    "@opentelemetry/core": "npm:^1.21.0"
-    "@opentelemetry/exporter-trace-otlp-grpc": "npm:^0.48.0"
-    "@opentelemetry/resources": "npm:^1.21.0"
-    "@opentelemetry/sdk-trace-base": "npm:^1.21.0"
-    "@opentelemetry/sdk-trace-node": "npm:^1.21.0"
-    "@opentelemetry/semantic-conventions": "npm:^1.21.0"
-    chokidar: "npm:^3.5.3"
-    hash-wasm: "npm:^4.11.0"
-    inflection: "npm:^3.0.0"
-    memfs: "npm:3.6.0"
-    oo-ascii-tree: "npm:^1.94.0"
-    ts-pattern: "npm:^5.0.6"
-    type-fest: "npm:^4.10.0"
-  peerDependenciesMeta:
-    "@effect-ts/core":
-      optional: true
-    "@effect-ts/otel":
-      optional: true
-    "@effect-ts/otel-node":
-      optional: true
-  checksum: 1a1eb3cc9c4dbfe689755213473931897b7ea6451c11a444294fefbccb17f1d802a416ccf7afefbecf34ed6230bcab2ad01c2398cc44641617067c543cc4916a
   languageName: node
   linkType: hard
 
@@ -4779,23 +4665,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"contentlayer2@npm:0.4.4":
-  version: 0.4.4
-  resolution: "contentlayer2@npm:0.4.4"
-  dependencies:
-    "@contentlayer2/cli": "npm:0.4.1"
-    "@contentlayer2/client": "npm:0.4.1"
-    "@contentlayer2/core": "npm:0.4.1"
-    "@contentlayer2/source-files": "npm:0.4.1"
-    "@contentlayer2/source-remote-files": "npm:0.4.1"
-    "@contentlayer2/utils": "npm:0.4.1"
-  bin:
-    contentlayer2: ./bin/cli.cjs
-  checksum: e7a3b71fccb0d96e3d764a78762ae6e2f1972de5314808106232f38a149b257ba74a0ec12cf98245bf2e2344e91daa5ffd9b3bb7f4202dbb4a33cf99237e0bb2
-  languageName: node
-  linkType: hard
-
-"contentlayer2@npm:^0.4.4":
+"contentlayer2@npm:0.4.5, contentlayer2@npm:^0.4.4":
   version: 0.4.5
   resolution: "contentlayer2@npm:0.4.5"
   dependencies:
@@ -9059,22 +8929,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next-contentlayer2@npm:0.4.4":
-  version: 0.4.4
-  resolution: "next-contentlayer2@npm:0.4.4"
-  dependencies:
-    "@contentlayer2/core": "npm:0.4.1"
-    "@contentlayer2/utils": "npm:0.4.1"
-  peerDependencies:
-    contentlayer2: 0.4.4
-    next: ^12 || ^13 || ^14
-    react: "*"
-    react-dom: "*"
-  checksum: b03e203f49a66a395517968fde06bf7befc13dbd441a42dc03b8a45b85b13335370058594f0f8c57108a35854e8615c082bbef826bdb002ec66e4a21b104337b
-  languageName: node
-  linkType: hard
-
-"next-contentlayer2@npm:^0.4.4":
+"next-contentlayer2@npm:0.4.5, next-contentlayer2@npm:^0.4.4":
   version: 0.4.5
   resolution: "next-contentlayer2@npm:0.4.5"
   dependencies:
@@ -11450,7 +11305,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^6.19.0"
     "@waline/client": "npm:^3.1.3"
     autoprefixer: "npm:^10.4.17"
-    contentlayer2: "npm:0.4.4"
+    contentlayer2: "npm:0.4.5"
     cross-env: "npm:^7.0.3"
     esbuild: "npm:0.20.2"
     eslint: "npm:^8.56.0"
@@ -11468,7 +11323,7 @@ __metadata:
     image-size: "npm:1.1.1"
     lint-staged: "npm:^15.2.0"
     next: "npm:14.2.3"
-    next-contentlayer2: "npm:0.4.4"
+    next-contentlayer2: "npm:0.4.5"
     next-themes: "npm:^0.3.0"
     pliny: "npm:0.2.0"
     postcss: "npm:^8.4.33"
