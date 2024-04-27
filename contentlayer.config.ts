@@ -147,6 +147,7 @@ export const Blog = defineDocumentType(() => ({
     localeid: { type: 'string', required: true },
     tags: { type: 'list', of: { type: 'string' }, default: [] },
     lastmod: { type: 'date' },
+    featured: { type: 'boolean' },
     draft: { type: 'boolean' },
     summary: { type: 'string' },
     images: { type: 'json' },
