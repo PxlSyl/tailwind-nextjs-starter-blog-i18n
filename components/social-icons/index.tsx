@@ -10,6 +10,7 @@ import {
   Whatsapp,
   Telegram,
   Threads,
+  Instagram,
   Reddit,
 } from './icons'
 import siteMetadata from '@/data/siteMetadata'
@@ -27,6 +28,7 @@ const components = {
   whatsapp: Whatsapp,
   telegram: Telegram,
   threads: Threads,
+  instagram: Instagram,
   reddit: Reddit,
 }
 
