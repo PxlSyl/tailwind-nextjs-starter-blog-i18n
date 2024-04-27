@@ -1,8 +1,11 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import Link from './Link'
+import siteMetadata from '@/data/siteMetadata'
 import headerNavLinks from '@/data/headerNavLinks'
+import { Authors, allAuthors } from 'contentlayer/generated'
 import { useParams } from 'next/navigation'
 import { useTranslation } from 'app/[locale]/i18n/client'
 import type { LocaleTypes } from 'app/[locale]/i18n/settings'
@@ -10,6 +13,10 @@ import type { LocaleTypes } from 'app/[locale]/i18n/settings'
 const MobileNav = () => {
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, '')
+  const authors = allAuthors
+    .filter((a) => a.language === locale)
+    .sort((a, b) => (a.default === b.default ? 0 : a.default ? -1 : 1)) as Authors[];
+
   const [navShow, setNavShow] = useState(false)
 
   const onToggleNav = () => {
@@ -62,7 +69,15 @@ const MobileNav = () => {
           </button>
         </div>
         <nav className="fixed mt-8 h-full">
-          {headerNavLinks.map((link) => (
+          {headerNavLinks 
+            .filter((link) => {
+                if (siteMetadata.multiauthors) {
+                    return link.title !== 'About';
+                } else {
+                    return true ;
+                }
+            })
+            .map((link) => (
             <div key={link.title} className="px-12 py-4">
               <Link
                 href={`/${locale}${link.href}`}
@@ -73,6 +88,27 @@ const MobileNav = () => {
               </Link>
             </div>
           ))}
+          {siteMetadata.multiauthors &&  
+            <>
+            <div className="px-12 py-4 text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100">{t('about')}:</div>
+              {authors.map((author) => {
+                const { name, avatar, language, slug } = author;
+                if (language === locale) {
+                  return ( 
+                    <button key={name} className="group flex w-full items-center rounded-md px-12 py-4 text-sm">
+                      <div className="mr-2">
+                        <Image className='rounded-full' src={avatar ?? ''} alt='' width={25} height={25}/>
+                      </div>
+                      <Link href={`/${slug}`} onClick={onToggleNav} className="text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100">
+                        {name}
+                      </Link>
+                    </button>
+                  );
+                }
+                return null;
+              })}
+            </>
+          }
         </nav>
       </div>
     </>

@@ -5,6 +5,7 @@ import siteMetadata from '@/data/siteMetadata'
 import headerNavLinks from '@/data/headerNavLinks'
 import Logo from '@/data/logo.svg'
 import Link from './Link'
+import AuthorsMenu from './AuthorsMenu'
 import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
 import LangSwitch from './LangSwitch'
@@ -39,9 +40,15 @@ const Header = () => {
         </div>
         <div className="flex items-center space-x-4 leading-5 sm:space-x-6">
           {headerNavLinks
-            .filter((link) => link.href !== '/')
+              .filter((link) => {
+                if (siteMetadata.multiauthors) {
+                    return link.href !== '/' && link.title !== 'About';
+                } else {
+                    return link.href !== '/';
+                }
+            })
             .map((link) => {
-              const isSelected = pathname.includes(link.href)
+              const isSelected = pathname.includes(link.href as string)
               return (
                 <Link
                   key={link.title}
@@ -54,6 +61,7 @@ const Header = () => {
                 </Link>
               )
             })}
+           {(siteMetadata.multiauthors && <AuthorsMenu className='hidden sm:block'/>)}
           <SearchButton />
           <ThemeSwitch />
           <LangSwitch />
