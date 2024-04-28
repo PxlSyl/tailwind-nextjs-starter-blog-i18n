@@ -20,9 +20,7 @@ export async function generateMetadata({ params: { locale } }: AboutProps): Prom
 }
 
 export default async function Page({ params: { locale } }: AboutProps) {
-  const author = allAuthors.find(
-    (a) => a.default === true && a.language === locale
-  ) as Authors
+  const author = allAuthors.find((a) => a.default === true && a.language === locale) as Authors
   const mainContent = coreContent(author)
 
   return (
