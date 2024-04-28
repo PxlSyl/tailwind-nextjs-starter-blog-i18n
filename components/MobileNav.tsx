@@ -99,7 +99,7 @@ const MobileNav = () => {
                       <div className="mr-2">
                         <Image className='rounded-full' src={avatar ?? ''} alt='' width={25} height={25}/>
                       </div>
-                      <Link href={`/${slug}`} onClick={onToggleNav} className="text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100">
+                      <Link href={`/${slug}`} onClick={onToggleNav} className="text-xl font-bold tracking-widest text-gray-900 dark:text-gray-100">
                         {name}
                       </Link>
                     </button>
