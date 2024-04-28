@@ -24,6 +24,19 @@
   @apply my-5;
 }
 
+.overflow-y-auto::-webkit-scrollbar {
+  width: 2px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background-color: #9c9c9c;
+  border-radius: 5px;
+}
+
 /* https://stackoverflow.com/questions/61083813/how-to-avoid-internal-autofill-selected-style-to-be-applied */
 input:-webkit-autofill,
 input:-webkit-autofill:focus {

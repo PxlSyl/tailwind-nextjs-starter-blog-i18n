@@ -3,6 +3,8 @@
 import { ReactNode } from 'react'
 import { KBarSearchProvider } from './components/KBar'
 import { useParams, useRouter } from 'next/navigation'
+import siteMetadata from '@/data/siteMetadata'
+import { Authors, allAuthors } from 'contentlayer/generated'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import { Blog } from 'contentlayer/generated'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
@@ -17,6 +19,39 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, '')
   const router = useRouter()
+  const authors = allAuthors
+  .filter((a) => a.language === locale)
+  .sort((a, b) => (a.default === b.default ? 0 : a.default ? -1 : 1)) as Authors[]
+
+// Create search items for each author
+const authorSearchItems = authors.map((author) => {
+  const { name, slug } = author
+  return {
+    id: slug,
+    name: name,
+    keywords: '',
+    shortcut: [],
+    section: locale === fallbackLng ? 'Authors' : 'Auteurs',
+    perform: () => router.push(`/${slug}`),
+  }
+})
+
+const showAuthorsSearch = siteMetadata.multiauthors;
+const authorsActions = [
+  ...(showAuthorsSearch ? authorSearchItems : []), // Add author search items if multiauthors is true
+  ...(showAuthorsSearch
+    ? [] // Exclude "About" section if multiauthors is true
+    : [
+        {
+          id: 'about',
+          name: locale === fallbackLng ? 'About' : 'À propos',
+          keywords: '',
+          shortcut: ['a'],
+          section: locale === fallbackLng ? 'Navigate' : 'Naviguer',
+          perform: () => router.push(`/${locale}/about`),
+        },
+      ]),
+];
   /* issue when using regular translations, this is a workaround to show how to implement section titles */
   const navigationSection = locale === fallbackLng ? 'Navigate' : 'Naviguer'
   return (
@@ -57,14 +92,7 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
             section: navigationSection,
             perform: () => router.push(`/${locale}/projects`),
           },
-          {
-            id: 'about',
-            name: locale === fallbackLng ? 'About' : 'À propos',
-            keywords: '',
-            shortcut: ['a'],
-            section: navigationSection,
-            perform: () => router.push(`/${locale}/about`),
-          },
+          ...authorsActions,
         ],
         onSearchDocumentsLoad(json) {
           return json
