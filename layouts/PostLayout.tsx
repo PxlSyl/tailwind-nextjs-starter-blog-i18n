@@ -86,14 +86,25 @@ export default async function PostLayout({
                         />     
                         </Link>                                           
                       )}
-                         {author.avatar && siteMetadata.multiauthors === false && (                        
+                       {author.avatar && author.default && !siteMetadata.multiauthors && (
+                        <Link href={`/${locale}/about`}>
+                         <Image
+                           src={author.avatar}
+                           width={38}
+                           height={38}
+                           alt="avatar"
+                           className="h-10 w-10 rounded-full"
+                        />
+                        </Link>
+                       )}
+                      {author.avatar && !author.default && !siteMetadata.multiauthors && (
                         <Image
                           src={author.avatar}
                           width={38}
                           height={38}
                           alt="avatar"
                           className="h-10 w-10 rounded-full"
-                        />                                              
+                        />
                       )}
                       <dl className="whitespace-nowrap text-sm font-medium leading-5">
                         <dt className="sr-only">{t('name')}</dt>
