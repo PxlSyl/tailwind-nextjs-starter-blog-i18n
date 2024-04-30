@@ -5,7 +5,8 @@
   "scripts": {
     "start": "next dev",
     "dev": "cross-env INIT_CWD=$PWD next dev",
-    "build": " next build && cross-env NODE_OPTIONS='--experimental-json-modules' node ./scripts/postbuild.mjs && next-sitemap --config sitemap.config.js",
+    "build": " next build && cross-env NODE_OPTIONS='--experimental-json-modules' node ./scripts/postbuild.mjs",
+    "postbuild": "next-sitemap --config sitemap.config.js",
     "serve": "next start",
     "analyze": "cross-env ANALYZE=true next build",
     "lint": "next lint --fix --dir pages --dir app --dir components --dir lib --dir layouts --dir scripts",
