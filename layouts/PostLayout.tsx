@@ -75,7 +75,7 @@ export default async function PostLayout({
                 <ul className="flex flex-wrap justify-center gap-4 sm:space-x-12 xl:block xl:space-x-0 xl:space-y-8">
                   {authorDetails.map((author) => (
                     <li className="flex items-center space-x-2" key={author.name}>                    
-                      {author.avatar && siteMetadata.multiauthors && ( 
+                      {author.avatar && ( 
                         <Link href={`/${author.slug}`}>                     
                         <Image
                           src={author.avatar}
@@ -85,26 +85,6 @@ export default async function PostLayout({
                           className="h-10 w-10 rounded-full"
                         />     
                         </Link>                                           
-                      )}
-                       {author.avatar && author.default && !siteMetadata.multiauthors && (
-                        <Link href={`/${locale}/about`}>
-                         <Image
-                           src={author.avatar}
-                           width={38}
-                           height={38}
-                           alt="avatar"
-                           className="h-10 w-10 rounded-full"
-                        />
-                        </Link>
-                       )}
-                      {author.avatar && !author.default && !siteMetadata.multiauthors && (
-                        <Image
-                          src={author.avatar}
-                          width={38}
-                          height={38}
-                          alt="avatar"
-                          className="h-10 w-10 rounded-full"
-                        />
                       )}
                       <dl className="whitespace-nowrap text-sm font-medium leading-5">
                         <dt className="sr-only">{t('name')}</dt>

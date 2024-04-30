@@ -41,11 +41,7 @@ const Header = () => {
         <div className="flex items-center space-x-4 leading-5 sm:space-x-6">
           {headerNavLinks
             .filter((link) => {
-              if (siteMetadata.multiauthors) {
-                return link.href !== '/' && link.title !== 'About'
-              } else {
-                return link.href !== '/'
-              }
+              return link.href !== '/'
             })
             .map((link) => {
               const isSelected = pathname.includes(link.href as string)
@@ -61,7 +57,7 @@ const Header = () => {
                 </Link>
               )
             })}
-          {siteMetadata.multiauthors && <AuthorsMenu className="hidden sm:block" />}
+          <AuthorsMenu className="hidden sm:block" />
           <SearchButton />
           <ThemeSwitch />
           <LangSwitch />

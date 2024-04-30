@@ -17,6 +17,8 @@ const MobileNav = () => {
     .filter((a) => a.language === locale)
     .sort((a, b) => (a.default === b.default ? 0 : a.default ? -1 : 1)) as Authors[]
 
+  const mainAuthor = allAuthors.filter((a) => a.default === true && a.language === locale)
+
   const [navShow, setNavShow] = useState(false)
 
   const onToggleNav = () => {
@@ -69,25 +71,17 @@ const MobileNav = () => {
           </button>
         </div>
         <nav className="fixed mt-8 h-full">
-          {headerNavLinks
-            .filter((link) => {
-              if (siteMetadata.multiauthors) {
-                return link.title !== 'About'
-              } else {
-                return true
-              }
-            })
-            .map((link) => (
-              <div key={link.title} className="px-12 py-4">
-                <Link
-                  href={`/${locale}${link.href}`}
-                  className="text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100"
-                  onClick={onToggleNav}
-                >
-                  {t(`${link.title.toLowerCase()}`)}
-                </Link>
-              </div>
-            ))}
+          {headerNavLinks.map((link) => (
+            <div key={link.title} className="px-12 py-4">
+              <Link
+                href={`/${locale}${link.href}`}
+                className="text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100"
+                onClick={onToggleNav}
+              >
+                {t(`${link.title.toLowerCase()}`)}
+              </Link>
+            </div>
+          ))}
           {siteMetadata.multiauthors && (
             <>
               <div className="px-12 py-4 text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100">
@@ -123,6 +117,21 @@ const MobileNav = () => {
                 return null
               })}
             </>
+          )}
+          {siteMetadata.multiauthors === false && (
+            <div className="px-12 py-4 text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100">
+              {mainAuthor.map((author) => {
+                const { name, language, slug } = author
+                if (language === locale) {
+                  return (
+                    <Link href={`/${slug}`} onClick={onToggleNav} key={name}>
+                      {t('about')}
+                    </Link>
+                  )
+                }
+                return null
+              })}
+            </div>
           )}
         </nav>
       </div>
