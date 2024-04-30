@@ -1844,6 +1844,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@corex/deepmerge@npm:^4.0.43":
+  version: 4.0.43
+  resolution: "@corex/deepmerge@npm:4.0.43"
+  checksum: c9ac6163e982e81e3216a9fc7c68cd60b9788ad3b23d7387c9e9741b0274b42dfc332ae74b993e550c95e4256be5ce68045fc55d363aa083344392dc95b50d8b
+  languageName: node
+  linkType: hard
+
 "@discoveryjs/json-ext@npm:0.5.7":
   version: 0.5.7
   resolution: "@discoveryjs/json-ext@npm:0.5.7"
@@ -2445,6 +2452,13 @@ __metadata:
   version: 14.2.3
   resolution: "@next/env@npm:14.2.3"
   checksum: 82b445331d46b4896dc86c0e33a7eaaa6f6abfd2408d49e1cb90fbfd6b26c698ea8e69c911ffe597e30fd8294db4e3445cde44b0771eabbfcd13663a9832a397
+  languageName: node
+  linkType: hard
+
+"@next/env@npm:^13.4.3":
+  version: 13.5.6
+  resolution: "@next/env@npm:13.5.6"
+  checksum: c81bd6052db366407da701e4e431becbc80ef36a88bec7883b0266cdfeb45a7da959d37c38e1a816006cd2da287e5ff5b928bdb71025e3d4aa59e07dea3edd59
   languageName: node
   linkType: hard
 
@@ -8728,7 +8742,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimist@npm:^1.2.0, minimist@npm:^1.2.6":
+"minimist@npm:^1.2.0, minimist@npm:^1.2.6, minimist@npm:^1.2.8":
   version: 1.2.8
   resolution: "minimist@npm:1.2.8"
   checksum: 908491b6cc15a6c440ba5b22780a0ba89b9810e1aea684e253e43c4e3b8d56ec1dcdd7ea96dde119c29df59c936cde16062159eae4225c691e19c70b432b6e6f
@@ -8922,6 +8936,23 @@ __metadata:
     react: "*"
     react-dom: "*"
   checksum: 87886c3300859f77901fca593ce04ce888d89aeeaac1113f6203cafa6ffbef212cf10b96da115249d9020410177fe9fab523fb7052dd4afc02054a0a70b1f73f
+  languageName: node
+  linkType: hard
+
+"next-sitemap@npm:^4.2.3":
+  version: 4.2.3
+  resolution: "next-sitemap@npm:4.2.3"
+  dependencies:
+    "@corex/deepmerge": "npm:^4.0.43"
+    "@next/env": "npm:^13.4.3"
+    fast-glob: "npm:^3.2.12"
+    minimist: "npm:^1.2.8"
+  peerDependencies:
+    next: "*"
+  bin:
+    next-sitemap: bin/next-sitemap.mjs
+    next-sitemap-cjs: bin/next-sitemap.cjs
+  checksum: 8e88c941b5e487584abaa21a31a94d888c8d37e95892cd6b5bdbc121f49435f75c279e97508a7a99d3de0010e833f3769d0c2d0888d9228be4dbd48e031b831c
   languageName: node
   linkType: hard
 
@@ -11294,6 +11325,7 @@ __metadata:
     lint-staged: "npm:^15.2.0"
     next: "npm:14.2.3"
     next-contentlayer2: "npm:0.4.5"
+    next-sitemap: "npm:^4.2.3"
     next-themes: "npm:^0.3.0"
     pliny: "npm:0.2.0"
     postcss: "npm:^8.4.33"
