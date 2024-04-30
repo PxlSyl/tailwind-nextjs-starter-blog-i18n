@@ -1,6 +1,6 @@
 import { sortPosts, allCoreContent } from 'pliny/utils/contentlayer'
 import { allBlogs } from 'contentlayer/generated'
-import Featured from './Featured'
+import Featured from '@/layouts/Featured'
 import Main from './Main'
 import { LocaleTypes } from './i18n/settings'
 

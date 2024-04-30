@@ -1,8 +1,8 @@
 import Link from '@/components/Link'
 import Tag from '@/components/Tag'
 import { formatDate } from 'pliny/utils/formatDate'
-import { createTranslation } from './i18n/server'
-import { LocaleTypes } from './i18n/settings'
+import { createTranslation } from 'app/[locale]/i18n/server'
+import { LocaleTypes } from 'app/[locale]/i18n/settings'
 
 interface Post {
   slug: string
@@ -28,7 +28,7 @@ export default async function Featured({ posts, params: { locale } }: HomeProps)
     <>
       <div className="divide-y divide-gray-200 border-b border-gray-200 dark:divide-gray-700 dark:border-gray-700">
         <div className="space-y-2 pb-8 pt-6 md:space-y-5">
-          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-blue-400 dark:text-blue-400 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-heading-400 dark:text-heading-400 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             {t('featured')}
           </h1>
         </div>
