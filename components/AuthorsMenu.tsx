@@ -47,7 +47,7 @@ const AuthorsMenu = ({ className }: AuthorsMenuProps) => {
     <>
       {siteMetadata.multiauthors && (
         <div ref={menubarRef} className={className}>
-          <Menu as="div" className="relative inline-block text-left leading-5">
+          <Menu as="div" className="relative inline-block text-left font-medium leading-5">
             <div
               className={
                 authors.some((author) => author.slug.includes(lastSection)) && filterSections
@@ -119,7 +119,7 @@ const AuthorsMenu = ({ className }: AuthorsMenuProps) => {
                 <Link
                   href={`/${slug}`}
                   key={name}
-                  className={`${authors.some((author) => author.slug.includes(lastSection)) && filterSections ? 'text-primary-500 dark:text-primary-500' : ''}"relative leading-5" inline-block text-left`}
+                  className={`${authors.some((author) => author.slug.includes(lastSection)) && filterSections ? 'text-primary-500 dark:text-primary-500' : ''}relative inline-block text-left font-medium leading-5`}
                 >
                   {t('about')}
                 </Link>
