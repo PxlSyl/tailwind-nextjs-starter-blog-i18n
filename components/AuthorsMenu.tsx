@@ -7,7 +7,7 @@ import { Authors, allAuthors } from 'contentlayer/generated'
 import { Fragment, useRef, useState } from 'react'
 import { Menu, RadioGroup, Transition } from '@headlessui/react'
 import { useOuterClick } from './util/useOuterClick'
-import { useParams } from 'next/navigation'
+import { useParams, usePathname } from 'next/navigation'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { useTranslation } from 'app/[locale]/i18n/client'
 
@@ -22,7 +22,11 @@ const AuthorsMenu = ({ className }: AuthorsMenuProps) => {
     .filter((a) => a.language === locale)
     .sort((a, b) => (a.default === b.default ? 0 : a.default ? -1 : 1)) as Authors[]
 
-  const mainAuthor = allAuthors.filter((a) => a.default === true && a.language === locale)
+  const mainAuthor = allAuthors.filter((a) => a.default === true && a.language === locale)  as Authors[]
+
+  const pathname = usePathname()
+  const sections = pathname.split('/');
+  const lastSection = sections[sections.length - 1];
 
   const [isOpen, setIsOpen] = useState(false)
 
@@ -42,9 +46,9 @@ const AuthorsMenu = ({ className }: AuthorsMenuProps) => {
       {siteMetadata.multiauthors && (
         <div ref={menubarRef} className={className}>
           <Menu as="div" className="relative inline-block text-left leading-5">
-            <div>
-              <Menu.Button onClick={toggleMenu}>{t('about')}</Menu.Button>
-            </div>
+          <div className={authors.some(author => author.slug.includes(lastSection)) ? 'text-primary-500 dark:text-primary-500' : '' }>
+          <Menu.Button onClick={toggleMenu}>{t('about')}</Menu.Button>
+         </div>
             <Transition
               as={Fragment}
               show={isOpen}
@@ -107,7 +111,7 @@ const AuthorsMenu = ({ className }: AuthorsMenuProps) => {
                 <Link
                   href={`/${slug}`}
                   key={name}
-                  className="relative inline-block text-left leading-5"
+                  className={`${authors.some(author => author.slug.includes(lastSection)) ? 'text-primary-500 dark:text-primary-500' : '' }"relative inline-block text-left leading-5"`}
                 >
                   {t('about')}
                 </Link>
