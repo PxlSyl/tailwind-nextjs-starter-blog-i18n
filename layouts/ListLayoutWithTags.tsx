@@ -57,7 +57,7 @@ export default function ListLayoutWithTags({
   const filteredTags = Object.keys(tagCountMap).map((postTag) => {
     return (
       <li key={postTag} className="my-3">
-        {pathname.split('/tags/')[1] === slug(postTag) ? (
+        {pathname.includes(postTag) ? (
           <h3 className="inline px-3 py-2 text-sm font-bold uppercase text-primary-500">
             {postTag} ({tagCountMap[postTag]})
           </h3>
