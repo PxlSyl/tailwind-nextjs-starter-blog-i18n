@@ -55,17 +55,17 @@ const AuthorsMenu = ({ className }: AuthorsMenuProps) => {
                   : ''
               }
             >
-              <Menu.Button onClick={toggleMenu}>{t('about')}</Menu.Button>
+              <Menu.Button className="flex items-center space-x-1 transition-transform duration-300 transform-gpu" onClick={toggleMenu}>{t('about')}</Menu.Button>
             </div>
             <Transition
               as={Fragment}
               show={isOpen}
-              enter="transition ease-out duration-100"
-              enterFrom="transform opacity-0 scale-95"
-              enterTo="transform opacity-100 scale-100"
-              leave="transition ease-in duration-75"
-              leaveFrom="transform opacity-100 scale-100"
-              leaveTo="transform opacity-0 scale-95"
+              enter="transition-all ease-out duration-300"
+              enterFrom="opacity-0 scale-95 translate-y-[-10px]"
+              enterTo="opacity-100 scale-100 translate-y-0"
+              leave="transition-all ease-in duration-200"
+              leaveFrom="opacity-100 scale-100 translate-y-0"
+              leaveTo="opacity-0 scale-95 translate-y-[10px]"
             >
               <Menu.Items
                 className="absolute right-0 z-50 mt-2 w-40 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800"
@@ -78,8 +78,11 @@ const AuthorsMenu = ({ className }: AuthorsMenuProps) => {
                       if (language === locale) {
                         return (
                           <RadioGroup.Option key={name} value={name}>
+                             {({ active }) => (
                             <Menu.Item>
-                              <button className="group flex w-full items-center rounded-md px-2 py-2 text-sm">
+                              <button className={`${
+                            active ? 'bg-gray-100 dark:bg-gray-600' : 'hover:bg-gray-100 dark:hover:bg-gray-600'
+                          } group flex w-full items-center rounded-md px-2 py-2 text-sm  hover:text-primary-500 dark:hover:text-primary-500`}>
                                 <div className="mr-2">
                                   <Image
                                     className="rounded-full"
@@ -92,12 +95,12 @@ const AuthorsMenu = ({ className }: AuthorsMenuProps) => {
                                 <Link
                                   href={`/${slug}`}
                                   onClick={closeMenu}
-                                  className="hover:text-primary-500 dark:hover:text-primary-500"
                                 >
                                   {name}
                                 </Link>
                               </button>
                             </Menu.Item>
+                                )}
                           </RadioGroup.Option>
                         )
                       }

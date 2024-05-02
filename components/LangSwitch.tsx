@@ -1,9 +1,16 @@
-import { useRef, useState } from 'react'
-import { usePathname, useParams, useSelectedLayoutSegments, useRouter } from 'next/navigation'
+import { useState, useRef } from 'react'
+import { usePathname, useParams, useRouter, useSelectedLayoutSegments } from 'next/navigation'
 import { useOuterClick } from './util/useOuterClick'
 import { LocaleTypes, locales } from 'app/[locale]/i18n/settings'
 import { allBlogs } from '.contentlayer/generated'
 import slugMap from 'app/[locale]/localeid-map.json'
+import { Menu, Transition, RadioGroup, Popover } from '@headlessui/react'
+
+export const ChevronDownIcon = ({ className }) => {
+  return (
+    <svg className={`${className} transition-transform duration-300`} xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 15 15"><path fill="#3b82f6" fillRule="evenodd" d="M3.135 6.158a.5.5 0 0 1 .707-.023L7.5 9.565l3.658-3.43a.5.5 0 0 1 .684.73l-4 3.75a.5.5 0 0 1-.684 0l-4-3.75a.5.5 0 0 1-.023-.707" clipRule="evenodd"></path></svg>
+  );
+};
 
 const LangSwitch = () => {
   const pathname = usePathname()
@@ -12,82 +19,80 @@ const LangSwitch = () => {
   const router = useRouter()
 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const menubarRef = useRef<HTMLDivElement>(null)
+  useOuterClick(menubarRef, () => setIsMenuOpen(false))
 
   const handleLocaleChange = (newLocale: string): string => {
     const newUrl = `/${newLocale}/${urlSegments.join('/')}`
-
-    // Find the current post based on the current locale and slug
     const currentPost = allBlogs.find((p) => pathname.includes(p.slug))
-
     if (currentPost) {
-      // Find the corresponding slug in the new language
       const newSlug = slugMap[currentPost.localeid]?.[newLocale]
-
-      if (newSlug) {
-        return `/${newLocale}/blog/${newSlug}`
-      } else {
-        return `/${newLocale}/blog`
-      }
+      return newSlug ? `/${newLocale}/blog/${newSlug}` : `/${newLocale}/blog`
     }
-
     return newUrl
   }
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen)
-  }
-
-  const closeMenu = () => {
-    setIsMenuOpen(false)
-  }
-
-  const menubarRef = useRef<HTMLDivElement>(null)
-  useOuterClick(menubarRef, closeMenu)
 
   const handleLinkClick = (newLocale: string) => {
     const resolvedUrl = handleLocaleChange(newLocale)
     router.push(resolvedUrl)
-    closeMenu()
+    setIsMenuOpen(false)
   }
 
   return (
     <div ref={menubarRef} className="relative inline-block text-left">
-      <div>
-        <button
-          type="button"
-          className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 dark:bg-gray-800 dark:text-white"
-          id="options-menu"
-          aria-haspopup="true"
-          aria-expanded={isMenuOpen}
-          onClick={toggleMenu}
-        >
-          {locale}
-        </button>
-      </div>
-      {isMenuOpen && (
-        <div
-          className="absolute right-0 z-50 mt-2 w-12 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:rounded-md dark:bg-gray-700 dark:ring-1 dark:ring-gray-300"
-          role="menu"
-          aria-orientation="vertical"
-          aria-labelledby="options-menu"
-          onBlur={closeMenu}
-        >
-          <ul className="py-1" role="none" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
-            {locales.map((newLocale: string) => (
-              <li key={newLocale}>
-                <button
-                  onClick={() => handleLinkClick(newLocale)}
-                  className="rounded-md px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
-                  role="menuitem"
-                  style={{ display: 'block', width: '100%', textDecoration: 'none' }}
-                >
-                  {newLocale}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+        <Menu>
+        {({ open }) => (
+          <>
+            <Menu.Button
+              className="inline-flex w-full justify-center rounded-md px-1 py-2 text-sm font-bold leading-5 text-gray-700 shadow-sm dark:text-white"
+              aria-haspopup="true"
+              aria-expanded={open}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {locale.charAt(0).toUpperCase() + locale.slice(1)}
+              <ChevronDownIcon className={`ml-1 mt-1 transform ${open ? 'rotate-180' : 'rotate-0'}`} />
+            </Menu.Button>
+            <Transition
+              show={open}
+              enter="transition-all ease-out duration-300"
+          enterFrom="opacity-0 scale-95 translate-y-[-10px]"
+          enterTo="opacity-100 scale-100 translate-y-0"
+          leave="transition-all ease-in duration-200"
+          leaveFrom="opacity-100 scale-100 translate-y-0"
+          leaveTo="opacity-0 scale-95 translate-y-[10px]"
+            >          
+              <Menu.Items
+                className="absolute right-0 z-50 mt-2 w-12 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800"              
+                aria-orientation="vertical"
+                onBlur={() => setIsMenuOpen(false)}
+              >
+                 <RadioGroup>
+                <div className="py-1" role="none" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+                  {locales.map((newLocale: string) => (
+                    <RadioGroup.Option key={newLocale} value={newLocale}>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <button
+                            onClick={() => handleLinkClick(newLocale)}
+                            className={`${
+                              active ? 'bg-gray-100 dark:bg-gray-600' : 'hover:bg-gray-100 dark:hover:bg-gray-600'
+                            } rounded-md px-4 py-2 text-sm text-gray-700 dark:text-white hover:text-primary-500 dark:hover:text-primary-500`}
+                            role="menuitem"
+                            style={{ display: 'block', width: '100%', textDecoration: 'none' }}
+                          >
+                             {newLocale.charAt(0).toUpperCase() + newLocale.slice(1)}
+                          </button>
+                        )}
+                      </Menu.Item>
+                    </RadioGroup.Option>
+                  ))}
+                </div>
+                </RadioGroup>
+              </Menu.Items>
+            </Transition>
+          </>
+        )}
+      </Menu>
     </div>
   )
 }
