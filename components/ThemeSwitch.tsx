@@ -1,8 +1,10 @@
 'use client'
 
+import * as React from 'react'
 import { Fragment, useEffect, useState } from 'react'
 import { useTheme } from 'next-themes'
 import { Menu, RadioGroup, Transition } from '@headlessui/react'
+import { DarkModeSwitch } from './DarkModeSwitch'
 
 const Sun = () => (
   <svg
@@ -48,19 +50,31 @@ const Monitor = () => (
 const ThemeSwitch = () => {
   const [mounted, setMounted] = useState(false)
   const { theme, setTheme, resolvedTheme } = useTheme()
+  const [menuOpen, setMenuOpen] = useState(false)
 
-  // When mounted on client, now we can show the UI
   useEffect(() => setMounted(true), [])
+
+  const [darkModeChecked, setDarkModeChecked] = useState(resolvedTheme === 'dark')
+
+  const handleThemeChange = (newTheme) => {
+    setTheme(newTheme)
+    setDarkModeChecked(newTheme === 'dark')
+    setMenuOpen(false)
+  }
 
   return (
     <div className="mr-5">
       <Menu as="div" className="relative mt-1 inline-block text-left">
-        <div>
-          <Menu.Button className="flex transform-gpu items-center space-x-1 transition-transform duration-300">
-            {resolvedTheme === 'dark' ? <Moon /> : <Sun />}
-          </Menu.Button>
-        </div>
+        <Menu.Button>
+          <DarkModeSwitch
+            checked={darkModeChecked}
+            onChange={(isChecked) => setDarkModeChecked(isChecked)}
+            onClick={() => setMenuOpen(!menuOpen)}
+            size={24}
+          />
+        </Menu.Button>
         <Transition
+          show={menuOpen}
           as={Fragment}
           enter="transition-all ease-out duration-300"
           enterFrom="opacity-0 scale-95 translate-y-[-10px]"
@@ -70,13 +84,13 @@ const ThemeSwitch = () => {
           leaveTo="opacity-0 scale-95 translate-y-[10px]"
         >
           <Menu.Items className="absolute right-0 z-50 mt-2 w-32 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800">
-            <RadioGroup value={theme} onChange={setTheme}>
+            <RadioGroup value={theme} onChange={handleThemeChange}>
               <div className="p-1">
                 <RadioGroup.Option value="light">
                   <Menu.Item>
                     {({ active }) => (
                       <button
-                        onClick={() => setTheme('light')}
+                        onClick={() => handleThemeChange('light')}
                         className={`${
                           active
                             ? 'bg-gray-100 dark:bg-gray-600'
@@ -93,7 +107,7 @@ const ThemeSwitch = () => {
                   {({ active }) => (
                     <Menu.Item>
                       <button
-                        onClick={() => setTheme('dark')}
+                        onClick={() => handleThemeChange('dark')}
                         className={`${
                           active
                             ? 'bg-gray-100 dark:bg-gray-600'
@@ -110,7 +124,7 @@ const ThemeSwitch = () => {
                   {({ active }) => (
                     <Menu.Item>
                       <button
-                        onClick={() => setTheme('system')}
+                        onClick={() => handleThemeChange('system')}
                         className={`${
                           active
                             ? 'bg-gray-100 dark:bg-gray-600'

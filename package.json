@@ -38,6 +38,7 @@
     "react-dom": "18.3.0",
     "react-h5-audio-player": "^3.9.1",
     "react-i18next": "^14.0.1",
+    "react-spring": "^9.7.3",
     "react-toastify": "^10.0.3",
     "reading-time": "1.5.0",
     "rehype-autolink-headings": "^7.1.0",
