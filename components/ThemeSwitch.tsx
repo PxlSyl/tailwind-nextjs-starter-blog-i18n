@@ -58,9 +58,15 @@ const ThemeSwitch = () => {
 
   useEffect(() => setMounted(true), [])
 
-  const [darkModeChecked, setDarkModeChecked] = useState(resolvedTheme === 'dark')
+  const [darkModeChecked, setDarkModeChecked] = useState<boolean>(false)
 
-  const handleThemeChange = (newTheme) => {
+  useEffect(() => {
+    if (resolvedTheme === 'dark') {
+      setDarkModeChecked(true)
+    }
+  }, [resolvedTheme])
+
+  const handleThemeChange = (newTheme: string) => {
     setTheme(newTheme)
     setDarkModeChecked(newTheme === 'dark')
     setMenuOpen(false)
