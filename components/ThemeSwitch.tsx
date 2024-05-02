@@ -51,7 +51,7 @@ const Monitor = () => (
 const ThemeSwitch = () => {
   const [mounted, setMounted] = useState(false)
   const { theme, setTheme, resolvedTheme } = useTheme()
-  
+
   const [menuOpen, setMenuOpen] = useState(false)
   const menubarRef = useRef<HTMLDivElement>(null)
   useOuterClick(menubarRef, () => setMenuOpen(false))
@@ -67,7 +67,7 @@ const ThemeSwitch = () => {
   }
 
   return (
-    <div ref={menubarRef}  className="mr-5">
+    <div ref={menubarRef} className="mr-5">
       <Menu as="div" className="relative mt-1 inline-block text-left">
         <Menu.Button aria-label="Theme">
           <DarkModeSwitch

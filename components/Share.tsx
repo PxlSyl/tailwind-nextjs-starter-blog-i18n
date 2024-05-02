@@ -2,6 +2,8 @@
 
 import siteMetadata from '@/data/siteMetadata'
 import SocialIcon from '@/components/social-icons'
+import { useState } from 'react'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { useParams, usePathname } from 'next/navigation'
 import { useTranslation } from 'app/[locale]/i18n/client'
 import { fallbackLng, secondLng } from 'app/[locale]/i18n/locales'
@@ -10,6 +12,14 @@ import { LocaleTypes } from 'app/[locale]/i18n/settings'
 type ShareProps = { title: string; description?: string; slug: string; className?: string }
 
 const Share = ({ title, description, slug, className }: ShareProps) => {
+  const [showMenu, setShowMenu] = useState(false)
+  const [copied, setCopied] = useState(false)
+
+  const handleCopy = () => {
+    setCopied(true)
+    setTimeout(() => setCopied(false), 10 * 60 * 1000) // Reset copied state after 10 minutes
+  }
+
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, 'common')
   const pathname = usePathname()
@@ -90,6 +100,30 @@ const Share = ({ title, description, slug, className }: ShareProps) => {
               aria-label={t('telegramshare')}
               href={`https://telegram.me/share/url?url=${siteMetadata.siteUrl}/${locale}/${targetSegment}/${slug}&text=${title}`}
             />
+          </li>
+          <li className="relative ml-4 inline-block">
+            <button
+              onMouseEnter={() => setShowMenu(true)}
+              onMouseLeave={() => setShowMenu(false)}
+              className="fill-current text-gray-700 outline-none hover:text-primary-500 focus:outline-none dark:text-gray-200 dark:hover:text-primary-400"
+            >
+              <CopyToClipboard
+                text={`${siteMetadata.siteUrl}/${locale}/${targetSegment}/${slug}`}
+                onCopy={handleCopy}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+                  <path d="M0 0h24v24H0z" fill="none" />
+                  <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                </svg>
+              </CopyToClipboard>
+            </button>
+            {showMenu && (
+              <div className="absolute right-0 top-8 w-32 rounded-md bg-white p-2 text-center shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800">
+                <p className={`${copied ? 'text-primary-500 dark:text-primary-400' : ''}`}>
+                  {copied ? t('urlcopied') : t('copyurl')}
+                </p>
+              </div>
+            )}
           </li>
         </ul>
       </div>

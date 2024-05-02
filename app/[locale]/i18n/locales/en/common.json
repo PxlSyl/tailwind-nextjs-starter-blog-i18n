@@ -24,5 +24,7 @@
   "whatsappshare": "whatsapp share button",
   "telegramshare": "telegram share button",
   "pinterestshare": "pinterest share button",
-  "threadsshare": "threadsshare button"
+  "threadsshare": "threadsshare button",
+  "copyurl": "Copy URL?",
+  "urlcopied": "URL copied!"
 }
