@@ -1,8 +1,9 @@
 'use client'
 
 import * as React from 'react'
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useEffect, useState, useRef } from 'react'
 import { useTheme } from 'next-themes'
+import { useOuterClick } from './util/useOuterClick'
 import { Menu, RadioGroup, Transition } from '@headlessui/react'
 import { DarkModeSwitch } from './DarkModeSwitch'
 
@@ -50,7 +51,10 @@ const Monitor = () => (
 const ThemeSwitch = () => {
   const [mounted, setMounted] = useState(false)
   const { theme, setTheme, resolvedTheme } = useTheme()
+  
   const [menuOpen, setMenuOpen] = useState(false)
+  const menubarRef = useRef<HTMLDivElement>(null)
+  useOuterClick(menubarRef, () => setMenuOpen(false))
 
   useEffect(() => setMounted(true), [])
 
@@ -63,9 +67,9 @@ const ThemeSwitch = () => {
   }
 
   return (
-    <div className="mr-5">
+    <div ref={menubarRef}  className="mr-5">
       <Menu as="div" className="relative mt-1 inline-block text-left">
-        <Menu.Button>
+        <Menu.Button aria-label="Theme">
           <DarkModeSwitch
             checked={darkModeChecked}
             onChange={(isChecked) => setDarkModeChecked(isChecked)}
