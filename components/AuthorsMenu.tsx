@@ -55,7 +55,12 @@ const AuthorsMenu = ({ className }: AuthorsMenuProps) => {
                   : ''
               }
             >
-              <Menu.Button className="flex items-center space-x-1 transition-transform duration-300 transform-gpu" onClick={toggleMenu}>{t('about')}</Menu.Button>
+              <Menu.Button
+                className="flex transform-gpu items-center space-x-1 transition-transform duration-300"
+                onClick={toggleMenu}
+              >
+                {t('about')}
+              </Menu.Button>
             </div>
             <Transition
               as={Fragment}
@@ -78,29 +83,30 @@ const AuthorsMenu = ({ className }: AuthorsMenuProps) => {
                       if (language === locale) {
                         return (
                           <RadioGroup.Option key={name} value={name}>
-                             {({ active }) => (
-                            <Menu.Item>
-                              <button className={`${
-                            active ? 'bg-gray-100 dark:bg-gray-600' : 'hover:bg-gray-100 dark:hover:bg-gray-600'
-                          } group flex w-full items-center rounded-md px-2 py-2 text-sm  hover:text-primary-500 dark:hover:text-primary-500`}>
-                                <div className="mr-2">
-                                  <Image
-                                    className="rounded-full"
-                                    src={avatar ?? ''}
-                                    alt=""
-                                    width={25}
-                                    height={25}
-                                  />
-                                </div>
-                                <Link
-                                  href={`/${slug}`}
-                                  onClick={closeMenu}
+                            {({ active }) => (
+                              <Menu.Item>
+                                <button
+                                  className={`${
+                                    active
+                                      ? 'bg-gray-100 dark:bg-gray-600'
+                                      : 'hover:bg-gray-100 dark:hover:bg-gray-600'
+                                  } group flex w-full items-center rounded-md px-2 py-2 text-sm  hover:text-primary-500 dark:hover:text-primary-500`}
                                 >
-                                  {name}
-                                </Link>
-                              </button>
-                            </Menu.Item>
-                                )}
+                                  <div className="mr-2">
+                                    <Image
+                                      className="rounded-full"
+                                      src={avatar ?? ''}
+                                      alt=""
+                                      width={25}
+                                      height={25}
+                                    />
+                                  </div>
+                                  <Link href={`/${slug}`} onClick={closeMenu}>
+                                    {name}
+                                  </Link>
+                                </button>
+                              </Menu.Item>
+                            )}
                           </RadioGroup.Option>
                         )
                       }

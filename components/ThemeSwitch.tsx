@@ -9,7 +9,7 @@ const Sun = () => (
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 20 20"
     fill="currentColor"
-    className="h-6 w-6 text-gray-900 dark:text-gray-100 transition-transform duration-300"
+    className="h-6 w-6 text-gray-900 transition-transform duration-300 dark:text-gray-100"
   >
     <path
       fillRule="evenodd"
@@ -23,7 +23,7 @@ const Moon = () => (
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 20 20"
     fill="currentColor"
-    className="h-6 w-6 text-gray-900 dark:text-gray-100 transition-transform duration-300"
+    className="h-6 w-6 text-gray-900 transition-transform duration-300 dark:text-gray-100"
   >
     <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
   </svg>
@@ -37,7 +37,7 @@ const Monitor = () => (
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="h-6 w-6 text-gray-900 dark:text-gray-100 transition-transform duration-300"
+    className="h-6 w-6 text-gray-900 transition-transform duration-300 dark:text-gray-100"
   >
     <rect x="3" y="3" width="14" height="10" rx="2" ry="2"></rect>
     <line x1="7" y1="17" x2="13" y2="17"></line>
@@ -56,7 +56,7 @@ const ThemeSwitch = () => {
     <div className="mr-5">
       <Menu as="div" className="relative mt-1 inline-block text-left">
         <div>
-          <Menu.Button className="flex items-center space-x-1 transition-transform duration-300 transform-gpu">
+          <Menu.Button className="flex transform-gpu items-center space-x-1 transition-transform duration-300">
             {resolvedTheme === 'dark' ? <Moon /> : <Sun />}
           </Menu.Button>
         </div>
@@ -73,19 +73,21 @@ const ThemeSwitch = () => {
             <RadioGroup value={theme} onChange={setTheme}>
               <div className="p-1">
                 <RadioGroup.Option value="light">
-                    <Menu.Item>
-                      {({ active }) => (
-                        <button
-                          onClick={() => setTheme('light')}
-                          className={`${
-                            active ? 'bg-gray-100 dark:bg-gray-600' : 'hover:bg-gray-100 dark:hover:bg-gray-600'
-                          } group flex w-full items-center rounded-md px-2 py-2 text-sm  hover:text-primary-500 dark:hover:text-primary-500`}
-                        >
-                          <Sun />
-                          <span className="ml-2">Light</span>
-                        </button>
-                      )}
-                    </Menu.Item>               
+                  <Menu.Item>
+                    {({ active }) => (
+                      <button
+                        onClick={() => setTheme('light')}
+                        className={`${
+                          active
+                            ? 'bg-gray-100 dark:bg-gray-600'
+                            : 'hover:bg-gray-100 dark:hover:bg-gray-600'
+                        } group flex w-full items-center rounded-md px-2 py-2 text-sm  hover:text-primary-500 dark:hover:text-primary-500`}
+                      >
+                        <Sun />
+                        <span className="ml-2">Light</span>
+                      </button>
+                    )}
+                  </Menu.Item>
                 </RadioGroup.Option>
                 <RadioGroup.Option value="dark">
                   {({ active }) => (
@@ -93,7 +95,9 @@ const ThemeSwitch = () => {
                       <button
                         onClick={() => setTheme('dark')}
                         className={`${
-                          active ? 'bg-gray-100 dark:bg-gray-600' : 'hover:bg-gray-100 dark:hover:bg-gray-600'
+                          active
+                            ? 'bg-gray-100 dark:bg-gray-600'
+                            : 'hover:bg-gray-100 dark:hover:bg-gray-600'
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm hover:text-primary-500 dark:hover:text-primary-500`}
                       >
                         <Moon />
@@ -108,7 +112,9 @@ const ThemeSwitch = () => {
                       <button
                         onClick={() => setTheme('system')}
                         className={`${
-                          active ? 'bg-gray-100 dark:bg-gray-600' : 'hover:bg-gray-100 dark:hover:bg-gray-600'
+                          active
+                            ? 'bg-gray-100 dark:bg-gray-600'
+                            : 'hover:bg-gray-100 dark:hover:bg-gray-600'
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm  hover:text-primary-500 dark:hover:text-primary-500`}
                       >
                         <Monitor />
