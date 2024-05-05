@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react'
 import { usePathname, useParams, useRouter, useSelectedLayoutSegments } from 'next/navigation'
 import { useOuterClick } from './util/useOuterClick'
+import { useTagStore } from '@/components/util/useTagStore'
 import { LocaleTypes, locales } from 'app/[locale]/i18n/settings'
 import { allBlogs } from '.contentlayer/generated'
 import slugMap from 'app/[locale]/localeid-map.json'
@@ -30,7 +31,7 @@ const LangSwitch = () => {
   const urlSegments = useSelectedLayoutSegments()
   const locale = useParams()?.locale as LocaleTypes
   const router = useRouter()
-
+  const setSelectedTag = useTagStore((state) => state.setSelectedTag)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const menubarRef = useRef<HTMLDivElement>(null)
   useOuterClick(menubarRef, () => setIsMenuOpen(false))
@@ -46,6 +47,7 @@ const LangSwitch = () => {
   }
 
   const handleLinkClick = (newLocale: string) => {
+    setSelectedTag('')
     const resolvedUrl = handleLocaleChange(newLocale)
     router.push(resolvedUrl)
     setIsMenuOpen(false)
