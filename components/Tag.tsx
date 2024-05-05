@@ -1,23 +1,31 @@
-import Link from 'next/link'
-import { slug } from 'github-slugger'
+'use client'
+
+import { useCallback } from 'react'
+import { useRouter, useParams } from 'next/navigation'
+import { useTagStore } from './util/useTagStore'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 
-interface TagProps {
+interface Props {
   text: string
-  params: { locale: LocaleTypes }
 }
 
-const Tag: React.FC<TagProps> = ({ text, params: { locale } }) => {
-  // Define the link URL based on the locale
-  const tagLink = `/${locale}/tags/${slug(text)}`
+const Tag = ({ text }: Props) => {
+  const locale = useParams()?.locale as LocaleTypes
+  const router = useRouter()
+  const { setSelectedTag } = useTagStore()
+
+  const handleClick = useCallback(() => {
+    setSelectedTag(text)
+    router.push(`/${locale}/blog`)
+  }, [text, setSelectedTag, router])
 
   return (
-    <Link
-      href={tagLink}
-      className="mr-3 mt-2 text-sm font-medium uppercase text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 sm:mt-0"
+    <span
+      onClick={handleClick}
+      className="mr-3 cursor-pointer text-sm font-medium uppercase text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
     >
-      {text.replace(/ /g, '-')}
-    </Link>
+      {text.split(' ').join('-')}
+    </span>
   )
 }
 

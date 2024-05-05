@@ -1,7 +1,7 @@
 import { sortPosts, allCoreContent } from 'pliny/utils/contentlayer'
 import { allBlogs } from 'contentlayer/generated'
-import Featured from '@/layouts/Featured'
-import Main from './Main'
+import FeaturedLayout from '@/layouts/FeaturedLayout'
+import HomeLayout from '@/layouts/HomeLayout'
 import { LocaleTypes } from './i18n/settings'
 
 type HomeProps = {
@@ -14,9 +14,9 @@ export default async function Page({ params: { locale } }: HomeProps) {
   return (
     <>
       {posts.filter((post) => post.language === locale).some((post) => post.featured) && (
-        <Featured posts={posts} params={{ locale }} />
+        <FeaturedLayout posts={posts} params={{ locale }} />
       )}
-      <Main posts={posts} params={{ locale: locale }} />
+      <HomeLayout posts={posts} params={{ locale: locale }} />
     </>
   )
 }

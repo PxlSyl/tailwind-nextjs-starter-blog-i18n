@@ -1,7 +1,5 @@
 import { Metadata } from 'next'
-import Link from '@/components/Link'
 import Tag from '@/components/Tag'
-import { slug } from 'github-slugger'
 import tagData from 'app/[locale]/tag-data.json'
 import { genPageMetadata } from 'app/[locale]/seo'
 import { createTranslation } from '../i18n/server'
@@ -24,8 +22,6 @@ export default async function Page({ params: { locale } }: TagsProps) {
   const { t } = await createTranslation(locale, '')
   const tagCounts = tagData[locale]
   const tagKeys = Object.keys(tagCounts)
-
-  // Sort the tags
   const sortedTags = tagKeys.sort((a, b) => tagCounts[b] - tagCounts[a])
 
   return (
@@ -40,14 +36,10 @@ export default async function Page({ params: { locale } }: TagsProps) {
           {tagKeys.length === 0 && 'No tags found.'}
           {sortedTags.map((tag) => (
             <div key={tag} className="mb-2 mr-5 mt-2">
-              <Tag text={tag} params={{ locale: locale }} />
-              <Link
-                href={`/${locale}/tags/${slug(tag)}`}
-                className="-ml-2 text-sm font-semibold uppercase text-gray-600 dark:text-gray-300"
-                aria-label={`${t('poststagged')}${tag}`}
-              >
+              <Tag text={tag} />
+              <span className="-ml-2 text-sm font-semibold uppercase text-gray-600 dark:text-gray-300">
                 {`(${tagCounts[tag]})`}
-              </Link>
+              </span>
             </div>
           ))}
         </div>

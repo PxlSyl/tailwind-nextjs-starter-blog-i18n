@@ -9,7 +9,7 @@
     "serve": "next start",
     "analyze": "cross-env ANALYZE=true next build",
     "lint": "next lint --fix --dir pages --dir app --dir components --dir lib --dir layouts --dir scripts",
-    "format": "prettier -w ./app ./components"
+    "format": "prettier -w ./app ./components ./layouts"
   },
   "dependencies": {
     "@formspree/react": "^2.5.1",
