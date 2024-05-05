@@ -20,7 +20,6 @@ export async function generateMetadata({ params: { locale } }: BlogPageProps): P
 export default async function BlogPage({ params: { locale } }: BlogPageProps) {
   const { t } = await createTranslation(locale, 'home')
   const posts = allCoreContent(sortPosts(allBlogs))
-  // Filter posts based on the current locale
   const filteredPosts = posts.filter((post) => post.language === locale)
 
   return <ListLayout params={{ locale: locale }} posts={filteredPosts} title={t('all')} />

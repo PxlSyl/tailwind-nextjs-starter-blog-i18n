@@ -26,7 +26,6 @@ export const CModal: React.FC<cModalProps> = ({
 }) => {
   const modalContentRef = useRef<HTMLDivElement>(null)
 
-  // Close modal when clicking outside of it
   useOuterClick(modalContentRef, onClose)
 
   const handleClose = useCallback(() => {
@@ -49,12 +48,10 @@ export const CModal: React.FC<cModalProps> = ({
       className="fixed inset-0 z-50 flex items-center justify-center bg-gray-300/50 p-4 backdrop-blur backdrop-filter dark:bg-black/50"
     >
       <div className="relative mx-auto my-3 h-full w-full sm:h-auto sm:w-2/5 sm:max-w-xl">
-        {/* Content  */}
         <div
           ref={modalContentRef}
           className="relative flex h-full w-full flex-col rounded-lg border-0 bg-white shadow-lg outline-none focus:outline-none dark:bg-black lg:h-auto"
         >
-          {/* Header */}
           <div className="flex items-center justify-between rounded-t p-6">
             <h3 className="text-3xl font-semibold">{title}</h3>
             <button
@@ -67,9 +64,7 @@ export const CModal: React.FC<cModalProps> = ({
               </p>
             </button>
           </div>
-          {/* Body  */}
           <div className="relative flex-auto p-6">{body}</div>
-          {/* Footer */}
           <div className="flex flex-col gap-2 p-6">{footer}</div>
         </div>
       </div>

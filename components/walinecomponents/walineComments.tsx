@@ -32,7 +32,6 @@ export default function WalineComments() {
     }
 
     return () => {
-      // Cleanup if needed
     }
   }, [loadComments, locale])
 

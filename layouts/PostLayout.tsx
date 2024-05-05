@@ -140,7 +140,7 @@ export default async function PostLayout({
                     </h2>
                     <div className="flex flex-wrap">
                       {tags.map((tag) => (
-                        <Tag key={tag} text={tag} params={{ locale: locale }} />
+                        <Tag key={tag} text={tag} />
                       ))}
                     </div>
                   </div>

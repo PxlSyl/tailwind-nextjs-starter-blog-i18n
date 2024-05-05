@@ -15,8 +15,6 @@ import {
 } from './icons'
 import siteMetadata from '@/data/siteMetadata'
 
-// Twitter icon replaced with "X" brand. If you prefer the blue bird icon, replace the X with "twitter" instead
-
 const components = {
   mail: Mail,
   github: Github,

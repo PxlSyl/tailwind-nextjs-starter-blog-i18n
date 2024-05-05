@@ -110,7 +110,7 @@ const AuthorsMenu = ({ className }: AuthorsMenuProps) => {
                           </RadioGroup.Option>
                         )
                       }
-                      return null // Return null if the language doesn't match the locale
+                      return null
                     })}
                   </div>
                 </RadioGroup>
@@ -134,7 +134,7 @@ const AuthorsMenu = ({ className }: AuthorsMenuProps) => {
                 </Link>
               )
             }
-            return null // Return null if the language doesn't match the locale
+            return null
           })}
         </div>
       )}

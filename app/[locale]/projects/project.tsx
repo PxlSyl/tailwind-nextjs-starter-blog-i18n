@@ -1,4 +1,5 @@
 'use client'
+
 import projectsData from '@/data/projectsData'
 import Card from '@/components/Card'
 import { LocaleTypes } from '../i18n/settings'
