@@ -63,11 +63,13 @@ export default async function HomeLayout({ posts, params: { locale } }: HomeProp
                                   {title}
                                 </Link>
                               </h2>
-                              <div className="flex flex-wrap">
+                              <ul className="flex flex-wrap">                       
                                 {tags.map((tag: string) => (
-                                  <Tag key={tag} text={tag} />
-                                ))}
-                              </div>
+                                  <li key={tag} className="my-1">
+                                  <Tag text={tag} />
+                                  </li>
+                                ))}                      
+                              </ul>
                             </div>
                             <div className="prose max-w-none text-gray-500 dark:text-gray-400">
                               {summary!.length > 149 ? `${summary!.substring(0, 149)}...` : summary}
