@@ -1,3 +1,15 @@
+IMPORTANT NOTE: 
+
+This is still a WIP (Work In Progress).
+
+I recently changed all the complex server logic for pagination and tags, with the use of Zustand library, and moved it all to two components (pagination, and ListLayout)
+While it's not optimal for SEO purposes, the goal of these changes is to find a solution for managing all the url in a better way (translated urls are very bad for SEO)
+Also, I don't think that the impact od this first change is really bad for SEO, because most users will use this repository and code for their personal dev blog.
+
+So for now, blog page and tags logic is entirely managed on client side (also resulting in a faster UI for users). This also means less complex server side code and pages.
+
+The next step and changes will be to find a way to manage the url of the posts in the best way possible for SEO!
+
 ## Introduction
 
 In this post we will discuss the i18n implementation and how it changes compared to the original V.2.
