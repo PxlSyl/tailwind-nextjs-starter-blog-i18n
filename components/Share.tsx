@@ -44,8 +44,8 @@ const Share = ({ title, description, slug, className }: ShareProps) => {
         </p>
       </div>
       <div>
-        <ul className={className}>
-          <li className="inline-block">
+        <ul className={`grid grid-cols-4 gap-4 ${className}`}>
+          <li className="ml-4 inline-block">
             <SocialIcon
               kind="facebook"
               size={5}
