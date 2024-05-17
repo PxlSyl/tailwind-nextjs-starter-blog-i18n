@@ -31,8 +31,7 @@ export default function WalineComments() {
       })
     }
 
-    return () => {
-    }
+    return () => {}
   }, [loadComments, locale])
 
   return (

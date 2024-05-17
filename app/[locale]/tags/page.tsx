@@ -18,8 +18,7 @@ export async function generateMetadata({ params: { locale } }: TagsProps): Promi
   })
 }
 
-export default async function Page({ params: { locale } }: TagsProps) {
-  const { t } = await createTranslation(locale, '')
+export default function Page({ params: { locale } }: TagsProps) {
   const tagCounts = tagData[locale]
   const tagKeys = Object.keys(tagCounts)
   const sortedTags = tagKeys.sort((a, b) => tagCounts[b] - tagCounts[a])

@@ -61,12 +61,12 @@ export default async function FeaturedLayout({ posts, params: { locale } }: Home
                                   {title}
                                 </Link>
                               </h2>
-                              <ul className="flex flex-wrap">                       
+                              <ul className="flex flex-wrap">
                                 {tags.map((tag: string) => (
                                   <li key={tag} className="my-1">
-                                  <Tag text={tag} />
+                                    <Tag text={tag} />
                                   </li>
-                                ))}                      
+                                ))}
                               </ul>
                             </div>
                             <div className="prose max-w-none text-gray-500 dark:text-gray-400">
