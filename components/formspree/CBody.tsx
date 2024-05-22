@@ -1,17 +1,15 @@
-// ModalBody.tsx
-import React from 'react';
-import { FormInputs } from './FormInputs';
+import { FormInputs } from './FormInputs'
 
 interface ModalBodyProps {
-  state: any;
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  name: string;
-  email: string;
-  message: string;
-  handleNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleEmailChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleMessageChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  t: (key: string) => string;
+  state: any
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void
+  name: string
+  email: string
+  message: string
+  handleNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  handleEmailChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  handleMessageChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
+  t: (key: string) => string
 }
 
 export const ModalBody: React.FC<ModalBodyProps> = ({
@@ -49,5 +47,5 @@ export const ModalBody: React.FC<ModalBodyProps> = ({
         </button>
       </form>
     </div>
-  );
-};
+  )
+}

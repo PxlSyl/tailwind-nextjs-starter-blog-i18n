@@ -1,14 +1,14 @@
-'use client';
+'use client'
 
-import 'react-toastify/dist/ReactToastify.css';
-import { useContactModal } from './store';
-import { ToastContainer } from 'react-toastify';
-import { CModal } from './CModal';
-import { ModalBody } from './CBody';
-import { useContactForm } from './useContactForm';
+import 'react-toastify/dist/ReactToastify.css'
+import { useContactModal } from './store'
+import { ToastContainer } from 'react-toastify'
+import { CModal } from './CModal'
+import { ModalBody } from './CBody'
+import { useContactForm } from './useContactForm'
 
 export const ContactModal = (): JSX.Element => {
-  const contactModal = useContactModal();
+  const contactModal = useContactModal()
   const {
     state,
     handleSubmit,
@@ -19,7 +19,7 @@ export const ContactModal = (): JSX.Element => {
     handleEmailChange,
     handleMessageChange,
     t,
-  } = useContactForm();
+  } = useContactForm()
 
   return (
     <>
@@ -43,5 +43,5 @@ export const ContactModal = (): JSX.Element => {
       />
       <ToastContainer autoClose={2000} />
     </>
-  );
-};
+  )
+}

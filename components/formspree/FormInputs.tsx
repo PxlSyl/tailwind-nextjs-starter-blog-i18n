@@ -1,16 +1,14 @@
-// FormInputs.tsx
-import React from 'react';
-import { ValidationError } from '@formspree/react';
+import { ValidationError } from '@formspree/react'
 
 interface FormInputsProps {
-  name: string;
-  email: string;
-  message: string;
-  handleNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleEmailChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleMessageChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  state: any;
-  t: (key: string) => string;
+  name: string
+  email: string
+  message: string
+  handleNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  handleEmailChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  handleMessageChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
+  state: any
+  t: (key: string) => string
 }
 
 export const FormInputs: React.FC<FormInputsProps> = ({
@@ -59,5 +57,5 @@ export const FormInputs: React.FC<FormInputsProps> = ({
       />
       <ValidationError prefix="Message" field="message" errors={state.errors} />
     </>
-  );
-};
+  )
+}
