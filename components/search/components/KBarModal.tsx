@@ -1,4 +1,6 @@
 'use client'
+
+import siteMetadata from '@/data/siteMetadata'
 import { useParams } from 'next/navigation'
 import { useTranslation } from 'app/[locale]/i18n/client'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
@@ -12,11 +14,35 @@ import {
   Action,
   useRegisterActions,
 } from 'kbar'
+import { useContactForm } from '@/components/formspree/useContactForm'
+import { ModalBody } from '@/components/formspree/CBody'
+import { Mail, Backward } from '../icons'
+import { useState } from 'react'
 
 export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading: boolean }) => {
   const locale = useParams()?.locale as LocaleTypes
-  const { t } = useTranslation(locale, '')
   useRegisterActions(actions, [actions])
+  const {
+    state,
+    handleSubmit,
+    name,
+    email,
+    message,
+    handleNameChange,
+    handleEmailChange,
+    handleMessageChange,
+    t,
+  } = useContactForm()
+  const [showEmailForm, setShowEmailForm] = useState<boolean>(false);
+
+  const toggleShowEmail = () => {
+    if (siteMetadata.formspree === true) {
+      setShowEmailForm(!showEmailForm);
+    } else {
+      const mailtoLink: string = `mailto:${siteMetadata.email}`;
+      window.location.href = mailtoLink;
+    }
+  };
 
   return (
     <KBarPortal>
@@ -43,15 +69,56 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
                   />
                 </svg>
               </span>
+              {showEmailForm ? (
+                <div className="h-8 w-full bg-transparent" />
+              ) : (
               <KBarSearch
                 defaultPlaceholder={t('kbarplaceholder')}
                 className="h-8 w-full bg-transparent text-gray-600 placeholder-gray-400 focus:outline-none dark:text-gray-200 dark:placeholder-gray-500"
               />
+            )}
               <kbd className="inline-block whitespace-nowrap rounded border border-gray-400 px-1.5 align-middle text-xs font-medium leading-4 tracking-wide text-gray-400">
                 ESC
               </kbd>
             </div>
-            {!isLoading && <RenderResults />}
+            <div className="mt-1 mb-1 flex items-center justify-center hover:opacity-80">
+              <button
+                className="flex flex-row items-center justify-center px-4 py-1 rounded-md text-white dark:text-white bg-heading-500 dark:bg-heading-500"
+                onClick={toggleShowEmail}
+              >
+                {showEmailForm ? (
+                  <>
+                    <span className="mr-2">
+                      <Backward />
+                    </span>
+                    <div>{t('back')}</div>
+                  </>
+                ) : (
+                  <>
+                    <span className="mr-2">
+                      <Mail />
+                    </span>
+                    <div>{t('contact')}</div>
+                  </>
+                )}
+              </button>
+            </div>
+            {showEmailForm && (
+              <div className='mt-20 mb-20 ml-2 mr-2'>
+                <ModalBody
+            state={state}
+            handleSubmit={handleSubmit}
+            name={name}
+            email={email}
+            message={message}
+            handleNameChange={handleNameChange}
+            handleEmailChange={handleEmailChange}
+            handleMessageChange={handleMessageChange}
+            t={t}
+          />
+              </div>
+            )}
+            {!isLoading && !showEmailForm && <RenderResults />}
             {isLoading && (
               <div className="block border-t border-gray-100 px-4 py-8 text-center text-gray-400 dark:border-gray-800 dark:text-gray-600">
                 {t('loading')}
