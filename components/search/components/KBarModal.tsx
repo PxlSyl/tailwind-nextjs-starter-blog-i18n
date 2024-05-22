@@ -33,16 +33,16 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
     handleMessageChange,
     t,
   } = useContactForm()
-  const [showEmailForm, setShowEmailForm] = useState<boolean>(false);
+  const [showEmailForm, setShowEmailForm] = useState<boolean>(false)
 
   const toggleShowEmail = () => {
     if (siteMetadata.formspree === true) {
-      setShowEmailForm(!showEmailForm);
+      setShowEmailForm(!showEmailForm)
     } else {
-      const mailtoLink: string = `mailto:${siteMetadata.email}`;
-      window.location.href = mailtoLink;
+      const mailtoLink: string = `mailto:${siteMetadata.email}`
+      window.location.href = mailtoLink
     }
-  };
+  }
 
   return (
     <KBarPortal>
@@ -72,18 +72,18 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
               {showEmailForm ? (
                 <div className="h-8 w-full bg-transparent" />
               ) : (
-              <KBarSearch
-                defaultPlaceholder={t('kbarplaceholder')}
-                className="h-8 w-full bg-transparent text-gray-600 placeholder-gray-400 focus:outline-none dark:text-gray-200 dark:placeholder-gray-500"
-              />
-            )}
+                <KBarSearch
+                  defaultPlaceholder={t('kbarplaceholder')}
+                  className="h-8 w-full bg-transparent text-gray-600 placeholder-gray-400 focus:outline-none dark:text-gray-200 dark:placeholder-gray-500"
+                />
+              )}
               <kbd className="inline-block whitespace-nowrap rounded border border-gray-400 px-1.5 align-middle text-xs font-medium leading-4 tracking-wide text-gray-400">
                 ESC
               </kbd>
             </div>
-            <div className="mt-1 mb-1 flex items-center justify-center hover:opacity-80">
+            <div className="mb-1 mt-1 flex items-center justify-center hover:opacity-80">
               <button
-                className="flex flex-row items-center justify-center px-4 py-1 rounded-md text-white dark:text-white bg-heading-500 dark:bg-heading-500"
+                className="flex flex-row items-center justify-center rounded-md bg-heading-500 px-4 py-1 text-white dark:bg-heading-500 dark:text-white"
                 onClick={toggleShowEmail}
               >
                 {showEmailForm ? (
@@ -104,18 +104,18 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
               </button>
             </div>
             {showEmailForm && (
-              <div className='mt-20 mb-20 ml-2 mr-2'>
+              <div className="mb-20 ml-2 mr-2 mt-20">
                 <ModalBody
-            state={state}
-            handleSubmit={handleSubmit}
-            name={name}
-            email={email}
-            message={message}
-            handleNameChange={handleNameChange}
-            handleEmailChange={handleEmailChange}
-            handleMessageChange={handleMessageChange}
-            t={t}
-          />
+                  state={state}
+                  handleSubmit={handleSubmit}
+                  name={name}
+                  email={email}
+                  message={message}
+                  handleNameChange={handleNameChange}
+                  handleEmailChange={handleEmailChange}
+                  handleMessageChange={handleMessageChange}
+                  t={t}
+                />
               </div>
             )}
             {!isLoading && !showEmailForm && <RenderResults />}
