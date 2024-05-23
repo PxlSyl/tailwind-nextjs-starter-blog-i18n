@@ -16,7 +16,7 @@ import {
 } from 'kbar'
 import { useContactForm } from '@/components/formspree/useContactForm'
 import { ModalBody } from '@/components/formspree/CBody'
-import { Mail, Backward, CopyToClipboard } from '../icons'
+import { MailIcon, BackwardIcon, CopyToClipboard } from '../icons'
 import { useState } from 'react'
 
 export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading: boolean }) => {
@@ -96,14 +96,14 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
                 {showEmailForm ? (
                   <>
                     <span className="mr-2">
-                      <Backward />
+                      <BackwardIcon />
                     </span>
                     <div>{t('back')}</div>
                   </>
                 ) : (
                   <>
                     <span className="mr-2">
-                      <Mail />
+                      <MailIcon />
                     </span>
                     <div>{t('contact')}</div>
                   </>
@@ -181,7 +181,7 @@ const RenderResults = () => {
                 }`}
               >
                 <div className={'flex space-x-2'}>
-                  {item.icon && <div className={'self-center'}>{item.icon}</div>}
+                  {item.icon && <div className={'self-center mb-1'}>{item.icon}</div>}
                   <div className="block">
                     {item.subtitle && (
                       <div className={`${active ? 'text-gray-200' : 'text-gray-400'} text-xs`}>

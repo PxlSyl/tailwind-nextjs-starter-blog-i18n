@@ -10,6 +10,7 @@ import { Blog } from 'contentlayer/generated'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { useTranslation } from 'app/[locale]/i18n/client'
 import { fallbackLng } from 'app/[locale]/i18n/locales'
+import { HomeIcon, BlogIcon, TagsIcon, ProjectsIcon, AboutIcon } from './icons'
 
 interface SearchProviderProps {
   children: ReactNode
@@ -33,6 +34,11 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
       shortcut: [],
       section: locale === fallbackLng ? 'Authors' : 'Auteurs',
       perform: () => router.push(`/${slug}`),
+      icon: (
+        <i>
+          <AboutIcon />
+        </i>
+      ),
     }
   })
 
@@ -49,6 +55,11 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
             shortcut: ['a'],
             section: locale === fallbackLng ? 'Navigate' : 'Naviguer',
             perform: () => router.push(`/${locale}/about`),
+            icon: (
+              <i>
+                <AboutIcon />
+              </i>
+            ),
           },
         ]),
   ]
@@ -67,6 +78,11 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
             shortcut: ['h'],
             section: navigationSection,
             perform: () => router.push(`/${locale}`),
+            icon: (
+              <i>
+                <HomeIcon />
+              </i>
+            ),
           },
           {
             id: 'blog',
@@ -75,6 +91,11 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
             shortcut: ['b'],
             section: navigationSection,
             perform: () => router.push(`/${locale}/blog`),
+            icon: (
+              <i>
+                <BlogIcon />
+              </i>
+            ),
           },
           {
             id: 'tags',
@@ -83,6 +104,11 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
             shortcut: ['t'],
             section: navigationSection,
             perform: () => router.push(`/${locale}/tags`),
+            icon: (
+              <i>
+                <TagsIcon />
+              </i>
+            ),
           },
           {
             id: 'projects',
@@ -91,6 +117,11 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
             shortcut: ['p'],
             section: navigationSection,
             perform: () => router.push(`/${locale}/projects`),
+            icon: (
+              <i>
+                <ProjectsIcon />
+              </i>
+            ),
           },
           ...authorsActions,
         ],
