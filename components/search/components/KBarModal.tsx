@@ -16,11 +16,12 @@ import {
 } from 'kbar'
 import { useContactForm } from '@/components/formspree/useContactForm'
 import { ModalBody } from '@/components/formspree/CBody'
-import { Mail, Backward } from '../icons'
+import { Mail, Backward, CopyToClipboard } from '../icons'
 import { useState } from 'react'
 
 export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading: boolean }) => {
   const locale = useParams()?.locale as LocaleTypes
+  const { t } = useTranslation(locale, '')
   useRegisterActions(actions, [actions])
   const {
     state,
@@ -31,9 +32,9 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
     handleNameChange,
     handleEmailChange,
     handleMessageChange,
-    t,
   } = useContactForm()
   const [showEmailForm, setShowEmailForm] = useState<boolean>(false)
+  const [showCopied, setShowCopied] = useState(false)
 
   const toggleShowEmail = () => {
     if (siteMetadata.formspree === true) {
@@ -42,6 +43,12 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
       const mailtoLink: string = `mailto:${siteMetadata.email}`
       window.location.href = mailtoLink
     }
+  }
+
+  const copyUrl = () => {
+    navigator.clipboard.writeText(window.location.href)
+    setShowCopied(true)
+    setTimeout(() => setShowCopied(false), 1 * 1000)
   }
 
   return (
@@ -81,9 +88,9 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
                 ESC
               </kbd>
             </div>
-            <div className="mb-1 mt-1 flex items-center justify-center hover:opacity-80">
+            <div className="mb-1 ml-2 flex items-center space-x-2">
               <button
-                className="flex flex-row items-center justify-center rounded-md bg-heading-500 px-4 py-1 text-white dark:bg-heading-500 dark:text-white"
+                className="flex flex-row items-center justify-center rounded-md bg-heading-500 px-4 py-1 text-white hover:bg-blue-600 dark:bg-heading-500 dark:hover:bg-heading-600"
                 onClick={toggleShowEmail}
               >
                 {showEmailForm ? (
@@ -102,6 +109,24 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
                   </>
                 )}
               </button>
+              <div className="relative inline-block">
+                {!showEmailForm && (
+                  <button
+                    className="flex flex-row items-center justify-center rounded-md bg-heading-500 px-4 py-1 text-white hover:bg-blue-600 dark:hover:bg-heading-600"
+                    onClick={copyUrl}
+                  >
+                    <span className="mr-2">
+                      <CopyToClipboard />
+                    </span>
+                    <div>Copy url</div>
+                  </button>
+                )}
+                {showCopied && (
+                  <div className="absolute right-0 top-10 z-50 rounded-md bg-primary-400 p-1 px-2 text-center">
+                    <p className="">{t('urlcopied')}</p>
+                  </div>
+                )}
+              </div>
             </div>
             {showEmailForm && (
               <div className="mb-20 ml-2 mr-2 mt-20">
