@@ -19,7 +19,7 @@ import { ModalBody } from '@/components/formspree/CBody'
 import { MailIcon, BackwardIcon, CopyToClipboard, SettingsIcon } from '../icons'
 import { Sun, Moon, Monitor } from '@/components/theme/icons'
 import { useState } from 'react'
-import { useThemeSwitch } from '@/components/theme/useThemeSwitch'
+import { useTheme } from '@/components/theme/ThemeContext'
 
 export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading: boolean }) => {
   const locale = useParams()?.locale as LocaleTypes
@@ -35,7 +35,7 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
     handleEmailChange,
     handleMessageChange,
   } = useContactForm()
-  const { mounted, handleThemeChange } = useThemeSwitch()
+  const { setTheme } = useTheme()
   const [showEmailForm, setShowEmailForm] = useState<boolean>(false)
   const [showSettings, setShowSettings] = useState<boolean>(false)
   const [showCopied, setShowCopied] = useState(false)
@@ -56,10 +56,12 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
   const copyUrl = () => {
     navigator.clipboard.writeText(window.location.href)
     setShowCopied(true)
-    setTimeout(() => setShowCopied(false), 1 * 1000)
+    setTimeout(() => setShowCopied(false), 1000)
   }
 
-  if (!mounted) return null
+  const handleThemeChange = (newTheme: string) => {
+    setTheme(newTheme)
+  }
 
   return (
     <KBarPortal>
@@ -183,7 +185,7 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
                   className="flex flex-row py-2 hover:bg-primary-600 hover:text-white"
                   onClick={() => handleThemeChange('light')}
                 >
-                  <span className=" ml-4 mr-2 hover:text-white">
+                  <span className="ml-4 mr-2 hover:text-white">
                     <Sun />
                   </span>
                   <div>Light</div>
@@ -192,7 +194,7 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
                   className="flex flex-row py-2 hover:bg-primary-600 hover:text-white"
                   onClick={() => handleThemeChange('dark')}
                 >
-                  <span className=" ml-4 mr-2 hover:text-white">
+                  <span className="ml-4 mr-2 hover:text-white">
                     <Moon />
                   </span>
                   <div>Dark</div>
@@ -201,7 +203,7 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
                   className="flex flex-row py-2 hover:bg-primary-600 hover:text-white"
                   onClick={() => handleThemeChange('system')}
                 >
-                  <span className=" ml-4 mr-2 hover:text-white">
+                  <span className="ml-4 mr-2 hover:text-white">
                     <Monitor />
                   </span>
                   <div>System</div>
@@ -261,7 +263,7 @@ const RenderResults = () => {
                     {item.shortcut.map((sc) => (
                       <kbd
                         key={sc}
-                        className={`flex h-7 w-6 items-center justify-center	rounded border text-xs font-medium ${
+                        className={`flex h-7 w-6 items-center justify-center rounded border text-xs font-medium ${
                           active ? 'border-gray-200 text-gray-200' : 'border-gray-400 text-gray-400'
                         }`}
                       >

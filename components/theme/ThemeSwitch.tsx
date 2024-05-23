@@ -2,27 +2,28 @@
 
 import * as React from 'react'
 import { Fragment } from 'react'
-import { useThemeSwitch } from './useThemeSwitch'
-import { useOuterClick } from '../util/useOuterClick'
 import { Menu, RadioGroup, Transition } from '@headlessui/react'
 import { DarkModeSwitch } from './DarkModeSwitch'
 import { Monitor, Moon, Sun } from './icons'
+import { useTheme } from './ThemeContext'
+import { useOuterClick } from '../util/useOuterClick'
 
 const ThemeSwitch = () => {
-  const {
-    mounted,
-    theme,
-    menuOpen,
-    darkModeChecked,
-    menubarRef,
-    setDarkModeChecked,
-    setMenuOpen,
-    handleThemeChange,
-  } = useThemeSwitch()
+  const { theme, setTheme } = useTheme()
+  const [menuOpen, setMenuOpen] = React.useState(false)
+  const [darkModeChecked, setDarkModeChecked] = React.useState(theme === 'dark')
+  const menubarRef = React.useRef<HTMLDivElement>(null)
 
   useOuterClick(menubarRef, () => setMenuOpen(false))
 
-  if (!mounted) return null
+  React.useEffect(() => {
+    setDarkModeChecked(theme === 'dark')
+  }, [theme])
+
+  const handleThemeChange = (newTheme: string) => {
+    setTheme(newTheme)
+    setMenuOpen(false)
+  }
 
   return (
     <div ref={menubarRef} className="mr-5">
@@ -57,7 +58,7 @@ const ThemeSwitch = () => {
                           active
                             ? 'bg-gray-100 dark:bg-gray-600'
                             : 'hover:bg-gray-100 dark:hover:bg-gray-600'
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm  hover:text-primary-500 dark:hover:text-primary-500`}
+                        } group flex w-full items-center rounded-md px-2 py-2 text-sm hover:text-primary-500 dark:hover:text-primary-500`}
                       >
                         <Sun />
                         <span className="ml-2">Light</span>
@@ -66,8 +67,8 @@ const ThemeSwitch = () => {
                   </Menu.Item>
                 </RadioGroup.Option>
                 <RadioGroup.Option value="dark">
-                  {({ active }) => (
-                    <Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
                       <button
                         onClick={() => handleThemeChange('dark')}
                         className={`${
@@ -79,25 +80,25 @@ const ThemeSwitch = () => {
                         <Moon />
                         <span className="ml-2">Dark</span>
                       </button>
-                    </Menu.Item>
-                  )}
+                    )}
+                  </Menu.Item>
                 </RadioGroup.Option>
                 <RadioGroup.Option value="system">
-                  {({ active }) => (
-                    <Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
                       <button
                         onClick={() => handleThemeChange('system')}
                         className={`${
                           active
                             ? 'bg-gray-100 dark:bg-gray-600'
                             : 'hover:bg-gray-100 dark:hover:bg-gray-600'
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm  hover:text-primary-500 dark:hover:text-primary-500`}
+                        } group flex w-full items-center rounded-md px-2 py-2 text-sm hover:text-primary-500 dark:hover:text-primary-500`}
                       >
                         <Monitor />
                         <span className="ml-2">System</span>
                       </button>
-                    </Menu.Item>
-                  )}
+                    )}
+                  </Menu.Item>
                 </RadioGroup.Option>
               </div>
             </RadioGroup>

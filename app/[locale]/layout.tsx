@@ -9,7 +9,7 @@ import SectionContainer from '@/components/SectionContainer'
 import Footer from '@/components/Footer'
 import siteMetadata from '@/data/siteMetadata'
 import { maintitle, maindescription } from '@/data/localeMetadata'
-import { ThemeProviders } from './theme-providers'
+import { ThemeProvider } from '@/components/theme/ThemeContext'
 import { Metadata } from 'next'
 import { dir } from 'i18next'
 import { LocaleTypes, locales } from './i18n/settings'
@@ -92,7 +92,7 @@ export default function RootLayout({
       <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
       <body className="bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white">
         <TwSizeIndicator />
-        <ThemeProviders>
+        <ThemeProvider>
           <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
           <SectionContainer>
             <div className="flex h-screen flex-col justify-between font-sans">
@@ -103,7 +103,7 @@ export default function RootLayout({
               <Footer />
             </div>
           </SectionContainer>
-        </ThemeProviders>
+        </ThemeProvider>
       </body>
     </html>
   )
