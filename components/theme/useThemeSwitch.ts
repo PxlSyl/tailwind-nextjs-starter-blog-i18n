@@ -1,28 +1,28 @@
-import { useState, useEffect, useRef } from 'react';
-import { useTheme } from 'next-themes';
+import { useState, useEffect, useRef } from 'react'
+import { useTheme } from 'next-themes'
 
 export const useThemeSwitch = () => {
-  const [mounted, setMounted] = useState(false);
-  const { theme, setTheme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false)
+  const { theme, setTheme, resolvedTheme } = useTheme()
 
-  const [menuOpen, setMenuOpen] = useState(false);
-  const menubarRef = useRef<HTMLDivElement>(null);
+  const [menuOpen, setMenuOpen] = useState(false)
+  const menubarRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => setMounted(true), []);
+  useEffect(() => setMounted(true), [])
 
-  const [darkModeChecked, setDarkModeChecked] = useState<boolean>(false);
+  const [darkModeChecked, setDarkModeChecked] = useState<boolean>(false)
 
   useEffect(() => {
     if (resolvedTheme === 'dark') {
-      setDarkModeChecked(true);
+      setDarkModeChecked(true)
     }
-  }, [resolvedTheme]);
+  }, [resolvedTheme])
 
   const handleThemeChange = (newTheme: string) => {
-    setTheme(newTheme);
-    setDarkModeChecked(newTheme === 'dark');
-    setMenuOpen(false);
-  };
+    setTheme(newTheme)
+    setDarkModeChecked(newTheme === 'dark')
+    setMenuOpen(false)
+  }
 
   return {
     mounted,
@@ -32,6 +32,6 @@ export const useThemeSwitch = () => {
     menubarRef,
     setDarkModeChecked,
     setMenuOpen,
-    handleThemeChange
-  };
-};
+    handleThemeChange,
+  }
+}

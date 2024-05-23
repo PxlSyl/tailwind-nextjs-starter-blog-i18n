@@ -17,8 +17,8 @@ const ThemeSwitch = () => {
     menubarRef,
     setDarkModeChecked,
     setMenuOpen,
-    handleThemeChange
-  } = useThemeSwitch();
+    handleThemeChange,
+  } = useThemeSwitch()
 
   useOuterClick(menubarRef, () => setMenuOpen(false))
 

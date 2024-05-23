@@ -16,8 +16,10 @@ import {
 } from 'kbar'
 import { useContactForm } from '@/components/formspree/useContactForm'
 import { ModalBody } from '@/components/formspree/CBody'
-import { MailIcon, BackwardIcon, CopyToClipboard } from '../icons'
+import { MailIcon, BackwardIcon, CopyToClipboard, SettingsIcon } from '../icons'
+import { Sun, Moon, Monitor } from '@/components/theme/icons'
 import { useState } from 'react'
+import { useThemeSwitch } from '@/components/theme/useThemeSwitch'
 
 export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading: boolean }) => {
   const locale = useParams()?.locale as LocaleTypes
@@ -33,7 +35,9 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
     handleEmailChange,
     handleMessageChange,
   } = useContactForm()
+  const { mounted, handleThemeChange } = useThemeSwitch()
   const [showEmailForm, setShowEmailForm] = useState<boolean>(false)
+  const [showSettings, setShowSettings] = useState<boolean>(false)
   const [showCopied, setShowCopied] = useState(false)
 
   const toggleShowEmail = () => {
@@ -45,11 +49,17 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
     }
   }
 
+  const toggleSettings = () => {
+    setShowSettings(!showSettings)
+  }
+
   const copyUrl = () => {
     navigator.clipboard.writeText(window.location.href)
     setShowCopied(true)
     setTimeout(() => setShowCopied(false), 1 * 1000)
   }
+
+  if (!mounted) return null
 
   return (
     <KBarPortal>
@@ -76,7 +86,7 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
                   />
                 </svg>
               </span>
-              {showEmailForm ? (
+              {showEmailForm || showSettings ? (
                 <div className="h-8 w-full bg-transparent" />
               ) : (
                 <KBarSearch
@@ -89,30 +99,32 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
               </kbd>
             </div>
             <div className="mb-1 ml-2 flex items-center space-x-2">
-              <button
-                className="flex flex-row items-center justify-center rounded-md bg-heading-500 px-4 py-1 text-white hover:bg-blue-600 dark:bg-heading-500 dark:hover:bg-heading-600"
-                onClick={toggleShowEmail}
-              >
-                {showEmailForm ? (
-                  <>
-                    <span className="mr-2">
-                      <BackwardIcon />
-                    </span>
-                    <div>{t('back')}</div>
-                  </>
-                ) : (
-                  <>
-                    <span className="mr-2">
-                      <MailIcon />
-                    </span>
-                    <div>{t('contact')}</div>
-                  </>
-                )}
-              </button>
+              {!showSettings && (
+                <button
+                  className="flex flex-row items-center justify-center rounded-md bg-heading-500 px-2 py-1 text-white hover:bg-blue-600 dark:bg-heading-500 dark:hover:bg-heading-600"
+                  onClick={toggleShowEmail}
+                >
+                  {showEmailForm ? (
+                    <>
+                      <span className="mr-2">
+                        <BackwardIcon />
+                      </span>
+                      <div>{t('back')}</div>
+                    </>
+                  ) : (
+                    <>
+                      <span className="mr-2">
+                        <MailIcon />
+                      </span>
+                      <div>{t('contact')}</div>
+                    </>
+                  )}
+                </button>
+              )}
               <div className="relative inline-block">
-                {!showEmailForm && (
+                {!showEmailForm && !showSettings && (
                   <button
-                    className="flex flex-row items-center justify-center rounded-md bg-heading-500 px-4 py-1 text-white hover:bg-blue-600 dark:hover:bg-heading-600"
+                    className="flex flex-row items-center justify-center rounded-md bg-heading-500 px-2 py-1 text-white hover:bg-blue-600 dark:hover:bg-heading-600"
                     onClick={copyUrl}
                   >
                     <span className="mr-2">
@@ -127,6 +139,28 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
                   </div>
                 )}
               </div>
+              {!showEmailForm && (
+                <button
+                  className="flex flex-row items-center justify-center rounded-md bg-heading-500 px-2 py-1 text-white hover:bg-blue-600 dark:bg-heading-500 dark:hover:bg-heading-600"
+                  onClick={toggleSettings}
+                >
+                  {showSettings ? (
+                    <>
+                      <span className="mr-2">
+                        <BackwardIcon />
+                      </span>
+                      <div>{t('back')}</div>
+                    </>
+                  ) : (
+                    <>
+                      <span className="mr-2">
+                        <SettingsIcon />
+                      </span>
+                      <div>Theme</div>
+                    </>
+                  )}
+                </button>
+              )}
             </div>
             {showEmailForm && (
               <div className="mb-20 ml-2 mr-2 mt-20">
@@ -143,7 +177,38 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
                 />
               </div>
             )}
-            {!isLoading && !showEmailForm && <RenderResults />}
+            {showSettings && (
+              <div className="mb-20 mt-20 flex flex-col space-y-4">
+                <button
+                  className="flex flex-row py-2 hover:bg-primary-600 hover:text-white"
+                  onClick={() => handleThemeChange('light')}
+                >
+                  <span className=" ml-4 mr-2 hover:text-white">
+                    <Sun />
+                  </span>
+                  <div>Light</div>
+                </button>
+                <button
+                  className="flex flex-row py-2 hover:bg-primary-600 hover:text-white"
+                  onClick={() => handleThemeChange('dark')}
+                >
+                  <span className=" ml-4 mr-2 hover:text-white">
+                    <Moon />
+                  </span>
+                  <div>Dark</div>
+                </button>
+                <button
+                  className="flex flex-row py-2 hover:bg-primary-600 hover:text-white"
+                  onClick={() => handleThemeChange('system')}
+                >
+                  <span className=" ml-4 mr-2 hover:text-white">
+                    <Monitor />
+                  </span>
+                  <div>System</div>
+                </button>
+              </div>
+            )}
+            {!isLoading && !showEmailForm && !showSettings && <RenderResults />}
             {isLoading && (
               <div className="block border-t border-gray-100 px-4 py-8 text-center text-gray-400 dark:border-gray-800 dark:text-gray-600">
                 {t('loading')}
