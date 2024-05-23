@@ -2,6 +2,7 @@ import { useState, useRef } from 'react'
 import { usePathname, useParams, useRouter, useSelectedLayoutSegments } from 'next/navigation'
 import { useOuterClick } from './util/useOuterClick'
 import { useTagStore } from '@/components/util/useTagStore'
+import { useTheme } from './theme/ThemeContext'
 import { LocaleTypes, locales } from 'app/[locale]/i18n/settings'
 import { allBlogs } from '.contentlayer/generated'
 import slugMap from 'app/[locale]/localeid-map.json'
@@ -31,6 +32,7 @@ const LangSwitch = () => {
   const urlSegments = useSelectedLayoutSegments()
   const locale = useParams()?.locale as LocaleTypes
   const router = useRouter()
+  const {mounted} = useTheme()
   const setSelectedTag = useTagStore((state) => state.setSelectedTag)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const menubarRef = useRef<HTMLDivElement>(null)
@@ -52,6 +54,8 @@ const LangSwitch = () => {
     router.push(resolvedUrl)
     setIsMenuOpen(false)
   }
+
+  if (!mounted) return null;
 
   return (
     <div ref={menubarRef} className="relative inline-block text-left">
