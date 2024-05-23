@@ -35,7 +35,7 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
     handleEmailChange,
     handleMessageChange,
   } = useContactForm()
-  const { setTheme } = useTheme()
+  const { setTheme, mounted } = useTheme()
   const [showEmailForm, setShowEmailForm] = useState<boolean>(false)
   const [showSettings, setShowSettings] = useState<boolean>(false)
   const [showCopied, setShowCopied] = useState(false)
@@ -62,6 +62,8 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
   const handleThemeChange = (newTheme: string) => {
     setTheme(newTheme)
   }
+
+  if (!mounted) return null;
 
   return (
     <KBarPortal>

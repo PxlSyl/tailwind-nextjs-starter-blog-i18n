@@ -5,7 +5,7 @@ import { useTagStore } from '@/components/util/useTagStore'
 import { LocaleTypes, locales } from 'app/[locale]/i18n/settings'
 import { allBlogs } from '.contentlayer/generated'
 import slugMap from 'app/[locale]/localeid-map.json'
-import { Menu, Transition, RadioGroup, Popover } from '@headlessui/react'
+import { Menu, Transition, RadioGroup } from '@headlessui/react'
 
 export const ChevronDownIcon = ({ className }) => {
   return (

@@ -9,7 +9,7 @@ import { useTheme } from './ThemeContext'
 import { useOuterClick } from '../util/useOuterClick'
 
 const ThemeSwitch = () => {
-  const { theme, setTheme } = useTheme()
+  const { theme, setTheme, mounted } = useTheme()
   const [menuOpen, setMenuOpen] = React.useState(false)
   const [darkModeChecked, setDarkModeChecked] = React.useState(theme === 'dark')
   const menubarRef = React.useRef<HTMLDivElement>(null)
@@ -24,6 +24,8 @@ const ThemeSwitch = () => {
     setTheme(newTheme)
     setMenuOpen(false)
   }
+
+  if (!mounted) return null;
 
   return (
     <div ref={menubarRef} className="mr-5">
