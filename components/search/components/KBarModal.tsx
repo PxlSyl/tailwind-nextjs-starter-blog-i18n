@@ -118,7 +118,7 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
                     <span className="mr-2">
                       <CopyToClipboard />
                     </span>
-                    <div>Copy url</div>
+                    <div>{t('copyurl')}</div>
                   </button>
                 )}
                 {showCopied && (
@@ -181,7 +181,7 @@ const RenderResults = () => {
                 }`}
               >
                 <div className={'flex space-x-2'}>
-                  {item.icon && <div className={'self-center mb-1'}>{item.icon}</div>}
+                  {item.icon && <div className={'mb-1 self-center'}>{item.icon}</div>}
                   <div className="block">
                     {item.subtitle && (
                       <div className={`${active ? 'text-gray-200' : 'text-gray-400'} text-xs`}>

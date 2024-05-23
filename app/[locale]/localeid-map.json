@@ -1,50 +1,50 @@
 {
-  "introducingstarterblogi18n": {
-    "fr": "articles/internationalisation-v2",
-    "en": "posts/internationalization-v2"
-  },
-  "releasev2": {
-    "fr": "articles/presentation-starter-blog-tailwind-nextjs-v2.0",
-    "en": "posts/release-of-tailwind-nextjs-starter-blog-v2.0"
-  },
-  "newfeaturesv1": {
-    "fr": "articles/nouvelles-fonctionnalites-v1",
-    "en": "posts/new-features-in-v1"
-  },
-  "nestedroutes": {
-    "fr": "articles/route-imbriquee/presentation-publications-en-plusieurs-parties-routage-imbrique",
-    "en": "posts/nested-route/introducing-multi-part-posts-with-nested-routing"
-  },
-  "myfancytitle": {
-    "fr": "articles/mon-titre-fancy",
-    "en": "posts/my-fancy-title"
-  },
-  "introducingstarterblog": {
-    "fr": "articles/presentation-blog-starter-tailwind-nextjs",
-    "en": "posts/introducing-tailwind-nextjs-starter-blog"
-  },
   "derivingols": {
     "fr": "articles/derivation-estimateur-ols",
     "en": "posts/deriving-ols-estimator"
   },
-  "nextjsimagesguide": {
-    "fr": "articles/guide-utilisation-images-nextjs",
-    "en": "posts/guide-to-using-images-in-nextjs"
+  "codesample": {
+    "fr": "articles/exemple-code",
+    "en": "posts/code-sample"
   },
   "mardownguide": {
     "fr": "articles/guide-github-markdown",
     "en": "posts/github-markdown-guide"
   },
+  "nextjsimagesguide": {
+    "fr": "articles/guide-utilisation-images-nextjs",
+    "en": "posts/guide-to-using-images-in-nextjs"
+  },
+  "introducingstarterblogi18n": {
+    "fr": "articles/internationalisation-v2",
+    "en": "posts/internationalization-v2"
+  },
   "thetimemachine": {
     "fr": "articles/la-machine-a-remonter-le-temps",
     "en": "posts/the-time-machine"
+  },
+  "myfancytitle": {
+    "fr": "articles/mon-titre-fancy",
+    "en": "posts/my-fancy-title"
+  },
+  "newfeaturesv1": {
+    "fr": "articles/nouvelles-fonctionnalites-v1",
+    "en": "posts/new-features-in-v1"
   },
   "canadapictures": {
     "fr": "articles/pictures-of-canada",
     "en": "posts/images-du-canada"
   },
-  "codesample": {
-    "fr": "articles/exemple-code",
-    "en": "posts/code-sample"
+  "introducingstarterblog": {
+    "fr": "articles/presentation-blog-starter-tailwind-nextjs",
+    "en": "posts/introducing-tailwind-nextjs-starter-blog"
+  },
+  "releasev2": {
+    "fr": "articles/presentation-starter-blog-tailwind-nextjs-v2.0",
+    "en": "posts/release-of-tailwind-nextjs-starter-blog-v2.0"
+  },
+  "nestedroutes": {
+    "fr": "articles/route-imbriquee/presentation-publications-en-plusieurs-parties-routage-imbrique",
+    "en": "posts/nested-route/introducing-multi-part-posts-with-nested-routing"
   }
 }
