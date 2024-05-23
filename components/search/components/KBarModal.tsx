@@ -132,7 +132,7 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
                     <span className="mr-2">
                       <CopyToClipboard />
                     </span>
-                    <div>{t('copyurl')}</div>
+                    <div>Url</div>
                   </button>
                 )}
                 {showCopied && (
