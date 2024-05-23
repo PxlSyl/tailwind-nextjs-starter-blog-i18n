@@ -103,7 +103,7 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
             <div className="mb-1 ml-2 flex items-center space-x-2">
               {!showSettings && (
                 <button
-                  className="flex flex-row items-center justify-center rounded-md bg-heading-500 px-2 py-1 text-white hover:bg-blue-600 dark:bg-heading-500 dark:hover:bg-heading-600"
+                  className="flex flex-row items-center justify-center rounded-md bg-white px-2 py-1 text-gray-700 shadow-lg ring-1 ring-black ring-opacity-5 hover:bg-gray-100 hover:text-primary-500 focus:outline-none dark:bg-gray-800 dark:text-white dark:hover:bg-gray-600 dark:hover:text-primary-500"
                   onClick={toggleShowEmail}
                 >
                   {showEmailForm ? (
@@ -123,27 +123,9 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
                   )}
                 </button>
               )}
-              <div className="relative inline-block">
-                {!showEmailForm && !showSettings && (
-                  <button
-                    className="flex flex-row items-center justify-center rounded-md bg-heading-500 px-2 py-1 text-white hover:bg-blue-600 dark:hover:bg-heading-600"
-                    onClick={copyUrl}
-                  >
-                    <span className="mr-2">
-                      <CopyToClipboard />
-                    </span>
-                    <div>Url</div>
-                  </button>
-                )}
-                {showCopied && (
-                  <div className="absolute right-0 top-10 z-50 rounded-md bg-primary-400 p-1 px-2 text-center">
-                    <p className="">{t('urlcopied')}</p>
-                  </div>
-                )}
-              </div>
               {!showEmailForm && (
                 <button
-                  className="flex flex-row items-center justify-center rounded-md bg-heading-500 px-2 py-1 text-white hover:bg-blue-600 dark:bg-heading-500 dark:hover:bg-heading-600"
+                  className="flex flex-row items-center justify-center rounded-md bg-white px-2 py-1 text-gray-700 shadow-lg ring-1 ring-black ring-opacity-5 hover:bg-gray-100  hover:text-primary-500 focus:outline-none dark:bg-gray-800 dark:text-white dark:hover:bg-gray-600 dark:hover:text-primary-500"
                   onClick={toggleSettings}
                 >
                   {showSettings ? (
@@ -163,6 +145,25 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
                   )}
                 </button>
               )}
+              <div className="relative inline-block">
+                {!showEmailForm && !showSettings && (
+                  <button
+                    className="flex flex-row items-center justify-center rounded-md bg-white px-2 py-1 text-gray-700 shadow-lg ring-1 ring-black ring-opacity-5 hover:bg-gray-100  hover:text-primary-500 focus:outline-none dark:bg-gray-800 dark:text-white dark:hover:bg-gray-600 dark:hover:text-primary-500"
+                    onClick={copyUrl}
+                  >
+                    <span className="mr-2">
+                      <CopyToClipboard />
+                    </span>
+                    <div className="sm:hidden">Url</div>
+                    <div className="hidden sm:block">{t('copyurl')}</div>
+                  </button>
+                )}
+                {showCopied && (
+                  <div className="absolute right-0 top-10 z-50 rounded-md bg-white p-2 text-center shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800">
+                    <p className="text-primary-500 dark:text-primary-400">{t('urlcopied')}</p>
+                  </div>
+                )}
+              </div>
             </div>
             {showEmailForm && (
               <div className="mb-20 ml-2 mr-2 mt-20">
@@ -210,6 +211,7 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
                 </button>
               </div>
             )}
+
             {!isLoading && !showEmailForm && !showSettings && <RenderResults />}
             {isLoading && (
               <div className="block border-t border-gray-100 px-4 py-8 text-center text-gray-400 dark:border-gray-800 dark:text-gray-600">
