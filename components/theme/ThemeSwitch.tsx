@@ -7,8 +7,13 @@ import { DarkModeSwitch } from './DarkModeSwitch'
 import { Monitor, Moon, Sun } from './icons'
 import { useTheme } from './ThemeContext'
 import { useOuterClick } from '../util/useOuterClick'
+import { useParams } from 'next/navigation'
+import { LocaleTypes } from 'app/[locale]/i18n/settings'
+import { useTranslation } from 'app/[locale]/i18n/client'
 
 const ThemeSwitch = () => {
+  const locale = useParams()?.locale as LocaleTypes
+  const { t } = useTranslation(locale, '')
   const { theme, setTheme, mounted } = useTheme()
   const [menuOpen, setMenuOpen] = React.useState(false)
   const [darkModeChecked, setDarkModeChecked] = React.useState(theme === 'dark')
@@ -30,7 +35,7 @@ const ThemeSwitch = () => {
   return (
     <div ref={menubarRef} className="mr-5">
       <Menu as="div" className="relative mt-1 inline-block text-left">
-        <Menu.Button aria-label="Theme">
+        <Menu.Button aria-label={t('theme')}>
           <DarkModeSwitch
             checked={darkModeChecked}
             onChange={(isChecked) => setDarkModeChecked(isChecked)}
@@ -63,7 +68,7 @@ const ThemeSwitch = () => {
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm hover:text-primary-500 dark:hover:text-primary-500`}
                       >
                         <Sun />
-                        <span className="ml-2">Light</span>
+                        <span className="ml-2">{t('light')}</span>
                       </button>
                     )}
                   </Menu.Item>
@@ -80,7 +85,7 @@ const ThemeSwitch = () => {
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm hover:text-primary-500 dark:hover:text-primary-500`}
                       >
                         <Moon />
-                        <span className="ml-2">Dark</span>
+                        <span className="ml-2">{t('dark')}</span>
                       </button>
                     )}
                   </Menu.Item>
@@ -97,7 +102,7 @@ const ThemeSwitch = () => {
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm hover:text-primary-500 dark:hover:text-primary-500`}
                       >
                         <Monitor />
-                        <span className="ml-2">System</span>
+                        <span className="ml-2">{t('system')}</span>
                       </button>
                     )}
                   </Menu.Item>

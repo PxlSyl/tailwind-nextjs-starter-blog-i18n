@@ -142,7 +142,7 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
                       <span className="mr-2">
                         <SettingsIcon />
                       </span>
-                      <div>Theme</div>
+                      <div>{t('theme')}</div>
                     </>
                   )}
                 </button>
@@ -168,7 +168,8 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
               </div>
             </div>
             {showEmailForm && (
-              <div className="mb-20 ml-2 mr-2 mt-20">
+              <div className="mb-20 ml-2 mr-2 mt-16">
+                <div className='text-3xl font-semibold'>{t('title')}</div>
                 <ModalBody
                   state={state}
                   handleSubmit={handleSubmit}
@@ -184,6 +185,7 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
             )}
             {showSettings && (
               <div className="mb-20 mt-20 flex flex-col space-y-4">
+                <div className='ml-4 text-3xl font-semibold'>{t('theme')}</div>
                 <button
                   className="flex flex-row py-2 hover:bg-primary-600 hover:text-white"
                   onClick={() => handleThemeChange('light')}
@@ -191,7 +193,7 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
                   <span className="ml-4 mr-2 hover:text-white">
                     <Sun />
                   </span>
-                  <div>Light</div>
+                  <div>{t('light')}</div>
                 </button>
                 <button
                   className="flex flex-row py-2 hover:bg-primary-600 hover:text-white"
@@ -200,7 +202,7 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
                   <span className="ml-4 mr-2 hover:text-white">
                     <Moon />
                   </span>
-                  <div>Dark</div>
+                  <div>{t('dark')}</div>
                 </button>
                 <button
                   className="flex flex-row py-2 hover:bg-primary-600 hover:text-white"
@@ -209,7 +211,7 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
                   <span className="ml-4 mr-2 hover:text-white">
                     <Monitor />
                   </span>
-                  <div>System</div>
+                  <div>{t('system')}</div>
                 </button>
               </div>
             )}
