@@ -10,7 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const blogRoutes = allBlogs
     .filter((post) => !post.draft)
     .flatMap((post) => {
-      const mainUrl = `${siteUrl}/blog/${post.slug}`
+      const mainUrl = `${siteUrl}/${fallbackLng}/blog/${post.slug}`
       const alternatepostsUrls: { url: string; lang: string }[] = []
 
       if (post.language !== secondLng) {
@@ -27,7 +27,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
 
   const authorsRoutes = allAuthors.flatMap((author) => {
-    const mainUrl = `${siteUrl}/about/${author.slug}`
+    const mainUrl = `${siteUrl}/${fallbackLng}/about/${author.slug}`
     const alternateauthorsUrls: { url: string; lang: string }[] = []
 
     if (author.language !== secondLng) {
@@ -44,7 +44,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   })
 
   const routes = ['', 'blog', 'projects', 'tags'].flatMap((route) => {
-    const mainUrl = `${siteUrl}/${route}`
+    const mainUrl = `${siteUrl}/${fallbackLng}/${route}`
     const alternateUrls: { url: string; lang: string }[] = []
 
     if (route !== secondLng) {
@@ -53,7 +53,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
 
     if (route !== fallbackLng) {
-      const alternateUrl = `${siteUrl}/${route}`
+      const alternateUrl = `${siteUrl}/${fallbackLng}/${route}`
       alternateUrls.push({ url: alternateUrl, lang: fallbackLng })
     }
 
