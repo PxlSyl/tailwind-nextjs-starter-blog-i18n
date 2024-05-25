@@ -21,9 +21,7 @@ export async function generateMetadata({ params: { locale } }: AboutProps): Prom
 
 export default async function Page({ params: { authors, locale } }: AboutProps) {
   const authorSlug = authors.join('/')
-  const author = allAuthors.find(
-    (a) => a.slug === authorSlug && a.language === locale
-  ) as Authors
+  const author = allAuthors.find((a) => a.slug === authorSlug && a.language === locale) as Authors
 
   if (!author) {
     return <p>Author not found</p>
