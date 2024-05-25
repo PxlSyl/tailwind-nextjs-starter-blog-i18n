@@ -3,7 +3,7 @@
   "version": "2.2.0",
   "private": true,
   "scripts": {
-    "start": "next dev && node ./scripts/robots.mjs",
+    "start": "next dev",
     "dev": "next dev",
     "build": " next build && cross-env NODE_OPTIONS='--experimental-json-modules' ",
     "serve": "next start",

@@ -23,7 +23,7 @@ const Share = ({ title, description, slug, className }: ShareProps) => {
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, 'common')
   const pathname = usePathname()
-  const pathSegments = pathname.split('/')
+  const pathSegments = pathname!.split('/')
 
   // Choose the appropriate segment based on the locale
   let targetSegment = pathSegments.length >= 2 ? pathSegments[1] : ''

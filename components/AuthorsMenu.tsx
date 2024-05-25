@@ -27,7 +27,7 @@ const AuthorsMenu = ({ className }: AuthorsMenuProps) => {
   ) as Authors[]
 
   const pathname = usePathname()
-  const sections = pathname.split('/')
+  const sections = pathname!.split('/')
   const lastSection = sections[sections.length - 1]
   const filterSections = pathname !== `/${locale}` && pathname !== '/'
   const [isOpen, setIsOpen] = useState(false)

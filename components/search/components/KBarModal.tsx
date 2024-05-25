@@ -266,7 +266,7 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
   }
 
   const handleLocaleChange = (newLocale: string): string => {
-    const segments = pathname.split('/')
+    const segments = pathname!.split('/')
     const localeIndex = segments.findIndex((segment) => locales.includes(segment as LocaleTypes))
     if (localeIndex !== -1) {
       segments[localeIndex] = newLocale
