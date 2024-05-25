@@ -98,13 +98,14 @@ const MobileNav = () => {
                         <Image
                           className="rounded-full"
                           src={avatar ?? ''}
-                          alt=""
+                          title="avatar"
+                          alt="avatar"
                           width={25}
                           height={25}
                         />
                       </div>
                       <Link
-                        href={`/${slug}`}
+                        href={`/${locale}/about/${slug}`}
                         onClick={onToggleNav}
                         className="text-xl font-bold tracking-widest text-gray-900 dark:text-gray-100"
                       >
@@ -123,7 +124,7 @@ const MobileNav = () => {
                 const { name, language, slug } = author
                 if (language === locale) {
                   return (
-                    <Link href={`/${slug}`} onClick={onToggleNav} key={name}>
+                    <Link href={`/${locale}/about/${slug}`} onClick={onToggleNav} key={name}>
                       {t('about')}
                     </Link>
                   )

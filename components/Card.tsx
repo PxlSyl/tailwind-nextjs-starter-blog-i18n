@@ -43,6 +43,7 @@ const Card: React.FC<CardProps> = ({ title, description, imgSrc, href }) => {
             >
               <Image
                 alt={title}
+                title={title}
                 src={imgSrc}
                 className="object-cover object-center md:h-36 lg:h-48"
                 width={544}
@@ -52,6 +53,7 @@ const Card: React.FC<CardProps> = ({ title, description, imgSrc, href }) => {
           ) : (
             <Image
               alt={title}
+              title={title}
               src={imgSrc}
               className="object-cover object-center md:h-36 lg:h-48"
               width={544}

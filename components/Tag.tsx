@@ -1,7 +1,7 @@
 'use client'
 
 import { useCallback } from 'react'
-import { useRouter, useParams } from 'next/navigation'
+import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import { useTagStore } from './util/useTagStore'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'

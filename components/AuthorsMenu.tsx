@@ -96,7 +96,8 @@ const AuthorsMenu = ({ className }: AuthorsMenuProps) => {
                                     <Image
                                       className="rounded-full"
                                       src={avatar ?? ''}
-                                      alt=""
+                                      alt="avatar"
+                                      title='avatar'
                                       width={25}
                                       height={25}
                                     />
