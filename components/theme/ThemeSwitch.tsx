@@ -30,7 +30,7 @@ const ThemeSwitch = () => {
     setMenuOpen(false)
   }
 
-  if (!mounted) return null;
+  if (!mounted) return null
 
   return (
     <div ref={menubarRef} className="mr-5">

@@ -119,10 +119,10 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
           <div>
             <motion.ul variants={container} initial="hidden" animate="show">
               {displayPosts.map((post) => {
-                const { path, date, title, summary, tags, language } = post
+                const { slug, date, title, summary, tags, language } = post
                 if (language === locale) {
                   return (
-                    <motion.li variants={item} key={path} className="py-5">
+                    <motion.li variants={item} key={slug} className="py-5">
                       <article className="flex flex-col space-y-2 xl:space-y-0">
                         <dl>
                           <dt className="sr-only">{t('pub')}</dt>
@@ -134,7 +134,7 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                           <div>
                             <h2 className="text-2xl font-bold leading-8 tracking-tight">
                               <Link
-                                href={`/${locale}/${path}`}
+                              href={`/${locale}/blog/${slug}`}
                                 className="text-gray-900 dark:text-gray-100"
                                 aria-labelledby={title}
                               >

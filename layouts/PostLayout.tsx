@@ -29,8 +29,8 @@ const postDateTemplate: Intl.DateTimeFormatOptions = {
 interface LayoutProps {
   content: CoreContent<Blog>
   authorDetails: CoreContent<Authors>[]
-  next?: { path: string; title: string }
-  prev?: { path: string; title: string }
+  next?: { slug: string; title: string }
+  prev?: { slug: string; title: string }
   children: ReactNode
   params: { locale: LocaleTypes }
 }
@@ -147,23 +147,23 @@ export default async function PostLayout({
                 )}
                 {(next || prev) && (
                   <div className="flex justify-between py-4 xl:block xl:space-y-8 xl:py-8">
-                    {prev && prev.path && (
+                    {prev && prev.slug && (
                       <div>
                         <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
                           {t('preva')}
                         </h2>
                         <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                          <Link href={`/${locale}/${prev.path}`}>{prev.title}</Link>
+                          <Link href={`/${locale}/blog/${prev.slug}`}>{prev.title}</Link>
                         </div>
                       </div>
                     )}
-                    {next && next.path && (
+                    {next && next.slug && (
                       <div>
                         <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
                           {t('nexta')}
                         </h2>
                         <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                          <Link href={`/${locale}/${next.path}`}>{next.title}</Link>
+                          <Link href={`/${locale}/blog/${next.slug}`}>{next.title}</Link>
                         </div>
                       </div>
                     )}

@@ -49,7 +49,11 @@ const computedFields: ComputedFields = {
   readingTime: { type: 'json', resolve: (doc) => readingTime(doc.body.raw) },
   slug: {
     type: 'string',
-    resolve: (doc) => doc._raw.flattenedPath.replace(/^.+?(\/)/, ''),
+    resolve: (doc) => {
+      // Split the flattenedPath by '/' and take the last part
+      const pathParts = doc._raw.flattenedPath.split('/');
+      return pathParts[pathParts.length - 1];
+    },
   },
   path: {
     type: 'string',
@@ -60,26 +64,7 @@ const computedFields: ComputedFields = {
     resolve: (doc) => doc._raw.sourceFilePath,
   },
   toc: { type: 'string', resolve: (doc) => extractTocHeadings(doc.body.raw) },
-}
-
-async function generateSlugMap(allBlogs) {
-  const slugMap = {}
-
-  // Process each blog post
-  allBlogs.forEach((blog) => {
-    const { localeid, language, slug } = blog
-    const formattedLng = language === fallbackLng ? fallbackLng : secondLng
-
-    if (!slugMap[localeid]) {
-      slugMap[localeid] = {}
-    }
-
-    // Add the slug to the map for the specific language
-    slugMap[localeid][formattedLng] = slug
-  })
-
-  writeFileSync('./app/[locale]/localeid-map.json', JSON.stringify(slugMap, null, 2))
-}
+};
 
 /**
  * Count the occurrences of all tags across blog posts and write to json file
@@ -144,7 +129,6 @@ export const Blog = defineDocumentType(() => ({
     series: { type: 'nested', of: Series },
     date: { type: 'date', required: true },
     language: { type: 'string', required: true },
-    localeid: { type: 'string', required: true },
     tags: { type: 'list', of: { type: 'string' }, default: [] },
     lastmod: { type: 'date' },
     featured: { type: 'boolean' },
@@ -227,7 +211,6 @@ export default makeSource({
   },
   onSuccess: async (importData) => {
     const { allBlogs } = await importData()
-    generateSlugMap(allBlogs)
     createTagCount(allBlogs)
     createSearchIndex(allBlogs)
   },

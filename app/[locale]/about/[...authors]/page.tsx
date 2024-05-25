@@ -4,11 +4,11 @@ import { MDXLayoutRenderer } from 'pliny/mdx-components'
 import AuthorLayout from '@/layouts/AuthorLayout'
 import { coreContent } from 'pliny/utils/contentlayer'
 import { genPageMetadata } from 'app/[locale]/seo'
-import { createTranslation } from '../i18n/server'
-import { LocaleTypes } from '../i18n/settings'
+import { createTranslation } from 'app/[locale]/i18n/server'
+import { LocaleTypes } from 'app/[locale]/i18n/settings'
 
 type AboutProps = {
-  params: { authors: string; locale: LocaleTypes }
+  params: { authors: string[]; locale: LocaleTypes }
 }
 
 export async function generateMetadata({ params: { locale } }: AboutProps): Promise<Metadata> {
@@ -20,16 +20,20 @@ export async function generateMetadata({ params: { locale } }: AboutProps): Prom
 }
 
 export default async function Page({ params: { authors, locale } }: AboutProps) {
+  const authorSlug = authors.join('/')
   const author = allAuthors.find(
-    (a) => a.slug.includes(authors) && a.language === locale
+    (a) => a.slug === authorSlug && a.language === locale
   ) as Authors
+
+  if (!author) {
+    return <p>Author not found</p>
+  }
+
   const mainContent = coreContent(author)
 
   return (
-    <>
-      <AuthorLayout params={{ locale: locale }} content={mainContent}>
-        <MDXLayoutRenderer code={author.body.code} />
-      </AuthorLayout>
-    </>
+    <AuthorLayout params={{ locale: locale }} content={mainContent}>
+      <MDXLayoutRenderer code={author.body.code} />
+    </AuthorLayout>
   )
 }

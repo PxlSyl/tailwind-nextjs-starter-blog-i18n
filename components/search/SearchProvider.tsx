@@ -1,5 +1,5 @@
 'use client'
-// use this component in layout.tsx to customize kbar search
+
 import { ReactNode } from 'react'
 import { KBarSearchProvider } from './components/KBar'
 import { useParams, useRouter } from 'next/navigation'
@@ -24,7 +24,6 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
     .filter((a) => a.language === locale)
     .sort((a, b) => (a.default === b.default ? 0 : a.default ? -1 : 1)) as Authors[]
 
-  // Create search items for each author
   const authorSearchItems = authors.map((author) => {
     const { name, slug } = author
     return {
@@ -33,7 +32,7 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
       keywords: '',
       shortcut: [],
       section: locale === fallbackLng ? 'Authors' : 'Auteurs',
-      perform: () => router.push(`/${slug}`),
+      perform: () => router.push(`/${locale}/about/${slug}`),
       icon: (
         <i>
           <AboutIcon />
@@ -44,9 +43,9 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
 
   const showAuthorsSearch = siteMetadata.multiauthors
   const authorsActions = [
-    ...(showAuthorsSearch ? authorSearchItems : []), // Add author search items if multiauthors is true
+    ...(showAuthorsSearch ? authorSearchItems : []),
     ...(showAuthorsSearch
-      ? [] // Exclude "About" section if multiauthors is true
+      ? []
       : [
           {
             id: 'about',

@@ -1,10 +1,8 @@
 import { useState, useRef } from 'react'
-import { usePathname, useParams, useRouter, useSelectedLayoutSegments } from 'next/navigation'
+import { usePathname, useParams, useRouter } from 'next/navigation'
 import { useOuterClick } from './util/useOuterClick'
 import { useTagStore } from '@/components/util/useTagStore'
 import { LocaleTypes, locales } from 'app/[locale]/i18n/settings'
-import { allBlogs } from '.contentlayer/generated'
-import slugMap from 'app/[locale]/localeid-map.json'
 import { Menu, Transition, RadioGroup } from '@headlessui/react'
 
 export const ChevronDownIcon = ({ className }) => {
@@ -28,7 +26,6 @@ export const ChevronDownIcon = ({ className }) => {
 
 const LangSwitch = () => {
   const pathname = usePathname()
-  const urlSegments = useSelectedLayoutSegments()
   const locale = useParams()?.locale as LocaleTypes
   const router = useRouter()
   const setSelectedTag = useTagStore((state) => state.setSelectedTag)
@@ -37,13 +34,14 @@ const LangSwitch = () => {
   useOuterClick(menubarRef, () => setIsMenuOpen(false))
 
   const handleLocaleChange = (newLocale: string): string => {
-    const newUrl = `/${newLocale}/${urlSegments.join('/')}`
-    const currentPost = allBlogs.find((p) => pathname.includes(p.slug))
-    if (currentPost) {
-      const newSlug = slugMap[currentPost.localeid]?.[newLocale]
-      return newSlug ? `/${newLocale}/blog/${newSlug}` : `/${newLocale}/blog`
+    const segments = pathname.split('/')
+    const localeIndex = segments.findIndex((segment) => locales.includes(segment as LocaleTypes))
+    if (localeIndex !== -1) {
+      segments[localeIndex] = newLocale
+    } else {
+      segments.splice(1, 0, newLocale)
     }
-    return newUrl
+    return segments.join('/')
   }
 
   const handleLinkClick = (newLocale: string) => {

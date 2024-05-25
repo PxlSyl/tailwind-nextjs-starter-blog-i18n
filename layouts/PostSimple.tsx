@@ -17,8 +17,8 @@ import Share from '@/components/Share'
 interface PostSimpleProps {
   content: CoreContent<Blog>
   children: ReactNode
-  next?: { path: string; title: string }
-  prev?: { path: string; title: string }
+  next?: { slug: string; title: string }
+  prev?: { slug: string; title: string }
   params: { locale: LocaleTypes }
 }
 
@@ -69,10 +69,10 @@ export default async function PostLayout({
             </div>
             <footer>
               <div className="flex flex-col text-sm font-medium sm:flex-row sm:justify-between sm:text-base">
-                {prev && prev.path && (
+                {prev && prev.slug && (
                   <div className="pt-4 xl:pt-8">
                     <Link
-                      href={`/${locale}/${prev.path}`}
+                      href={`/${locale}/blog/${prev.slug}`}
                       className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                       aria-label={`Previous post: ${prev.title}`}
                     >
@@ -80,10 +80,10 @@ export default async function PostLayout({
                     </Link>
                   </div>
                 )}
-                {next && next.path && (
+                {next && next.slug && (
                   <div className="pt-4 xl:pt-8">
                     <Link
-                      href={`/${locale}/${next.path}`}
+                      href={`/${locale}/blog/${next.slug}`}
                       className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                       aria-label={`Next post: ${next.title}`}
                     >

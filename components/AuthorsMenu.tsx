@@ -85,7 +85,7 @@ const AuthorsMenu = ({ className }: AuthorsMenuProps) => {
                           <RadioGroup.Option key={name} value={name}>
                             {({ active }) => (
                               <Menu.Item>
-                                <button
+                                <div
                                   className={`${
                                     active
                                       ? 'bg-gray-100 dark:bg-gray-600'
@@ -101,10 +101,10 @@ const AuthorsMenu = ({ className }: AuthorsMenuProps) => {
                                       height={25}
                                     />
                                   </div>
-                                  <Link href={`/${slug}`} onClick={closeMenu}>
+                                  <Link href={`/${locale}/about/${slug}`} onClick={closeMenu}>
                                     {name}
                                   </Link>
-                                </button>
+                                </div>
                               </Menu.Item>
                             )}
                           </RadioGroup.Option>
@@ -119,14 +119,14 @@ const AuthorsMenu = ({ className }: AuthorsMenuProps) => {
           </Menu>
         </div>
       )}
-      {siteMetadata.multiauthors === false && (
+      {!siteMetadata.multiauthors && (
         <div className={className}>
           {mainAuthor.map((author) => {
             const { name, language, slug } = author
             if (language === locale) {
               return (
                 <Link
-                  href={`/${slug}`}
+                  href={`/${locale}/about/${slug}`}
                   key={name}
                   className={`${authors.some((author) => author.slug.includes(lastSection)) && filterSections ? 'text-primary-500 dark:text-primary-500' : ''}relative inline-block text-left font-medium leading-5`}
                 >

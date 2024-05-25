@@ -75,7 +75,7 @@ export default async function FeaturedLayout({ posts, params: { locale } }: Home
                           </div>
                           <div className="text-base font-medium leading-6">
                             <Link
-                              href={`/${locale}/blog/${slug}`}
+                                        href={`/${locale}/blog/${slug}`}
                               className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                               aria-label={`${t('more')}"${title}"`}
                             >

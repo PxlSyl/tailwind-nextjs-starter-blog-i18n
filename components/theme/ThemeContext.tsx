@@ -5,19 +5,19 @@ import React, { createContext, useState, useContext, useEffect } from 'react'
 interface ThemeContextProps {
   theme: string
   setTheme: (theme: string) => void
-  mounted: boolean;
+  mounted: boolean
 }
 
 const ThemeContext = createContext<ThemeContextProps | undefined>(undefined)
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [theme, setTheme] = useState<string>('system')
-  const [mounted, setMounted] = useState(false);
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') || 'system'
     setTheme(savedTheme)
-    setMounted(true);
+    setMounted(true)
   }, [])
 
   useEffect(() => {
@@ -32,7 +32,9 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   }, [theme])
 
-  return <ThemeContext.Provider value={{ theme, setTheme, mounted }}>{children}</ThemeContext.Provider>
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme, mounted }}>{children}</ThemeContext.Provider>
+  )
 }
 
 export const useTheme = (): ThemeContextProps => {

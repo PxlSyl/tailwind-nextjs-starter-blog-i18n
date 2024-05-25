@@ -1,37 +1,36 @@
 ---
-title: Dérivation de l'estimateur OLS
+title: Deriving the OLS Estimator
 date: '2020-12-21'
-language: fr
-localeid: 'derivingols'
+language: en
 tags: ['next-js', 'math', 'ols']
 authors: ['tailsazimuth']
 draft: false
-summary: Comment dériver l'estimateur OLS avec la notation matricielle et une visite guidée de la composition mathématique, en utilisant markdown et à l'aide de KaTeX.
+summary: How to derive the OLS Estimator with matrix notation and a tour of math typesetting using markdown with the help of KaTeX.
 ---
 
 # Introduction
 
-L'analyse et l'affichage des équations mathématiques sont inclus dans ce modèle de blog. L'analyse mathématique est activée par `remark-math` et `rehype-katex`.
-KaTeX et sa police associée sont inclus dans `_document.js` alors n'hésitez pas à l'utiliser sur n'importe quelle page.
+Parsing and display of math equations is included in this blog template. Parsing of math is enabled by `remark-math` and `rehype-katex`.
+KaTeX and its associated font is included in `_document.js` so feel free to use it on any page.
 [^footnote]
 
-[^footnote]: Pour la liste complète des fonctions TeX prises en charge, consultez la [documentation KaTeX](https://katex.org/docs/supported.html)
+[^footnote]: For the full list of supported TeX functions, check out the [KaTeX documentation](https://katex.org/docs/supported.html)
 
-Les symboles mathématiques en ligne peuvent être inclus en plaçant le terme entre le symbole «$».
+Inline math symbols can be included by enclosing the term between the `$` symbol.
 
-Les blocs de code mathématique sont désignés par `$$`.
+Math code blocks are denoted by `$$`.
 
-Si vous avez l'intention d'utiliser le signe `$` au lieu des mathématiques, vous pouvez l'échapper (`\$`) ou spécifier l'entité HTML (`&dollar;`) [^2]
+If you intend to use the `$` sign instead of math, you can escape it (`\$`), or specify the HTML entity (`&dollar;`) [^2]
 
-Les notes de bas de page en ligne ou énumérées manuellement sont également prises en charge. Cliquez sur les liens ci-dessus pour les voir en action.
+Inline or manually enumerated footnotes are also supported. Click on the links above to see them in action.
 
-[^2]: \$10 et &dollar;20.
+[^2]: \$10 and &dollar;20.
 
-# Dérivation de l'estimateur OLS
+# Deriving the OLS Estimator
 
-En utilisant la notation matricielle, soit $n$ le nombre d'observations et $k$ le nombre de régresseurs.
+Using matrix notation, let $n$ denote the number of observations and $k$ denote the number of regressors.
 
-Le vecteur des variables de résultat $\mathbf{Y}$ est une matrice $n \times 1$,
+The vector of outcome variables $\mathbf{Y}$ is a $n \times 1$ matrix,
 
 ```tex
 \mathbf{Y} = \left[\begin{array}
@@ -55,7 +54,7 @@ $$
 \end{array}\right]
 $$
 
-La matrice des régresseurs $\mathbf{X}$ est une matrice $n \times k$ (ou chaque ligne est un vecteur $k \times 1$),
+The matrix of regressors $\mathbf{X}$ is a $n \times k$ matrix (or each row is a $k \times 1$ vector),
 
 ```latex
 \mathbf{X} = \left[\begin{array}
@@ -95,11 +94,11 @@ $$
 \end{array}\right]
 $$
 
-Le vecteur des termes d'erreur $\mathbf{U}$ est également une matrice $n \times 1$.
+The vector of error terms $\mathbf{U}$ is also a $n \times 1$ matrix.
 
-Parfois, il peut être plus facile d'utiliser la notation vectorielle. Par souci de cohérence, j'utiliserai le petit x gras pour désigner un vecteur et les lettres majuscules pour désigner une matrice. Les observations uniques sont indiquées par l'indice.
+At times it might be easier to use vector notation. For consistency, I will use the bold small x to denote a vector and capital letters to denote a matrix. Single observations are denoted by the subscript.
 
-## Moindres carrés
+## Least Squares
 
 **Start**:  
 $$y_i = \mathbf{x}'_i \beta + u_i$$

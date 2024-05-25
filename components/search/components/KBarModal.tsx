@@ -21,9 +21,19 @@ import { MailIcon, BackwardIcon, CopyToClipboard, SettingsIcon } from '../icons'
 import { Sun, Moon, Monitor } from '@/components/theme/icons'
 import { useTheme } from '@/components/theme/ThemeContext'
 
-const EmailForm = ({ state, handleSubmit, name, email, message, handleNameChange, handleEmailChange, handleMessageChange, t }) => (
+const EmailForm = ({
+  state,
+  handleSubmit,
+  name,
+  email,
+  message,
+  handleNameChange,
+  handleEmailChange,
+  handleMessageChange,
+  t,
+}) => (
   <div className="mb-20 ml-2 mr-2 mt-16">
-    <div className='text-3xl font-semibold'>{t('title')}</div>
+    <div className="text-3xl font-semibold">{t('title')}</div>
     <ModalBody
       state={state}
       handleSubmit={handleSubmit}
@@ -40,7 +50,7 @@ const EmailForm = ({ state, handleSubmit, name, email, message, handleNameChange
 
 const ThemeSettings = ({ t, handleThemeChange }) => (
   <div className="mb-20 mt-20 flex flex-col space-y-4">
-    <div className='ml-4 text-3xl font-semibold'>{t('theme')}</div>
+    <div className="ml-4 text-3xl font-semibold">{t('theme')}</div>
     <ThemeButton t={t} handleThemeChange={handleThemeChange} theme="light" Icon={Sun} />
     <ThemeButton t={t} handleThemeChange={handleThemeChange} theme="dark" Icon={Moon} />
     <ThemeButton t={t} handleThemeChange={handleThemeChange} theme="system" Icon={Monitor} />
@@ -48,7 +58,10 @@ const ThemeSettings = ({ t, handleThemeChange }) => (
 )
 
 const ThemeButton = ({ t, handleThemeChange, theme, Icon }) => (
-  <button className="flex flex-row py-2 hover:bg-primary-600 hover:text-white" onClick={() => handleThemeChange(theme)}>
+  <button
+    className="flex flex-row py-2 hover:bg-primary-600 hover:text-white"
+    onClick={() => handleThemeChange(theme)}
+  >
     <span className="ml-4 mr-2 hover:text-white">
       <Icon />
     </span>
@@ -57,8 +70,19 @@ const ThemeButton = ({ t, handleThemeChange, theme, Icon }) => (
 )
 
 const SearchIcon = () => (
-  <svg className="text-gray-400 dark:text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+  <svg
+    className="text-gray-400 dark:text-gray-300"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+    />
   </svg>
 )
 
@@ -76,9 +100,7 @@ const Button = ({ onClick, show, icon, label, backLabel }) => (
       </>
     ) : (
       <>
-        <span className="mr-2">
-          {icon}
-        </span>
+        <span className="mr-2">{icon}</span>
         <div>{label}</div>
       </>
     )}
@@ -137,9 +159,11 @@ const RenderResults = () => {
 }
 
 const ResultItem = ({ item, active }) => (
-  <div className={`flex cursor-pointer justify-between px-4 py-2 ${active ? 'bg-primary-600 text-gray-100' : 'bg-transparent text-gray-700 dark:text-gray-100'}`}>
-    <div className='flex space-x-2'>
-      {item.icon && <div className='mb-1 self-center'>{item.icon}</div>}
+  <div
+    className={`flex cursor-pointer justify-between px-4 py-2 ${active ? 'bg-primary-600 text-gray-100' : 'bg-transparent text-gray-700 dark:text-gray-100'}`}
+  >
+    <div className="flex space-x-2">
+      {item.icon && <div className="mb-1 self-center">{item.icon}</div>}
       <div className="block">
         {item.subtitle && (
           <div className={`${active ? 'text-gray-200' : 'text-gray-400'} text-xs`}>
@@ -152,7 +176,10 @@ const ResultItem = ({ item, active }) => (
     {item.shortcut?.length ? (
       <div aria-hidden className="flex flex-row items-center justify-center gap-x-2">
         {item.shortcut.map((sc) => (
-          <kbd key={sc} className={`flex h-7 w-6 items-center justify-center rounded border text-xs font-medium ${active ? 'border-gray-200 text-gray-200' : 'border-gray-400 text-gray-400'}`}>
+          <kbd
+            key={sc}
+            className={`flex h-7 w-6 items-center justify-center rounded border text-xs font-medium ${active ? 'border-gray-200 text-gray-200' : 'border-gray-400 text-gray-400'}`}
+          >
             {sc}
           </kbd>
         ))}
@@ -206,7 +233,10 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
     <KBarPortal>
       <KBarPositioner className="bg-gray-300/50 p-4 backdrop-blur backdrop-filter dark:bg-black/50">
         <KBarAnimator className="w-full max-w-xl">
-          <div style={{ zIndex: '100' }} className="overflow-hidden rounded-2xl border border-gray-100 bg-gray-50 dark:border-gray-800 dark:bg-[#1c1c1c]">
+          <div
+            style={{ zIndex: '100' }}
+            className="overflow-hidden rounded-2xl border border-gray-100 bg-gray-50 dark:border-gray-800 dark:bg-[#1c1c1c]"
+          >
             <div className="flex items-center space-x-4 p-4">
               <span className="block w-5">
                 <SearchIcon />
@@ -225,12 +255,29 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
             </div>
             <div className="mb-1 ml-2 flex items-center space-x-2">
               {!showSettings && (
-                <Button onClick={toggleShowEmail} show={showEmailForm} icon={<MailIcon />} label={t('contact')} backLabel={t('back')} />
+                <Button
+                  onClick={toggleShowEmail}
+                  show={showEmailForm}
+                  icon={<MailIcon />}
+                  label={t('contact')}
+                  backLabel={t('back')}
+                />
               )}
               {!showEmailForm && (
-                <Button onClick={toggleSettings} show={showSettings} icon={<SettingsIcon />} label={t('theme')} backLabel={t('back')} />
+                <Button
+                  onClick={toggleSettings}
+                  show={showSettings}
+                  icon={<SettingsIcon />}
+                  label={t('theme')}
+                  backLabel={t('back')}
+                />
               )}
-              <CopyButton show={showEmailForm || showSettings} copyUrl={copyUrl} showCopied={showCopied} t={t} />
+              <CopyButton
+                show={showEmailForm || showSettings}
+                copyUrl={copyUrl}
+                showCopied={showCopied}
+                t={t}
+              />
             </div>
             {showEmailForm && (
               <EmailForm

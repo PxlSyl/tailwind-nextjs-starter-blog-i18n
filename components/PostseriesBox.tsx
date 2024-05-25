@@ -40,7 +40,7 @@ export const PostSeriesBox = ({ data }: PostSeriesProps) => {
               ) : (
                 <Link
                   className="transition-colors duration-200 ease-in-out hover:text-primary-500 dark:hover:text-primary-500"
-                  href={`/${p.language}/blog/${p.slug}`}
+                  href={`/${locale}/blog/${p.slug}`}
                 >
                   {p.title}
                 </Link>
