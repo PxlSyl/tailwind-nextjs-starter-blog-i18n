@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import siteMetadata from '../data/siteMetadata.js';
 
-const publicDirPath = path.resolve(process.cwd(), '..', 'public');
+const publicDirPath = path.resolve(process.cwd(), '..', 'app');
 const robotsFilePath = path.join(publicDirPath, 'robots.txt');
 
 const robotsContent = `User-agent: *
