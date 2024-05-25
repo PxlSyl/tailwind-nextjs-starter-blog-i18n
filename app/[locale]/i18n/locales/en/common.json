@@ -39,5 +39,9 @@
   "copyurl": "Copy URL",
   "urlcopied": "URL copied!",
   "contact": "Contact",
-  "back": "Go Back"
+  "back": "Go Back",
+  "settings": "Settings",
+  "language": "Language",
+  "french": "French",
+  "english": "English"
 }

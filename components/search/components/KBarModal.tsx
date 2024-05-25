@@ -2,9 +2,10 @@
 
 import { useState } from 'react'
 import siteMetadata from '@/data/siteMetadata'
-import { useParams } from 'next/navigation'
+import { useParams, usePathname, useRouter } from 'next/navigation'
 import { useTranslation } from 'app/[locale]/i18n/client'
-import { LocaleTypes } from 'app/[locale]/i18n/settings'
+import { LocaleTypes, locales } from 'app/[locale]/i18n/settings'
+import { fallbackLng, secondLng } from 'app/[locale]/i18n/locales'
 import {
   KBarPortal,
   KBarSearch,
@@ -17,9 +18,17 @@ import {
 } from 'kbar'
 import { useContactForm } from '@/components/formspree/useContactForm'
 import { ModalBody } from '@/components/formspree/CBody'
-import { MailIcon, BackwardIcon, CopyToClipboard, SettingsIcon } from '../icons'
+import {
+  MailIcon,
+  BackwardIcon,
+  CopyToClipboard,
+  SettingsIcon,
+  EnglishIcon,
+  FrenchhIcon,
+} from '../icons'
 import { Sun, Moon, Monitor } from '@/components/theme/icons'
 import { useTheme } from '@/components/theme/ThemeContext'
+import { useTagStore } from '@/components/util/useTagStore'
 
 const EmailForm = ({
   state,
@@ -48,13 +57,40 @@ const EmailForm = ({
   </div>
 )
 
-const ThemeSettings = ({ t, handleThemeChange }) => (
+const Settings = ({ t, handleThemeChange, handleLinkClick }) => (
   <div className="mb-20 mt-20 flex flex-col space-y-4">
+    <div className="ml-4 text-3xl font-semibold">{t('language')}</div>
+    <LangButton
+      t={t}
+      handleLinkClick={handleLinkClick}
+      locale={fallbackLng}
+      lang="english"
+      Icon={EnglishIcon}
+    />
+    <LangButton
+      t={t}
+      handleLinkClick={handleLinkClick}
+      locale={secondLng}
+      lang="french"
+      Icon={FrenchhIcon}
+    />
     <div className="ml-4 text-3xl font-semibold">{t('theme')}</div>
     <ThemeButton t={t} handleThemeChange={handleThemeChange} theme="light" Icon={Sun} />
     <ThemeButton t={t} handleThemeChange={handleThemeChange} theme="dark" Icon={Moon} />
     <ThemeButton t={t} handleThemeChange={handleThemeChange} theme="system" Icon={Monitor} />
   </div>
+)
+
+const LangButton = ({ t, handleLinkClick, locale, lang, Icon }) => (
+  <button
+    className="flex flex-row py-2 hover:bg-primary-600 hover:text-white"
+    onClick={() => handleLinkClick(locale)}
+  >
+    <span className="ml-4 mr-2 hover:text-white">
+      <Icon />
+    </span>
+    <div>{t(lang)}</div>
+  </button>
 )
 
 const ThemeButton = ({ t, handleThemeChange, theme, Icon }) => (
@@ -191,6 +227,10 @@ const ResultItem = ({ item, active }) => (
 export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading: boolean }) => {
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, '')
+  const pathname = usePathname()
+  const router = useRouter()
+  const setSelectedTag = useTagStore((state) => state.setSelectedTag)
+
   useRegisterActions(actions, [actions])
 
   const {
@@ -223,6 +263,23 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
     navigator.clipboard.writeText(window.location.href)
     setShowCopied(true)
     setTimeout(() => setShowCopied(false), 1000)
+  }
+
+  const handleLocaleChange = (newLocale: string): string => {
+    const segments = pathname.split('/')
+    const localeIndex = segments.findIndex((segment) => locales.includes(segment as LocaleTypes))
+    if (localeIndex !== -1) {
+      segments[localeIndex] = newLocale
+    } else {
+      segments.splice(1, 0, newLocale)
+    }
+    return segments.join('/')
+  }
+
+  const handleLinkClick = (newLocale: string) => {
+    setSelectedTag('')
+    const resolvedUrl = handleLocaleChange(newLocale)
+    router.push(resolvedUrl)
   }
 
   const handleThemeChange = (newTheme: string) => setTheme(newTheme)
@@ -268,7 +325,7 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
                   onClick={toggleSettings}
                   show={showSettings}
                   icon={<SettingsIcon />}
-                  label={t('theme')}
+                  label={t('settings')}
                   backLabel={t('back')}
                 />
               )}
@@ -292,7 +349,13 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
                 t={t}
               />
             )}
-            {showSettings && <ThemeSettings t={t} handleThemeChange={handleThemeChange} />}
+            {showSettings && (
+              <Settings
+                t={t}
+                handleThemeChange={handleThemeChange}
+                handleLinkClick={handleLinkClick}
+              />
+            )}
             {!isLoading && !showEmailForm && !showSettings && <RenderResults />}
             {isLoading && (
               <div className="block border-t border-gray-100 px-4 py-8 text-center text-gray-400 dark:border-gray-800 dark:text-gray-600">
