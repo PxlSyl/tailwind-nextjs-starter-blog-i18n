@@ -138,7 +138,7 @@ export const EnglishIcon = () => {
   )
 }
 
-export const FrenchhIcon = () => {
+export const FrenchIcon = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

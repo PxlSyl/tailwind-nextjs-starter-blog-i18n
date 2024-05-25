@@ -24,7 +24,7 @@ import {
   CopyToClipboard,
   SettingsIcon,
   EnglishIcon,
-  FrenchhIcon,
+  FrenchIcon,
 } from '../icons'
 import { Sun, Moon, Monitor } from '@/components/theme/icons'
 import { useTheme } from '@/components/theme/ThemeContext'
@@ -72,7 +72,7 @@ const Settings = ({ t, handleThemeChange, handleLinkClick }) => (
       handleLinkClick={handleLinkClick}
       locale={secondLng}
       lang="french"
-      Icon={FrenchhIcon}
+      Icon={FrenchIcon}
     />
     <div className="ml-4 text-3xl font-semibold">{t('theme')}</div>
     <ThemeButton t={t} handleThemeChange={handleThemeChange} theme="light" Icon={Sun} />
