@@ -82,6 +82,10 @@ module.exports = () => {
         },
       ]
     },
+    i18n: {
+      locales: ['en', 'fr'],
+      defaultLocale: 'en',
+    },
     webpack: (config, options) => {
       config.module.rules.push({
         test: /\.svg$/,

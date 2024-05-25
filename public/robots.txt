@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://tailwind-nextjs-starter-blog-i18n.vercel.app/sitemap.xml
-Host: https://tailwind-nextjs-starter-blog-i18n.vercel.app
