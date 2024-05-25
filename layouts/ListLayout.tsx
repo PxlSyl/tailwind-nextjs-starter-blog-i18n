@@ -132,15 +132,15 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                         </dl>
                         <div className="space-y-3">
                           <div>
-                            <h2 className="text-2xl font-bold leading-8 tracking-tight">
+                            <div className="text-2xl font-bold leading-8 tracking-tight">
                               <Link
                               href={`/${locale}/blog/${slug}`}
                                 className="text-gray-900 dark:text-gray-100"
                                 aria-labelledby={title}
                               >
-                                {title}
+                                <h2>{title}</h2>
                               </Link>
-                            </h2>
+                            </div>
                             <ul className="flex flex-wrap">
                               {tags.map((t) => (
                                 <li key={t} className="my-3">

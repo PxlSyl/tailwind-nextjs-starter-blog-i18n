@@ -1,12 +1,10 @@
 import { MetadataRoute } from 'next'
 import { allBlogs, allAuthors } from 'contentlayer/generated'
 import siteMetadata from '@/data/siteMetadata'
+import { fallbackLng, secondLng } from './i18n/locales'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const siteUrl = siteMetadata.siteUrl
-  const fallbackLng = 'en'
-  const secondLng = 'fr'
-
   const blogRoutes = allBlogs
     .filter((post) => !post.draft)
     .flatMap((post) => {

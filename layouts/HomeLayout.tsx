@@ -55,14 +55,14 @@ export default async function HomeLayout({ posts, params: { locale } }: HomeProp
                         <div className="space-y-5 xl:col-span-3">
                           <div className="space-y-6">
                             <div>
-                              <h2 className="text-2xl font-bold leading-8 tracking-tight">
+                              <div className="text-2xl font-bold leading-8 tracking-tight">
                                 <Link
                                   href={`/${locale}/blog/${slug}`}
                                   className="text-gray-900 dark:text-gray-100"
                                 >
-                                  {title}
+                                 <h2>{title}</h2> 
                                 </Link>
-                              </h2>
+                              </div>
                               <ul className="flex flex-wrap">
                                 {tags.map((tag: string) => (
                                   <li key={tag} className="my-1">

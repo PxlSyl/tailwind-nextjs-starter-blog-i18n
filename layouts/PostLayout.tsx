@@ -76,7 +76,7 @@ export default async function PostLayout({
                   {authorDetails.map((author) => (
                     <li className="flex items-center space-x-2" key={author.name}>
                       {author.avatar && (
-                        <Link href={`/${author.slug}`}>
+                        <Link href={`/${locale}/about/${author.slug}`}>
                           <Image
                             src={author.avatar}
                             width={38}
@@ -135,9 +135,9 @@ export default async function PostLayout({
               <div className="divide-gray-200 text-sm font-medium leading-5 dark:divide-gray-700 xl:col-start-1 xl:row-start-2 xl:divide-y">
                 {tags && (
                   <div className="py-4 xl:py-8">
-                    <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                    <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
                       Tags
-                    </h2>
+                    </p>
                     <div className="flex flex-wrap">
                       {tags.map((tag) => (
                         <Tag key={tag} text={tag} />
@@ -149,9 +149,9 @@ export default async function PostLayout({
                   <div className="flex justify-between py-4 xl:block xl:space-y-8 xl:py-8">
                     {prev && prev.slug && (
                       <div>
-                        <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                        <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
                           {t('preva')}
-                        </h2>
+                        </p>
                         <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
                           <Link href={`/${locale}/blog/${prev.slug}`}>{prev.title}</Link>
                         </div>
@@ -159,9 +159,9 @@ export default async function PostLayout({
                     )}
                     {next && next.slug && (
                       <div>
-                        <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                        <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
                           {t('nexta')}
-                        </h2>
+                        </p>
                         <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
                           <Link href={`/${locale}/blog/${next.slug}`}>{next.title}</Link>
                         </div>
