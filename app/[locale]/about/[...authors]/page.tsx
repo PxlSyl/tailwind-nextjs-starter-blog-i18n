@@ -11,10 +11,15 @@ type AboutProps = {
   params: { authors: string[]; locale: LocaleTypes }
 }
 
-export async function generateMetadata({ params: { locale } }: AboutProps): Promise<Metadata> {
+export async function generateMetadata({
+  params: { authors, locale },
+}: AboutProps): Promise<Metadata> {
+  const authorSlug = authors.join('/')
+  const author = allAuthors.find((a) => a.slug === authorSlug && a.language === locale) as Authors
   const { t } = await createTranslation(locale, 'about')
+
   return genPageMetadata({
-    title: t('about'),
+    title: `${t('about')} ${author.name}`,
     params: { locale: locale },
   })
 }
@@ -22,11 +27,6 @@ export async function generateMetadata({ params: { locale } }: AboutProps): Prom
 export default async function Page({ params: { authors, locale } }: AboutProps) {
   const authorSlug = authors.join('/')
   const author = allAuthors.find((a) => a.slug === authorSlug && a.language === locale) as Authors
-
-  if (!author) {
-    return <p>Author not found</p>
-  }
-
   const mainContent = coreContent(author)
 
   return (
