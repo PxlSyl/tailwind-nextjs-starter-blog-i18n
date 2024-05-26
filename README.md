@@ -8,7 +8,7 @@ Also, I don't think that the impact of these first changes is really bad for SEO
 
 So for now, blog page and tags logic is entirely managed on client side (also resulting in a faster UI for users). This also means less complex server side code and pages.
 
-The next step and changes will be to find a way to manage the url of the posts in the best way possible for SEO!
+sitemap.xml and robots.txt are now handled perfectly. I made all the necessary changes, next step is to fix rss, and update the i18n documentation because a lot of things are coded in a different way as before.
 
 ## Introduction
 
@@ -766,7 +766,7 @@ There's an issue when using regular translations, so I implemented a workaround 
 - Fix the translation in page 404. This is related to the current functioning of the not-found function,
   so we have to wait for a fix from next-js side see here: [i18n for not-found page](https://github.com/vercel/next.js/discussions/50518)
 
-- Fix Robot.ts, sitemap.ts and rss.mjs. For the moment, I cannot find a solution to have a sitemap.ts file that can generate a valid robot.txt file (I have searched and tried a lot of things), same for rss.mjs. If you find a solution on your side, don't hesitate to open a PR!
+- Fix rss.mjs. If you find a solution on your side, don't hesitate to open a PR!
 
 Everything else is currently working as expected.
 
