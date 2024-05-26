@@ -26,7 +26,8 @@ export const ChevronDownIcon = ({ className }) => {
 
 const LangSwitch = () => {
   const pathname = usePathname()
-  const locale = useParams()?.locale as LocaleTypes
+  const params = useParams()
+  const locale = (params.locale as string) || ''
   const router = useRouter()
   const setSelectedTag = useTagStore((state) => state.setSelectedTag)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -41,7 +42,9 @@ const LangSwitch = () => {
     } else {
       segments.splice(1, 0, newLocale)
     }
-    return segments.join('/')
+    // Remove trailing slash if it exists
+    const newPath = segments.join('/').replace(/\/$/, '')
+    return newPath
   }
 
   const handleLinkClick = (newLocale: string) => {

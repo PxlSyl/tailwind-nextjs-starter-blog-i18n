@@ -63,7 +63,7 @@ export default async function FeaturedLayout({ posts, params: { locale } }: Home
                               </div>
                               <ul className="flex flex-wrap">
                                 {tags.map((tag: string) => (
-                                  <li key={tag} className="my-1">
+                                  <li key={tag}>
                                     <Tag text={tag} />
                                   </li>
                                 ))}

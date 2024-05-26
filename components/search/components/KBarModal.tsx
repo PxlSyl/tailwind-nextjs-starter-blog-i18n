@@ -42,47 +42,47 @@ const EmailForm = ({
   t,
 }) => (
   <>
-  <div className="ml-2 text-3xl font-semibold mt-5 text-heading-400">{t('title')}</div>
-  <div className="mb-16 ml-2 mr-2 mt-16">   
-    <ModalBody
-      state={state}
-      handleSubmit={handleSubmit}
-      name={name}
-      email={email}
-      message={message}
-      handleNameChange={handleNameChange}
-      handleEmailChange={handleEmailChange}
-      handleMessageChange={handleMessageChange}
-      t={t}
-    />
-  </div>
+    <div className="ml-2 mt-5 text-3xl font-semibold text-heading-400">{t('title')}</div>
+    <div className="mb-16 ml-2 mr-2 mt-16">
+      <ModalBody
+        state={state}
+        handleSubmit={handleSubmit}
+        name={name}
+        email={email}
+        message={message}
+        handleNameChange={handleNameChange}
+        handleEmailChange={handleEmailChange}
+        handleMessageChange={handleMessageChange}
+        t={t}
+      />
+    </div>
   </>
 )
 
 const Settings = ({ t, handleThemeChange, handleLinkClick }) => (
   <>
-  <div className='ml-4 text-3xl font-semibold mt-5 mb-5 text-heading-400'>{t('settings')}</div>
-  <div className="mb-20 mt-10 flex flex-col space-y-4 overflow-y-auto max-h-[230px] my-auto">
-    <div className="ml-4 text-3xl font-semibold text-primary-400">{t('language')}</div>
-    <LangButton
-      t={t}
-      handleLinkClick={handleLinkClick}
-      locale={fallbackLng}
-      lang="english"
-      Icon={EnglishIcon}
-    />
-    <LangButton
-      t={t}
-      handleLinkClick={handleLinkClick}
-      locale={secondLng}
-      lang="french"
-      Icon={FrenchIcon}
-    />
-    <div className="ml-4 text-3xl font-semibold text-primary-400">{t('theme')}</div>
-    <ThemeButton t={t} handleThemeChange={handleThemeChange} theme="light" Icon={Sun} />
-    <ThemeButton t={t} handleThemeChange={handleThemeChange} theme="dark" Icon={Moon} />
-    <ThemeButton t={t} handleThemeChange={handleThemeChange} theme="system" Icon={Monitor} />
-  </div>
+    <div className="mb-5 ml-4 mt-5 text-3xl font-semibold text-heading-400">{t('settings')}</div>
+    <div className="my-auto mb-20 mt-10 flex max-h-[230px] flex-col space-y-4 overflow-y-auto">
+      <div className="ml-4 text-3xl font-semibold text-primary-400">{t('language')}</div>
+      <LangButton
+        t={t}
+        handleLinkClick={handleLinkClick}
+        locale={fallbackLng}
+        lang="english"
+        Icon={EnglishIcon}
+      />
+      <LangButton
+        t={t}
+        handleLinkClick={handleLinkClick}
+        locale={secondLng}
+        lang="french"
+        Icon={FrenchIcon}
+      />
+      <div className="ml-4 text-3xl font-semibold text-primary-400">{t('theme')}</div>
+      <ThemeButton t={t} handleThemeChange={handleThemeChange} theme="light" Icon={Sun} />
+      <ThemeButton t={t} handleThemeChange={handleThemeChange} theme="dark" Icon={Moon} />
+      <ThemeButton t={t} handleThemeChange={handleThemeChange} theme="system" Icon={Monitor} />
+    </div>
   </>
 )
 

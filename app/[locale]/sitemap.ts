@@ -13,14 +13,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       const mainUrl = `${siteUrl}/${fallbackLng}/blog/${post.slug}`
       const alternatepostsUrls: { url: string; lang: string }[] = []
 
+      if (post.language !== fallbackLng) {
+        const alternatepostsUrl = `${siteUrl}/${post.language}/blog/${post.slug}`
+        alternatepostsUrls.push({ url: alternatepostsUrl, lang: post.language })
+      }
+
       if (post.language !== secondLng) {
         const alternatepostsUrl = `${siteUrl}/${secondLng}/blog/${post.slug}`
         alternatepostsUrls.push({ url: alternatepostsUrl, lang: secondLng })
-      }
-
-      if (post.language !== fallbackLng) {
-        const alternatepostsUrl = `${siteUrl}/${post.language}/blog/${post.slug}`
-        alternatepostsUrls.push({ url: alternatepostsUrl, lang: fallbackLng })
       }
 
       return [{ url: mainUrl, lastModified: post.lastmod || post.date }, ...alternatepostsUrls]
@@ -30,31 +30,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const mainUrl = `${siteUrl}/${fallbackLng}/about/${author.slug}`
     const alternateauthorsUrls: { url: string; lang: string }[] = []
 
+    if (author.language !== fallbackLng) {
+      const alternateauthorsUrl = `${siteUrl}/${author.language}/about/${author.slug}`
+      alternateauthorsUrls.push({ url: alternateauthorsUrl, lang: author.language })
+    }
+
     if (author.language !== secondLng) {
       const alternateauthorsUrl = `${siteUrl}/${secondLng}/about/${author.slug}`
       alternateauthorsUrls.push({ url: alternateauthorsUrl, lang: secondLng })
-    }
-
-    if (author.language !== fallbackLng) {
-      const alternateauthorsUrl = `${siteUrl}/${author.language}/about/${author.slug}`
-      alternateauthorsUrls.push({ url: alternateauthorsUrl, lang: fallbackLng })
     }
 
     return [{ url: mainUrl }, ...alternateauthorsUrls]
   })
 
   const routes = ['', 'blog', 'projects', 'tags'].flatMap((route) => {
-    const mainUrl = `${siteUrl}/${fallbackLng}/${route}`
+    const mainUrl = `${siteUrl}/${fallbackLng}/${route}`.replace(/\/$/, '')
     const alternateUrls: { url: string; lang: string }[] = []
 
-    if (route !== secondLng) {
-      const alternateUrl = `${siteUrl}/${secondLng}/${route}`
-      alternateUrls.push({ url: alternateUrl, lang: secondLng })
+    if (route !== fallbackLng) {
+      const alternateUrl = `${siteUrl}/${fallbackLng}/${route}`.replace(/\/$/, '')
+      alternateUrls.push({ url: alternateUrl, lang: fallbackLng })
     }
 
-    if (route !== fallbackLng) {
-      const alternateUrl = `${siteUrl}/${fallbackLng}/${route}`
-      alternateUrls.push({ url: alternateUrl, lang: fallbackLng })
+    if (route !== secondLng) {
+      const alternateUrl = `${siteUrl}/${secondLng}/${route}`.replace(/\/$/, '')
+      alternateUrls.push({ url: alternateUrl, lang: secondLng })
     }
 
     return [{ url: mainUrl, lastModified: today }, ...alternateUrls]
