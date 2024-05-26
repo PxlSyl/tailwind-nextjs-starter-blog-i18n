@@ -58,8 +58,10 @@ const EmailForm = ({
 )
 
 const Settings = ({ t, handleThemeChange, handleLinkClick }) => (
-  <div className="mb-20 mt-20 flex flex-col space-y-4">
-    <div className="ml-4 text-3xl font-semibold">{t('language')}</div>
+  <>
+  <div className='ml-4 text-3xl font-semibold mt-5 mb-5 text-heading-400'>{t('settings')}</div>
+  <div className="mb-20 mt-10 flex flex-col space-y-4 overflow-y-auto max-h-[230px] my-auto">
+    <div className="ml-4 text-3xl font-semibold text-primary-400">{t('language')}</div>
     <LangButton
       t={t}
       handleLinkClick={handleLinkClick}
@@ -74,11 +76,12 @@ const Settings = ({ t, handleThemeChange, handleLinkClick }) => (
       lang="french"
       Icon={FrenchIcon}
     />
-    <div className="ml-4 text-3xl font-semibold">{t('theme')}</div>
+    <div className="ml-4 text-3xl font-semibold text-primary-400">{t('theme')}</div>
     <ThemeButton t={t} handleThemeChange={handleThemeChange} theme="light" Icon={Sun} />
     <ThemeButton t={t} handleThemeChange={handleThemeChange} theme="dark" Icon={Moon} />
     <ThemeButton t={t} handleThemeChange={handleThemeChange} theme="system" Icon={Monitor} />
   </div>
+  </>
 )
 
 const LangButton = ({ t, handleLinkClick, locale, lang, Icon }) => (
