@@ -231,7 +231,7 @@ const ResultItem = ({ item, active }) => (
 
 export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading: boolean }) => {
   const locale = useParams()?.locale as LocaleTypes
-  const { t } = useTranslation(locale, '')
+  const { t } = useTranslation(locale, 'common')
   const pathname = usePathname()
   const router = useRouter()
   const setSelectedTag = useTagStore((state) => state.setSelectedTag)

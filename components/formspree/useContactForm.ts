@@ -7,7 +7,7 @@ import { useTranslation } from 'app/[locale]/i18n/client'
 
 export const useContactForm = () => {
   const locale = useParams()?.locale as LocaleTypes
-  const { t } = useTranslation(locale, '')
+  const { t } = useTranslation(locale, 'common')
   const [state, handleSubmit, reset] = useForm('xdojkndq')
   const [name, setName] = useState<string>('')
   const [email, setEmail] = useState<string>('')

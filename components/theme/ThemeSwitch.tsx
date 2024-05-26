@@ -13,7 +13,7 @@ import { useTranslation } from 'app/[locale]/i18n/client'
 
 const ThemeSwitch = () => {
   const locale = useParams()?.locale as LocaleTypes
-  const { t } = useTranslation(locale, '')
+  const { t } = useTranslation(locale, 'common')
   const { theme, setTheme, mounted } = useTheme()
   const [menuOpen, setMenuOpen] = React.useState(false)
   const [darkModeChecked, setDarkModeChecked] = React.useState(theme === 'dark')

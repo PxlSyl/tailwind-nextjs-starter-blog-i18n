@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react'
 
 const ScrollTopAndComment = () => {
   const locale = useParams()?.locale as LocaleTypes
-  const { t } = useTranslation(locale, '')
+  const { t } = useTranslation(locale, 'common')
   const [show, setShow] = useState(false)
 
   useEffect(() => {

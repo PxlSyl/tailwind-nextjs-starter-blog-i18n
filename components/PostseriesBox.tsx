@@ -13,7 +13,7 @@ export type PostSeriesProps = {
 export const PostSeriesBox = ({ data }: PostSeriesProps) => {
   const currentIndex = data.posts.findIndex((post) => post.isCurrent) + 1
   const locale = useParams()?.locale as LocaleTypes
-  const { t } = useTranslation(locale, '')
+  const { t } = useTranslation(locale, 'common')
 
   return (
     <Card className="mb-4">

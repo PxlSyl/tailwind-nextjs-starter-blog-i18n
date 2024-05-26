@@ -18,7 +18,7 @@ interface SearchProviderProps {
 
 export const SearchProvider = ({ children }: SearchProviderProps) => {
   const locale = useParams()?.locale as LocaleTypes
-  const { t } = useTranslation(locale, '')
+  const { t } = useTranslation(locale, 'common')
   const router = useRouter()
   const authors = allAuthors
     .filter((a) => a.language === locale)

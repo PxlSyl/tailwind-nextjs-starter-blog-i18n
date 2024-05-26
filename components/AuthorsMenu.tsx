@@ -17,7 +17,7 @@ type AuthorsMenuProps = {
 
 const AuthorsMenu = ({ className }: AuthorsMenuProps) => {
   const locale = useParams()?.locale as LocaleTypes
-  const { t } = useTranslation(locale, '')
+  const { t } = useTranslation(locale, 'common')
   const authors = allAuthors
     .filter((a) => a.language === locale)
     .sort((a, b) => (a.default === b.default ? 0 : a.default ? -1 : 1)) as Authors[]
