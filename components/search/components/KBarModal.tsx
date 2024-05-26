@@ -41,8 +41,9 @@ const EmailForm = ({
   handleMessageChange,
   t,
 }) => (
-  <div className="mb-20 ml-2 mr-2 mt-16">
-    <div className="text-3xl font-semibold">{t('title')}</div>
+  <>
+  <div className="ml-2 text-3xl font-semibold mt-5 text-heading-400">{t('title')}</div>
+  <div className="mb-16 ml-2 mr-2 mt-16">   
     <ModalBody
       state={state}
       handleSubmit={handleSubmit}
@@ -55,6 +56,7 @@ const EmailForm = ({
       t={t}
     />
   </div>
+  </>
 )
 
 const Settings = ({ t, handleThemeChange, handleLinkClick }) => (
