@@ -53,7 +53,7 @@ export const CModal: React.FC<cModalProps> = ({
           className="relative flex h-full w-full flex-col rounded-lg border-0 bg-white shadow-lg outline-none focus:outline-none dark:bg-black lg:h-auto"
         >
           <div className="flex items-center justify-between rounded-t p-6">
-            <h3 className="text-3xl font-semibold">{title}</h3>
+            <h3 className="text-3xl font-semibold text-heading-400">{title}</h3>
             <button
               aria-label="contact"
               onClick={handleClose}
