@@ -57,7 +57,7 @@ const Header = () => {
               )
             })}
           <AuthorsMenu className="hidden sm:block" />
-          <SearchButton />
+          <SearchButton viewBox="0 0 24 24" className='h-6 w-6'/>
           <ThemeSwitch />
           <LangSwitch />
           <MobileNav />

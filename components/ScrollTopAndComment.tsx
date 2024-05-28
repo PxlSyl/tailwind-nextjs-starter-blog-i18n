@@ -5,6 +5,7 @@ import { useTranslation } from 'app/[locale]/i18n/client'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import SearchButton from './search/SearchButton'
 
 const ScrollTopAndComment = () => {
   const locale = useParams()?.locale as LocaleTypes
@@ -31,6 +32,9 @@ const ScrollTopAndComment = () => {
     <div
       className={`fixed bottom-8 right-8 hidden flex-col gap-3 ${show ? 'md:flex' : 'md:hidden'}`}
     >
+      <div className='rounded-full bg-gray-200 p-2 text-gray-500 transition-all hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600'>
+        <SearchButton viewBox="0 0 20 20" className='h-4 w-4'/>
+      </div>
       {siteMetadata.comments?.provider && (
         <button
           aria-label={t('scrollcomment')}
