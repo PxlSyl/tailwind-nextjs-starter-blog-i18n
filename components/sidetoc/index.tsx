@@ -6,6 +6,7 @@ import { useTranslation } from 'app/[locale]/i18n/client'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { useParams } from 'next/navigation'
 import { useOuterClick } from '../util/useOuterClick'
+import ArrowRightIcon from './icon'
 
 const Sidetoc = ({ toc }) => {
   const locale = useParams()?.locale as LocaleTypes
@@ -47,23 +48,3 @@ const Sidetoc = ({ toc }) => {
 }
 
 export default Sidetoc
-
-function ArrowRightIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M5 12h14" />
-      <path d="m12 5 7 7-7 7" />
-    </svg>
-  )
-}
