@@ -23,8 +23,6 @@ import {
   BackwardIcon,
   CopyToClipboard,
   SettingsIcon,
-  EnglishIcon,
-  FrenchIcon,
 } from '../icons'
 import { Sun, Moon, Monitor } from '@/components/theme/icons'
 import { useTheme } from '@/components/theme/ThemeContext'
@@ -69,14 +67,12 @@ const Settings = ({ t, handleThemeChange, handleLinkClick }) => (
         handleLinkClick={handleLinkClick}
         locale={fallbackLng}
         lang="english"
-        Icon={EnglishIcon}
       />
       <LangButton
         t={t}
         handleLinkClick={handleLinkClick}
         locale={secondLng}
         lang="french"
-        Icon={FrenchIcon}
       />
       <div className="ml-4 text-3xl font-semibold text-primary-400">{t('theme')}</div>
       <ThemeButton t={t} handleThemeChange={handleThemeChange} theme="light" Icon={Sun} />
@@ -86,13 +82,13 @@ const Settings = ({ t, handleThemeChange, handleLinkClick }) => (
   </>
 )
 
-const LangButton = ({ t, handleLinkClick, locale, lang, Icon }) => (
+const LangButton = ({ t, handleLinkClick, locale, lang }) => (
   <button
-    className="flex flex-row py-2 hover:bg-primary-600 hover:text-white"
+    className="group flex flex-row py-2 items-center hover:bg-primary-600 hover:text-white"
     onClick={() => handleLinkClick(locale)}
   >
-    <span className="ml-4 mr-2 hover:text-white">
-      <Icon />
+    <span className="ml-4 mr-2 bg-black text-white rounded-md px-1 w-8 dark:bg-white dark:text-black group-hover:bg-white group-hover:text-primary-500">
+      {locale}
     </span>
     <div>{t(lang)}</div>
   </button>
