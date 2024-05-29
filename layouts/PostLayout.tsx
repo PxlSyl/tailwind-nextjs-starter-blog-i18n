@@ -14,6 +14,8 @@ import { createTranslation } from 'app/[locale]/i18n/server'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { PostSeriesBox } from '@/components/PostseriesBox'
 import Share from '@/components/Share'
+import { Toc } from 'pliny/mdx-plugins'
+import Sidetoc from '@/components/sidetoc'
 
 const editUrl = (path) => `${siteMetadata.siteRepo}/blob/main/data/${path}`
 const discussUrl = (path) =>
@@ -43,12 +45,14 @@ export default async function PostLayout({
   children,
   params: { locale },
 }: LayoutProps) {
-  const { filePath, path, slug, date, title, tags, language, series } = content
+  const { filePath, path, slug, date, title, tags, language, series, toc } = content
   const basePath = path.split('/')[0]
   const { t } = await createTranslation(locale, 'home')
+  const tableOfContents: Toc = toc as unknown as Toc
   return (
     <SectionContainer>
       <ScrollTopAndComment />
+      <Sidetoc toc={tableOfContents} />
       <article>
         <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
           <header className="pt-6 xl:pb-6">

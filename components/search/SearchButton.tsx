@@ -2,7 +2,7 @@ import { AlgoliaButton } from 'pliny/search/AlgoliaButton'
 import { KBarButton } from './KBarButton'
 import siteMetadata from '@/data/siteMetadata'
 
-const SearchButton = ({className, viewBox}) => {
+const SearchButton = ({ className, viewBox }) => {
   if (
     siteMetadata.search &&
     (siteMetadata.search.provider === 'algolia' || siteMetadata.search.provider === 'kbar')

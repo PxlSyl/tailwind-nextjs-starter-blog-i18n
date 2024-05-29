@@ -18,12 +18,7 @@ import {
 } from 'kbar'
 import { useContactForm } from '@/components/formspree/useContactForm'
 import { ModalBody } from '@/components/formspree/CBody'
-import {
-  MailIcon,
-  BackwardIcon,
-  CopyToClipboard,
-  SettingsIcon,
-} from '../icons'
+import { MailIcon, BackwardIcon, CopyToClipboard, SettingsIcon } from '../icons'
 import { Sun, Moon, Monitor } from '@/components/theme/icons'
 import { useTheme } from '@/components/theme/ThemeContext'
 import { useTagStore } from '@/components/util/useTagStore'
@@ -62,18 +57,8 @@ const Settings = ({ t, handleThemeChange, handleLinkClick }) => (
     <div className="mb-5 ml-4 mt-5 text-3xl font-semibold text-heading-400">{t('settings')}</div>
     <div className="my-auto mb-20 mt-10 flex max-h-[230px] flex-col space-y-4 overflow-y-auto">
       <div className="ml-4 text-3xl font-semibold text-primary-400">{t('language')}</div>
-      <LangButton
-        t={t}
-        handleLinkClick={handleLinkClick}
-        locale={fallbackLng}
-        lang="english"
-      />
-      <LangButton
-        t={t}
-        handleLinkClick={handleLinkClick}
-        locale={secondLng}
-        lang="french"
-      />
+      <LangButton t={t} handleLinkClick={handleLinkClick} locale={fallbackLng} lang="english" />
+      <LangButton t={t} handleLinkClick={handleLinkClick} locale={secondLng} lang="french" />
       <div className="ml-4 text-3xl font-semibold text-primary-400">{t('theme')}</div>
       <ThemeButton t={t} handleThemeChange={handleThemeChange} theme="light" Icon={Sun} />
       <ThemeButton t={t} handleThemeChange={handleThemeChange} theme="dark" Icon={Moon} />
@@ -84,10 +69,10 @@ const Settings = ({ t, handleThemeChange, handleLinkClick }) => (
 
 const LangButton = ({ t, handleLinkClick, locale, lang }) => (
   <button
-    className="group flex flex-row py-2 items-center hover:bg-primary-600 hover:text-white"
+    className="group flex flex-row items-center py-2 hover:bg-primary-600 hover:text-white"
     onClick={() => handleLinkClick(locale)}
   >
-    <span className="ml-4 mr-2 bg-black text-white rounded-md px-1 w-8 dark:bg-white dark:text-black group-hover:bg-white group-hover:text-primary-500">
+    <span className="ml-4 mr-2 w-8 rounded-md bg-black px-1 text-white group-hover:bg-white group-hover:text-primary-500 dark:bg-white dark:text-black">
       {locale}
     </span>
     <div>{t(lang)}</div>
