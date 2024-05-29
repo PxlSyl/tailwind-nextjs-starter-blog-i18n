@@ -19,7 +19,7 @@ const Sidetoc = ({ toc }) => {
   }
 
   return (
-    <div ref={menubarRef} className="fixed left-0 top-0 z-50 h-screen flex">
+    <div ref={menubarRef} className="hidden fixed left-0 top-0 z-50 h-screen md:flex">
       <div
         className={`transition-transform duration-300 ease-in-out transform ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
