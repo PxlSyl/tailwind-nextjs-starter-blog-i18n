@@ -19,20 +19,18 @@ const Sidetoc = ({ toc }) => {
   }
 
   return (
-    <div ref={menubarRef}>
-      <div  className="fixed left-0 top-0 z-50 flex h-screen">
-        <div
-          className={`flex w-16 flex-col items-center justify-between bg-gray-100 px-2 py-4 text-transparent opacity-0 transition-all duration-300 ease-in-out dark:bg-gray-800 ${sidebarOpen ? 'w-64 opacity-100' : ''}`}
-        >
-          <div className="mt-20">
-            <div className={`${sidebarOpen ? 'text-xl font-bold text-heading-400' : ''}`}>
-              {t('sidetoc')}
-            </div>
-            <div
-              className={`${sidebarOpen ? 'my-auto mt-5 overflow-y-auto text-black dark:text-white' : ''}`}
-            >
-              <TOCInline toc={toc} />
-            </div>
+    <div ref={menubarRef} className="fixed left-0 top-0 z-50 h-screen flex">
+      <div
+        className={`transition-transform duration-300 ease-in-out transform ${
+          sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        } fixed left-0 top-0 z-50 flex h-screen w-64 flex-col bg-gray-100 px-2 py-4 dark:bg-gray-800`}
+      >
+        <div className="mt-20">
+          <div className="text-xl font-bold text-heading-400">
+            {t('sidetoc')}
+          </div>
+          <div className="my-auto mt-5 overflow-y-auto text-black dark:text-white">
+            <TOCInline toc={toc} />
           </div>
         </div>
       </div>
@@ -42,7 +40,7 @@ const Sidetoc = ({ toc }) => {
           className="rounded-full bg-gray-200 p-2 text-gray-500 opacity-100 transition-colors hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600"
         >
           <ArrowRightIcon
-            className={`h-6 w-6 transform transition-transform ${sidebarOpen ? 'rotate-180' : ''}`}
+            className={`h-5 w-5 transform transition-transform ${sidebarOpen ? 'rotate-180' : ''}`}
           />
         </button>
       </div>
