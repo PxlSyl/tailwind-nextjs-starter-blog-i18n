@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import Link from './Link'
+import Link from './mdxcomponents/Link'
 import siteMetadata from '@/data/siteMetadata'
 import headerNavLinks from '@/data/headerNavLinks'
 import { Authors, allAuthors } from 'contentlayer/generated'

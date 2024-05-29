@@ -1,8 +1,8 @@
-import Link from '@/components/Link'
+import Link from '@/components/mdxcomponents/Link'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import { formatDate } from 'pliny/utils/formatDate'
-import NewsletterForm from '@/components/NewsletterForm'
+import NewsletterForm from '@/components/newletter/NewsletterForm'
 import { createTranslation } from '../app/[locale]/i18n/server'
 import { LocaleTypes } from '../app/[locale]/i18n/settings'
 

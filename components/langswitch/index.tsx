@@ -1,28 +1,10 @@
 import { useState, useRef } from 'react'
 import { usePathname, useParams, useRouter } from 'next/navigation'
-import { useOuterClick } from './util/useOuterClick'
+import { useOuterClick } from '../util/useOuterClick'
 import { useTagStore } from '@/components/util/useTagStore'
 import { LocaleTypes, locales } from 'app/[locale]/i18n/settings'
 import { Menu, Transition, RadioGroup } from '@headlessui/react'
-
-export const ChevronDownIcon = ({ className }) => {
-  return (
-    <svg
-      className={`${className} transition-transform duration-300`}
-      xmlns="http://www.w3.org/2000/svg"
-      width="1em"
-      height="1em"
-      viewBox="0 0 15 15"
-    >
-      <path
-        fill="#3b82f6"
-        fillRule="evenodd"
-        d="M3.135 6.158a.5.5 0 0 1 .707-.023L7.5 9.565l3.658-3.43a.5.5 0 0 1 .684.73l-4 3.75a.5.5 0 0 1-.684 0l-4-3.75a.5.5 0 0 1-.023-.707"
-        clipRule="evenodd"
-      ></path>
-    </svg>
-  )
-}
+import { ChevronDownIcon } from './icon'
 
 const LangSwitch = () => {
   const pathname = usePathname()
@@ -67,7 +49,7 @@ const LangSwitch = () => {
             >
               {locale.charAt(0).toUpperCase() + locale.slice(1)}
               <ChevronDownIcon
-                className={`ml-1 mt-1 transform ${open ? 'rotate-180' : 'rotate-0'}`}
+                className={`ml-1 mt-1 transform transition-transform duration-300 ${open ? 'rotate-180' : 'rotate-0'}`}
               />
             </Menu.Button>
             <Transition

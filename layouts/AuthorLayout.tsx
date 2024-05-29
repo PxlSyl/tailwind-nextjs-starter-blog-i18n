@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import type { Authors } from 'contentlayer/generated'
 import SocialIcon from '@/components/social-icons'
-import Image from '@/components/Image'
+import Image from '@/components/mdxcomponents/Image'
 
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { createTranslation } from 'app/[locale]/i18n/server'

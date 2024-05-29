@@ -1,4 +1,4 @@
-import Link from '@/components/Link'
+import Link from '@/components/mdxcomponents/Link'
 import Tag from '@/components/Tag'
 import { formatDate } from 'pliny/utils/formatDate'
 import { createTranslation } from 'app/[locale]/i18n/server'
