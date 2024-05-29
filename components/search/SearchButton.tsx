@@ -1,8 +1,9 @@
 import { AlgoliaButton } from 'pliny/search/AlgoliaButton'
 import { KBarButton } from './KBarButton'
 import siteMetadata from '@/data/siteMetadata'
+import { SearchIcon } from './icons'
 
-const SearchButton = ({ className, viewBox }) => {
+const SearchButton = () => {
   if (
     siteMetadata.search &&
     (siteMetadata.search.provider === 'algolia' || siteMetadata.search.provider === 'kbar')
@@ -12,20 +13,7 @@ const SearchButton = ({ className, viewBox }) => {
 
     return (
       <SearchButtonWrapper aria-label="Search">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox={viewBox}
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className={`${className} text-gray-900 dark:text-gray-100`}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-          />
-        </svg>
+        <SearchIcon className="h-6 w-6 text-gray-900 dark:text-gray-100" />
       </SearchButtonWrapper>
     )
   }

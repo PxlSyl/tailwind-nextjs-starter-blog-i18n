@@ -1,6 +1,8 @@
-export function ChevronDownIcon(props) {
+import { SVGProps } from 'react'
+
+export function ChevronDownIcon(svgProps: SVGProps<SVGSVGElement>) {
   return (
-    <svg {...props} width="1em" height="1em" viewBox="0 0 15 15">
+    <svg {...svgProps} width="1em" height="1em" viewBox="0 0 15 15">
       <path
         fill="#3b82f6"
         fillRule="evenodd"

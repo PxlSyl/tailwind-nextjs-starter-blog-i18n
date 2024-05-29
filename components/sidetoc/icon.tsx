@@ -1,7 +1,9 @@
-export default function ArrowRightIcon(props) {
+import { SVGProps } from 'react'
+
+export function ArrowRightIcon(svgProps: SVGProps<SVGSVGElement>) {
   return (
     <svg
-      {...props}
+      {...svgProps}
       width="24"
       height="24"
       viewBox="0 0 24 24"

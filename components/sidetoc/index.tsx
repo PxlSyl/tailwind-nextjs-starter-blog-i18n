@@ -1,23 +1,25 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useRef } from 'react'
 import TOCInline from 'pliny/ui/TOCInline'
 import { useTranslation } from 'app/[locale]/i18n/client'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { useParams } from 'next/navigation'
 import { useOuterClick } from '../util/useOuterClick'
-import ArrowRightIcon from './icon'
+import { ArrowRightIcon } from './icon'
+import useSidebarStore from './store'
+import { Toc } from 'pliny/mdx-plugins'
 
-const Sidetoc = ({ toc }) => {
+interface SidetocProps {
+  toc: Toc
+}
+
+const Sidetoc = ({ toc }: SidetocProps) => {
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, 'common')
-  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const { sidebarOpen, toggleSidebar, closeSidebar } = useSidebarStore()
   const menubarRef = useRef<HTMLDivElement>(null)
-  useOuterClick(menubarRef, () => setSidebarOpen(false))
-
-  const handleClick = () => {
-    setSidebarOpen(!sidebarOpen)
-  }
+  useOuterClick(menubarRef, closeSidebar)
 
   return (
     <div ref={menubarRef} className="fixed left-0 top-0 z-50 hidden h-screen md:flex">
@@ -35,7 +37,7 @@ const Sidetoc = ({ toc }) => {
       </div>
       <div className="fixed bottom-8 left-6 z-50">
         <button
-          onClick={handleClick}
+          onClick={toggleSidebar}
           className="rounded-full bg-gray-200 p-2 text-gray-500 opacity-100 transition-colors hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600"
         >
           <ArrowRightIcon

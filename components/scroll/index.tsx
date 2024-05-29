@@ -5,8 +5,10 @@ import { useTranslation } from 'app/[locale]/i18n/client'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import SearchButton from '../search/SearchButton'
+import { AlgoliaButton } from 'pliny/search/AlgoliaButton'
+import { KBarButton } from '../search/KBarButton'
 import { CommentsIcon, ArrowTopIcon } from './icons'
+import { SearchIcon } from '../search/icons'
 
 const ScrollTopAndComment = () => {
   const locale = useParams()?.locale as LocaleTypes
@@ -29,31 +31,42 @@ const ScrollTopAndComment = () => {
   const handleScrollToComment = () => {
     document.getElementById('comment')?.scrollIntoView()
   }
-  return (
-    <div
-      className={`fixed bottom-8 right-8 z-50 hidden flex-col gap-3 ${show ? 'md:flex' : 'md:hidden'}`}
-    >
-      <div className="rounded-full bg-gray-200 p-2 text-gray-500 transition-all hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600">
-        <SearchButton viewBox="0 0 20 20" className="h-4 w-4" />
-      </div>
-      {siteMetadata.comments?.provider && (
+
+  if (
+    siteMetadata.search &&
+    (siteMetadata.search.provider === 'algolia' || siteMetadata.search.provider === 'kbar')
+  ) {
+    const SearchButtonWrapper =
+      siteMetadata.search.provider === 'algolia' ? AlgoliaButton : KBarButton
+
+    return (
+      <div
+        className={`fixed bottom-8 right-8 z-50 hidden flex-col gap-3 ${show ? 'md:flex' : 'md:hidden'}`}
+      >
+        <div className="rounded-full bg-gray-200 p-2 text-gray-500 transition-all hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600">
+          <SearchButtonWrapper aria-label="Search">
+            <SearchIcon className="h-5 w-5 text-gray-900 dark:text-gray-100" />
+          </SearchButtonWrapper>
+        </div>
+        {siteMetadata.comments?.provider && (
+          <button
+            aria-label={t('scrollcomment')}
+            onClick={handleScrollToComment}
+            className="rounded-full bg-gray-200 p-2 text-gray-500 transition-all hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600"
+          >
+            <CommentsIcon className="h-5 w-5" />
+          </button>
+        )}
         <button
-          aria-label={t('scrollcomment')}
-          onClick={handleScrollToComment}
+          aria-label={t('scrolltop')}
+          onClick={handleScrollTop}
           className="rounded-full bg-gray-200 p-2 text-gray-500 transition-all hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600"
         >
-          <CommentsIcon className="h-5 w-5" />
+          <ArrowTopIcon className="h-5 w-5" />
         </button>
-      )}
-      <button
-        aria-label={t('scrolltop')}
-        onClick={handleScrollTop}
-        className="rounded-full bg-gray-200 p-2 text-gray-500 transition-all hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600"
-      >
-        <ArrowTopIcon className="h-5 w-5" />
-      </button>
-    </div>
-  )
+      </div>
+    )
+  }
 }
 
 export default ScrollTopAndComment

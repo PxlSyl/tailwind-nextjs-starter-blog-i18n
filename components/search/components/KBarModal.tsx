@@ -18,7 +18,7 @@ import {
 } from 'kbar'
 import { useContactForm } from '@/components/formspree/useContactForm'
 import { ModalBody } from '@/components/formspree/CBody'
-import { MailIcon, BackwardIcon, CopyToClipboard, SettingsIcon } from '../icons'
+import { MailIcon, BackwardIcon, CopyToClipboard, SettingsIcon, SearchIcon } from '../icons'
 import { Sun, Moon, Monitor } from '@/components/theme/icons'
 import { useTheme } from '@/components/theme/ThemeContext'
 import { useTagStore } from '@/components/util/useTagStore'
@@ -89,23 +89,6 @@ const ThemeButton = ({ t, handleThemeChange, theme, Icon }) => (
     </span>
     <div>{t(theme)}</div>
   </button>
-)
-
-const SearchIcon = () => (
-  <svg
-    className="text-gray-400 dark:text-gray-300"
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="currentColor"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-    />
-  </svg>
 )
 
 const Button = ({ onClick, show, icon, label, backLabel }) => (
@@ -282,7 +265,7 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
           >
             <div className="flex items-center space-x-4 p-4">
               <span className="block w-5">
-                <SearchIcon />
+                <SearchIcon className="text-gray-400 dark:text-gray-300"/>
               </span>
               {showEmailForm || showSettings ? (
                 <div className="h-8 w-full bg-transparent" />
