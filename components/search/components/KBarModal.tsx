@@ -35,7 +35,13 @@ const EmailForm = ({
   t,
 }) => (
   <>
-    <div className="ml-2 mt-5 text-3xl font-semibold text-heading-400">{t('title')}</div>
+    <div className="flex flex-row items-center ml-2 mt-5 text-3xl font-semibold text-heading-400">
+    <span>
+      <MailIcon className="w-8 h8 mr-1"/>
+      </span>
+      <div>
+      {t('title')}</div>
+      </div>
     <div className="mb-16 ml-2 mr-2 mt-16">
       <ModalBody
         state={state}
@@ -54,7 +60,14 @@ const EmailForm = ({
 
 const Settings = ({ t, handleThemeChange, handleLinkClick }) => (
   <>
-    <div className="mb-5 ml-4 mt-5 text-3xl font-semibold text-heading-400">{t('settings')}</div>
+    <div className="flex flex-row items-center mb-5 ml-4 mt-5 text-3xl font-semibold text-heading-400">
+      <span>
+      <SettingsIcon className="w-8 h8 mr-1"/>
+      </span>
+      <div>
+      {t('settings')}
+      </div>
+      </div>
     <div className="my-auto mb-20 mt-10 flex max-h-[230px] flex-col space-y-4 overflow-y-auto">
       <div className="ml-4 text-3xl font-semibold text-primary-400">{t('language')}</div>
       <LangButton t={t} handleLinkClick={handleLinkClick} locale={fallbackLng} lang="english" />
