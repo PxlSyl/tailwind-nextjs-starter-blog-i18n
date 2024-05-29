@@ -133,7 +133,7 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
               keywords: post?.summary || '',
               section: t('content'),
               subtitle: post.tags.join(', '),
-              perform: () => router.push(`/${locale}/${post.path}`),
+              perform: () => router.push(`/${locale}/blog/${post.slug}`),
             }))
         },
       }}
