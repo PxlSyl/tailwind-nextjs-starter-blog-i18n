@@ -8,11 +8,11 @@ import { useParams } from 'next/navigation'
 import useSidebarStore from './store'
 import { Toc } from 'pliny/mdx-plugins'
 
-interface SidetocProps {
+interface TocBodyProps {
   toc: Toc
 }
 
-const TocBody = ({ toc }: SidetocProps) => {
+const TocBody = ({ toc }: TocBodyProps) => {
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, 'common')
   const { sidebarOpen} = useSidebarStore()
