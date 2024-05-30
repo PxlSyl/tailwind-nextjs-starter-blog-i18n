@@ -19,8 +19,8 @@ const Sidetoc = ({ toc }: SidetocProps) => {
 
   return (
     <div ref={menubarRef}>
-     <TocBody toc={toc}/>
-     <Button/>
+      <TocBody toc={toc} />
+      <Button />
     </div>
   )
 }
