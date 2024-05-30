@@ -36,14 +36,14 @@ export async function generateMetadata({ params: { locale } }): Promise<Metadata
     openGraph: {
       title: maintitle[locale],
       description: maindescription[locale],
-      url: './',
+      url:  siteMetadata.siteUrl,
       siteName: maintitle[locale],
       images: [siteMetadata.socialBanner],
       locale: locale,
       type: 'website',
     },
     alternates: {
-      canonical: './',
+      canonical: siteMetadata.siteUrl,
       types: {
         'application/rss+xml': `${siteMetadata.siteUrl}/feed.xml`,
       },
