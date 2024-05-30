@@ -13,6 +13,8 @@ import { createTranslation } from 'app/[locale]/i18n/server'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { PostSeriesBox } from '@/components/seriescard'
 import Share from '@/components/Share'
+import { Toc } from 'pliny/mdx-plugins'
+import Sidetoc from '@/components/sidetoc'
 
 interface PostSimpleProps {
   content: CoreContent<Blog>
@@ -29,11 +31,13 @@ export default async function PostLayout({
   children,
   params: { locale },
 }: PostSimpleProps) {
-  const { slug, date, title, language, series } = content
+  const { slug, date, title, language, series, toc } = content
+  const tableOfContents: Toc = toc as unknown as Toc
   const { t } = await createTranslation(locale, 'home')
   return (
     <SectionContainer>
       <ScrollTopAndComment />
+      <Sidetoc toc={tableOfContents} />
       <article>
         <div>
           <header>
