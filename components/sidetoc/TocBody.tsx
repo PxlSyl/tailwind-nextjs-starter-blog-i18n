@@ -1,6 +1,5 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import TOCInline from 'pliny/ui/TOCInline'
 import { useTranslation } from 'app/[locale]/i18n/client'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
@@ -16,13 +15,8 @@ const TocBody = ({ toc }: TocBodyProps) => {
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, 'common')
   const { sidebarOpen} = useSidebarStore()
-  const [isMounted, setIsMounted] = useState(false)
 
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
-
-  if (!isMounted || sidebarOpen === false) {
+  if ( sidebarOpen === false) {
     return null
   }
 
