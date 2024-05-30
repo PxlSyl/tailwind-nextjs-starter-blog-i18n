@@ -29,7 +29,7 @@ const Sidetoc = ({ toc }: SidetocProps) => {
 
   return (
     mounted && (
-      <div ref={menubarRef} className="fixed left-0 top-0 z-50 hidden h-screen md:flex">
+      <div ref={menubarRef} className={`${mounted? '' : "fixed left-0 top-0 z-50 hidden h-screen md:flex"}`}>
         <div
           className={`transform transition-transform duration-300 ease-in-out ${
             sidebarOpen ? 'translate-x-0' : '-translate-x-full'
@@ -38,7 +38,7 @@ const Sidetoc = ({ toc }: SidetocProps) => {
           <div className="mt-20">
             <div className="text-xl font-bold text-heading-400">{t('sidetoc')}</div>
             <div className="my-auto mt-5 overflow-y-auto text-black dark:text-white">
-              <TOCInline toc={toc} />
+              <TOCInline toc={toc} ulClassName={`${mounted? 'space-y-2 overflow-y-auto my-auto text-primary-500' : 'hidden'}`}/>
             </div>
           </div>
         </div>
