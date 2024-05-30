@@ -43,11 +43,11 @@ const ScrollTopAndComment = () => {
       <div
         className={`fixed bottom-8 right-8 z-50 hidden flex-col gap-3 ${show ? 'md:flex' : 'md:hidden'}`}
       >
-        <div className="rounded-full bg-gray-200 p-2 text-gray-500 transition-all hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600">
-          <SearchButtonWrapper aria-label="Search">
-            <SearchIcon className="h-5 w-5 text-gray-900 dark:text-gray-100" />
-          </SearchButtonWrapper>
-        </div>
+        <SearchButtonWrapper aria-label="Search">
+          <div className="rounded-full bg-gray-200 p-2 text-gray-500 transition-all hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600">
+            <SearchIcon className="h-5 w-5" />
+          </div>
+        </SearchButtonWrapper>
         {siteMetadata.comments?.provider && (
           <button
             aria-label={t('scrollcomment')}
