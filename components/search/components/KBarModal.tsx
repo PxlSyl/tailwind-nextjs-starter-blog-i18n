@@ -35,13 +35,12 @@ const EmailForm = ({
   t,
 }) => (
   <>
-    <div className="flex flex-row items-center ml-2 mt-5 text-3xl font-semibold text-heading-400">
-    <span>
-      <MailIcon className="w-8 h8 mr-1"/>
+    <div className="ml-2 mt-5 flex flex-row items-center text-3xl font-semibold text-heading-400">
+      <span>
+        <MailIcon className="h8 mr-1 w-8" />
       </span>
-      <div>
-      {t('title')}</div>
-      </div>
+      <div>{t('title')}</div>
+    </div>
     <div className="mb-16 ml-2 mr-2 mt-16">
       <ModalBody
         state={state}
@@ -60,14 +59,12 @@ const EmailForm = ({
 
 const Settings = ({ t, handleThemeChange, handleLinkClick }) => (
   <>
-    <div className="flex flex-row items-center mb-5 ml-4 mt-5 text-3xl font-semibold text-heading-400">
+    <div className="mb-5 ml-4 mt-5 flex flex-row items-center text-3xl font-semibold text-heading-400">
       <span>
-      <SettingsIcon className="w-8 h8 mr-1"/>
+        <SettingsIcon className="h8 mr-1 w-8" />
       </span>
-      <div>
-      {t('settings')}
-      </div>
-      </div>
+      <div>{t('settings')}</div>
+    </div>
     <div className="my-auto mb-20 mt-10 flex max-h-[230px] flex-col space-y-4 overflow-y-auto">
       <div className="ml-4 text-3xl font-semibold text-primary-400">{t('language')}</div>
       <LangButton t={t} handleLinkClick={handleLinkClick} locale={fallbackLng} lang="english" />
@@ -97,7 +94,7 @@ const ThemeButton = ({ t, handleThemeChange, theme, Icon }) => (
     className="flex flex-row py-2 hover:bg-primary-600 hover:text-white"
     onClick={() => handleThemeChange(theme)}
   >
-    <span className="ml-4 mr-2 hover:text-white">
+    <span className="ml-4 mr-2">
       <Icon />
     </span>
     <div>{t(theme)}</div>
@@ -278,7 +275,7 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
           >
             <div className="flex items-center space-x-4 p-4">
               <span className="block w-5">
-                <SearchIcon className="text-gray-400 dark:text-gray-300"/>
+                <SearchIcon className="text-gray-400 dark:text-gray-300" />
               </span>
               {showEmailForm || showSettings ? (
                 <div className="h-8 w-full bg-transparent" />

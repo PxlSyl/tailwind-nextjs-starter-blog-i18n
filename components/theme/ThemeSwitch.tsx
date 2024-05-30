@@ -67,7 +67,7 @@ const ThemeSwitch = () => {
                             : 'hover:bg-gray-100 dark:hover:bg-gray-600'
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm hover:text-primary-500 dark:hover:text-primary-500`}
                       >
-                        <Sun />
+                        <Sun className="h-6 w-6" />
                         <span className="ml-2">{t('light')}</span>
                       </button>
                     )}
@@ -84,7 +84,7 @@ const ThemeSwitch = () => {
                             : 'hover:bg-gray-100 dark:hover:bg-gray-600'
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm hover:text-primary-500 dark:hover:text-primary-500`}
                       >
-                        <Moon />
+                        <Moon className="h-6 w-6" />
                         <span className="ml-2">{t('dark')}</span>
                       </button>
                     )}
@@ -101,7 +101,7 @@ const ThemeSwitch = () => {
                             : 'hover:bg-gray-100 dark:hover:bg-gray-600'
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm hover:text-primary-500 dark:hover:text-primary-500`}
                       >
-                        <Monitor />
+                        <Monitor className="h-6 w-6" />
                         <span className="ml-2">{t('system')}</span>
                       </button>
                     )}
