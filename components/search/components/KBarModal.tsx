@@ -37,7 +37,7 @@ const EmailForm = ({
   <>
     <div className="ml-2 mt-5 flex flex-row items-center text-3xl font-semibold text-heading-400">
       <span>
-        <MailIcon className="h8 mr-1 w-8" />
+        <MailIcon className="mr-1 h-6 w-6" />
       </span>
       <div>{t('title')}</div>
     </div>
@@ -61,7 +61,7 @@ const Settings = ({ t, handleThemeChange, handleLinkClick }) => (
   <>
     <div className="mb-5 ml-4 mt-5 flex flex-row items-center text-3xl font-semibold text-heading-400">
       <span>
-        <SettingsIcon className="h8 mr-1 w-8" />
+        <SettingsIcon className="mr-1 h-6 w-6" />
       </span>
       <div>{t('settings')}</div>
     </div>
