@@ -42,7 +42,7 @@ const LangSwitch = () => {
         {({ open }) => (
           <>
             <Menu.Button
-              className="inline-flex w-full justify-center rounded-md px-1 py-2 text-sm font-bold leading-5 text-gray-700 shadow-sm dark:text-white"
+              className="inline-flex rounded-md px-1 py-2 font-bold leading-5 text-gray-700 shadow-sm dark:text-white"
               aria-haspopup="true"
               aria-expanded={open}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
