@@ -24,7 +24,7 @@ export function genPageMetadata({
     openGraph: {
       title: `${title} | ${maintitle[locale]}`,
       description: description || maindescription[locale],
-      url: siteMetadata.siteUrl,
+      url: './',
       siteName: maintitle[locale],
       images: image ? [image] : [siteMetadata.socialBanner],
       locale: locale,

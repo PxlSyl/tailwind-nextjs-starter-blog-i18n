@@ -147,7 +147,7 @@ const CopyButton = ({ show, copyUrl, showCopied, t }) => (
 const RenderResults = () => {
   const { results } = useMatches()
   const locale = useParams()?.locale as LocaleTypes
-  const { t } = useTranslation(locale, '')
+  const { t } = useTranslation(locale, 'common')
 
   return results.length ? (
     <KBarResults
