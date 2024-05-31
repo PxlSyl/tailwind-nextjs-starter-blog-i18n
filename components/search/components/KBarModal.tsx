@@ -95,7 +95,7 @@ const ThemeButton = ({ t, handleThemeChange, theme, Icon }) => (
     onClick={() => handleThemeChange(theme)}
   >
     <span className="ml-4 mr-2">
-      <Icon />
+      <Icon className='h-6 w-6'/>
     </span>
     <div>{t(theme)}</div>
   </button>
