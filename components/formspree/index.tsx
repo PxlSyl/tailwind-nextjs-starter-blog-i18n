@@ -1,8 +1,7 @@
 'use client'
 
-import 'react-toastify/dist/ReactToastify.css'
 import { useContactModal } from './store'
-import { ToastContainer } from 'react-toastify'
+import { Toaster } from 'react-hot-toast'
 import { CModal } from './CModal'
 import { ModalBody } from './CBody'
 import { useContactForm } from './useContactForm'
@@ -41,7 +40,7 @@ export const ContactModal = (): JSX.Element => {
           />
         }
       />
-      <ToastContainer autoClose={2000} />
+      <Toaster />
     </>
   )
 }

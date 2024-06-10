@@ -1,5 +1,3 @@
-'use client'
-
 import { useState } from 'react'
 import siteMetadata from '@/data/siteMetadata'
 import { useParams, usePathname, useRouter } from 'next/navigation'
@@ -17,6 +15,7 @@ import {
   useRegisterActions,
 } from 'kbar'
 import { useContactForm } from '@/components/formspree/useContactForm'
+import { Toaster } from 'react-hot-toast'
 import { ModalBody } from '@/components/formspree/CBody'
 import { MailIcon, BackwardIcon, CopyToClipboard, SettingsIcon, SearchIcon } from '../icons'
 import { Sun, Moon, Monitor } from '@/components/theme/icons'
@@ -95,7 +94,7 @@ const ThemeButton = ({ t, handleThemeChange, theme, Icon }) => (
     onClick={() => handleThemeChange(theme)}
   >
     <span className="ml-4 mr-2">
-      <Icon className='h-6 w-6'/>
+      <Icon className="h-6 w-6" />
     </span>
     <div>{t(theme)}</div>
   </button>
@@ -175,7 +174,9 @@ const RenderResults = () => {
 
 const ResultItem = ({ item, active }) => (
   <div
-    className={`flex cursor-pointer justify-between px-4 py-2 ${active ? 'bg-primary-600 text-gray-100' : 'bg-transparent text-gray-700 dark:text-gray-100'}`}
+    className={`flex cursor-pointer justify-between px-4 py-2 ${
+      active ? 'bg-primary-600 text-gray-100' : 'bg-transparent text-gray-700 dark:text-gray-100'
+    }`}
   >
     <div className="flex space-x-2">
       {item.icon && <div className="mb-1 self-center">{item.icon}</div>}
@@ -193,7 +194,9 @@ const ResultItem = ({ item, active }) => (
         {item.shortcut.map((sc) => (
           <kbd
             key={sc}
-            className={`flex h-7 w-6 items-center justify-center rounded border text-xs font-medium ${active ? 'border-gray-200 text-gray-200' : 'border-gray-400 text-gray-400'}`}
+            className={`flex h-7 w-6 items-center justify-center rounded border text-xs font-medium ${
+              active ? 'border-gray-200 text-gray-200' : 'border-gray-400 text-gray-400'
+            }`}
           >
             {sc}
           </kbd>
@@ -266,84 +269,87 @@ export const KBarModal = ({ actions, isLoading }: { actions: Action[]; isLoading
   if (!mounted) return null
 
   return (
-    <KBarPortal>
-      <KBarPositioner className="bg-gray-300/50 p-4 backdrop-blur backdrop-filter dark:bg-black/50">
-        <KBarAnimator className="w-full max-w-xl">
-          <div
-            style={{ zIndex: '100' }}
-            className="overflow-hidden rounded-2xl border border-gray-100 bg-gray-50 dark:border-gray-800 dark:bg-[#1c1c1c]"
-          >
-            <div className="flex items-center space-x-4 p-4">
-              <span className="block w-5">
-                <SearchIcon className="text-gray-400 dark:text-gray-300" />
-              </span>
-              {showEmailForm || showSettings ? (
-                <div className="h-8 w-full bg-transparent" />
-              ) : (
-                <KBarSearch
-                  defaultPlaceholder={t('kbarplaceholder')}
-                  className="h-8 w-full bg-transparent text-gray-600 placeholder-gray-400 focus:outline-none dark:text-gray-200 dark:placeholder-gray-500"
-                />
-              )}
-              <kbd className="inline-block whitespace-nowrap rounded border border-gray-400 px-1.5 align-middle text-xs font-medium leading-4 tracking-wide text-gray-400">
-                ESC
-              </kbd>
-            </div>
-            <div className="mb-1 ml-2 flex items-center space-x-2">
-              {!showSettings && (
-                <Button
-                  onClick={toggleShowEmail}
-                  show={showEmailForm}
-                  icon={<MailIcon />}
-                  label={t('contact')}
-                  backLabel={t('back')}
-                />
-              )}
-              {!showEmailForm && (
-                <Button
-                  onClick={toggleSettings}
-                  show={showSettings}
-                  icon={<SettingsIcon />}
-                  label={t('settings')}
-                  backLabel={t('back')}
-                />
-              )}
-              <CopyButton
-                show={showEmailForm || showSettings}
-                copyUrl={copyUrl}
-                showCopied={showCopied}
-                t={t}
-              />
-            </div>
-            {showEmailForm && (
-              <EmailForm
-                state={state}
-                handleSubmit={handleSubmit}
-                name={name}
-                email={email}
-                message={message}
-                handleNameChange={handleNameChange}
-                handleEmailChange={handleEmailChange}
-                handleMessageChange={handleMessageChange}
-                t={t}
-              />
-            )}
-            {showSettings && (
-              <Settings
-                t={t}
-                handleThemeChange={handleThemeChange}
-                handleLinkClick={handleLinkClick}
-              />
-            )}
-            {!isLoading && !showEmailForm && !showSettings && <RenderResults />}
-            {isLoading && (
-              <div className="block border-t border-gray-100 px-4 py-8 text-center text-gray-400 dark:border-gray-800 dark:text-gray-600">
-                {t('loading')}
+    <>
+      <KBarPortal>
+        <KBarPositioner className="bg-gray-300/50 p-4 backdrop-blur backdrop-filter dark:bg-black/50">
+          <KBarAnimator className="w-full max-w-xl">
+            <div
+              style={{ zIndex: '100' }}
+              className="overflow-hidden rounded-2xl border border-gray-100 bg-gray-50 dark:border-gray-800 dark:bg-[#1c1c1c]"
+            >
+              <div className="flex items-center space-x-4 p-4">
+                <span className="block w-5">
+                  <SearchIcon className="text-gray-400 dark:text-gray-300" />
+                </span>
+                {showEmailForm || showSettings ? (
+                  <div className="h-8 w-full bg-transparent" />
+                ) : (
+                  <KBarSearch
+                    defaultPlaceholder={t('kbarplaceholder')}
+                    className="h-8 w-full bg-transparent text-gray-600 placeholder-gray-400 focus:outline-none dark:text-gray-200 dark:placeholder-gray-500"
+                  />
+                )}
+                <kbd className="inline-block whitespace-nowrap rounded border border-gray-400 px-1.5 align-middle text-xs font-medium leading-4 tracking-wide text-gray-400">
+                  ESC
+                </kbd>
               </div>
-            )}
-          </div>
-        </KBarAnimator>
-      </KBarPositioner>
-    </KBarPortal>
+              <div className="mb-1 ml-2 flex items-center space-x-2">
+                {!showSettings && (
+                  <Button
+                    onClick={toggleShowEmail}
+                    show={showEmailForm}
+                    icon={<MailIcon />}
+                    label={t('contact')}
+                    backLabel={t('back')}
+                  />
+                )}
+                {!showEmailForm && (
+                  <Button
+                    onClick={toggleSettings}
+                    show={showSettings}
+                    icon={<SettingsIcon />}
+                    label={t('settings')}
+                    backLabel={t('back')}
+                  />
+                )}
+                <CopyButton
+                  show={showEmailForm || showSettings}
+                  copyUrl={copyUrl}
+                  showCopied={showCopied}
+                  t={t}
+                />
+              </div>
+              {showEmailForm && (
+                <EmailForm
+                  state={state}
+                  handleSubmit={handleSubmit}
+                  name={name}
+                  email={email}
+                  message={message}
+                  handleNameChange={handleNameChange}
+                  handleEmailChange={handleEmailChange}
+                  handleMessageChange={handleMessageChange}
+                  t={t}
+                />
+              )}
+              {showSettings && (
+                <Settings
+                  t={t}
+                  handleThemeChange={handleThemeChange}
+                  handleLinkClick={handleLinkClick}
+                />
+              )}
+              {!isLoading && !showEmailForm && !showSettings && <RenderResults />}
+              {isLoading && (
+                <div className="block border-t border-gray-100 px-4 py-8 text-center text-gray-400 dark:border-gray-800 dark:text-gray-600">
+                  {t('loading')}
+                </div>
+              )}
+            </div>
+          </KBarAnimator>
+        </KBarPositioner>
+      </KBarPortal>
+      <Toaster />
+    </>
   )
 }

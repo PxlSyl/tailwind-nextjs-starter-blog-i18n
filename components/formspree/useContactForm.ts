@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useForm } from '@formspree/react'
-import { toast } from 'react-toastify'
+import toast from 'react-hot-toast'
 import { useParams } from 'next/navigation'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { useTranslation } from 'app/[locale]/i18n/client'
@@ -15,7 +15,7 @@ export const useContactForm = () => {
 
   useEffect(() => {
     if (state.succeeded && !state.submitting) {
-      toast.success<unknown>(t('thanks'), {
+      toast.success(t('thanks'), {
         position: 'bottom-right',
       })
       setTimeout(() => {
@@ -27,7 +27,7 @@ export const useContactForm = () => {
     }
 
     if (state.errors && Object.keys(state.errors).length > 0) {
-      toast.error<unknown>(t('error'))
+      toast.error(t('error'))
     }
   }, [state, reset, t])
 
