@@ -10,6 +10,8 @@ So for now, blog page and tags logic is entirely managed on client side (also re
 
 sitemap.xml and robots.txt are now handled perfectly. I made all the necessary changes, next step is to fix rss, and update the i18n documentation because a lot of things are coded in a different way as before.
 
+How can YOU help? You can help this project by making PR. I need help to optimize the performances on mobile
+
 ## Introduction
 
 In this post we will discuss the i18n implementation and how it changes compared to the original V.2.
