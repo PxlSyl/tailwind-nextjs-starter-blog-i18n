@@ -10,6 +10,7 @@ import { useOuterClick } from './util/useOuterClick'
 import { useParams, usePathname } from 'next/navigation'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { useTranslation } from 'app/[locale]/i18n/client'
+import { motion } from 'framer-motion'
 
 type AuthorsMenuProps = {
   className: string
@@ -43,23 +44,36 @@ const AuthorsMenu = ({ className }: AuthorsMenuProps) => {
   const menubarRef = useRef<HTMLDivElement>(null)
   useOuterClick(menubarRef, closeMenu)
 
+const isSelected = authors.some((author) => author.slug.includes(lastSection)) && filterSections
+
   return (
     <>
       {siteMetadata.multiauthors && (
         <div ref={menubarRef} className={className}>
           <Menu as="div" className="relative inline-block text-left font-medium leading-5">
             <div
-              className={
-                authors.some((author) => author.slug.includes(lastSection)) && filterSections
-                  ? 'text-primary-500 dark:text-primary-500'
-                  : ''
-              }
+             
             >
               <Menu.Button
                 className="flex transform-gpu items-center space-x-1 transition-transform duration-300"
                 onClick={toggleMenu}
               >
-                {t('about')}
+                <div  className={`hidden font-medium ${
+                    isSelected ? 'text-white'
+                    : 'text-gray-500 hover:text-gray-900 dark:hover:text-gray-100'
+                  } relative rounded-md px-2 py-1 font-medium transition-colors sm:block`}
+                >
+                  <span className="relative z-10">
+                  {t('about')}
+                  </span>
+                  {isSelected && (
+                    <motion.span
+                      layoutId="tab"
+                      transition={{ type: 'spring', duration: 0.4 }}
+                      className="absolute inset-0 z-0 rounded-md bg-heading-500"
+                    ></motion.span>
+                  )}
+                </div>
               </Menu.Button>
             </div>
             <Transition
@@ -129,9 +143,20 @@ const AuthorsMenu = ({ className }: AuthorsMenuProps) => {
                 <Link
                   href={`/${locale}/about/${slug}`}
                   key={name}
-                  className={`${authors.some((author) => author.slug.includes(lastSection)) && filterSections ? 'text-primary-500 dark:text-primary-500' : ''}relative inline-block text-left font-medium leading-5`}
+                  className={`${isSelected ? 'text-white'
+                  : 'text-gray-500 hover:text-gray-900 dark:hover:text-gray-100'
+                } relative rounded-md px-2 py-1 font-medium transition-colors sm:block`}
                 >
+                  <span className="relative z-10">
                   {t('about')}
+                  </span>
+                  {isSelected && (
+                    <motion.span
+                      layoutId="tab"
+                      transition={{ type: 'spring', duration: 0.4 }}
+                      className="absolute inset-0 z-0 rounded-md bg-heading-500"
+                    ></motion.span>
+                  )}
                 </Link>
               )
             }
