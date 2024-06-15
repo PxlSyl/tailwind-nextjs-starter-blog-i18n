@@ -51,7 +51,7 @@ const Header = () => {
                   href={`/${locale}${link.href}`}
                   className={`hidden font-medium ${
                     isSelected
-                      ? 'text-white'
+                      ? 'text-heading-500'
                       : 'text-gray-500 hover:text-gray-900 dark:hover:text-gray-100'
                   } relative rounded-md px-2 py-1 font-medium transition-colors sm:block`}
                 >
@@ -60,7 +60,7 @@ const Header = () => {
                     <motion.span
                       layoutId="tab"
                       transition={{ type: 'spring', duration: 0.4 }}
-                      className="absolute inset-0 z-0 rounded-md bg-heading-500"
+                      className="absolute inset-0 z-0 rounded-md bg-gray-100 dark:bg-gray-600"
                     ></motion.span>
                   )}
                 </Link>
