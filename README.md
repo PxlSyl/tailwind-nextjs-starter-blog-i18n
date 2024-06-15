@@ -8,7 +8,7 @@ Also, I don't think that the impact of these first changes is really bad for SEO
 
 So for now, blog page and tags logic is entirely managed on client side (also resulting in a faster UI for users). This also means less complex server side code and pages.
 
-sitemap.xml and robots.txt are now handled perfectly. I made all the necessary changes, next step is to fix rss, and update the i18n documentation because a lot of things are coded in a different way as before.
+sitemap.xml and robots.txt are now handled perfectly. I made all the necessary changes, next step is to fix rss.
 
 How can YOU help? You can help this project by making PR. I need help to optimize the performances on mobile
 
@@ -53,6 +53,7 @@ This repository will sometimes be updated with new features (not present in the 
 All this can sometimes seem obsessive regarding the UI and details, -maybe too neat or a little overkill- but I also use this repository as a play and learning space.
 
 For now :
+- New "sidetoc" component :  display automatically the table of contents of your posts in a dedicated sidebar.
 - Integration of email, theme, as well as a button to quickly copy the URL of the page you are on, with the kbar palette command.
 The motivation for this is having explored other command palette libraries, with some offering nested elements for 'Actions'. Unfortunately this is not possible with kbar, but it gave me new ideas!
 - Multi-authors feature for "about" section: each author can have it's own about page available inside a dropdown menu on large screens, or displayed directly on small screens. If you want to turn it off and only use the "normal", classical about section, go to sitemetadata.js and set multiauthors to false. In any case, your main author now needs to have the field "default" set to true.
@@ -61,7 +62,7 @@ The motivation for this is having explored other command palette libraries, with
 - Waline comment system now supported! It's probably the best open source comment system right now, with even i18n and many other great features! First, follow [the official tutorial](https://waline.js.org/en/guide/get-started/) to set up the comments database and your vercel server. There's many options available, so take the time to read their documentation. Since it's Vue based, it's still compatible with Next.js, and I created a new comment component. You'll find it in "walinecomponents" folder. I also added a new css file, and you can modify the style here if needed. Once you have deployed your application for comments, modify the sitemetadata.js file. Set "iscomments" property to false, set "iswaline"
 to true and set the url of your comments server accordingly in "walineServer". If your language is not supported by waline, make a PR to their repository or ask them kindly to add your own translation (provide it yourself first). This is what I did for supporting french, and this how we work in open source world!
 
-- I know it's a frequently asked feature request in the original repository, so : series for your posts is now supported, see the deployed demo!
+- Series for your posts is now supported, see the deployed demo!
 
 Example of including this new feature : 
 
@@ -73,7 +74,6 @@ series:
 date: '2023-11-17'
 lastmod: '2023-11-17'
 language: en
-localeid: 'introducingstarterblogi18n'
 tags: ['next-js', 'tailwind', 'guide', 'features', 'i18n']
 authors: ['default']
 images: ['/static/images/twitter-card.png']
@@ -94,8 +94,8 @@ summary: Presentation of the Starter Blog Tailwind Next-js v2.0, with addition a
 
 - [Formspree](https://formspree.io/) support for the mail icon, with a beautiful modal dialog. Formspree allows your users to contact you and send you messages directly from your site, with anti-spam protection. Simply create a free basic account, read the docs and get the key from your formspree account and then replace the key with your own here, in components/formspree/index.tsx :
 
-```ts:formspree/index.tsx
-/* Line 19*/
+```ts:formspree/useContactForm.ts
+/* Line 11*/
  const [state, handleSubmit, reset] = useForm('xdojkndq')
 ```
 
@@ -438,7 +438,7 @@ export const config = {
    /* Do not execute middleware on the following paths: */
    // prettier-ignore
    match:
-   '/((?!api|static|data|css|scripts|.*\\..*|_next).*|robots.txt|sitemap.xml|favicon.ico)',
+   '/((?!api|static|data|css|scripts|.*\\..*|_next).*|sitemap.xml)',
 }
 ```
 
@@ -446,9 +446,15 @@ export const config = {
 
 All posts are grouped within the “data/blog” folder.
 
-They are organized into subfolders: "data/blog/posts" for English, and "data/blog/articles" for French (articles is the
-French translation of "posts"). If you add/modify a language, I simply recommend that you create a folder with
-the name of the translation of "posts" for the chosen language.
+They are organized into subfolders: "data/blog/en" for English, and "data/blog/fr" for French. 
+You can name the subfolders for your languages as you want : with the current configuration in contentlayer.config.ts file, the slug for your posts is the filename of your post, without the .mdx extension. All your translated posts must have the same name as the originals ones, for handling purposes of translation.
+
+Example : 
+
+En: "data/blog/en/code-sample.mdx"
+Fr: "data/blog/fr/code-sample.mdx"
+
+Etc.
 
 - Headers of your posts:
 
@@ -458,7 +464,6 @@ title: article title
 date: creation date
 lastmod: last modified date
 language: article language
-localeid: identifier to match articles in other languages
 tags: tags
 authors: authors
 pictures: pictures
@@ -479,11 +484,12 @@ export const Blog = defineDocumentType(() => ({
    contentType: 'mdx',
    fields: {
      title: { type: 'string', required: true },
+     series: { type: 'nested', of: Series },
      date: { type: 'date', required: true },
      language: { type: 'string', required: true }, // New required field
-     localeid: { type: 'string', required: true }, // New required field
      tags: { type: 'list', of: { type: 'string' }, default: [] },
      lastmod: { type: 'date' },
+     featured: { type: 'boolean' },
      draft: { type: 'boolean' },
      summary: { type: 'string' },
      images: { type: 'json' },
@@ -506,6 +512,7 @@ export const Authors = defineDocumentType(() => ({
    fields: {
      name: { type: 'string', required: true },
      language: { type: 'string', required: true }, // New required field
+     default: {type: 'boolean'},
      avatar: { type: 'string' },
      occupation: { type: 'string' },
      company: { type: 'string' },
@@ -548,42 +555,6 @@ function createTagCount(allBlogs) {
 
 Note: If you want to add other languages (3, 4 or even 5 languages), you will need to modify the logic to support
 these new languages.
-
--generateSlugMap function:
-
-```
-async function generateSlugMap(allBlogs) {
-   const slugMap = {}
-
-   // Processing each blog post
-   allBlogs.forEach((blog) => {
-     const { localeid, language, slug } = blog
-     const formattedLng = language === fallbackLng ? fallbackLng: secondLng
-
-     if (!slugMap[localeid]) {
-       slugMap[localeid] = {}
-     }
-
-     // Adding the slug to the mapping for the specific language
-     slugMap[localeid][formattedLng] = slug
-   })
-
-   writeFileSync('./app/[locale]/localeid-map.json', JSON.stringify(slugMap, null, 2))
-}
-```
-
-This function is the one that allows you to match the posts to each other:
-
-let's say you are reading a post, but you prefer to read it in another language, instead of redirecting
-to a 404 error page, this will display the post in the corresponding language!
-
-But for this, you must assign a unique identifier (LocaleID in your MDX files) to your post,
-and the corresponding post in the translated language. If no matching item is found, the router
-will simply redirect you to the blog's overview page.
-
-- Important: if you are a Windows user, a script adapted to internationalization is provided (/scripts folder) as a workaround
-  to a [beug](https://github.com/timlrx/tailwind-nextjs-starter-blog/issues/704#issuecomment-1712693106) linked to the
-  contentlayer library.
 
 ## Authors
 
@@ -647,7 +618,7 @@ const projectsData: ProjectsData = {
          to the desired date and press “Go”. No more worrying about lost keys or
          forgotten headphones with this simple yet affordable solution.`,
        imgSrc: '/static/images/time-machine.jpg',
-       href: '/blog/posts/the-time-machine',
+       href: '/blog/the-time-machine',
      },
    ],
 
@@ -665,7 +636,7 @@ const projectsData: ProjectsData = {
         à la date souhaitée et appuyez sur "Go". Ne vous inquiétez plus des clés perdues ou
         écouteurs oubliés avec cette solution simple mais abordable.`,
       imgSrc: '/static/images/time-machine.jpg',
-      href: '/blog/articles/la-machine-a-remonter-le-temps',
+      href: '/blog/the-time-machine',
     },
   ],
 }
@@ -689,6 +660,48 @@ There's an issue when using regular translations, so I implemented a workaround 
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, '')
   const router = useRouter()
+   const authors = allAuthors
+    .filter((a) => a.language === locale)
+    .sort((a, b) => (a.default === b.default ? 0 : a.default ? -1 : 1)) as Authors[]
+
+  const authorSearchItems = authors.map((author) => {
+    const { name, slug } = author
+    return {
+      id: slug,
+      name: name,
+      keywords: '',
+      shortcut: [],
+      section: locale === fallbackLng ? 'Authors' : 'Auteurs',
+      perform: () => router.push(`/${locale}/about/${slug}`),
+      icon: (
+        <i>
+          <AboutIcon />
+        </i>
+      ),
+    }
+  })
+
+  const showAuthorsSearch = siteMetadata.multiauthors
+  const authorsActions = [
+    ...(showAuthorsSearch ? authorSearchItems : []),
+    ...(showAuthorsSearch
+      ? []
+      : [
+          {
+            id: 'about',
+            name: locale === fallbackLng ? 'About' : 'À propos',
+            keywords: '',
+            shortcut: ['a'],
+            section: locale === fallbackLng ? 'Navigate' : 'Naviguer',
+            perform: () => router.push(`/${locale}/about`),
+            icon: (
+              <i>
+                <AboutIcon />
+              </i>
+            ),
+          },
+        ]),
+  ]
   /* issue when using regular translations, this is a workaround to show how to implement section titles */
    /*Modify the following line based on your implemented languages: */
   const navigationSection = locale === fallbackLng ? 'Navigate' : 'Naviguer'
@@ -696,52 +709,61 @@ There's an issue when using regular translations, so I implemented a workaround 
     <KBarSearchProvider
       kbarConfig={{
         searchDocumentsPath: 'search.json',
+        /* issue when using regular translations, this is a workaround to show how to implement translated menu titles */
         defaultActions: [
           {
             id: 'home',
-             /*Modify the following line based on your implemented languages: */
             name: locale === fallbackLng ? 'Home' : 'Accueil',
             keywords: '',
             shortcut: ['h'],
             section: navigationSection,
             perform: () => router.push(`/${locale}`),
+            icon: (
+              <i>
+                <HomeIcon />
+              </i>
+            ),
           },
           {
             id: 'blog',
-             /*Modify the following line based on your implemented languages: */
             name: locale === fallbackLng ? 'Blog' : 'Blog',
             keywords: '',
             shortcut: ['b'],
             section: navigationSection,
             perform: () => router.push(`/${locale}/blog`),
+            icon: (
+              <i>
+                <BlogIcon />
+              </i>
+            ),
           },
           {
             id: 'tags',
-             /*Modify the following line based on your implemented languages: */
             name: locale === fallbackLng ? 'Tags' : 'Tags',
             keywords: '',
             shortcut: ['t'],
             section: navigationSection,
             perform: () => router.push(`/${locale}/tags`),
+            icon: (
+              <i>
+                <TagsIcon />
+              </i>
+            ),
           },
           {
             id: 'projects',
-             /*Modify the following line based on your implemented languages: */
             name: locale === fallbackLng ? 'Projects' : 'Projets',
             keywords: '',
             shortcut: ['p'],
             section: navigationSection,
             perform: () => router.push(`/${locale}/projects`),
+            icon: (
+              <i>
+                <ProjectsIcon />
+              </i>
+            ),
           },
-          {
-            id: 'about',
-             /*Modify the following line based on your implemented languages: */
-            name: locale === fallbackLng ? 'About' : 'À propos',
-            keywords: '',
-            shortcut: ['a'],
-            section: navigationSection,
-            perform: () => router.push(`/${locale}/about`),
-          },
+          ...authorsActions,
         ],
         onSearchDocumentsLoad(json) {
           return json
@@ -752,7 +774,7 @@ There's an issue when using regular translations, so I implemented a workaround 
               keywords: post?.summary || '',
               section: t('content'),
               subtitle: post.tags.join(', '),
-              perform: () => router.push(`/${locale}/${post.path}`),
+              perform: () => router.push(`/${locale}/blog/${post.slug}`),
             }))
         },
       }}

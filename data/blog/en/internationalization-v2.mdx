@@ -4,7 +4,7 @@ series:
   order: 4
   title: "Blog Starter"
 date: '2023-11-17'
-lastmod: '2023-11-17'
+lastmod: '2024-06-15'
 language: en
 tags: ['next-js', 'tailwind', 'guide', 'features', 'i18n']
 authors: ['tailsazimuth']
@@ -14,20 +14,112 @@ featured: true
 summary: Presentation of the Starter Blog Tailwind Next-js v2.0, with addition and support for multiple languages.
 ---
 
+IMPORTANT NOTE: 
+
+This is still a WIP (Work In Progress).
+
+I recently changed all the complex server logic for pagination and tags, with the use of Zustand library, and moved it all to two components (pagination, and ListLayout)
+While it's not optimal for SEO purposes, the goal of these changes is to find a solution for managing all the url in a better way (translated urls are very bad for SEO)
+Also, I don't think that the impact of these first changes is really bad for SEO, because most users will use this repository and code for their personal dev blog.
+
+So for now, blog page and tags logic is entirely managed on client side (also resulting in a faster UI for users). This also means less complex server side code and pages.
+
+sitemap.xml and robots.txt are now handled perfectly. I made all the necessary changes, next step is to fix rss.
+
+How can YOU help? You can help this project by making PR. I need help to optimize the performances on mobile
+
 ## Introduction
 
 In this post we will discuss the i18n implementation and how it changes compared to the original V.2.
 For a better understanding of the basic functionalities, you will need to consult the other posts, or the original documentation
 on [timlrx](https://github.com/timlrx/tailwind-nextjs-starter-blog) github.
 
+Using the repo? Let me know and I'll start a list if you want your own blog listed there.
+
+If you find this project useful, please give it a ⭐ to show your support.
+
 ## Motivation
 
-I am currently redesigning my website, (not yet published) which uses the router page, and part of the code for the internationalized blog of V.1.
-I want to migrate to the app router, but for that, I first had to learn how to internationalize a site with the router app, so I took this repository as training.
+The original model is amazing, and all major credits for it go to its creator @Timlrx. I was using V.1 of the i18n version, which was rather complicated to use and which it seems that the creator has unfortunately abandoned. So this is my participation and my donation to the community!
 
-I am also preparing a much more complete template for artists, content creators and developers, which I will use for my own site and which will be available soon.
+Also, I am currently redesigning my own website, which uses the router page, and part of the code for the internationalized blog of V.1.
+I wanted to migrate to the app router, but for that, I first had to learn how to internationalize a site with the router app, so I took this repository as training.
+
+I love the idea of helping other developers to quickly start sharing their precious knowledge with the whole world, making the internet better, whether in their native language, or in English 😌
+
+I also designed a much more complete template for artists, content creators and developers, which I m'using for my own site and which is available here :
+
+Normal version :
+
+- [Pablo Pikassiet Next Starter](https://github.com/PxlSyl/pablo-pikassiet-next-starter)
+
+I18 version :
+
+- [Pablo Pikassiet Next Starter I18n](https://github.com/PxlSyl/pablo-pikassiet-next-starter-i18n)
+
+My own website based on this new template :
+
+- [PxlSyl.art](https://www.pxlsyl.art/)
 
 # Changes:
+
+## New features
+
+This repository will sometimes be updated with new features (not present in the original repository)
+All this can sometimes seem obsessive regarding the UI and details, -maybe too neat or a little overkill- but I also use this repository as a play and learning space.
+
+For now :
+- New "sidetoc" component :  display automatically the table of contents of your posts in a dedicated sidebar.
+- Integration of email, theme, as well as a button to quickly copy the URL of the page you are on, with the kbar palette command.
+The motivation for this is having explored other command palette libraries, with some offering nested elements for 'Actions'. Unfortunately this is not possible with kbar, but it gave me new ideas!
+- Multi-authors feature for "about" section: each author can have it's own about page available inside a dropdown menu on large screens, or displayed directly on small screens. If you want to turn it off and only use the "normal", classical about section, go to sitemetadata.js and set multiauthors to false. In any case, your main author now needs to have the field "default" set to true.
+- Featured section on home page for posts you want to pin to top : set featured to true (max two posts by default, can be modified in Featured.tsx file, in component folder) The program will pick the latest two posts with "featured : true." If no featured posts are available, this section will simply not be displayed!
+- Each tag now has its own pagination! If the number of posts is greater than the one you have defined (by default, set to 5) then a new page is automatically created for subsequent posts including the same tag.
+- Waline comment system now supported! It's probably the best open source comment system right now, with even i18n and many other great features! First, follow [the official tutorial](https://waline.js.org/en/guide/get-started/) to set up the comments database and your vercel server. There's many options available, so take the time to read their documentation. Since it's Vue based, it's still compatible with Next.js, and I created a new comment component. You'll find it in "walinecomponents" folder. I also added a new css file, and you can modify the style here if needed. Once you have deployed your application for comments, modify the sitemetadata.js file. Set "iscomments" property to false, set "iswaline"
+to true and set the url of your comments server accordingly in "walineServer". If your language is not supported by waline, make a PR to their repository or ask them kindly to add your own translation (provide it yourself first). This is what I did for supporting french, and this how we work in open source world!
+
+- Series for your posts is now supported, see the deployed demo!
+
+Example of including this new feature : 
+
+```mdx
+title: Internationalization of V 2.0
+series:
+  order: 4 // You must add a number for the actual order of your post in your series
+  title: "Blog Starter" // You must add the same title to all of your posts from the same series
+date: '2023-11-17'
+lastmod: '2023-11-17'
+language: en
+tags: ['next-js', 'tailwind', 'guide', 'features', 'i18n']
+authors: ['default']
+images: ['/static/images/twitter-card.png']
+draft: false
+summary: Presentation of the Starter Blog Tailwind Next-js v2.0, with addition and support for multiple languages.
+```
+
+- Share component : you or your users can share your blog posts on Facebook, Twitter, Linkedin, WhatsApp, Threads or Telegram with ease! What's a 2024 modern blog without this possibility?
+
+- Smooth page transitions thanks to [Framer Motion](https://github.com/framer/motion) (see the template.tsx file in the app folder and take a look at the following next.js documentation
+  for file functionality [template](https://nextjs.org/docs/app/api-reference/file-conventions/template))
+  Note: This is a basic but effective implementation. I strongly encourage you to experiment with framer-motion and its use within the new
+  router. I also added some Framer Motion flavor to the formspree contact modal, and to the ListLayoutWithTags.tsx component
+
+- New MDX component: excellent audio player for mdx files (in case you make podcasts, or even music), thanks to [react-h5-audio-player](https://github.com/lhz516/react-h5-audio-player)
+
+- Tailwind screen size indicator: a little help for development mode and responsive design (see TwSizeIndicator.tsx in /components/helper)
+
+- [Formspree](https://formspree.io/) support for the mail icon, with a beautiful modal dialog. Formspree allows your users to contact you and send you messages directly from your site, with anti-spam protection. Simply create a free basic account, read the docs and get the key from your formspree account and then replace the key with your own here, in components/formspree/index.tsx :
+
+```ts:formspree/useContactForm.ts
+/* Line 11*/
+ const [state, handleSubmit, reset] = useForm('xdojkndq')
+```
+
+IMPORTANT NOTE: you must replace the key in useform like this : useform('[your key]'). The provided key is
+a test one of mine. You can use it to verify if the toast box is functional for example, but you must know
+that I'll receive all your test messages. (You can still send me a friendly hello message!)
+
+If you don't want to use Formspree, go to the siteMetadata.js file and set formspree to "false".
 
 ## Libraries
 
@@ -55,17 +147,17 @@ app
     │     │     │
     │     │     ├── en
     │     │     │   ├── about.json
-    │     │     │   │   
+    │     │     │   │
     │     │     │   ├── home.json
-    │     │     │   │  
+    │     │     │   │
     │     │     │   └── ...
     │     │     └── fr
     │     │         ├── about.json
-    │     │         │   
+    │     │         │
     │     │         ├── home.json
-    │     │         │ 
+    │     │         │
     │     │         └── ...
-    │     │  
+    │     │
     │     │
     │     ├── client.ts
     │     ├── locales.js
@@ -82,7 +174,7 @@ It is therefore in this i18n folder that the main logic for the internationaliza
 The "locales" subfolder contains the .json files where you will define your translations, the convention being to define one file per page of your site, with the name of the page concerned for the name of the json file.
 There is also a "common" file: if you do not specify a "namespace" or ns (the name of the file without the json extension) in your pages or components, the translations will be taken from this file by default.
 
-*Important: for each language there must be a corresponding file with the same name, for example an "about" file for "fr" and for "en", etc. As well as translation keys with the same name within
+\*Important: for each language there must be a corresponding file with the same name, for example an "about" file for "fr" and for "en", etc. As well as translation keys with the same name within
 of each file.
 
 Example :
@@ -166,7 +258,7 @@ export function getOptions(locale = fallbackLng, ns = defaultNS): InitOptions {
      debug:true,
      supportedLngs: locales,
      fallbackLng,
-     lng: local,
+     lng: locale,
      fallbackNS:defaultNS,
      defaultNS,
      ns,
@@ -362,7 +454,7 @@ export const config = {
    /* Do not execute middleware on the following paths: */
    // prettier-ignore
    match:
-   '/((?!api|static|data|css|scripts|.*\\..*|_next).*|robots.txt|sitemap.xml|favicon.ico)',
+   '/((?!api|static|data|css|scripts|.*\\..*|_next).*|sitemap.xml)',
 }
 ```
 
@@ -370,9 +462,15 @@ export const config = {
 
 All posts are grouped within the “data/blog” folder.
 
-They are organized into subfolders: "data/blog/posts" for English, and "data/blog/articles" for French (articles is the
-French translation of "posts") If you add/modify a language, I simply recommend that you create a folder with
-the name of the translation of "posts" for the chosen language.
+They are organized into subfolders: "data/blog/en" for English, and "data/blog/fr" for French. 
+You can name the subfolders for your languages as you want : with the current configuration in contentlayer.config.ts file, the slug for your posts is the filename of your post, without the .mdx extension. All your translated posts must have the same name as the originals ones, for handling purposes of translation.
+
+Example : 
+
+En: "data/blog/en/code-sample.mdx"
+Fr: "data/blog/fr/code-sample.mdx"
+
+Etc.
 
 - Headers of your posts:
 
@@ -382,7 +480,6 @@ title: article title
 date: creation date
 lastmod: last modified date
 language: article language
-localeid: identifier to match articles in other languages
 tags: tags
 authors: authors
 pictures: pictures
@@ -403,11 +500,12 @@ export const Blog = defineDocumentType(() => ({
    contentType: 'mdx',
    fields: {
      title: { type: 'string', required: true },
+     series: { type: 'nested', of: Series },
      date: { type: 'date', required: true },
      language: { type: 'string', required: true }, // New required field
-     localeid: { type: 'string', required: true }, // New required field
      tags: { type: 'list', of: { type: 'string' }, default: [] },
      lastmod: { type: 'date' },
+     featured: { type: 'boolean' },
      draft: { type: 'boolean' },
      summary: { type: 'string' },
      images: { type: 'json' },
@@ -430,6 +528,7 @@ export const Authors = defineDocumentType(() => ({
    fields: {
      name: { type: 'string', required: true },
      language: { type: 'string', required: true }, // New required field
+     default: {type: 'boolean'},
      avatar: { type: 'string' },
      occupation: { type: 'string' },
      company: { type: 'string' },
@@ -472,42 +571,6 @@ function createTagCount(allBlogs) {
 
 Note: If you want to add other languages (3, 4 or even 5 languages), you will need to modify the logic to support
 these new languages.
-
--generateSlugMap function:
-
-```
-async function generateSlugMap(allBlogs) {
-   const slugMap = {}
-
-   // Processing each blog post
-   allBlogs.forEach((blog) => {
-     const { localeid, language, slug } = blog
-     const formattedLng = language === fallbackLng ? fallbackLng: secondLng
-
-     if (!slugMap[localeid]) {
-       slugMap[localeid] = {}
-     }
-
-     // Adding the slug to the mapping for the specific language
-     slugMap[localeid][formattedLng] = slug
-   })
-
-   writeFileSync('./app/[locale]/localeid-map.json', JSON.stringify(slugMap, null, 2))
-}
-```
-
-This function is the one that allows you to match the posts to each other:
-
-let's say you are reading a post, but you prefer to read it in another language, instead of redirecting
-to a 404 error page, this will display the post in the corresponding language!
-
-But for this, you must assign a unique identifier (LocaleID in your MDX files) to your post,
-and the corresponding post in the translated language. If no matching item is found, the router
-will simply redirect you to the blog's overview page.
-
-- Important: if you are a Windows user, a script adapted to internationalization is provided (/scripts folder) as a workaround
- to a [beug](https://github.com/timlrx/tailwind-nextjs-starter-blog/issues/704#issuecomment-1712693106) linked to the 
-contentlayer library.
 
 ## Authors
 
@@ -571,7 +634,7 @@ const projectsData: ProjectsData = {
          to the desired date and press “Go”. No more worrying about lost keys or
          forgotten headphones with this simple yet affordable solution.`,
        imgSrc: '/static/images/time-machine.jpg',
-       href: '/blog/posts/the-time-machine',
+       href: '/blog/the-time-machine',
      },
    ],
 
@@ -589,7 +652,7 @@ const projectsData: ProjectsData = {
         à la date souhaitée et appuyez sur "Go". Ne vous inquiétez plus des clés perdues ou
         écouteurs oubliés avec cette solution simple mais abordable.`,
       imgSrc: '/static/images/time-machine.jpg',
-      href: '/blog/articles/la-machine-a-remonter-le-temps',
+      href: '/blog/the-time-machine',
     },
   ],
 }
@@ -597,53 +660,7 @@ const projectsData: ProjectsData = {
 export default projectsData
 ```
 
-Again, simply modify the logic keeping the same general structure, and according to your chosen languages/and/or
-number of languages.
-
-## “Sitemap” logic
-
-There too, there were necessary modifications. This file is located in the "app" folder, and allows Google robots
-to understand how your site is built, so it is essential for indexing and SEO:
-
-```ts:sitemap.ts
-import { MetadataRoute } from 'next'
-import { allBlogs } from 'contentlayer/generated'
-import siteMetadata from '@/data/siteMetadata'
-import { fallbackLng, secondLng } from './i18n/locales'
-
-export default function sitemap(): MetadataRoute.Sitemap {
-   const siteUrl = siteMetadata.siteUrl
-   // routes for blog posts in English
-   const blogRoutes = allBlogs
-     .filter((p) => p.language === fallbackLng)
-     .map((post) => ({
-       url: `${siteUrl}/${fallbackLng}/${post.path}`,
-       lastModified: post.lastmod || post.date,
-     }))
-   // routes for blog posts in French (or your own second language)
-   const secondBlogRoutes = allBlogs
-     .filter((p) => p.language === secondLng)
-     .map((post) => ({
-       url: `${siteUrl}/${secondLng}/${post.path}`,
-       lastModified: post.lastmod || post.date,
-     }))
-   // all other routes for English
-   const routes = ['', 'blog', 'projects', 'tags', 'about'].map((route) => ({
-     url: `${siteUrl}/${fallbackLng}/${route}`,
-     lastModified: new Date().toISOString().split('T')[0],
-   }))
-   // all routes for French (or your own second language)
-   const secondRoutes = ['', 'blog', 'projects', 'tags', 'about'].map((route) => ({
-     url: `${siteUrl}/${secondLng}/${route}`,
-     lastModified: new Date().toISOString().split('T')[0],
-   }))
-
-   return [...routes, ...secondRoutes, ...blogRoutes, ...secondBlogRoutes]
-}
-
-```
-
-Note: modify this file accordingly if you add other languages.
+Again, simply modify the logic keeping the same general structure, and according to your chosen languages/and/or number of languages.
 
 ## Search bar :
 
@@ -652,18 +669,146 @@ The original repository allows support for kbar and algolia.
 Here, the search bar relies on the kbar library, and Algolia support is not planned.
 If you prefer to use Algolia, it will be up to you to implement it on your site, instead of kbar.
 
+There's an issue when using regular translations, so I implemented a workaround for that problem. Just modify the name in each menu item, as well as the navigationSection object, based on the languages you're using.
+
+```ts:SearchProvider.ts
+  export const SearchProvider = ({ children }: SearchProviderProps) => {
+  const locale = useParams()?.locale as LocaleTypes
+  const { t } = useTranslation(locale, '')
+  const router = useRouter()
+   const authors = allAuthors
+    .filter((a) => a.language === locale)
+    .sort((a, b) => (a.default === b.default ? 0 : a.default ? -1 : 1)) as Authors[]
+
+  const authorSearchItems = authors.map((author) => {
+    const { name, slug } = author
+    return {
+      id: slug,
+      name: name,
+      keywords: '',
+      shortcut: [],
+      section: locale === fallbackLng ? 'Authors' : 'Auteurs',
+      perform: () => router.push(`/${locale}/about/${slug}`),
+      icon: (
+        <i>
+          <AboutIcon />
+        </i>
+      ),
+    }
+  })
+
+  const showAuthorsSearch = siteMetadata.multiauthors
+  const authorsActions = [
+    ...(showAuthorsSearch ? authorSearchItems : []),
+    ...(showAuthorsSearch
+      ? []
+      : [
+          {
+            id: 'about',
+            name: locale === fallbackLng ? 'About' : 'À propos',
+            keywords: '',
+            shortcut: ['a'],
+            section: locale === fallbackLng ? 'Navigate' : 'Naviguer',
+            perform: () => router.push(`/${locale}/about`),
+            icon: (
+              <i>
+                <AboutIcon />
+              </i>
+            ),
+          },
+        ]),
+  ]
+  /* issue when using regular translations, this is a workaround to show how to implement section titles */
+   /*Modify the following line based on your implemented languages: */
+  const navigationSection = locale === fallbackLng ? 'Navigate' : 'Naviguer'
+  return (
+    <KBarSearchProvider
+      kbarConfig={{
+        searchDocumentsPath: 'search.json',
+        /* issue when using regular translations, this is a workaround to show how to implement translated menu titles */
+        defaultActions: [
+          {
+            id: 'home',
+            name: locale === fallbackLng ? 'Home' : 'Accueil',
+            keywords: '',
+            shortcut: ['h'],
+            section: navigationSection,
+            perform: () => router.push(`/${locale}`),
+            icon: (
+              <i>
+                <HomeIcon />
+              </i>
+            ),
+          },
+          {
+            id: 'blog',
+            name: locale === fallbackLng ? 'Blog' : 'Blog',
+            keywords: '',
+            shortcut: ['b'],
+            section: navigationSection,
+            perform: () => router.push(`/${locale}/blog`),
+            icon: (
+              <i>
+                <BlogIcon />
+              </i>
+            ),
+          },
+          {
+            id: 'tags',
+            name: locale === fallbackLng ? 'Tags' : 'Tags',
+            keywords: '',
+            shortcut: ['t'],
+            section: navigationSection,
+            perform: () => router.push(`/${locale}/tags`),
+            icon: (
+              <i>
+                <TagsIcon />
+              </i>
+            ),
+          },
+          {
+            id: 'projects',
+            name: locale === fallbackLng ? 'Projects' : 'Projets',
+            keywords: '',
+            shortcut: ['p'],
+            section: navigationSection,
+            perform: () => router.push(`/${locale}/projects`),
+            icon: (
+              <i>
+                <ProjectsIcon />
+              </i>
+            ),
+          },
+          ...authorsActions,
+        ],
+        onSearchDocumentsLoad(json) {
+          return json
+            .filter((post: CoreContent<Blog>) => post.language === locale)
+            .map((post: CoreContent<Blog>) => ({
+              id: post.path,
+              name: post.title,
+              keywords: post?.summary || '',
+              section: t('content'),
+              subtitle: post.tags.join(', '),
+              perform: () => router.push(`/${locale}/blog/${post.slug}`),
+            }))
+        },
+      }}
+    >
+      {children}
+    </KBarSearchProvider>
+  )
+}
+```
+
 ## Things to do :
 
-- Fixed the translation in page 404. This is related to the current functioning of the not-found function,
-so we have to wait for a fix from next-js side see here: [i18n for not-found page](https://github.com/vercel/next.js/discussions/50518)
+- Fix the translation in page 404. This is related to the current functioning of the not-found function,
+  so we have to wait for a fix from next-js side see here: [i18n for not-found page](https://github.com/vercel/next.js/discussions/50518)
 
-- I tried to update the rss.mjs script for first deployment purposes, but I don't know if it is correct for the language configuration
-(but I did my best). If you are an experienced developer, let me know what you think.
+- Fix rss.mjs. If you find a solution on your side, don't hesitate to open a PR!
 
 Everything else is currently working as expected.
-
-So I had to make significant changes regarding SEO and metadata within the pages, but I ended up finding a solution
-which worked, with a perfect SEO score!
 
 Here is another possible solution for i18n integration regarding SEO, and even the translated URL:
 
@@ -674,37 +819,10 @@ Any help for improvements and/or bug reports is welcome!
 Important notes:
 
 - I use a custom Link component for language selection: I prefer this to the HTML selection element (easier to customize).
-The small downside is that it requires more code. If you prefer, you are free to adapt and use the select element instead, but I
-I'll keep it as is for the template.
+  The small downside is that it requires more code. If you prefer, you are free to adapt and use the select element instead, but I
+  I'll keep it as is for the template.
 
-- Do not update dependencies: this will break your application since some things need to be fixed on the side of these libraries.
-
-## What else?
-
-This repository will sometimes be updated with new features (not present in the original repository)
-
-For the moment :
-
-- Smooth page transitions thanks to [Framer Motion](https://github.com/framer/motion) (see the template.tsx file in the app folder and take a look at the following next.js documentation
-for file functionality [template](https://nextjs.org/docs/app/api-reference/file-conventions/template))
-
-Note: This is a basic but effective implementation. I strongly encourage you to experiment with framer-motion and its use within the new
-router.
-
-- New component: excellent audio player for mdx files (in case you make podcasts, or even music), thanks to [react-h5-audio-player](https://github.com/lhz516/react-h5-audio-player)
-
-<Audioplayer src="/track/Ghostrifter-Official-Purple-Dream.mp3" />
-
-- Tailwind screen size indicator: a little help for development mode and responsive design (see TwSizeIndicator.tsx in /components/helper)
-
-- [Formspree](https://formspree.io/) support for the mail icon, with a beautiful modal dialog. Formspree allows your users to contact you and send you messages directly from your site,
-with anti-spam protection. Simply create a free basic account, get the key from your formspree account and then replace the key with your own here, in components/formspree/index.tsx :
-
-```ts:formspree/index.tsx
-/* Line 19*/
- const [state, handleSubmit, reset] = useForm('xdojkndq')
-```
-
-  If you don't want to use Formspree, go to the siteMetadata.js file and set formspree to "false".
+- Do not update dependencies: this will break your application since some things need to be fixed on the side of these libraries
+  ​
 
 Author: [pxlsyl](https://pxlsyl.art)
