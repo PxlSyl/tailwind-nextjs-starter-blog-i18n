@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import siteMetadata from '@/data/siteMetadata'
 import { Authors, allAuthors } from 'contentlayer/generated'
-import { Fragment, useRef, useState } from 'react'
+import { Fragment, useRef, useState, useMemo } from 'react'
 import { Menu, RadioGroup, Transition } from '@headlessui/react'
 import { useOuterClick } from './util/useOuterClick'
 import { useParams, usePathname } from 'next/navigation'
@@ -19,18 +19,18 @@ type AuthorsMenuProps = {
 const AuthorsMenu = ({ className }: AuthorsMenuProps) => {
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, 'common')
-  const authors = allAuthors
-    .filter((a) => a.language === locale)
-    .sort((a, b) => (a.default === b.default ? 0 : a.default ? -1 : 1)) as Authors[]
-
-  const mainAuthor = allAuthors.filter(
-    (a) => a.default === true && a.language === locale
-  ) as Authors[]
-
   const pathname = usePathname()
   const sections = pathname!.split('/')
   const lastSection = sections[sections.length - 1]
   const filterSections = pathname !== `/${locale}` && pathname !== '/'
+
+  const authors = useMemo(() => allAuthors
+    .filter((a) => a.language === locale)
+    .sort((a, b) => (a.default === b.default ? 0 : a.default ? -1 : 1)), [locale]) as Authors[]
+
+  const mainAuthor = useMemo(() => allAuthors
+    .filter((a) => a.default === true && a.language === locale), [locale]) as Authors[]
+
   const [isOpen, setIsOpen] = useState(false)
 
   const toggleMenu = () => {
@@ -44,28 +44,59 @@ const AuthorsMenu = ({ className }: AuthorsMenuProps) => {
   const menubarRef = useRef<HTMLDivElement>(null)
   useOuterClick(menubarRef, closeMenu)
 
-const isSelected = authors.some((author) => author.slug.includes(lastSection)) && filterSections
+  const isSelected = authors.some((author) => author.slug.includes(lastSection)) && filterSections
+
+  const renderAuthorLink = (author: Authors) => {
+    const { name, avatar, slug } = author
+    return (
+      <RadioGroup.Option key={name} value={name}>
+        {({ active }) => (
+          <Menu.Item>
+            <div
+              className={`${
+                active
+                  ? 'bg-gray-100 dark:bg-gray-600'
+                  : 'hover:bg-gray-100 dark:hover:bg-gray-600'
+              } group flex w-full items-center rounded-md px-2 py-2 text-sm hover:text-primary-500 dark:hover:text-primary-500`}
+            >
+              <div className="mr-2">
+                <Image
+                  className="rounded-full"
+                  src={avatar ?? ''}
+                  alt="avatar"
+                  title="avatar"
+                  width={25}
+                  height={25}
+                />
+              </div>
+              <Link href={`/${locale}/about/${slug}`} onClick={closeMenu}>
+                {name}
+              </Link>
+            </div>
+          </Menu.Item>
+        )}
+      </RadioGroup.Option>
+    )
+  }
 
   return (
     <>
-      {siteMetadata.multiauthors && (
+      {siteMetadata.multiauthors ? (
         <div ref={menubarRef} className={className}>
           <Menu as="div" className="relative inline-block text-left font-medium leading-5">
-            <div
-             
-            >
+            <div>
               <Menu.Button
                 className="flex transform-gpu items-center space-x-1 transition-transform duration-300"
                 onClick={toggleMenu}
               >
-                <div  className={`hidden font-medium ${
-                    isSelected ? 'text-white'
-                    : 'text-gray-500 hover:text-gray-900 dark:hover:text-gray-100'
+                <div
+                  className={`hidden font-medium ${
+                    isSelected
+                      ? 'text-white'
+                      : 'text-gray-500 hover:text-gray-900 dark:hover:text-gray-100'
                   } relative rounded-md px-2 py-1 font-medium transition-colors sm:block`}
                 >
-                  <span className="relative z-10">
-                  {t('about')}
-                  </span>
+                  <span className="relative z-10">{t('about')}</span>
                   {isSelected && (
                     <motion.span
                       layoutId="tab"
@@ -92,75 +123,37 @@ const isSelected = authors.some((author) => author.slug.includes(lastSection)) &
               >
                 <RadioGroup>
                   <div className="p-1">
-                    {authors.map((author) => {
-                      const { name, avatar, language, slug } = author
-                      if (language === locale) {
-                        return (
-                          <RadioGroup.Option key={name} value={name}>
-                            {({ active }) => (
-                              <Menu.Item>
-                                <div
-                                  className={`${
-                                    active
-                                      ? 'bg-gray-100 dark:bg-gray-600'
-                                      : 'hover:bg-gray-100 dark:hover:bg-gray-600'
-                                  } group flex w-full items-center rounded-md px-2 py-2 text-sm  hover:text-primary-500 dark:hover:text-primary-500`}
-                                >
-                                  <div className="mr-2">
-                                    <Image
-                                      className="rounded-full"
-                                      src={avatar ?? ''}
-                                      alt="avatar"
-                                      title="avatar"
-                                      width={25}
-                                      height={25}
-                                    />
-                                  </div>
-                                  <Link href={`/${locale}/about/${slug}`} onClick={closeMenu}>
-                                    {name}
-                                  </Link>
-                                </div>
-                              </Menu.Item>
-                            )}
-                          </RadioGroup.Option>
-                        )
-                      }
-                      return null
-                    })}
+                    {authors.map((author) => author.language === locale && renderAuthorLink(author))}
                   </div>
                 </RadioGroup>
               </Menu.Items>
             </Transition>
           </Menu>
         </div>
-      )}
-      {!siteMetadata.multiauthors && (
+      ) : (
         <div className={className}>
           {mainAuthor.map((author) => {
-            const { name, language, slug } = author
-            if (language === locale) {
-              return (
-                <Link
-                  href={`/${locale}/about/${slug}`}
-                  key={name}
-                  className={`${isSelected ? 'text-white'
-                  : 'text-gray-500 hover:text-gray-900 dark:hover:text-gray-100'
+            const { name, slug } = author
+            return (
+              <Link
+                href={`/${locale}/about/${slug}`}
+                key={name}
+                className={`${
+                  isSelected
+                    ? 'text-white'
+                    : 'text-gray-500 hover:text-gray-900 dark:hover:text-gray-100'
                 } relative rounded-md px-2 py-1 font-medium transition-colors sm:block`}
-                >
-                  <span className="relative z-10">
-                  {t('about')}
-                  </span>
-                  {isSelected && (
-                    <motion.span
-                      layoutId="tab"
-                      transition={{ type: 'spring', duration: 0.4 }}
-                      className="absolute inset-0 z-0 rounded-md bg-heading-500"
-                    ></motion.span>
-                  )}
-                </Link>
-              )
-            }
-            return null
+              >
+                <span className="relative z-10">{t('about')}</span>
+                {isSelected && (
+                  <motion.span
+                    layoutId="tab"
+                    transition={{ type: 'spring', duration: 0.4 }}
+                    className="absolute inset-0 z-0 rounded-md bg-heading-500"
+                  ></motion.span>
+                )}
+              </Link>
+            )
           })}
         </div>
       )}
