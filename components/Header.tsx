@@ -49,6 +49,9 @@ const Header = () => {
                 <Link
                   key={link.title}
                   href={`/${locale}${link.href}`}
+                  className="flex transform-gpu items-center space-x-1 transition-transform duration-300"
+                >
+                  <div
                   className={`hidden font-medium ${
                     isSelected
                       ? 'text-heading-500'
@@ -63,6 +66,7 @@ const Header = () => {
                       className="absolute inset-0 z-0 rounded-md bg-gray-100 dark:bg-gray-600"
                     ></motion.span>
                   )}
+                  </div>
                 </Link>
               )
             })}
