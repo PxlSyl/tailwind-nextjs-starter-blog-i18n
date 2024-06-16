@@ -1,7 +1,7 @@
 name: CI Workflows
 
 on:
-  pull_request:
+  pull_request_target:
     branches: ["main"]
 jobs:
   ci-build:
