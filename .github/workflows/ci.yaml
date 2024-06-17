@@ -7,7 +7,7 @@ jobs:
   ci-build:
     name: Build Docker image and push to repositories
     # run only when code is compiling and tests are passing
-    runs-on: dind-runner
+    runs-on: ubuntu-22.04
 
     # steps to perform in job
     steps:
