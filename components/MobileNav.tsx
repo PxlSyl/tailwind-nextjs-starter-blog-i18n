@@ -19,7 +19,7 @@ const MobileNav = () => {
 
   const mainAuthor = allAuthors.filter((a) => a.default === true && a.language === locale)
 
-  const [navShow, setNavShow] = useState(false)
+  const [navShow, setNavShow] = useState<boolean>(false)
 
   const onToggleNav = () => {
     setNavShow((status) => {

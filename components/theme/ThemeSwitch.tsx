@@ -1,7 +1,6 @@
 'use client'
 
-import * as React from 'react'
-import { Fragment } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import {
   Menu,
   MenuButton,
@@ -23,13 +22,13 @@ const ThemeSwitch = () => {
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, 'common')
   const { theme, setTheme, mounted } = useTheme()
-  const [menuOpen, setMenuOpen] = React.useState(false)
-  const [darkModeChecked, setDarkModeChecked] = React.useState(theme === 'dark')
-  const menubarRef = React.useRef<HTMLDivElement>(null)
+  const [menuOpen, setMenuOpen] = useState<boolean>(false)
+  const [darkModeChecked, setDarkModeChecked] = useState<boolean>(theme === 'dark')
+  const menubarRef = useRef<HTMLDivElement>(null)
 
   useOuterClick(menubarRef, () => setMenuOpen(false))
 
-  React.useEffect(() => {
+  useEffect(() => {
     setDarkModeChecked(theme === 'dark')
   }, [theme])
 
@@ -66,11 +65,11 @@ const ThemeSwitch = () => {
               <div className="p-1">
                 <Radio value="light">
                   <MenuItem>
-                    {({ active }) => (
+                    {({ focus }) => (
                       <button
                         onClick={() => handleThemeChange('light')}
                         className={`${
-                          active
+                          focus
                             ? 'bg-gray-100 dark:bg-gray-600'
                             : 'hover:bg-gray-100 dark:hover:bg-gray-600'
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm hover:text-primary-500 dark:hover:text-primary-500`}
@@ -83,11 +82,11 @@ const ThemeSwitch = () => {
                 </Radio>
                 <Radio value="dark">
                   <MenuItem>
-                    {({ active }) => (
+                    {({ focus }) => (
                       <button
                         onClick={() => handleThemeChange('dark')}
                         className={`${
-                          active
+                          focus
                             ? 'bg-gray-100 dark:bg-gray-600'
                             : 'hover:bg-gray-100 dark:hover:bg-gray-600'
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm hover:text-primary-500 dark:hover:text-primary-500`}
@@ -100,11 +99,11 @@ const ThemeSwitch = () => {
                 </Radio>
                 <Radio value="system">
                   <MenuItem>
-                    {({ active }) => (
+                    {({ focus }) => (
                       <button
                         onClick={() => handleThemeChange('system')}
                         className={`${
-                          active
+                          focus
                             ? 'bg-gray-100 dark:bg-gray-600'
                             : 'hover:bg-gray-100 dark:hover:bg-gray-600'
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm hover:text-primary-500 dark:hover:text-primary-500`}

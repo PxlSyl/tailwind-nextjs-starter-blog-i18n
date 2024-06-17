@@ -11,7 +11,7 @@ import { useParams } from 'next/navigation'
 export default function WalineComments() {
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, 'home')
-  const [loadComments, setLoadComments] = useState(false)
+  const [loadComments, setLoadComments] = useState<boolean>(false)
 
   useEffect(() => {
     let element: HTMLDivElement | null

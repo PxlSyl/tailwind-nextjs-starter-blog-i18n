@@ -65,10 +65,10 @@ const AuthorsMenu = ({ className }: AuthorsMenuProps) => {
     return (
       <Radio key={name} value={name}>
         <MenuItem>
-          {({ active }) => (
+          {({ focus }) => (
             <div
               className={`${
-                active ? 'bg-gray-100 dark:bg-gray-600' : 'hover:bg-gray-100 dark:hover:bg-gray-600'
+                focus ? 'bg-gray-100 dark:bg-gray-600' : 'hover:bg-gray-100 dark:hover:bg-gray-600'
               } group flex w-full items-center rounded-md px-2 py-2 text-sm hover:text-primary-500 dark:hover:text-primary-500`}
             >
               <div className="mr-2">

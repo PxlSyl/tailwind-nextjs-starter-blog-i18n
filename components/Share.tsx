@@ -11,8 +11,8 @@ import { LocaleTypes } from 'app/[locale]/i18n/settings'
 type ShareProps = { title: string; description?: string; slug: string; className?: string }
 
 const Share = ({ title, description, slug, className }: ShareProps) => {
-  const [showMenu, setShowMenu] = useState(false)
-  const [copied, setCopied] = useState(false)
+  const [showMenu, setShowMenu] = useState<boolean>(false)
+  const [copied, setCopied] = useState<boolean>(false)
 
   const handleCopy = () => {
     navigator.clipboard.writeText(window.location.href)
