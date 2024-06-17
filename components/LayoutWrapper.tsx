@@ -1,8 +1,8 @@
 import { Inter } from 'next/font/google'
 import SectionContainer from './SectionContainer'
-import Footer from './Footer'
+import Footer from './navigation/Footer'
 import { ReactNode } from 'react'
-import Header from './Header'
+import Header from './navigation/Header'
 
 interface LayoutWrapperProps {
   children: ReactNode

@@ -1,5 +1,5 @@
 import Link from '@/components/mdxcomponents/Link'
-import Tag from '@/components/Tag'
+import Tag from '@/components/tag'
 import { formatDate } from 'pliny/utils/formatDate'
 import { createTranslation } from 'app/[locale]/i18n/server'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'

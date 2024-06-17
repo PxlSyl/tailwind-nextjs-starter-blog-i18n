@@ -14,7 +14,7 @@ import {
   RadioGroup,
   Transition,
 } from '@headlessui/react'
-import { useOuterClick } from './util/useOuterClick'
+import { useOuterClick } from '../util/useOuterClick'
 import { useParams, usePathname } from 'next/navigation'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { useTranslation } from 'app/[locale]/i18n/client'
