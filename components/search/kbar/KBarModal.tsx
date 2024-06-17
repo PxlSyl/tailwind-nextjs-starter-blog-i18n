@@ -73,13 +73,13 @@ export const KBarModal: React.FC<KBarModalProps> = ({ actions, isLoading }) => {
     return segments.join('/')
   }
 
-  const handleLinkClick = (newLocale) => {
+  const handleLinkClick = (newLocale: string) => {
     setSelectedTag('')
     const resolvedUrl = handleLocaleChange(newLocale)
     router.push(resolvedUrl)
   }
 
-  const handleThemeChange = (newTheme) => setTheme(newTheme)
+  const handleThemeChange = (newTheme: string) => setTheme(newTheme)
 
   if (!mounted) return null
 
