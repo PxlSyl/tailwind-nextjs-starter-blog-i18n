@@ -13,7 +13,7 @@ import { SearchIcon } from '../search/icons'
 const ScrollTopAndComment = () => {
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, 'common')
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState<boolean>(false)
 
   useEffect(() => {
     const handleWindowScroll = () => {

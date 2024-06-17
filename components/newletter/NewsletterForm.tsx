@@ -14,9 +14,9 @@ const NewsletterForm = ({ apiUrl = '/api/newsletter' }: NewsletterFormProps) => 
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, 'newsletter')
   const inputEl = useRef<HTMLInputElement>(null)
-  const [error, setError] = useState(false)
-  const [message, setMessage] = useState('')
-  const [subscribed, setSubscribed] = useState(false)
+  const [error, setError] = useState<boolean>(false)
+  const [message, setMessage] = useState<string>('')
+  const [subscribed, setSubscribed] = useState<boolean>(false)
 
   const subscribe = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()

@@ -12,7 +12,7 @@ import ScrollTopAndComment from '@/components/scroll'
 import { createTranslation } from 'app/[locale]/i18n/server'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { PostSeriesBox } from '@/components/seriescard'
-import Share from '@/components/Share'
+import Share from '@/components/share'
 import { Toc } from 'pliny/mdx-plugins'
 import Sidetoc from '@/components/sidetoc'
 

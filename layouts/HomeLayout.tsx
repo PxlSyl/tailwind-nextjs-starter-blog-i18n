@@ -1,5 +1,5 @@
 import Link from '@/components/mdxcomponents/Link'
-import Tag from '@/components/Tag'
+import Tag from '@/components/tag'
 import siteMetadata from '@/data/siteMetadata'
 import { formatDate } from 'pliny/utils/formatDate'
 import NewsletterForm from '@/components/newletter/NewsletterForm'

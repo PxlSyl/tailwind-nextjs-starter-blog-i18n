@@ -1,6 +1,5 @@
-import React from 'react'
-import Image from './mdxcomponents/Image'
-import Link from './mdxcomponents/Link'
+import Image from '../mdxcomponents/Image'
+import Link from '../mdxcomponents/Link'
 import { useParams } from 'next/navigation'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 

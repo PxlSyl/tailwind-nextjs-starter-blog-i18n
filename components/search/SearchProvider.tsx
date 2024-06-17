@@ -1,7 +1,7 @@
 'use client'
 
 import { ReactNode } from 'react'
-import { KBarSearchProvider } from './components/KBar'
+import { KBarSearchProvider } from './kbar'
 import { useParams, useRouter } from 'next/navigation'
 import siteMetadata from '@/data/siteMetadata'
 import { Authors, allAuthors } from 'contentlayer/generated'
