@@ -3,7 +3,15 @@ import { usePathname, useParams, useRouter } from 'next/navigation'
 import { useOuterClick } from '../util/useOuterClick'
 import { useTagStore } from '@/components/util/useTagStore'
 import { LocaleTypes, locales } from 'app/[locale]/i18n/settings'
-import { Menu, Transition, RadioGroup, MenuButton, MenuItems, Radio, MenuItem } from '@headlessui/react'
+import {
+  Menu,
+  Transition,
+  RadioGroup,
+  MenuButton,
+  MenuItems,
+  Radio,
+  MenuItem,
+} from '@headlessui/react'
 import { ChevronDownIcon } from './icon'
 
 const LangSwitch = () => {
