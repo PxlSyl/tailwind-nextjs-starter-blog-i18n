@@ -1,7 +1,3 @@
-## Demo Video
-
-![Demo Video](public/static/demo.mp4)
-
 IMPORTANT NOTE: 
 
 This is still a WIP (Work In Progress).
