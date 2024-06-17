@@ -2,7 +2,15 @@
 
 import * as React from 'react'
 import { Fragment } from 'react'
-import { Menu, RadioGroup, Transition } from '@headlessui/react'
+import {
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+  Radio,
+  RadioGroup,
+  Transition,
+} from '@headlessui/react'
 import { DarkModeSwitch } from './DarkModeSwitch'
 import { Monitor, Moon, Sun } from './icons'
 import { useTheme } from './ThemeContext'
@@ -35,14 +43,14 @@ const ThemeSwitch = () => {
   return (
     <div ref={menubarRef} className="mr-5">
       <Menu as="div" className="relative mt-1 inline-block text-left">
-        <Menu.Button aria-label={t('theme')}>
+        <MenuButton aria-label={t('theme')}>
           <DarkModeSwitch
             checked={darkModeChecked}
             onChange={(isChecked) => setDarkModeChecked(isChecked)}
             onClick={() => setMenuOpen(!menuOpen)}
             size={24}
           />
-        </Menu.Button>
+        </MenuButton>
         <Transition
           show={menuOpen}
           as={Fragment}
@@ -53,11 +61,11 @@ const ThemeSwitch = () => {
           leaveFrom="opacity-100 scale-100 translate-y-0"
           leaveTo="opacity-0 scale-95 translate-y-[10px]"
         >
-          <Menu.Items className="absolute right-0 z-50 mt-2 w-32 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800">
+          <MenuItems className="absolute right-0 z-50 mt-2 w-32 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800">
             <RadioGroup value={theme} onChange={handleThemeChange}>
               <div className="p-1">
-                <RadioGroup.Option value="light">
-                  <Menu.Item>
+                <Radio value="light">
+                  <MenuItem>
                     {({ active }) => (
                       <button
                         onClick={() => handleThemeChange('light')}
@@ -71,10 +79,10 @@ const ThemeSwitch = () => {
                         <span className="ml-2">{t('light')}</span>
                       </button>
                     )}
-                  </Menu.Item>
-                </RadioGroup.Option>
-                <RadioGroup.Option value="dark">
-                  <Menu.Item>
+                  </MenuItem>
+                </Radio>
+                <Radio value="dark">
+                  <MenuItem>
                     {({ active }) => (
                       <button
                         onClick={() => handleThemeChange('dark')}
@@ -88,10 +96,10 @@ const ThemeSwitch = () => {
                         <span className="ml-2">{t('dark')}</span>
                       </button>
                     )}
-                  </Menu.Item>
-                </RadioGroup.Option>
-                <RadioGroup.Option value="system">
-                  <Menu.Item>
+                  </MenuItem>
+                </Radio>
+                <Radio value="system">
+                  <MenuItem>
                     {({ active }) => (
                       <button
                         onClick={() => handleThemeChange('system')}
@@ -105,11 +113,11 @@ const ThemeSwitch = () => {
                         <span className="ml-2">{t('system')}</span>
                       </button>
                     )}
-                  </Menu.Item>
-                </RadioGroup.Option>
+                  </MenuItem>
+                </Radio>
               </div>
             </RadioGroup>
-          </Menu.Items>
+          </MenuItems>
         </Transition>
       </Menu>
     </div>
