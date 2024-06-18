@@ -9,8 +9,8 @@ on:
       - labeled
     branches:
       - main
-    paths-ignore:
-      - 'charts/**'
+    paths:
+      - '!charts/**'
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
 jobs:
