@@ -1,0 +1,109 @@
+name: CI chart
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - labeled
+    branches:
+      - main
+    paths:
+      - 'charts/**'
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+jobs:
+  list-charts:
+    runs-on: ubuntu-22.04
+    name: Get modified charts
+    permissions:
+      contents: read
+    outputs:
+      result: ${{ steps.get-chart.outputs.result }}
+      matrix: ${{ steps.create-matrix.outputs.matrix }}
+    steps:
+      - id: get-chart
+        name: Get modified charts
+        env:
+          DIFF_URL: "${{github.event.pull_request.diff_url}}"
+          TEMP_FILE: "${{runner.temp}}/pr-${{github.event.number}}.diff"
+        run: |
+          set -e
+          # This request doesn't consume API calls.
+          sudo apt-get update
+          sudo apt-get install curl jq -y
+          curl -sL \
+              -H "Accept: application/vnd.github.v3.diff" \
+              -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+              https://api.github.com/repos/${{ github.repository }}/pulls/${{github.event.number}} \
+              -o $TEMP_FILE
+          files_changed="$(sed -nr 's/[\-\+]{3} [ab]\/(.*)/\1/p' $TEMP_FILE | sort | uniq)"
+          files_renamed="$(sed -nr 's/^rename to (.*)/\1/p' $TEMP_FILE | sort | uniq)"
+          # Adding || true to avoid "Process exited with code 1" errors
+          charts_dirs_changed="$(echo "$files_changed $files_renamed" | xargs dirname | grep -o "charts/[^/]*" | sort | uniq || true)"
+          echo $charts_dirs_changed
+          # Using grep -c as a better alternative to wc -l when dealing with empty strings."
+          num_charts_changed="$(echo "$charts_dirs_changed" | grep -c "charts" || true)"
+          non_readme_files=$(echo "$files_changed $files_renamed" | grep -vc "\.md" || true)
+          pr_state=$(curl -sL -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" ${{ github.event.pull_request.url }} | jq '.state | index("closed")')
+          if [[ $pr_state != *null* ]]; then
+            # The PR for which this workflow run was launched is now closed -> SKIP
+            echo "error=The PR for which this workflow run was launched is now closed. The tests will be skipped." >> $GITHUB_OUTPUT
+            echo "result=skip" >> $GITHUB_OUTPUT
+          elif [[ "$non_readme_files" -le "0" ]]; then
+            # The only changes are .md files -> SKIP
+            echo "result=skip" >> $GITHUB_OUTPUT
+          elif [[ "$num_charts_changed" -le "0" ]]; then
+            # Changes done in the charts/ folder but not inside a deploy subfolder -> SKIP
+            echo "error=No changes detected in charts. The rest of the tests will be skipped." >> $GITHUB_OUTPUT
+            echo "result=skip" >> $GITHUB_OUTPUT
+          else
+            charts=$(echo "$charts_dirs_changed" | sed "s|charts/||g")
+            list_changed=$(echo ${charts[*]})
+            echo "charts=${list_changed}" >> $GITHUB_OUTPUT
+            echo "result=ok" >> $GITHUB_OUTPUT
+          fi
+      # Using actions/github-scripts because using exit 1 in the script above would not provide any output
+      # Source: https://github.community/t/no-output-on-process-completed-with-exit-code-1/123821/3
+      - id: show-error
+        name: Show error
+        if: ${{ steps.get-chart.outputs.result != 'ok' }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            let message='${{ steps.get-chart.outputs.error }}';
+            if ('${{ steps.get-chart.outputs.result }}' === 'fail' ) {
+              core.setFailed(message);
+            } else {
+              core.warning(message);
+            }
+      - id: create-matrix
+        name: List of change
+        if: steps.get-chart.outputs.result == 'ok'
+        run: |
+          set -e
+          MATRIX="{\"include\":["
+          for item in ${{ steps.get-chart.outputs.charts }}
+          do
+            MATRIX="$MATRIX{\"chart\":\"$item\"},"
+          done
+          # Remove last ,
+          MATRIX=${MATRIX::-1}
+          # Add close ]}
+          MATRIX="$MATRIX]}"
+          echo $MATRIX
+          echo "matrix=${MATRIX}" >> $GITHUB_OUTPUT
+  ci-verify:
+    runs-on: ubuntu-22.04
+    needs: list-charts
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.list-charts.outputs.matrix) }}
+    permissions:
+      contents: read
+    if: |
+      needs.list-charts.outputs.result == 'ok'
+    name: GitOps
+    steps:
+      - run: echo ${{ matrix.chart }}
