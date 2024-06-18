@@ -2,10 +2,17 @@ name: CI Workflows
 
 on:
   pull_request:
-    branches: ["main"]
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - labeled
+    branches:
+      - main
+    paths-ignore:
+      - 'charts/**'
 concurrency:
-  group: tests-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
 jobs:
   ci-build:
     name: Build and test
