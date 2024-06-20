@@ -31,15 +31,17 @@ jobs:
         run: |
           set -e
           # This request doesn't consume API calls.
-          sudo apt-get update
-          sudo apt-get install curl jq -y
+          # sudo apt-get update
+          # sudo apt-get install curl jq -y
           curl -sL \
               -H "Accept: application/vnd.github.v3.diff" \
               -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
               https://api.github.com/repos/${{ github.repository }}/pulls/${{github.event.number}} \
               -o $TEMP_FILE
+          cat $TEMP_FILE
           files_changed="$(sed -nr 's/[\-\+]{3} [ab]\/(.*)/\1/p' $TEMP_FILE | sort | uniq)"
           files_renamed="$(sed -nr 's/^rename to (.*)/\1/p' $TEMP_FILE | sort | uniq)"
+          echo $files_changed
           # Adding || true to avoid "Process exited with code 1" errors
           charts_dirs_changed="$(echo "$files_changed $files_renamed" | xargs dirname | grep -o "charts/[^/]*" | sort | uniq || true)"
           echo $charts_dirs_changed
