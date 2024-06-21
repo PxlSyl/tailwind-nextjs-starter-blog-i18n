@@ -66,10 +66,6 @@ jobs:
             echo "charts=${list_changed}" >> $GITHUB_OUTPUT
             echo "result=ok" >> $GITHUB_OUTPUT
           fi
-      
-      - name: Get changes
-        run: git diff --name-only -r HEAD^1 HEAD | xargs
-
       # Using actions/github-scripts because using exit 1 in the script above would not provide any output
       # Source: https://github.community/t/no-output-on-process-completed-with-exit-code-1/123821/3
       - id: show-error
@@ -100,6 +96,20 @@ jobs:
           MATRIX="$MATRIX]}"
           echo $MATRIX
           echo "matrix=${MATRIX}" >> $GITHUB_OUTPUT
+  test:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout (fetch last two commits) of the PR
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 2
+      - name: Process files changed in the current commit
+        run: |
+          changedFiles=$(git diff --name-only HEAD^)
+          for file in $changedFiles; do
+            echo "Processing file: $file"
+          done
   ci-verify:
     runs-on: ubuntu-22.04
     needs: list-charts
