@@ -1,11 +1,11 @@
 interface ResultItemProps {
   item: {
-    name: string;
-    subtitle?: string;
-    icon?: React.ReactNode;
-    shortcut?: string[];
-  };
-  active: boolean;
+    name: string
+    subtitle?: string
+    icon?: React.ReactNode
+    shortcut?: string[]
+  }
+  active: boolean
 }
 
 const ResultItem: React.FC<ResultItemProps> = ({ item, active }) => (

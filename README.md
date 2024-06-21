@@ -787,9 +787,6 @@ There's an issue when using regular translations, so I implemented a workaround 
 
 ## Things to do :
 
-- Fix the translation in page 404. This is related to the current functioning of the not-found function,
-  so we have to wait for a fix from next-js side see here: [i18n for not-found page](https://github.com/vercel/next.js/discussions/50518)
-
 - Fix rss.mjs. If you find a solution on your side, don't hesitate to open a PR!
 
 Everything else is currently working as expected.
