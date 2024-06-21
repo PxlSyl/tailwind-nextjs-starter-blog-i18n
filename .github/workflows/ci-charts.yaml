@@ -66,6 +66,10 @@ jobs:
             echo "charts=${list_changed}" >> $GITHUB_OUTPUT
             echo "result=ok" >> $GITHUB_OUTPUT
           fi
+      
+      - name: Get changes
+        run: git diff --name-only -r HEAD^1 HEAD | xargs
+
       # Using actions/github-scripts because using exit 1 in the script above would not provide any output
       # Source: https://github.community/t/no-output-on-process-completed-with-exit-code-1/123821/3
       - id: show-error
