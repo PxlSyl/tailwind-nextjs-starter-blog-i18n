@@ -95,7 +95,7 @@ jobs:
           MATRIX="$MATRIX]}"
           echo $MATRIX
           echo "matrix=${MATRIX}" >> $GITHUB_OUTPUT
-  ci-verify:
+  ci-chart:
     runs-on: ubuntu-22.04
     needs: list-charts
     strategy:
@@ -105,6 +105,12 @@ jobs:
       contents: read
     if: |
       needs.list-charts.outputs.result == 'ok'
-    name: GitOps
+    name: Helm lint
     steps:
-      - run: echo ${{ matrix.chart }}
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Helm
+        uses: azure/setup-helm@v4
+      - name: Run helm lint
+        run: |
+          helm lint ${{ matrix.chart }}
