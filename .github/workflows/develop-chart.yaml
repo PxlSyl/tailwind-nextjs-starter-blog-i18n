@@ -1,0 +1,36 @@
+name: Publish chart
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'charts/nextjs-app/**'
+
+jobs:
+  helm-publish:
+    name: Publish helm chart
+    runs-on: ubuntu-22.04
+    if: github.actor == 'nvtienanh'
+    permissions:
+      contents: write
+      packages: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Helm
+        uses: azure/setup-helm@v4
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Push chart to GHCR
+        run: |
+          chart_version="$(yq e '.version' "charts/nextjs-app/Chart.yaml")"
+          app_version="$(yq e '.appVersion' "charts/nextjs-app/Chart.yaml")"
+          echo $chart_version
+          helm package charts/nextjs-app
+          helm push nextjs-app-$chart_version oci://ghcr.io/${{ github.repository }}
