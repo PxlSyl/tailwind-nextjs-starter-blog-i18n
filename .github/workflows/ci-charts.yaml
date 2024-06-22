@@ -38,7 +38,6 @@ jobs:
               -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
               https://api.github.com/repos/${{ github.repository }}/pulls/${{github.event.number}} \
               -o $TEMP_FILE
-          cat $TEMP_FILE
           files_changed="$(sed -nr 's/[\-\+]{3} [ab]\/(.*)/\1/p' $TEMP_FILE | sort | uniq)"
           files_renamed="$(sed -nr 's/^rename to (.*)/\1/p' $TEMP_FILE | sort | uniq)"
           echo $files_changed
@@ -96,20 +95,6 @@ jobs:
           MATRIX="$MATRIX]}"
           echo $MATRIX
           echo "matrix=${MATRIX}" >> $GITHUB_OUTPUT
-  test:
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Checkout (fetch last two commits) of the PR
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          fetch-depth: 2
-      - name: Process files changed in the current commit
-        run: |
-          changedFiles=$(git diff --name-only HEAD^)
-          for file in $changedFiles; do
-            echo "Processing file: $file"
-          done
   ci-verify:
     runs-on: ubuntu-22.04
     needs: list-charts
