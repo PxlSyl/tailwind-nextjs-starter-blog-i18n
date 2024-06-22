@@ -1,4 +1,4 @@
-name: CI Workflows
+name: Develop Workflows
 
 on:
   push:
@@ -10,7 +10,6 @@ on:
 jobs:
   build-docker:
     name: Build Docker image
-    needs: ci-build
     runs-on: ubuntu-22.04
     permissions:
       contents: read
