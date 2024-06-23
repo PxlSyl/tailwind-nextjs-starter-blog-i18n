@@ -33,4 +33,4 @@ jobs:
           app_version="$(yq e '.appVersion' "charts/nextjs-app/Chart.yaml")"
           echo $chart_version
           helm package charts/nextjs-app
-          helm push nextjs-app-$chart_version oci://ghcr.io/${{ github.repository }}
+          helm push nextjs-app-$chart_version.tgz oci://ghcr.io/${{ github.repository }}

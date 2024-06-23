@@ -1,6 +1,6 @@
 apiVersion: v2
 name: nextjs-app
-description: A Helm chart for Kubernetes
+description: A Helm chart for Kubernetes.
 maintainers:
   - name: Anh Nguyen
     email: nvtienanh@gmail.com
