@@ -5,8 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: nginx
-  pullPolicy: ghcr.io/codemauvn/tailwind-nextjs-starter-blog-i18n
+  repository: ghcr.io/codemauvn/tailwind-nextjs-starter-blog-i18n 
+  pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "main"
 
