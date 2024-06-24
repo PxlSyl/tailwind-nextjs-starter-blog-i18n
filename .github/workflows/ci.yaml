@@ -8,9 +8,9 @@ on:
       - synchronize
       - labeled
     branches:
-      - codemauvn:main
-    paths:
-      - '!charts/**'
+      - main
+    # paths:
+    #   - '!charts/**'
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
 jobs:
