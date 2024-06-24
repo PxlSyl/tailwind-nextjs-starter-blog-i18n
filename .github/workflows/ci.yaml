@@ -8,7 +8,7 @@ on:
       - synchronize
       - labeled
     branches:
-      - main
+      - codemauvn:main
     paths:
       - '!charts/**'
 concurrency:
