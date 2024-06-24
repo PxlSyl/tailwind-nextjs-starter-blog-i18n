@@ -44,10 +44,12 @@ RUN \
   adduser --system --uid 1001 nextjs
 
 COPY --from=builder --link /app/public ./public
+COPY --from=builder --link /app/content ./content
+COPY --from=builder --link /app/styles ./styles
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
-# COPY --from=builder --link --chown=1001:1001 /app/.next/standalone ./
+COPY --from=builder --link --chown=1001:1001 /app/.next/standalone ./
 COPY --from=builder --link --chown=1001:1001 /app/.next/static ./.next/static
 
 USER nextjs
@@ -55,6 +57,6 @@ USER nextjs
 EXPOSE 3000
 
 ENV PORT 3000
-ENV HOSTNAME localhost
+# ENV HOSTNAME localhost
 
 CMD ["node", "server.js"]

@@ -69,6 +69,7 @@ module.exports = () => {
         },
       ],
     },
+    output:	process.env.NEXT_OUTPUT === "standalone" ? "standalone"	: process.env.NEXT_OUTPUT === "export" ? "export" : undefined,
     async headers() {
       return [
         {
