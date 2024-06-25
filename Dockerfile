@@ -17,7 +17,6 @@ RUN \
   else echo "Lockfile not found." && exit 1; \
   fi
 
-
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
@@ -44,8 +43,8 @@ RUN \
   adduser --system --uid 1001 nextjs
 
 COPY --from=builder --link /app/public ./public
-COPY --from=builder --link /app/content ./content
-COPY --from=builder --link /app/styles ./styles
+# COPY --from=builder --link /app/content ./content
+# COPY --from=builder --link /app/styles ./styles
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
