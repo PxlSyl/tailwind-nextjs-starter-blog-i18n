@@ -53,6 +53,7 @@ This repository will sometimes be updated with new features (not present in the 
 All this can sometimes seem obsessive regarding the UI and details, -maybe too neat or a little overkill- but I also use this repository as a play and learning space.
 
 For now :
+- New "WebsiteEmbed" MDX component : Embed your demo templates from github with ease, and show them on your website! (Don't forget to update your Content Security Policy in the config files of your templates)
 - New "sidetoc" component :  display automatically the table of contents of your posts in a dedicated sidebar.
 - Integration of email, theme, as well as a button to quickly copy the URL of the page you are on, with the kbar palette command.
 The motivation for this is having explored other command palette libraries, with some offering nested elements for 'Actions'. Unfortunately this is not possible with kbar, but it gave me new ideas!
