@@ -1,6 +1,6 @@
 'use client'
 
-import ShimmerButton from './Button'
+import Button from './Button'
 import { useTranslation } from 'app/[locale]/i18n/client'
 import { useParams } from 'next/navigation'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
@@ -17,7 +17,7 @@ export default function NotFoundclient() {
       <div className="max-w-md">
         <p className="mb-4 text-xl font-bold leading-normal md:text-2xl">{t('title')}</p>
         <p className="mb-8">{t('description')}</p>
-        <ShimmerButton href="/" text={t('back')} />
+        <Button href="/" text={t('back')} />
       </div>
     </div>
   )

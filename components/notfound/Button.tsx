@@ -1,49 +1,26 @@
-import { motion } from 'framer-motion'
+import Link from 'next/link'
 
-type ShimmerButtonProps = {
+type ButtonProps = {
   text: string
   href: string
+  style?: string
+  rel?: string
 }
 
-const ShimmerButton = ({ text, href }: ShimmerButtonProps) => {
+const Button = ({ text, href }: ButtonProps) => {
   return (
-    <motion.button
-      className="inline-flex overflow-hidden rounded-lg bg-[linear-gradient(120deg,#FF98A4_calc(var(--shimmer-button-x)-25%),#f6f6f6_var(--shimmer-button-x),#FF98A4_calc(var(--shimmer-button-x)+25%))] [--shimmer-button-x:0%]"
-      initial={
-        {
-          scale: 1,
-          '--shimmer-button-x': '-100%',
-        } as any
-      }
-      animate={
-        {
-          '--shimmer-button-x': '200%',
-        } as any
-      }
-      transition={{
-        stiffness: 500,
-        damping: 20,
-        type: 'spring',
-        '--shimmer-button-x': {
-          duration: 3,
-          repeat: Infinity,
-          ease: [0.445, 0.05, 0.55, 0.95],
-        },
-      }}
-      whileTap={{
-        scale: 0.95,
-      }}
-      whileHover={{
-        scale: 1.05,
-      }}
+    <Link
+      href={href}
+      target={href.startsWith('http') ? `_blank` : ''}
+      className="group relative inline-flex items-center justify-center overflow-hidden rounded-md bg-highlighted px-4 py-1.5 text-xs font-normal text-white transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:shadow-blue-500/30 dark:bg-darkmode-highlighted dark:hover:shadow-purple-500/30"
+      style={{ textDecoration: 'none' }}
     >
-      <a href={href}>
-        <span className="m-[0.125rem] rounded-[calc(0.5rem-0.125rem)] bg-primary-500 px-4 py-1 text-lg text-[#f6f6f6] backdrop-blur-sm">
-          {text}
-        </span>
-      </a>
-    </motion.button>
+      <span className="relative z-50 text-lg text-white">{text}</span>
+      <div className="absolute inset-0 flex h-full w-full justify-center [transform:skew(-13deg)_translateX(-100%)] group-hover:duration-1000 group-hover:[transform:skew(-13deg)_translateX(100%)]">
+        <div className="relative h-full w-8 bg-white/20" />
+      </div>
+    </Link>
   )
 }
 
-export default ShimmerButton
+export default Button
