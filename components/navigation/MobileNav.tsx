@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { SVGProps, useState } from 'react'
 import Image from 'next/image'
 import Link from '../mdxcomponents/Link'
 import siteMetadata from '@/data/siteMetadata'
@@ -9,6 +9,20 @@ import { Authors, allAuthors } from 'contentlayer/generated'
 import { useParams } from 'next/navigation'
 import { useTranslation } from 'app/[locale]/i18n/client'
 import type { LocaleTypes } from 'app/[locale]/i18n/settings'
+import { motion } from 'framer-motion'
+
+export function ChevronDownIcon({ className, ...props }: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...props} className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15">
+      <path
+        fill="currentColor"
+        fillRule="evenodd"
+        d="M3.135 6.158a.5.5 0 0 1 .707-.023L7.5 9.565l3.658-3.43a.5.5 0 0 1 .684.73l-4 3.75a.5.5 0 0 1-.684 0l-4-3.75a.5.5 0 0 1-.023-.707"
+        clipRule="evenodd"
+      ></path>
+    </svg>
+  )
+}
 
 const MobileNav = () => {
   const locale = useParams()?.locale as LocaleTypes
@@ -20,6 +34,7 @@ const MobileNav = () => {
   const mainAuthor = allAuthors.filter((a) => a.default === true && a.language === locale)
 
   const [navShow, setNavShow] = useState<boolean>(false)
+  const [accordionOpen, setAccordionOpen] = useState<boolean>(false)
 
   const onToggleNav = () => {
     setNavShow((status) => {
@@ -30,6 +45,10 @@ const MobileNav = () => {
       }
       return !status
     })
+  }
+
+  const toggleAccordion = () => {
+    setAccordionOpen(!accordionOpen)
   }
 
   return (
@@ -82,39 +101,55 @@ const MobileNav = () => {
           ))}
           {siteMetadata.multiauthors && (
             <>
-              <div className="px-12 py-4 text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100">
-                {t('about')}:
+              <div
+                className="px-12 py-4 text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100 cursor-pointer flex items-center justify-between"
+                onClick={toggleAccordion}
+              >
+                <div>{t('about')}:</div>
+                <motion.div
+                  animate={{ rotate: accordionOpen ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ChevronDownIcon className={`h-5 w-5 ${accordionOpen ? 'text-primary-500' : ''}`} />
+                </motion.div>
               </div>
-              {authors.map((author) => {
-                const { name, avatar, language, slug } = author
-                if (language === locale) {
-                  return (
-                    <button
-                      key={name}
-                      className="group flex w-full items-center rounded-md px-12 py-4 text-sm"
-                    >
-                      <div className="mr-2">
-                        <Image
-                          className="rounded-full"
-                          src={avatar ?? ''}
-                          title="avatar"
-                          alt="avatar"
-                          width={25}
-                          height={25}
-                        />
-                      </div>
-                      <Link
-                        href={`/${locale}/about/${slug}`}
-                        onClick={onToggleNav}
-                        className="text-xl font-bold tracking-widest text-gray-900 dark:text-gray-100"
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: accordionOpen ? 'auto' : 0, opacity: accordionOpen ? 1 : 0 }}
+                transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+                className="overflow-hidden"
+              >
+                {authors.map((author) => {
+                  const { name, avatar, language, slug } = author
+                  if (language === locale) {
+                    return (
+                      <button
+                        key={name}
+                        className="group flex w-full items-center rounded-md px-12 py-4 text-sm"
                       >
-                        {name}
-                      </Link>
-                    </button>
-                  )
-                }
-                return null
-              })}
+                        <div className="mr-2">
+                          <Image
+                            className="rounded-full"
+                            src={avatar ?? ''}
+                            title="avatar"
+                            alt="avatar"
+                            width={25}
+                            height={25}
+                          />
+                        </div>
+                        <Link
+                          href={`/${locale}/about/${slug}`}
+                          onClick={onToggleNav}
+                          className="text-xl font-bold tracking-widest text-gray-900 dark:text-gray-100"
+                        >
+                          {name}
+                        </Link>
+                      </button>
+                    )
+                  }
+                  return null
+                })}
+              </motion.div>
             </>
           )}
           {siteMetadata.multiauthors === false && (
