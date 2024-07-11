@@ -102,7 +102,7 @@ const MobileNav = () => {
           {siteMetadata.multiauthors && (
             <>
               <div
-                className="px-12 py-4 text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100 cursor-pointer flex items-center justify-between"
+                className="flex cursor-pointer items-center justify-between px-12 py-4 text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100"
                 onClick={toggleAccordion}
               >
                 <div>{t('about')}:</div>
@@ -110,7 +110,9 @@ const MobileNav = () => {
                   animate={{ rotate: accordionOpen ? 180 : 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <ChevronDownIcon className={`h-5 w-5 ${accordionOpen ? 'text-primary-500' : ''}`} />
+                  <ChevronDownIcon
+                    className={`h-5 w-5 ${accordionOpen ? 'text-primary-500' : ''}`}
+                  />
                 </motion.div>
               </div>
               <motion.div

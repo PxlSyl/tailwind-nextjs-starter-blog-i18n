@@ -16,5 +16,5 @@ export const components: MDXComponents = {
   table: TableWrapper,
   BlogNewsletterForm,
   Audioplayer,
-  WebsiteEmbed
+  WebsiteEmbed,
 }

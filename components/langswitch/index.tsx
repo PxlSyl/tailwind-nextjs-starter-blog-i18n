@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useCallback, useMemo } from 'react'
 import { usePathname, useParams, useRouter } from 'next/navigation'
 import { useOuterClick } from '../util/useOuterClick'
 import { useTagStore } from '@/components/util/useTagStore'
@@ -24,25 +24,32 @@ const LangSwitch = () => {
   const menubarRef = useRef<HTMLDivElement>(null)
   useOuterClick(menubarRef, () => setIsMenuOpen(false))
 
-  const handleLocaleChange = (newLocale: string): string => {
-    const segments = pathname!.split('/')
-    const localeIndex = segments.findIndex((segment) => locales.includes(segment as LocaleTypes))
-    if (localeIndex !== -1) {
-      segments[localeIndex] = newLocale
-    } else {
-      segments.splice(1, 0, newLocale)
-    }
-    // Remove trailing slash if it exists
-    const newPath = segments.join('/').replace(/\/$/, '')
-    return newPath
-  }
+  const handleLocaleChange = useCallback(
+    (newLocale: string): string => {
+      const segments = pathname!.split('/')
+      const localeIndex = segments.findIndex((segment) => locales.includes(segment as LocaleTypes))
+      if (localeIndex !== -1) {
+        segments[localeIndex] = newLocale
+      } else {
+        segments.splice(1, 0, newLocale)
+      }
+      const newPath = segments.join('/').replace(/\/$/, '')
+      return newPath
+    },
+    [pathname]
+  )
 
-  const handleLinkClick = (newLocale: string) => {
-    setSelectedTag('')
-    const resolvedUrl = handleLocaleChange(newLocale)
-    router.push(resolvedUrl)
-    setIsMenuOpen(false)
-  }
+  const handleLinkClick = useCallback(
+    (newLocale: string) => {
+      setSelectedTag('')
+      const resolvedUrl = handleLocaleChange(newLocale)
+      router.push(resolvedUrl)
+      setIsMenuOpen(false)
+    },
+    [handleLocaleChange, router, setSelectedTag]
+  )
+
+  const currentLocale = useMemo(() => locale.charAt(0).toUpperCase() + locale.slice(1), [locale])
 
   return (
     <div ref={menubarRef} className="relative inline-block text-left">
@@ -55,7 +62,7 @@ const LangSwitch = () => {
               aria-expanded={open}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              {locale.charAt(0).toUpperCase() + locale.slice(1)}
+              {currentLocale}
               <ChevronDownIcon
                 className={`ml-1 mt-1 transform transition-transform duration-300 ${open ? 'rotate-180' : 'rotate-0'}`}
               />
