@@ -11,12 +11,12 @@ type HomeProps = {
 export default async function Page({ params: { locale } }: HomeProps) {
   const sortedPosts = sortPosts(allBlogs)
   const posts = allCoreContent(sortedPosts)
+  const hasFeaturedPosts = posts.some((post) => post.language === locale && post.featured)
+
   return (
     <>
-      {posts.filter((post) => post.language === locale).some((post) => post.featured) && (
-        <FeaturedLayout posts={posts} params={{ locale }} />
-      )}
-      <HomeLayout posts={posts} params={{ locale: locale }} />
+      {hasFeaturedPosts && <FeaturedLayout posts={posts} params={{ locale }} />}
+      <HomeLayout posts={posts} params={{ locale }} />
     </>
   )
 }
