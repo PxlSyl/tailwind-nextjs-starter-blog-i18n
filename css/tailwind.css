@@ -4,6 +4,34 @@
 @tailwind components;
 @tailwind utilities;
 
+.right-2 {
+  right: 0.5rem;
+}
+
+.top-2 {
+  top: .5rem;
+}
+
+.bg-gray-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(55 65 81/var(--tw-bg-opacity));
+}
+
+.text-gray-300 {
+  --tw-text-opacity: 1;
+  color: rgb(209 213 219/var(--tw-text-opacity));
+}
+
+.border-green-400 {
+  --tw-border-opacity: 1;
+  border-color: rgb(74 222 128 / var(--tw-border-opacity));
+}
+
+.text-green-400 {
+  --tw-text-opacity: 1;
+  color: rgb(74 222 128 / var(--tw-text-opacity));
+}
+
 .task-list-item::before {
   @apply hidden;
 }
