@@ -27,12 +27,7 @@ export default async function FeaturedLayout({ posts, params: { locale } }: Home
     <>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <LayoutHeader title={t('featured')} />
-        <PostList
-          posts={posts.filter((post) => post.featured === true)}
-          locale={locale}
-          t={t}
-          maxDisplay={MAX_DISPLAY}
-        />
+        <PostList posts={posts} locale={locale} t={t} maxDisplay={MAX_DISPLAY} />
       </div>
     </>
   )
