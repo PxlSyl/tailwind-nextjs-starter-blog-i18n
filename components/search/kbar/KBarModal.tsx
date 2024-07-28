@@ -21,6 +21,8 @@ interface KBarModalProps {
   isLoading: boolean
 }
 
+const Blank = () => <svg className="h-6 w-6" />
+
 export const KBarModal: React.FC<KBarModalProps> = ({ actions, isLoading }) => {
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, 'common')
@@ -81,7 +83,7 @@ export const KBarModal: React.FC<KBarModalProps> = ({ actions, isLoading }) => {
 
   const handleThemeChange = (newTheme: string) => setTheme(newTheme)
 
-  if (!mounted) return null
+  if (!mounted) return <Blank />
 
   return (
     <>
