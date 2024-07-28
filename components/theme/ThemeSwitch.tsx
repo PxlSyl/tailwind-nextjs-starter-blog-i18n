@@ -35,8 +35,6 @@ const ThemeSwitch = () => {
 
   }, [resolvedTheme])
 
-  console.log('Theme:', {resolvedTheme, theme})
-
   const handleThemeChange = (newTheme: string) => {
     setTheme(newTheme)
     setMenuOpen(false)
