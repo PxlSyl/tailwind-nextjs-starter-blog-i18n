@@ -2,6 +2,8 @@
 
 💫If you don't need a freelancer, a small tip will still be appreciated, so I'll be able to create more repositories (or improve the existing ones) and spend some time to help the community! 
 
+The other way to support me, is to buy me some artworks, thank you!
+
 IMPORTANT NOTE: 
 
 This is still a WIP (Work In Progress).
@@ -90,8 +92,34 @@ summary: Presentation of the Starter Blog Tailwind Next-js v2.0, with addition a
 
 - Smooth page transitions thanks to [Framer Motion](https://github.com/framer/motion) (see the template.tsx file in the app folder and take a look at the following next.js documentation
   for file functionality [template](https://nextjs.org/docs/app/api-reference/file-conventions/template))
-  Note: This is a basic but effective implementation. I strongly encourage you to experiment with framer-motion and its use within the new
+  I strongly encourage you to experiment with framer-motion and its use within the new
   router. I also added some Framer Motion flavor to the formspree contact modal, and to the ListLayoutWithTags.tsx component
+
+  Note : the template.tsx file is now removed, because there's performances issues with it. I'll try to implementanimations handled in a better way. If you don't care about mobile performance and like this animation, you can stick with it, here's the code :
+
+  ```ts:formspree/template.tsx
+'use client'
+
+import { motion } from 'framer-motion'
+
+const variants = {
+  hidden: { opacity: 0, x: -50, y: 0 },
+  enter: { opacity: 1, x: 0, y: 0 },
+}
+
+export default function Template({ children }: { children: React.ReactNode }) {
+  return (
+    <motion.main
+      variants={variants}
+      initial="hidden"
+      animate="enter"
+      transition={{ type: 'linear' }}
+    >
+      {children}
+    </motion.main>
+  )
+}
+```
 
 - New MDX component: excellent audio player for mdx files (in case you make podcasts, or even music), thanks to [react-h5-audio-player](https://github.com/lhz516/react-h5-audio-player)
 
