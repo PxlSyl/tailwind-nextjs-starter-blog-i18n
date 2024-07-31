@@ -97,7 +97,7 @@ summary: Presentation of the Starter Blog Tailwind Next-js v2.0, with addition a
 
   Note : the template.tsx file is now removed, because there's performances issues with it. I'll try to implementanimations handled in a better way. If you don't care about mobile performance and like this animation, you can stick with it, here's the code :
 
-  ```ts:formspree/template.tsx
+```ts:template.tsx
 'use client'
 
 import { motion } from 'framer-motion'
