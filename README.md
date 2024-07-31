@@ -1,3 +1,7 @@
+🙋‍♂️ I'm open for freelance offers.
+
+💫If you don't need a freelancer, a small tip will still be appreciated, so I'll be able to create more repositories (or improve the existing ones) and spend some time to help the community! 
+
 IMPORTANT NOTE: 
 
 This is still a WIP (Work In Progress).
