@@ -53,7 +53,7 @@ const computedFields: ComputedFields = {
     resolve: (doc) => {
       // Split the flattenedPath by '/' and take the last part
       const pathParts = doc._raw.flattenedPath.split('/');
-      return pathParts[pathParts.length - 1];
+      return pathParts.slice(2).join('/')
     },
   },
   path: {
