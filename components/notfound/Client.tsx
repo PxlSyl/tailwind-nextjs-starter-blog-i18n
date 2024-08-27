@@ -17,7 +17,7 @@ export default function NotFoundclient() {
       <div className="max-w-md">
         <p className="mb-4 text-xl font-bold leading-normal md:text-2xl">{t('title')}</p>
         <p className="mb-8">{t('description')}</p>
-        <Button href="/" text={t('back')} />
+        <Button href={`/${locale}`} text={t('back')} />
       </div>
     </div>
   )
