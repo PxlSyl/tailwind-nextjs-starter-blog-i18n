@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useParams, usePathname, useRouter } from 'next/navigation'
 import { useTranslation } from 'app/[locale]/i18n/client'
-import { useTheme } from '@/components/theme/ThemeContext'
 import { useTagStore } from '@/components/util/useTagStore'
 import { useContactForm } from '@/components/formspree/useContactForm'
 import { useRegisterActions } from 'kbar'
@@ -41,7 +40,6 @@ export const KBarModal: React.FC<KBarModalProps> = ({ actions, isLoading }) => {
     handleMessageChange,
   } = useContactForm()
 
-  const { setTheme, mounted } = useTheme()
   const [showEmailForm, setShowEmailForm] = useState<boolean>(false)
   const [showSettings, setShowSettings] = useState<boolean>(false)
   const [showCopied, setShowCopied] = useState<boolean>(false)
@@ -79,9 +77,6 @@ export const KBarModal: React.FC<KBarModalProps> = ({ actions, isLoading }) => {
     router.push(resolvedUrl)
   }
 
-  const handleThemeChange = (newTheme: string) => setTheme(newTheme)
-
-  if (!mounted) return null
 
   return (
     <>
@@ -145,13 +140,6 @@ export const KBarModal: React.FC<KBarModalProps> = ({ actions, isLoading }) => {
                   handleEmailChange={handleEmailChange}
                   handleMessageChange={handleMessageChange}
                   t={t}
-                />
-              )}
-              {showSettings && (
-                <Settings
-                  t={t}
-                  handleThemeChange={handleThemeChange}
-                  handleLinkClick={handleLinkClick}
                 />
               )}
               {!isLoading && !showEmailForm && !showSettings && <RenderResults />}

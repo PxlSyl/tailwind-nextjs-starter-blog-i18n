@@ -9,11 +9,11 @@ import SectionContainer from '@/components/SectionContainer'
 import Footer from '@/components/navigation/Footer'
 import siteMetadata from '@/data/siteMetadata'
 import { maintitle, maindescription } from '@/data/localeMetadata'
-import { ThemeProvider } from '@/components/theme/ThemeContext'
 import { Metadata } from 'next'
 import { dir } from 'i18next'
 import { LocaleTypes, locales } from './i18n/settings'
 import TwSizeIndicator from '@/components/helper/TwSizeIndicator'
+import { ThemeProviders } from './theme-providers'
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }))
@@ -95,7 +95,7 @@ export default function RootLayout({
       <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
       <body className="bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white">
         <TwSizeIndicator />
-        <ThemeProvider>
+        <ThemeProviders>
           <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
           <SectionContainer>
             <div className="flex h-screen flex-col justify-between font-sans">
@@ -106,7 +106,7 @@ export default function RootLayout({
               <Footer />
             </div>
           </SectionContainer>
-        </ThemeProvider>
+        </ThemeProviders>
       </body>
     </html>
   )
