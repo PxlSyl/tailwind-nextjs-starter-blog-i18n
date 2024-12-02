@@ -18,10 +18,12 @@ import { useParams } from 'next/navigation'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { useTranslation } from 'app/[locale]/i18n/client'
 
+const Blank = () => <svg className="h-6 w-6" />
+
 const ThemeSwitch = () => {
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, 'common')
-  const { theme, setTheme, mounted } = useTheme()
+  const { theme, setTheme, mounted, resolvedTheme } = useTheme()
   const [menuOpen, setMenuOpen] = useState<boolean>(false)
   const [darkModeChecked, setDarkModeChecked] = useState<boolean>(theme === 'dark')
   const menubarRef = useRef<HTMLDivElement>(null)
@@ -29,15 +31,16 @@ const ThemeSwitch = () => {
   useOuterClick(menubarRef, () => setMenuOpen(false))
 
   useEffect(() => {
-    setDarkModeChecked(theme === 'dark')
-  }, [theme])
+    setDarkModeChecked(resolvedTheme === 'dark')
+
+  }, [resolvedTheme])
 
   const handleThemeChange = (newTheme: string) => {
     setTheme(newTheme)
     setMenuOpen(false)
   }
 
-  if (!mounted) return null
+  if (!mounted) return <Blank />
 
   return (
     <div ref={menubarRef} className="mr-5">
@@ -61,7 +64,7 @@ const ThemeSwitch = () => {
           leaveTo="opacity-0 scale-95 translate-y-[10px]"
         >
           <MenuItems className="absolute right-0 z-50 mt-2 w-32 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800">
-            <RadioGroup value={theme} onChange={handleThemeChange}>
+            <RadioGroup value={resolvedTheme} onChange={handleThemeChange}>
               <div className="p-1">
                 <Radio value="light">
                   <MenuItem>
