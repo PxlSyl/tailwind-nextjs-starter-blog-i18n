@@ -4,8 +4,16 @@ import FeaturedLayout from '@/layouts/FeaturedLayout'
 import HomeLayout from '@/layouts/HomeLayout'
 import { LocaleTypes } from './i18n/settings'
 
-export default async function Page({ params }: { params: { locale: LocaleTypes } }) {
-  const locale = (await params).locale
+interface PageProps {
+  params: Promise<{
+    locale: LocaleTypes
+  }>
+}
+
+export default async function Page({ 
+  params 
+}: PageProps) {
+  const { locale } = await params
 
   const sortedPosts = sortPosts(allBlogs)
   const posts = allCoreContent(sortedPosts)
