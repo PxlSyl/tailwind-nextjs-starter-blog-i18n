@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useSpring, animated } from 'react-spring'
+import { useSpring, animated } from '@react-spring/web'
 
 export const defaultProperties = {
   dark: {
@@ -69,26 +69,29 @@ export const DarkModeSwitch: React.FC<Props> = ({
     if (animationProperties !== defaultProperties) {
       return Object.assign(defaultProperties, animationProperties)
     }
-
     return animationProperties
   }, [animationProperties])
 
   const { circle, svg, lines, mask } = properties[checked ? 'dark' : 'light']
 
   const svgContainerProps = useSpring({
-    ...svg,
+    transform: svg.transform,
     config: animationProperties.springConfig,
   })
+  
   const centerCircleProps = useSpring({
-    ...circle,
+    r: circle.r,
     config: animationProperties.springConfig,
   })
+  
   const maskedCircleProps = useSpring({
-    ...mask,
+    cx: mask.cx,
+    cy: mask.cy,
     config: animationProperties.springConfig,
   })
+  
   const linesProps = useSpring({
-    ...lines,
+    opacity: lines.opacity,
     config: animationProperties.springConfig,
   })
 
@@ -96,9 +99,13 @@ export const DarkModeSwitch: React.FC<Props> = ({
 
   const uniqueMaskId = `circle-mask-${id}`
 
+  const AnimatedSvg = animated('svg')
+  const AnimatedCircle = animated('circle')
+  const AnimatedG = animated('g')
+
   return (
-    <animated.div style={{ display: 'flex' }}>
-      <animated.svg
+    <div style={{ display: 'flex' }}>
+      <AnimatedSvg
         xmlns="http://www.w3.org/2000/svg"
         width={size}
         height={size}
@@ -119,23 +126,22 @@ export const DarkModeSwitch: React.FC<Props> = ({
       >
         <mask id={uniqueMaskId}>
           <rect x="0" y="0" width="100%" height="100%" fill="white" />
-          <animated.circle
-            // @ts-ignore
-            style={maskedCircleProps}
+          <AnimatedCircle
+            cx={maskedCircleProps.cx}
+            cy={maskedCircleProps.cy}
             r="9"
             fill="black"
           />
         </mask>
 
-        <animated.circle
+        <AnimatedCircle
           cx="12"
           cy="12"
+          r={centerCircleProps.r}
           fill={checked ? moonColor : sunColor}
-          // @ts-ignore
-          style={centerCircleProps}
           mask={`url(#${uniqueMaskId})`}
         />
-        <animated.g stroke="currentColor" style={linesProps}>
+        <AnimatedG style={{ opacity: linesProps.opacity }} stroke="currentColor">
           <line x1="12" y1="1" x2="12" y2="3" />
           <line x1="12" y1="21" x2="12" y2="23" />
           <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
@@ -144,8 +150,8 @@ export const DarkModeSwitch: React.FC<Props> = ({
           <line x1="21" y1="12" x2="23" y2="12" />
           <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
           <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-        </animated.g>
-      </animated.svg>
-    </animated.div>
+        </AnimatedG>
+      </AnimatedSvg>
+    </div>
   )
 }
