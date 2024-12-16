@@ -14,11 +14,11 @@ import { maintitle } from '@/data/localeMetadata'
 import { notFound } from 'next/navigation'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 
-interface BlogPageProps {
-  params: {
+interface PageProps {
+  params: Promise<{
     slug: string[]
     locale: LocaleTypes
-  }
+  }>
 }
 
 const defaultLayout = 'PostLayout'
@@ -28,7 +28,8 @@ const layouts = {
   PostBanner,
 }
 
-async function getPostFromParams({ params: { slug, locale } }: BlogPageProps): Promise<any> {
+async function getPostFromParams({ params }: { params: Promise<{ slug: string[]; locale: LocaleTypes }> }): Promise<any> {
+  const { slug, locale } = await params
   const dslug = decodeURI(slug.join('/'))
   const post = allBlogs.filter((p) => p.language === locale).find((p) => p.slug === dslug) as Blog
 
@@ -56,7 +57,9 @@ async function getPostFromParams({ params: { slug, locale } }: BlogPageProps): P
   return post
 }
 
-export async function generateMetadata({ params }: BlogPageProps): Promise<Metadata | undefined> {
+export async function generateMetadata({
+  params
+}: PageProps): Promise<Metadata | undefined> {
   const { slug, locale } = await params
   const dslug = decodeURI(slug.join('/'))
   const post = allBlogs.find((p) => p.slug === dslug && p.language === locale) as Blog
@@ -114,11 +117,9 @@ export const generateStaticParams = async () => {
   return paths
 }
 
-export default async function Page({
-  params,
-}: {
-  params: { slug: string[]; locale: LocaleTypes }
-}) {
+export default async function Page({ 
+  params 
+}: PageProps) {
   const { slug, locale } = await params
   const dslug = decodeURI(slug.join('/'))
 
@@ -132,7 +133,7 @@ export default async function Page({
 
   const prev = sortedCoreContents[postIndex + 1]
   const next = sortedCoreContents[postIndex - 1]
-  const post = await getPostFromParams({ params: { slug, locale } })
+  const post = await getPostFromParams({ params })
   const author = allAuthors.filter((a) => a.language === locale).find((a) => a.default === true)
   const authorList = post.authors || author
   const authorDetails = authorList.map((author) => {
