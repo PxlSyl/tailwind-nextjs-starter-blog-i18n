@@ -28,7 +28,11 @@ const layouts = {
   PostBanner,
 }
 
-async function getPostFromParams({ params }: { params: Promise<{ slug: string[]; locale: LocaleTypes }> }): Promise<any> {
+async function getPostFromParams({
+  params,
+}: {
+  params: Promise<{ slug: string[]; locale: LocaleTypes }>
+}): Promise<any> {
   const { slug, locale } = await params
   const dslug = decodeURI(slug.join('/'))
   const post = allBlogs.filter((p) => p.language === locale).find((p) => p.slug === dslug) as Blog
@@ -57,9 +61,7 @@ async function getPostFromParams({ params }: { params: Promise<{ slug: string[];
   return post
 }
 
-export async function generateMetadata({
-  params
-}: PageProps): Promise<Metadata | undefined> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata | undefined> {
   const { slug, locale } = await params
   const dslug = decodeURI(slug.join('/'))
   const post = allBlogs.find((p) => p.slug === dslug && p.language === locale) as Blog
@@ -117,9 +119,7 @@ export const generateStaticParams = async () => {
   return paths
 }
 
-export default async function Page({ 
-  params 
-}: PageProps) {
+export default async function Page({ params }: PageProps) {
   const { slug, locale } = await params
   const dslug = decodeURI(slug.join('/'))
 

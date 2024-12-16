@@ -12,9 +12,7 @@ interface PageProps {
   }>
 }
 
-export async function generateMetadata({ 
-  params 
-}: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params
   return genPageMetadata({
     title: 'Blog',
@@ -22,9 +20,7 @@ export async function generateMetadata({
   })
 }
 
-export default async function BlogPage({ 
-  params 
-}: PageProps) {
+export default async function BlogPage({ params }: PageProps) {
   const { locale } = await params
   const { t } = await createTranslation(locale, 'home')
   const posts = allCoreContent(sortPosts(allBlogs))

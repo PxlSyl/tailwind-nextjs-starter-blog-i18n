@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useParams, usePathname, useRouter } from 'next/navigation'
 import { useTranslation } from 'app/[locale]/i18n/client'
-import { useTheme } from '@/components/theme/ThemeContext'
+import { useTheme, Theme } from '@/components/theme/ThemeContext'
 import { useTagStore } from '@/components/util/useTagStore'
 import { useContactForm } from '@/components/formspree/useContactForm'
 import { useRegisterActions } from 'kbar'
@@ -79,7 +79,21 @@ export const KBarModal: React.FC<KBarModalProps> = ({ actions, isLoading }) => {
     router.push(resolvedUrl)
   }
 
-  const handleThemeChange = (newTheme: string) => setTheme(newTheme)
+  const handleThemeChange = (newTheme: string) => {
+    switch (newTheme) {
+      case 'light':
+        setTheme(Theme.LIGHT)
+        break
+      case 'dark':
+        setTheme(Theme.DARK)
+        break
+      case 'system':
+        setTheme(Theme.SYSTEM)
+        break
+      default:
+        setTheme(Theme.SYSTEM)
+    }
+  }
 
   if (!mounted) return null
 

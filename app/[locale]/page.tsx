@@ -10,9 +10,7 @@ interface PageProps {
   }>
 }
 
-export default async function Page({ 
-  params 
-}: PageProps) {
+export default async function Page({ params }: PageProps) {
   const { locale } = await params
 
   const sortedPosts = sortPosts(allBlogs)

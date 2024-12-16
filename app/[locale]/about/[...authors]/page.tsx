@@ -15,9 +15,7 @@ interface PageProps {
   }>
 }
 
-export async function generateMetadata({
-  params
-}: PageProps): Promise<Metadata | undefined> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata | undefined> {
   const { authors, locale } = await params
   const authorSlug = decodeURI(authors.join('/'))
   const author = allAuthors.find((a) => a.slug === authorSlug && a.language === locale) as Authors
@@ -32,9 +30,7 @@ export async function generateMetadata({
   })
 }
 
-export default async function Page({ 
-  params 
-}: PageProps) {
+export default async function Page({ params }: PageProps) {
   const { authors, locale } = await params
   const authorSlug = decodeURI(authors.join('/'))
   const author = allAuthors.find((a) => a.slug === authorSlug && a.language === locale) as Authors

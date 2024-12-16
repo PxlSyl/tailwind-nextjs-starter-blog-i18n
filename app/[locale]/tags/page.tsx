@@ -11,9 +11,7 @@ interface PageProps {
   }>
 }
 
-export async function generateMetadata({ 
-  params 
-}: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params
   const { t } = await createTranslation(locale, 'SEO')
   return genPageMetadata({
@@ -23,9 +21,7 @@ export async function generateMetadata({
   })
 }
 
-export default async function Page({ 
-  params 
-}: PageProps) {
+export default async function Page({ params }: PageProps) {
   const { locale } = await params
   const tagCounts = tagData[locale]
   const tagKeys = Object.keys(tagCounts)

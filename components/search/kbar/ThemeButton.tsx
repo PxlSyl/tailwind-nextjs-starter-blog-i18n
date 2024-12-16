@@ -1,7 +1,9 @@
+import { Theme } from '@/components/theme/ThemeContext'
+
 interface ThemeButtonProps {
   t: (key: string) => string
-  handleThemeChange: (theme: string) => void
-  theme: string
+  handleThemeChange: (theme: Theme) => void
+  theme: Theme
   Icon: React.FC<React.SVGProps<SVGSVGElement>>
 }
 
