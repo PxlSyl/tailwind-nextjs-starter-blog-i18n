@@ -17,22 +17,23 @@ import { useOuterClick } from '../util/useOuterClick'
 import { useParams } from 'next/navigation'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { useTranslation } from 'app/[locale]/i18n/client'
+import { Theme } from './ThemeContext'
 
 const ThemeSwitch = () => {
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, 'common')
   const { theme, setTheme, mounted } = useTheme()
   const [menuOpen, setMenuOpen] = useState<boolean>(false)
-  const [darkModeChecked, setDarkModeChecked] = useState<boolean>(theme === 'dark')
+  const [darkModeChecked, setDarkModeChecked] = useState<boolean>(theme === Theme.DARK)
   const menubarRef = useRef<HTMLDivElement>(null)
 
   useOuterClick(menubarRef, () => setMenuOpen(false))
 
   useEffect(() => {
-    setDarkModeChecked(theme === 'dark')
+    setDarkModeChecked(theme === Theme.DARK)
   }, [theme])
 
-  const handleThemeChange = (newTheme: string) => {
+  const handleThemeChange = (newTheme: Theme) => {
     setTheme(newTheme)
     setMenuOpen(false)
   }
@@ -63,11 +64,11 @@ const ThemeSwitch = () => {
           <MenuItems className="absolute right-0 z-50 mt-2 w-32 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800">
             <RadioGroup value={theme} onChange={handleThemeChange}>
               <div className="p-1">
-                <Radio value="light">
+                <Radio value={Theme.LIGHT}>
                   <MenuItem>
                     {({ focus }) => (
                       <button
-                        onClick={() => handleThemeChange('light')}
+                        onClick={() => handleThemeChange(Theme.LIGHT)}
                         className={`${
                           focus
                             ? 'bg-gray-100 dark:bg-gray-600'
@@ -80,11 +81,11 @@ const ThemeSwitch = () => {
                     )}
                   </MenuItem>
                 </Radio>
-                <Radio value="dark">
+                <Radio value={Theme.DARK}>
                   <MenuItem>
                     {({ focus }) => (
                       <button
-                        onClick={() => handleThemeChange('dark')}
+                        onClick={() => handleThemeChange(Theme.DARK)}
                         className={`${
                           focus
                             ? 'bg-gray-100 dark:bg-gray-600'
@@ -97,11 +98,11 @@ const ThemeSwitch = () => {
                     )}
                   </MenuItem>
                 </Radio>
-                <Radio value="system">
+                <Radio value={Theme.SYSTEM}>
                   <MenuItem>
                     {({ focus }) => (
                       <button
-                        onClick={() => handleThemeChange('system')}
+                        onClick={() => handleThemeChange(Theme.SYSTEM)}
                         className={`${
                           focus
                             ? 'bg-gray-100 dark:bg-gray-600'

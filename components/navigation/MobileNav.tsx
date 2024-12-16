@@ -131,7 +131,7 @@ const MobileNav = () => {
                       >
                         <div className="mr-2">
                           <Image
-                            className="rounded-full w-auto h-auto"
+                            className="h-auto w-auto rounded-full"
                             src={avatar ?? ''}
                             title="avatar"
                             alt="avatar"
