@@ -4,21 +4,27 @@ import { genPageMetadata } from 'app/[locale]/seo'
 import { createTranslation } from '../i18n/server'
 import { LocaleTypes } from '../i18n/settings'
 
-type ProjectsProps = {
-  params: { locale: LocaleTypes }
+interface PageProps {
+  params: Promise<{
+    locale: LocaleTypes
+  }>
 }
 
-export async function generateMetadata({ params }: ProjectsProps): Promise<Metadata> {
-  const locale = (await params).locale
+export async function generateMetadata({ 
+  params 
+}: PageProps): Promise<Metadata> {
+  const { locale } = await params
   const { t } = await createTranslation(locale, 'projects')
   return genPageMetadata({
     title: t('title'),
-    params: { locale },
+    params: { locale }
   })
 }
 
-export default async function Projects({ params }: ProjectsProps) {
-  const locale = (await params).locale
+export default async function Projects({ 
+  params 
+}: PageProps) {
+  const { locale } = await params
   const { t } = await createTranslation(locale, 'projects')
   return (
     <>
@@ -27,7 +33,9 @@ export default async function Projects({ params }: ProjectsProps) {
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             {t('title')}
           </h1>
-          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">{t('description')}</p>
+          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
+            {t('description')}
+          </p>
         </div>
         <div className="container py-12">
           <div className="-m-4 flex flex-wrap">
