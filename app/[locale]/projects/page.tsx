@@ -8,20 +8,16 @@ type ProjectsProps = {
   params: { locale: LocaleTypes }
 }
 
-export async function generateMetadata({ 
-  params 
-}: ProjectsProps): Promise<Metadata> {
+export async function generateMetadata({ params }: ProjectsProps): Promise<Metadata> {
   const locale = (await params).locale
   const { t } = await createTranslation(locale, 'projects')
   return genPageMetadata({
     title: t('title'),
-    params: { locale }
+    params: { locale },
   })
 }
 
-export default async function Projects({ 
-  params 
-}: ProjectsProps) {
+export default async function Projects({ params }: ProjectsProps) {
   const locale = (await params).locale
   const { t } = await createTranslation(locale, 'projects')
   return (
@@ -31,9 +27,7 @@ export default async function Projects({
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             {t('title')}
           </h1>
-          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            {t('description')}
-          </p>
+          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">{t('description')}</p>
         </div>
         <div className="container py-12">
           <div className="-m-4 flex flex-wrap">

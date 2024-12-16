@@ -8,33 +8,33 @@ import { createTranslation } from 'app/[locale]/i18n/server'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { notFound } from 'next/navigation'
 
-type AboutProps = {
-  params: { 
+interface PageProps {
+  params: Promise<{
     authors: string[]
-    locale: LocaleTypes 
-  }
+    locale: LocaleTypes
+  }>
 }
 
 export async function generateMetadata({
   params
-}: AboutProps): Promise<Metadata | undefined> {
+}: PageProps): Promise<Metadata | undefined> {
   const { authors, locale } = await params
   const authorSlug = decodeURI(authors.join('/'))
   const author = allAuthors.find((a) => a.slug === authorSlug && a.language === locale) as Authors
   if (!author) {
     return
   }
+  const { t } = await createTranslation(locale, 'about')
 
   return genPageMetadata({
-    title: author.name,
-    description: author.occupation,
+    title: `${t('about')} ${author.name}`,
     params: { locale },
   })
 }
 
 export default async function Page({ 
   params 
-}: AboutProps) {
+}: PageProps) {
   const { authors, locale } = await params
   const authorSlug = decodeURI(authors.join('/'))
   const author = allAuthors.find((a) => a.slug === authorSlug && a.language === locale) as Authors

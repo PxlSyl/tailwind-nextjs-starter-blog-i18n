@@ -31,7 +31,7 @@ export async function generateMetadata({
   params: { locale: LocaleTypes }
 }): Promise<Metadata> {
   const locale = (await params).locale
-  
+
   return {
     metadataBase: new URL(siteMetadata.siteUrl),
     title: {
@@ -84,7 +84,7 @@ export default async function RootLayout({
   params: { locale: LocaleTypes }
 }) {
   const locale = (await params).locale
-  
+
   return (
     <html
       lang={locale}

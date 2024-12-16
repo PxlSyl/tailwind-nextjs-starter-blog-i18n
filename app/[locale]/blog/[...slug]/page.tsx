@@ -15,9 +15,9 @@ import { notFound } from 'next/navigation'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 
 interface BlogPageProps {
-  params: { 
+  params: {
     slug: string[]
-    locale: LocaleTypes 
+    locale: LocaleTypes
   }
 }
 
@@ -56,9 +56,7 @@ async function getPostFromParams({ params: { slug, locale } }: BlogPageProps): P
   return post
 }
 
-export async function generateMetadata({
-  params
-}: BlogPageProps): Promise<Metadata | undefined> {
+export async function generateMetadata({ params }: BlogPageProps): Promise<Metadata | undefined> {
   const { slug, locale } = await params
   const dslug = decodeURI(slug.join('/'))
   const post = allBlogs.find((p) => p.slug === dslug && p.language === locale) as Blog
@@ -116,14 +114,14 @@ export const generateStaticParams = async () => {
   return paths
 }
 
-export default async function Page({ 
-  params 
-}: { 
-  params: { slug: string[], locale: LocaleTypes } 
+export default async function Page({
+  params,
+}: {
+  params: { slug: string[]; locale: LocaleTypes }
 }) {
   const { slug, locale } = await params
   const dslug = decodeURI(slug.join('/'))
-  
+
   const sortedCoreContents = allCoreContent(
     sortPosts(allBlogs.filter((p) => p.language === locale))
   )
