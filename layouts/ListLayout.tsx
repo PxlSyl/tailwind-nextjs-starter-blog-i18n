@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { useTagStore } from '@/components/util/useTagStore'
 import { motion } from 'framer-motion'
 import { formatDate } from 'pliny/utils/formatDate'
@@ -48,15 +48,15 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
   const [currentPage, setCurrentPage] = useState(1)
   const postsPerPage = POSTS_PER_PAGE
   const sortedPosts = sortByDate(posts)
+  const selectedTag = useTagStore((state) => state.selectedTag)
   const setSelectedTag = useTagStore((state) => state.setSelectedTag)
 
-  const filteredPosts = useTagStore((state) => {
-    if (state.selectedTag) {
-      return sortedPosts.filter((post) => post.tags.includes(state.selectedTag))
-    } else {
-      return sortedPosts
+  const filteredPosts = useMemo(() => {
+    if (selectedTag) {
+      return sortedPosts.filter((post) => post.tags.includes(selectedTag))
     }
-  })
+    return sortedPosts
+  }, [selectedTag, sortedPosts])
 
   const totalPages = Math.ceil(filteredPosts.length / postsPerPage)
   const startIndex = (currentPage - 1) * postsPerPage

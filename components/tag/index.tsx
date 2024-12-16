@@ -19,13 +19,12 @@ const Tag = ({ text }: Props) => {
   }, [text, setSelectedTag])
 
   return (
-    <Link href={`/${locale}/blog`}>
-      <span
-        onClick={handleClick}
-        className="mr-3 cursor-pointer text-sm font-medium uppercase text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-      >
-        {text.split(' ').join('-')}
-      </span>
+    <Link
+      href={`/${locale}/blog`}
+      onClick={handleClick}
+      className="mr-3 cursor-pointer text-sm font-medium uppercase text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+    >
+      {text.split(' ').join('-')}
     </Link>
   )
 }

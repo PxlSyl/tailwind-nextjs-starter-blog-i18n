@@ -25,7 +25,7 @@ const ThemeSwitch = () => {
   const { theme, setTheme, mounted } = useTheme()
   const [menuOpen, setMenuOpen] = useState<boolean>(false)
   const [darkModeChecked, setDarkModeChecked] = useState<boolean>(theme === Theme.DARK)
-  const menubarRef = useRef<HTMLDivElement>(null)
+  const menubarRef = useRef<HTMLDivElement | null>(null)
 
   useOuterClick(menubarRef, () => setMenuOpen(false))
 

@@ -9,26 +9,33 @@ import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { notFound } from 'next/navigation'
 
 type AboutProps = {
-  params: { authors: string[]; locale: LocaleTypes }
+  params: { 
+    authors: string[]
+    locale: LocaleTypes 
+  }
 }
 
 export async function generateMetadata({
-  params: { authors, locale },
+  params
 }: AboutProps): Promise<Metadata | undefined> {
+  const { authors, locale } = await params
   const authorSlug = decodeURI(authors.join('/'))
   const author = allAuthors.find((a) => a.slug === authorSlug && a.language === locale) as Authors
   if (!author) {
     return
   }
-  const { t } = await createTranslation(locale, 'about')
 
   return genPageMetadata({
-    title: `${t('about')} ${author.name}`,
-    params: { locale: locale },
+    title: author.name,
+    description: author.occupation,
+    params: { locale },
   })
 }
 
-export default async function Page({ params: { authors, locale } }: AboutProps) {
+export default async function Page({ 
+  params 
+}: AboutProps) {
+  const { authors, locale } = await params
   const authorSlug = decodeURI(authors.join('/'))
   const author = allAuthors.find((a) => a.slug === authorSlug && a.language === locale) as Authors
   const authorIndex = allAuthors.findIndex((p) => p.slug === authorSlug)
@@ -38,7 +45,7 @@ export default async function Page({ params: { authors, locale } }: AboutProps) 
   const mainContent = coreContent(author)
 
   return (
-    <AuthorLayout params={{ locale: locale }} content={mainContent}>
+    <AuthorLayout params={{ locale }} content={mainContent}>
       <MDXLayoutRenderer code={author.body.code} />
     </AuthorLayout>
   )

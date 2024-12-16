@@ -4,11 +4,13 @@ import FeaturedLayout from '@/layouts/FeaturedLayout'
 import HomeLayout from '@/layouts/HomeLayout'
 import { LocaleTypes } from './i18n/settings'
 
-type HomeProps = {
+export default async function Page({
+  params,
+}: {
   params: { locale: LocaleTypes }
-}
-
-export default async function Page({ params: { locale } }: HomeProps) {
+}) {
+  const locale = (await params).locale
+  
   const sortedPosts = sortPosts(allBlogs)
   const posts = allCoreContent(sortedPosts)
   const filteredPosts = posts.filter((p) => p.language === locale)
@@ -16,7 +18,9 @@ export default async function Page({ params: { locale } }: HomeProps) {
 
   return (
     <>
-      {hasFeaturedPosts && <FeaturedLayout posts={hasFeaturedPosts} params={{ locale }} />}
+      {hasFeaturedPosts.length > 0 && (
+        <FeaturedLayout posts={hasFeaturedPosts} params={{ locale }} />
+      )}
       <HomeLayout posts={filteredPosts} params={{ locale }} />
     </>
   )

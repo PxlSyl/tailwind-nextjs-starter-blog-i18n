@@ -101,8 +101,9 @@ const MobileNav = () => {
           ))}
           {siteMetadata.multiauthors && (
             <>
-              <div
-                className="flex cursor-pointer items-center justify-between px-12 py-4 text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100"
+              <button
+                type="button"
+                className="flex w-full items-center justify-between px-12 py-4 text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100"
                 onClick={toggleAccordion}
               >
                 <div>{t('about')}:</div>
@@ -114,7 +115,7 @@ const MobileNav = () => {
                     className={`h-5 w-5 ${accordionOpen ? 'text-primary-500' : ''}`}
                   />
                 </motion.div>
-              </div>
+              </button>
               <motion.div
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: accordionOpen ? 'auto' : 0, opacity: accordionOpen ? 1 : 0 }}

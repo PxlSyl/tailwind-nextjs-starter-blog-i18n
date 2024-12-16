@@ -5,7 +5,7 @@ import React, { createContext, useState, useContext, useEffect, useRef, useCallb
 export enum Theme {
   LIGHT = 'light',
   DARK = 'dark',
-  SYSTEM = 'system'
+  SYSTEM = 'system',
 }
 
 interface ThemeContextProps {
@@ -25,7 +25,9 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const updateTheme = useCallback((newTheme: Theme) => {
     setTheme(newTheme)
     if (newTheme === Theme.SYSTEM) {
-      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? Theme.DARK : Theme.LIGHT
+      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? Theme.DARK
+        : Theme.LIGHT
       setResolvedTheme(systemTheme)
       document.documentElement.classList.toggle('dark', systemTheme === Theme.DARK)
     } else {
@@ -60,7 +62,9 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }, [theme, updateTheme])
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme: updateTheme, mounted }}>{children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={{ theme, setTheme: updateTheme, mounted }}>
+      {children}
+    </ThemeContext.Provider>
   )
 }
 

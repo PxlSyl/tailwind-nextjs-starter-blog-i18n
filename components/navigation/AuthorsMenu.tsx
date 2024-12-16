@@ -120,7 +120,6 @@ const AuthorsMenu = ({ className }: AuthorsMenuProps) => {
               </MenuButton>
             </div>
             <Transition
-              as={Fragment}
               show={isOpen}
               enter="transition-all ease-out duration-300"
               enterFrom="opacity-0 scale-95 translate-y-[-10px]"
@@ -129,18 +128,20 @@ const AuthorsMenu = ({ className }: AuthorsMenuProps) => {
               leaveFrom="opacity-100 scale-100 translate-y-0"
               leaveTo="opacity-0 scale-95 translate-y-[10px]"
             >
-              <MenuItems
-                className="absolute right-0 z-50 mt-2 w-40 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800"
-                as="div"
-              >
-                <RadioGroup>
-                  <div className="p-1">
-                    {authors.map(
-                      (author) => author.language === locale && renderAuthorLink(author)
-                    )}
-                  </div>
-                </RadioGroup>
-              </MenuItems>
+              <div>
+                <MenuItems
+                  className="absolute right-0 z-50 mt-2 w-40 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800"
+                  as="div"
+                >
+                  <RadioGroup>
+                    <div className="p-1">
+                      {authors.map(
+                        (author) => author.language === locale && renderAuthorLink(author)
+                      )}
+                    </div>
+                  </RadioGroup>
+                </MenuItems>
+              </div>
             </Transition>
           </Menu>
         </div>

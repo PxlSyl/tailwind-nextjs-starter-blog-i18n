@@ -15,7 +15,10 @@ import { notFound } from 'next/navigation'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 
 interface BlogPageProps {
-  params: { slug: string[]; locale: LocaleTypes }
+  params: { 
+    slug: string[]
+    locale: LocaleTypes 
+  }
 }
 
 const defaultLayout = 'PostLayout'
@@ -30,7 +33,7 @@ async function getPostFromParams({ params: { slug, locale } }: BlogPageProps): P
   const post = allBlogs.filter((p) => p.language === locale).find((p) => p.slug === dslug) as Blog
 
   if (!post) {
-    null
+    return null
   }
 
   if (post?.series) {
@@ -54,13 +57,15 @@ async function getPostFromParams({ params: { slug, locale } }: BlogPageProps): P
 }
 
 export async function generateMetadata({
-  params: { slug, locale },
+  params
 }: BlogPageProps): Promise<Metadata | undefined> {
+  const { slug, locale } = await params
   const dslug = decodeURI(slug.join('/'))
   const post = allBlogs.find((p) => p.slug === dslug && p.language === locale) as Blog
   if (!post) {
     return
   }
+
   const author = allAuthors.filter((a) => a.language === locale).find((a) => a.default === true)
   const authorList = post.authors || author
   const authorDetails = authorList.map((author) => {
@@ -111,9 +116,14 @@ export const generateStaticParams = async () => {
   return paths
 }
 
-export default async function Page({ params: { slug, locale } }: BlogPageProps) {
+export default async function Page({ 
+  params 
+}: { 
+  params: { slug: string[], locale: LocaleTypes } 
+}) {
+  const { slug, locale } = await params
   const dslug = decodeURI(slug.join('/'))
-  // Filter out drafts in production + locale filtering
+  
   const sortedCoreContents = allCoreContent(
     sortPosts(allBlogs.filter((p) => p.language === locale))
   )
@@ -155,7 +165,7 @@ export default async function Page({ params: { slug, locale } }: BlogPageProps) 
         authorDetails={authorDetails}
         next={next}
         prev={prev}
-        params={{ locale: locale }}
+        params={{ locale }}
       >
         <MDXLayoutRenderer code={post.body.code} components={components} toc={post.toc} />
       </Layout>
