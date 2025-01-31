@@ -24,13 +24,30 @@ const ThemeSwitch = () => {
   const { t } = useTranslation(locale, 'common')
   const { theme, setTheme, mounted } = useTheme()
   const [menuOpen, setMenuOpen] = useState<boolean>(false)
-  const [darkModeChecked, setDarkModeChecked] = useState<boolean>(theme === Theme.DARK)
+  const [darkModeChecked, setDarkModeChecked] = useState<boolean>(false)
   const menubarRef = useRef<HTMLDivElement | null>(null)
 
   useOuterClick(menubarRef, () => setMenuOpen(false))
 
   useEffect(() => {
-    setDarkModeChecked(theme === Theme.DARK)
+    if (theme === Theme.SYSTEM) {
+      const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+      setDarkModeChecked(isDarkMode)
+    } else {
+      setDarkModeChecked(theme === Theme.DARK)
+    }
+  }, [theme])
+
+  useEffect(() => {
+    if (theme === Theme.SYSTEM) {
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+      const handleChange = (e: MediaQueryListEvent) => {
+        setDarkModeChecked(e.matches)
+      }
+
+      mediaQuery.addEventListener('change', handleChange)
+      return () => mediaQuery.removeEventListener('change', handleChange)
+    }
   }, [theme])
 
   const handleThemeChange = (newTheme: Theme) => {
