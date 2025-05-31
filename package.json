@@ -21,7 +21,7 @@
     "@waline/client": "^3.4.2",
     "autoprefixer": "^10.4.20",
     "contentlayer2": "^0.5.3",
-    "esbuild": "^0.25.2",
+    "esbuild": "^0.25.3",
     "framer-motion": "^11.15.0",
     "github-slugger": "^2.0.0",
     "gray-matter": "^4.0.3",
