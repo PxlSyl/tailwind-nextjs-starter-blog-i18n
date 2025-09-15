@@ -29,7 +29,7 @@ const space_grotesk = Space_Grotesk({
 export async function generateMetadata({
   params,
 }: {
-  params: { locale: LocaleTypes }
+  params: Promise<{ locale: LocaleTypes }>
 }): Promise<Metadata> {
   const { locale } = await params
 
@@ -82,7 +82,7 @@ export default async function RootLayout({
   params,
 }: {
   children: React.ReactNode
-  params: { locale: LocaleTypes }
+  params: Promise<{ locale: LocaleTypes }>
 }): Promise<ReactElement> {
   const { locale } = await params
 
