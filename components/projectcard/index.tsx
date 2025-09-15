@@ -1,10 +1,10 @@
+import type { LocaleTypes } from 'app/[locale]/i18n/settings'
+import { useParams } from 'next/navigation'
 import Image from '../mdxcomponents/Image'
 import Link from '../mdxcomponents/Link'
-import { useParams } from 'next/navigation'
-import type { LocaleTypes } from 'app/[locale]/i18n/settings'
 
-import { motion } from 'framer-motion'
 import { useTranslation } from 'app/[locale]/i18n/client'
+import { motion } from 'framer-motion'
 
 const variants = {
   hidden: { opacity: 0, x: 0, y: -25 },
@@ -26,7 +26,7 @@ const Card: React.FC<CardProps> = ({ title, description, imgSrc, href }) => {
       variants={variants}
       initial="hidden"
       animate="enter"
-      transition={{ type: 'linear' }}
+      transition={{ type: 'tween', duration: 0.3 }}
       className="md max-w-[544px] p-4 md:w-1/2"
     >
       <div
