@@ -1,18 +1,18 @@
+import { components } from '@/components/mdxcomponents'
+import { maintitle } from '@/data/localeMetadata'
+import siteMetadata from '@/data/siteMetadata'
+import PostBanner from '@/layouts/PostBanner'
+import PostLayout from '@/layouts/PostLayout'
+import PostSimple from '@/layouts/PostSimple'
+import type { LocaleTypes } from 'app/[locale]/i18n/settings'
+import { allAuthors, allBlogs, type Authors, type Blog } from 'contentlayer/generated'
 import 'css/prism.css'
 import 'katex/dist/katex.css'
-import { Metadata } from 'next'
-import { components } from '@/components/mdxcomponents'
-import { MDXLayoutRenderer } from 'pliny/mdx-components'
-import { sortPosts, coreContent, allCoreContent } from 'pliny/utils/contentlayer'
-import { allBlogs, allAuthors } from 'contentlayer/generated'
-import type { Authors, Blog } from 'contentlayer/generated'
-import PostSimple from '@/layouts/PostSimple'
-import PostLayout from '@/layouts/PostLayout'
-import PostBanner from '@/layouts/PostBanner'
-import siteMetadata from '@/data/siteMetadata'
-import { maintitle } from '@/data/localeMetadata'
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { LocaleTypes } from 'app/[locale]/i18n/settings'
+import { MDXLayoutRenderer } from 'pliny/mdx-components'
+import { allCoreContent, coreContent, sortPosts } from 'pliny/utils/contentlayer'
+import type { ReactElement } from 'react'
 
 interface PageProps {
   params: Promise<{
@@ -32,7 +32,7 @@ async function getPostFromParams({
   params,
 }: {
   params: Promise<{ slug: string[]; locale: LocaleTypes }>
-}): Promise<any> {
+}): Promise<Blog | null> {
   const { slug, locale } = await params
   const dslug = decodeURI(slug.join('/'))
   const post = allBlogs.filter((p) => p.language === locale).find((p) => p.slug === dslug) as Blog
@@ -44,7 +44,11 @@ async function getPostFromParams({
   if (post?.series) {
     const seriesPosts = allBlogs
       .filter((p) => p.language === locale && p.series?.title === post.series?.title)
-      .sort((a, b) => Number(a.series!.order) - Number(b.series!.order))
+      .sort((a, b) => {
+        const aOrder = a.series?.order ? Number(a.series.order) : 0
+        const bOrder = b.series?.order ? Number(b.series.order) : 0
+        return aOrder - bOrder
+      })
       .map((p) => {
         return {
           title: p.title,
@@ -54,7 +58,13 @@ async function getPostFromParams({
         }
       })
     if (seriesPosts.length > 0) {
-      return { ...post, series: { ...post.series, posts: seriesPosts } }
+      return {
+        ...post,
+        series: {
+          ...post.series,
+          posts: seriesPosts,
+        },
+      } as Blog & { series: { posts: typeof seriesPosts } }
     }
   }
 
@@ -114,12 +124,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata 
   }
 }
 
-export const generateStaticParams = async () => {
+export const generateStaticParams = async (): Promise<{ slug: string[] }[]> => {
   const paths = allBlogs.map((p) => ({ slug: p.slug.split('/') }))
   return paths
 }
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params }: PageProps): Promise<ReactElement> {
   const { slug, locale } = await params
   const dslug = decodeURI(slug.join('/'))
 
@@ -134,6 +144,11 @@ export default async function Page({ params }: PageProps) {
   const prev = sortedCoreContents[postIndex + 1]
   const next = sortedCoreContents[postIndex - 1]
   const post = await getPostFromParams({ params })
+
+  if (!post) {
+    return notFound()
+  }
+
   const author = allAuthors.filter((a) => a.language === locale).find((a) => a.default === true)
   const authorList = post.authors || author
   const authorDetails = authorList.map((author) => {
@@ -155,10 +170,9 @@ export default async function Page({ params }: PageProps) {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <script type="application/ld+json" suppressHydrationWarning>
+        {JSON.stringify(jsonLd)}
+      </script>
       <Layout
         content={mainContent}
         authorDetails={authorDetails}

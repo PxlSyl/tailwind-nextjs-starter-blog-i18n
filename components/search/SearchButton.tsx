@@ -1,9 +1,10 @@
-import { AlgoliaButton } from 'pliny/search/AlgoliaButton'
-import { KBarButton } from './KBarButton'
 import siteMetadata from '@/data/siteMetadata'
+import { AlgoliaButton } from 'pliny/search/AlgoliaButton'
+import type { JSX } from 'react'
 import { SearchIcon } from './icons'
+import { KBarButton } from './KBarButton'
 
-const SearchButton = () => {
+const SearchButton = (): JSX.Element | null => {
   if (
     siteMetadata.search &&
     (siteMetadata.search.provider === 'algolia' || siteMetadata.search.provider === 'kbar')
@@ -17,6 +18,8 @@ const SearchButton = () => {
       </SearchButtonWrapper>
     )
   }
+
+  return null
 }
 
 export default SearchButton

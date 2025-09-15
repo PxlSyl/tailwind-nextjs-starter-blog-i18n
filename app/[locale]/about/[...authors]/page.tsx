@@ -1,12 +1,13 @@
-import { Metadata } from 'next'
-import { Authors, allAuthors } from 'contentlayer/generated'
-import { MDXLayoutRenderer } from 'pliny/mdx-components'
 import AuthorLayout from '@/layouts/AuthorLayout'
-import { coreContent } from 'pliny/utils/contentlayer'
-import { genPageMetadata } from 'app/[locale]/seo'
 import { createTranslation } from 'app/[locale]/i18n/server'
-import { LocaleTypes } from 'app/[locale]/i18n/settings'
+import type { LocaleTypes } from 'app/[locale]/i18n/settings'
+import { genPageMetadata } from 'app/[locale]/seo'
+import { allAuthors, type Authors } from 'contentlayer/generated'
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import { MDXLayoutRenderer } from 'pliny/mdx-components'
+import { coreContent } from 'pliny/utils/contentlayer'
+import type { ReactElement } from 'react'
 
 interface PageProps {
   params: Promise<{
@@ -30,7 +31,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata 
   })
 }
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params }: PageProps): Promise<ReactElement> {
   const { authors, locale } = await params
   const authorSlug = decodeURI(authors.join('/'))
   const author = allAuthors.find((a) => a.slug === authorSlug && a.language === locale) as Authors

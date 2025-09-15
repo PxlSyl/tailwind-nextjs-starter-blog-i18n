@@ -1,28 +1,26 @@
 'use client'
 
-import Link from '../mdxcomponents/Link'
-import siteMetadata from '@/data/siteMetadata'
-import { maintitle } from '@/data/localeMetadata'
 import SocialIcon from '@/components/social-icons'
+import { maintitle } from '@/data/localeMetadata'
+import siteMetadata from '@/data/siteMetadata'
+import Link from '../mdxcomponents/Link'
 
-import { useParams } from 'next/navigation'
-import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { useTranslation } from 'app/[locale]/i18n/client'
+import type { LocaleTypes } from 'app/[locale]/i18n/settings'
+import { useParams } from 'next/navigation'
+import { useCallback, type JSX } from 'react'
 
-import { useContactModal } from '../formspree/store'
 import { ContactModal } from '../formspree'
+import { useContactModal } from '../formspree/store'
 
-export default function Footer() {
+export default function Footer(): JSX.Element {
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, 'footer')
   const contactModal = useContactModal()
 
-  const handleContactClick = (): void => {
+  const handleContactClick = useCallback((): void => {
     contactModal.onOpen()
-  }
-  function ContactClick(): void {
-    handleContactClick()
-  }
+  }, [contactModal])
 
   return (
     <>
@@ -33,7 +31,10 @@ export default function Footer() {
               {siteMetadata.formspree === false ? (
                 <SocialIcon kind="mail" href={`mailto:${siteMetadata.email}`} size={6} />
               ) : (
-                <button className="flex items-center focus:outline-none" onClick={ContactClick}>
+                <button
+                  className="flex items-center focus:outline-none"
+                  onClick={handleContactClick}
+                >
                   <SocialIcon kind="mail" size={6} />
                 </button>
               )}

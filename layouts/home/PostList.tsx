@@ -1,8 +1,8 @@
-import React from 'react'
 import Link from '@/components/mdxcomponents/Link'
 import Tag from '@/components/tag'
+import type { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { formatDate } from 'pliny/utils/formatDate'
-import { LocaleTypes } from 'app/[locale]/i18n/settings'
+import React from 'react'
 
 interface Post {
   slug: string
@@ -57,7 +57,9 @@ const PostList: React.FC<PostListProps> = ({ posts, locale, t, maxDisplay }) => 
                       </ul>
                     </div>
                     <div className="prose max-w-none text-gray-500 dark:text-gray-400">
-                      {summary!.length > 149 ? `${summary!.substring(0, 149)}...` : summary}
+                      {summary && summary.length > 149
+                        ? `${summary.substring(0, 149)}...`
+                        : summary}
                     </div>
                   </div>
                   <div className="text-base font-medium leading-6">

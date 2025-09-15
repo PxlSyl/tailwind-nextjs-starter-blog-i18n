@@ -1,23 +1,29 @@
-import { useState } from 'react'
-import { useParams, usePathname, useRouter } from 'next/navigation'
-import { useTranslation } from 'app/[locale]/i18n/client'
-import { useTheme, Theme } from '@/components/theme/ThemeContext'
-import { useTagStore } from '@/components/util/useTagStore'
 import { useContactForm } from '@/components/formspree/useContactForm'
-import { useRegisterActions } from 'kbar'
+import { Theme, useTheme } from '@/components/theme/ThemeContext'
+import { useTagStore } from '@/components/util/useTagStore'
 import siteMetadata from '@/data/siteMetadata'
-import EmailForm from './Emailform'
-import Settings from './Settings'
+import { useTranslation } from 'app/[locale]/i18n/client'
+import { locales, type LocaleTypes } from 'app/[locale]/i18n/settings'
+import {
+  KBarAnimator,
+  KBarPortal,
+  KBarPositioner,
+  KBarSearch,
+  useRegisterActions,
+  type Action,
+} from 'kbar'
+import { useParams, usePathname, useRouter } from 'next/navigation'
+import { useCallback, useState } from 'react'
+import { Toaster } from 'react-hot-toast'
+import { MailIcon, SearchIcon, SettingsIcon } from '../icons'
 import Button from './Button'
 import CopyButton from './CopyButton'
+import EmailForm from './Emailform'
 import RenderResults from './RenderResults'
-import { KBarPortal, KBarAnimator, KBarPositioner, KBarSearch } from 'kbar'
-import { Toaster } from 'react-hot-toast'
-import { SearchIcon, MailIcon, SettingsIcon } from '../icons'
-import { LocaleTypes, locales } from 'app/[locale]/i18n/settings'
+import Settings from './Settings'
 
 interface KBarModalProps {
-  actions: any
+  actions: Action[]
   isLoading: boolean
 }
 
@@ -95,6 +101,18 @@ export const KBarModal: React.FC<KBarModalProps> = ({ actions, isLoading }) => {
     }
   }
 
+  const handleEmailButtonClick = useCallback(() => toggleShowEmail(), [])
+  const handleSettingsButtonClick = useCallback(() => toggleSettings(), [])
+  const handleCopyButtonClick = useCallback(() => copyUrl(), [])
+  const handleSettingsThemeChange = useCallback(
+    (newTheme: string) => handleThemeChange(newTheme),
+    []
+  )
+  const handleSettingsLinkClick = useCallback((newLocale: string) => handleLinkClick(newLocale), [])
+
+  const mailIcon = <MailIcon />
+  const settingsIcon = <SettingsIcon />
+
   if (!mounted) return null
 
   return (
@@ -125,30 +143,30 @@ export const KBarModal: React.FC<KBarModalProps> = ({ actions, isLoading }) => {
               <div className="mb-1 ml-2 flex items-center space-x-2">
                 {!showSettings && (
                   <Button
-                    onClick={toggleShowEmail}
+                    onClick={handleEmailButtonClick}
                     show={showEmailForm}
-                    icon={<MailIcon />}
+                    icon={mailIcon}
                     label={t('contact')}
                     backLabel={t('back')}
                   />
                 )}
                 {!showEmailForm && (
                   <Button
-                    onClick={toggleSettings}
+                    onClick={handleSettingsButtonClick}
                     show={showSettings}
-                    icon={<SettingsIcon />}
+                    icon={settingsIcon}
                     label={t('settings')}
                     backLabel={t('back')}
                   />
                 )}
                 <CopyButton
                   show={showEmailForm || showSettings}
-                  copyUrl={copyUrl}
+                  copyUrl={handleCopyButtonClick}
                   showCopied={showCopied}
                   t={t}
                 />
               </div>
-              {showEmailForm && (
+              {showEmailForm ? (
                 <EmailForm
                   state={state}
                   handleSubmit={handleSubmit}
@@ -160,20 +178,20 @@ export const KBarModal: React.FC<KBarModalProps> = ({ actions, isLoading }) => {
                   handleMessageChange={handleMessageChange}
                   t={t}
                 />
-              )}
-              {showSettings && (
+              ) : null}
+              {showSettings ? (
                 <Settings
                   t={t}
-                  handleThemeChange={handleThemeChange}
-                  handleLinkClick={handleLinkClick}
+                  handleThemeChange={handleSettingsThemeChange}
+                  handleLinkClick={handleSettingsLinkClick}
                 />
-              )}
+              ) : null}
               {!isLoading && !showEmailForm && !showSettings && <RenderResults />}
-              {isLoading && (
+              {isLoading ? (
                 <div className="block border-t border-gray-100 px-4 py-8 text-center text-gray-400 dark:border-gray-800 dark:text-gray-600">
                   {t('loading')}
                 </div>
-              )}
+              ) : null}
             </div>
           </KBarAnimator>
         </KBarPositioner>

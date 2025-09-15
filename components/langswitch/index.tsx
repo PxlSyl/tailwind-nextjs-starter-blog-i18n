@@ -1,20 +1,20 @@
-import { useState, useRef, useCallback, useMemo } from 'react'
-import { usePathname, useParams, useRouter } from 'next/navigation'
-import { useOuterClick } from '../util/useOuterClick'
 import { useTagStore } from '@/components/util/useTagStore'
-import { LocaleTypes, locales } from 'app/[locale]/i18n/settings'
 import {
   Menu,
-  Transition,
-  RadioGroup,
   MenuButton,
+  MenuItem,
   MenuItems,
   Radio,
-  MenuItem,
+  RadioGroup,
+  Transition,
 } from '@headlessui/react'
+import { locales, type LocaleTypes } from 'app/[locale]/i18n/settings'
+import { useParams, usePathname, useRouter } from 'next/navigation'
+import { useCallback, useMemo, useRef, useState, type JSX } from 'react'
+import { useOuterClick } from '../util/useOuterClick'
 import { ChevronDownIcon } from './icon'
 
-const LangSwitch = () => {
+const LangSwitch = (): JSX.Element => {
   const pathname = usePathname()
   const params = useParams()
   const locale = (params.locale as string) || ''
@@ -26,7 +26,7 @@ const LangSwitch = () => {
 
   const handleLocaleChange = useCallback(
     (newLocale: string): string => {
-      const segments = pathname!.split('/')
+      const segments = pathname.split('/')
       const localeIndex = segments.findIndex((segment) => locales.includes(segment as LocaleTypes))
       if (localeIndex !== -1) {
         segments[localeIndex] = newLocale
@@ -51,6 +51,21 @@ const LangSwitch = () => {
 
   const currentLocale = useMemo(() => locale.charAt(0).toUpperCase() + locale.slice(1), [locale])
 
+  const handleMenuToggle = useCallback(() => {
+    setIsMenuOpen(!isMenuOpen)
+  }, [isMenuOpen])
+
+  const handleMenuBlur = useCallback(() => {
+    setIsMenuOpen(false)
+  }, [])
+
+  const createLocaleClickHandler = useCallback(
+    (newLocale: string) => {
+      return () => handleLinkClick(newLocale)
+    },
+    [handleLinkClick]
+  )
+
   return (
     <div ref={menubarRef} className="relative inline-block text-left">
       <Menu>
@@ -60,7 +75,7 @@ const LangSwitch = () => {
               className="inline-flex rounded-md px-1 py-2 font-bold leading-5 text-gray-700 shadow-sm dark:text-white"
               aria-haspopup="true"
               aria-expanded={open}
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              onClick={handleMenuToggle}
             >
               {currentLocale}
               <ChevronDownIcon
@@ -79,7 +94,7 @@ const LangSwitch = () => {
               <MenuItems
                 className="absolute right-0 z-50 mt-2 w-12 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800"
                 aria-orientation="vertical"
-                onBlur={() => setIsMenuOpen(false)}
+                onBlur={handleMenuBlur}
               >
                 <RadioGroup>
                   <div
@@ -92,7 +107,7 @@ const LangSwitch = () => {
                         <MenuItem>
                           {({ focus }) => (
                             <button
-                              onClick={() => handleLinkClick(newLocale)}
+                              onClick={createLocaleClickHandler(newLocale)}
                               className={`${
                                 focus
                                   ? 'bg-gray-100 dark:bg-gray-600'

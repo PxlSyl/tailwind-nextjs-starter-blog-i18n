@@ -1,11 +1,12 @@
 'use client'
 
-import projectsData from '@/data/projectsData'
 import Card from '@/components/projectcard'
-import { LocaleTypes } from '../i18n/settings'
+import projectsData from '@/data/projectsData'
 import { useParams } from 'next/navigation'
+import type { ReactElement } from 'react'
+import type { LocaleTypes } from '../i18n/settings'
 
-const Project = () => {
+const Project = (): ReactElement => {
   const locale = useParams()?.locale as LocaleTypes
   const projectArray = projectsData[locale]
   return (

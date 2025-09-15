@@ -1,7 +1,14 @@
 import { FormInputs } from './FormInputs'
 
+interface FormState {
+  succeeded: boolean
+  submitting: boolean
+  errors: unknown | null
+  result: unknown | null
+}
+
 interface ModalBodyProps {
-  state: any
+  state: FormState
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void
   name: string
   email: string

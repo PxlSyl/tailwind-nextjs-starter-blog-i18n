@@ -1,20 +1,19 @@
-import { ReactNode } from 'react'
-import { CoreContent } from 'pliny/utils/contentlayer'
+import React, { type ReactNode } from 'react'
+import type { CoreContent } from 'pliny/utils/contentlayer'
 import type { Blog, Authors } from 'contentlayer/generated'
 import Comments from '@/components/comments/Comments'
 import WalineComments from '@/components/comments/walinecomponents/walineComments'
 import Link from '@/components/mdxcomponents/Link'
 import PageTitle from '@/components/PageTitle'
-import SectionContainer from '@/components/SectionContainer'
 import Image from '@/components/mdxcomponents/Image'
 import Tag from '@/components/tag'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/scroll'
 import { createTranslation } from 'app/[locale]/i18n/server'
-import { LocaleTypes } from 'app/[locale]/i18n/settings'
+import type { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { PostSeriesBox } from '@/components/seriescard'
 import Share from '@/components/share'
-import { Toc } from 'pliny/mdx-plugins'
+import type { Toc } from 'pliny/mdx-plugins'
 import Sidetoc from '@/components/sidetoc'
 
 const editUrl = (path) => `${siteMetadata.siteRepo}/blob/main/data/${path}`
@@ -29,7 +28,18 @@ const postDateTemplate: Intl.DateTimeFormatOptions = {
 }
 
 interface LayoutProps {
-  content: CoreContent<Blog>
+  content: CoreContent<Blog> & {
+    series?: {
+      title: string
+      order: number
+      posts?: Array<{
+        title: string
+        slug: string
+        language: string
+        isCurrent: boolean
+      }>
+    }
+  }
   authorDetails: CoreContent<Authors>[]
   next?: { slug: string; title: string }
   prev?: { slug: string; title: string }
@@ -44,9 +54,9 @@ export default async function PostLayout({
   prev,
   children,
   params: { locale },
-}: LayoutProps) {
+}: LayoutProps): Promise<React.JSX.Element> {
   const { filePath, path, slug, date, title, tags, language, series, toc } = content
-  const basePath = path.split('/')[0]
+  const [basePath] = path.split('/')
   const { t } = await createTranslation(locale, 'home')
   const tableOfContents: Toc = toc as unknown as Toc
   return (
@@ -79,7 +89,7 @@ export default async function PostLayout({
                 <ul className="flex flex-wrap justify-center gap-4 sm:space-x-12 xl:block xl:space-x-0 xl:space-y-8">
                   {authorDetails.map((author) => (
                     <li className="flex items-center space-x-2" key={author.name}>
-                      {author.avatar && (
+                      {author.avatar ? (
                         <Link href={`/${locale}/about/${author.slug}`}>
                           <Image
                             src={author.avatar}
@@ -90,20 +100,20 @@ export default async function PostLayout({
                             className="h-10 w-10 rounded-full"
                           />
                         </Link>
-                      )}
+                      ) : null}
                       <dl className="whitespace-nowrap text-sm font-medium leading-5">
                         <dt className="sr-only">{t('name')}</dt>
                         <dd className="text-gray-900 dark:text-gray-100">{author.name}</dd>
                         <dt className="sr-only">Twitter</dt>
                         <dd>
-                          {author.twitter && (
+                          {author.twitter ? (
                             <Link
                               href={author.twitter}
                               className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                             >
                               {author.twitter.replace('https://twitter.com/', '@')}
                             </Link>
-                          )}
+                          ) : null}
                         </dd>
                       </dl>
                     </li>
@@ -112,11 +122,23 @@ export default async function PostLayout({
               </dd>
             </dl>
             <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
-              {series && (
+              {series && series.posts ? (
                 <div className="not-prose mt-4">
-                  <PostSeriesBox data={series} />
+                  <PostSeriesBox
+                    data={
+                      series as {
+                        title: string
+                        posts: Array<{
+                          title: string
+                          slug: string
+                          language: string
+                          isCurrent: boolean
+                        }>
+                      }
+                    }
+                  />
                 </div>
-              )}
+              ) : null}
               <div className="prose max-w-none pb-8 pt-10 dark:prose-invert">{children}</div>
               <div className="pb-6 pt-6 text-sm text-gray-700 dark:text-gray-300">
                 <Link href={discussUrl(path)} rel="nofollow">
@@ -131,14 +153,14 @@ export default async function PostLayout({
                 id="comment"
               >
                 {siteMetadata.iswaline === true && <WalineComments />}
-                {siteMetadata.comments && siteMetadata.iscomments === true && (
+                {siteMetadata.comments && siteMetadata.iscomments === true ? (
                   <Comments slug={slug} />
-                )}
+                ) : null}
               </div>
             </div>
             <footer>
               <div className="divide-gray-200 text-sm font-medium leading-5 dark:divide-gray-700 xl:col-start-1 xl:row-start-2 xl:divide-y">
-                {tags && (
+                {tags ? (
                   <div className="py-4 xl:py-8">
                     <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
                       Tags
@@ -149,10 +171,10 @@ export default async function PostLayout({
                       ))}
                     </div>
                   </div>
-                )}
-                {(next || prev) && (
+                ) : null}
+                {next || prev ? (
                   <div className="flex justify-between py-4 xl:block xl:space-y-8 xl:py-8">
-                    {prev && prev.slug && (
+                    {prev && prev.slug ? (
                       <div>
                         <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
                           {t('preva')}
@@ -161,8 +183,8 @@ export default async function PostLayout({
                           <Link href={`/${locale}/blog/${prev.slug}`}>{prev.title}</Link>
                         </div>
                       </div>
-                    )}
-                    {next && next.slug && (
+                    ) : null}
+                    {next && next.slug ? (
                       <div>
                         <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
                           {t('nexta')}
@@ -171,9 +193,9 @@ export default async function PostLayout({
                           <Link href={`/${locale}/blog/${next.slug}`}>{next.title}</Link>
                         </div>
                       </div>
-                    )}
+                    ) : null}
                   </div>
-                )}
+                ) : null}
               </div>
               <div className="pt-4 xl:pt-8">
                 <Link

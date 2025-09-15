@@ -1,34 +1,33 @@
 'use client'
 
-import { ReactNode } from 'react'
-import { KBarSearchProvider } from './kbar'
-import { useParams, useRouter } from 'next/navigation'
 import siteMetadata from '@/data/siteMetadata'
-import { Authors, allAuthors } from 'contentlayer/generated'
-import { CoreContent } from 'pliny/utils/contentlayer'
-import { Blog } from 'contentlayer/generated'
-import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { useTranslation } from 'app/[locale]/i18n/client'
 import { fallbackLng } from 'app/[locale]/i18n/locales'
-import { HomeIcon, BlogIcon, TagsIcon, ProjectsIcon, AboutIcon } from './icons'
+import type { LocaleTypes } from 'app/[locale]/i18n/settings'
+import { allAuthors, type Blog } from 'contentlayer/generated'
+import { useParams, useRouter } from 'next/navigation'
+import type { CoreContent } from 'pliny/utils/contentlayer'
+import type { ReactElement, ReactNode } from 'react'
+import { AboutIcon, BlogIcon, HomeIcon, ProjectsIcon, TagsIcon } from './icons'
+import { KBarSearchProvider } from './kbar'
 
 interface SearchProviderProps {
   children: ReactNode
 }
 
-export const SearchProvider = ({ children }: SearchProviderProps) => {
+export const SearchProvider = ({ children }: SearchProviderProps): ReactElement => {
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, 'common')
   const router = useRouter()
   const authors = allAuthors
     .filter((a) => a.language === locale)
-    .sort((a, b) => (a.default === b.default ? 0 : a.default ? -1 : 1)) as Authors[]
+    .sort((a, b) => (a.default === b.default ? 0 : a.default ? -1 : 1))
 
   const authorSearchItems = authors.map((author) => {
     const { name, slug } = author
     return {
       id: slug,
-      name: name,
+      name,
       keywords: '',
       shortcut: [],
       section: locale === fallbackLng ? 'Authors' : 'Auteurs',
@@ -124,8 +123,9 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
           },
           ...authorsActions,
         ],
-        onSearchDocumentsLoad(json) {
-          return json
+        onSearchDocumentsLoad(json: unknown) {
+          const posts = json as CoreContent<Blog>[]
+          return posts
             .filter((post: CoreContent<Blog>) => post.language === locale)
             .map((post: CoreContent<Blog>) => ({
               id: post.path,

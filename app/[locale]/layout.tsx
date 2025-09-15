@@ -1,21 +1,22 @@
 import 'css/tailwind.css'
 import 'pliny/search/algolia.css'
 
-import { Space_Grotesk } from 'next/font/google'
-import { Analytics, AnalyticsConfig } from 'pliny/analytics'
-import { SearchProvider } from '@/components/search/SearchProvider'
-import Header from '@/components/navigation/Header'
-import SectionContainer from '@/components/SectionContainer'
-import Footer from '@/components/navigation/Footer'
-import siteMetadata from '@/data/siteMetadata'
-import { maintitle, maindescription } from '@/data/localeMetadata'
-import { ThemeProvider } from '@/components/theme/ThemeContext'
-import { Metadata } from 'next'
-import { dir } from 'i18next'
-import { LocaleTypes, locales } from './i18n/settings'
 import TwSizeIndicator from '@/components/helper/TwSizeIndicator'
+import Footer from '@/components/navigation/Footer'
+import Header from '@/components/navigation/Header'
+import { SearchProvider } from '@/components/search/SearchProvider'
+import SectionContainer from '@/components/SectionContainer'
+import { ThemeProvider } from '@/components/theme/ThemeContext'
+import { maindescription, maintitle } from '@/data/localeMetadata'
+import siteMetadata from '@/data/siteMetadata'
+import { dir } from 'i18next'
+import type { Metadata } from 'next'
+import { Space_Grotesk } from 'next/font/google'
+import { Analytics, type AnalyticsConfig } from 'pliny/analytics'
+import type { ReactElement } from 'react'
+import { locales, type LocaleTypes } from './i18n/settings'
 
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<{ locale: LocaleTypes }[]> {
   return locales.map((locale) => ({ locale }))
 }
 
@@ -30,7 +31,7 @@ export async function generateMetadata({
 }: {
   params: { locale: LocaleTypes }
 }): Promise<Metadata> {
-  const locale = (await params).locale
+  const { locale } = await params
 
   return {
     metadataBase: new URL(siteMetadata.siteUrl),
@@ -45,7 +46,7 @@ export async function generateMetadata({
       url: './',
       siteName: maintitle[locale],
       images: [siteMetadata.socialBanner],
-      locale: locale,
+      locale,
       type: 'website',
     },
     alternates: {
@@ -82,8 +83,8 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
   params: { locale: LocaleTypes }
-}) {
-  const locale = (await params).locale
+}): Promise<ReactElement> {
+  const { locale } = await params
 
   return (
     <html

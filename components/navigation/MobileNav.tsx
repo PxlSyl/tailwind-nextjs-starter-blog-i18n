@@ -1,17 +1,17 @@
 'use client'
 
-import { SVGProps, useState } from 'react'
-import Image from 'next/image'
-import Link from '../mdxcomponents/Link'
-import siteMetadata from '@/data/siteMetadata'
 import headerNavLinks from '@/data/headerNavLinks'
-import { Authors, allAuthors } from 'contentlayer/generated'
-import { useParams } from 'next/navigation'
+import siteMetadata from '@/data/siteMetadata'
 import { useTranslation } from 'app/[locale]/i18n/client'
 import type { LocaleTypes } from 'app/[locale]/i18n/settings'
+import { allAuthors } from 'contentlayer/generated'
 import { motion } from 'framer-motion'
+import Image from 'next/image'
+import { useParams } from 'next/navigation'
+import { useCallback, useState, type JSX, type SVGProps } from 'react'
+import Link from '../mdxcomponents/Link'
 
-export function ChevronDownIcon({ className, ...props }: SVGProps<SVGSVGElement>) {
+export function ChevronDownIcon({ className, ...props }: SVGProps<SVGSVGElement>): JSX.Element {
   return (
     <svg {...props} className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15">
       <path
@@ -19,24 +19,24 @@ export function ChevronDownIcon({ className, ...props }: SVGProps<SVGSVGElement>
         fillRule="evenodd"
         d="M3.135 6.158a.5.5 0 0 1 .707-.023L7.5 9.565l3.658-3.43a.5.5 0 0 1 .684.73l-4 3.75a.5.5 0 0 1-.684 0l-4-3.75a.5.5 0 0 1-.023-.707"
         clipRule="evenodd"
-      ></path>
+      />
     </svg>
   )
 }
 
-const MobileNav = () => {
+const MobileNav = (): JSX.Element => {
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, 'common')
   const authors = allAuthors
     .filter((a) => a.language === locale)
-    .sort((a, b) => (a.default === b.default ? 0 : a.default ? -1 : 1)) as Authors[]
+    .sort((a, b) => (a.default === b.default ? 0 : a.default ? -1 : 1))
 
   const mainAuthor = allAuthors.filter((a) => a.default === true && a.language === locale)
 
   const [navShow, setNavShow] = useState<boolean>(false)
   const [accordionOpen, setAccordionOpen] = useState<boolean>(false)
 
-  const onToggleNav = () => {
+  const onToggleNav = useCallback(() => {
     setNavShow((status) => {
       if (status) {
         document.body.style.overflow = 'auto'
@@ -45,15 +45,19 @@ const MobileNav = () => {
       }
       return !status
     })
-  }
+  }, [])
 
-  const toggleAccordion = () => {
+  const toggleAccordion = useCallback(() => {
     setAccordionOpen(!accordionOpen)
-  }
+  }, [accordionOpen])
 
   return (
     <>
-      <button aria-label={t('showmenu')} onClick={onToggleNav} className="sm:hidden">
+      <button
+        aria-label={t('showmenu')}
+        onClick={useCallback(() => onToggleNav(), [onToggleNav])}
+        className="sm:hidden"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
@@ -73,7 +77,11 @@ const MobileNav = () => {
         }`}
       >
         <div className="flex justify-end">
-          <button className="mr-8 mt-11 h-8 w-8" aria-label="Toggle Menu" onClick={onToggleNav}>
+          <button
+            className="mr-8 mt-11 h-8 w-8"
+            aria-label="Toggle Menu"
+            onClick={useCallback(() => onToggleNav(), [onToggleNav])}
+          >
             <svg
               viewBox="0 0 20 20"
               fill="currentColor"
@@ -93,18 +101,18 @@ const MobileNav = () => {
               <Link
                 href={`/${locale}${link.href}`}
                 className="text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100"
-                onClick={onToggleNav}
+                onClick={useCallback(() => onToggleNav(), [onToggleNav])}
               >
                 {t(`${link.title.toLowerCase()}`)}
               </Link>
             </div>
           ))}
-          {siteMetadata.multiauthors && (
+          {siteMetadata.multiauthors ? (
             <>
               <button
                 type="button"
                 className="flex w-full items-center justify-between px-12 py-4 text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100"
-                onClick={toggleAccordion}
+                onClick={useCallback(() => toggleAccordion(), [toggleAccordion])}
               >
                 <div>{t('about')}:</div>
                 <motion.div
@@ -142,7 +150,7 @@ const MobileNav = () => {
                         </div>
                         <Link
                           href={`/${locale}/about/${slug}`}
-                          onClick={onToggleNav}
+                          onClick={useCallback(() => onToggleNav(), [onToggleNav])}
                           className="text-xl font-bold tracking-widest text-gray-900 dark:text-gray-100"
                         >
                           {name}
@@ -154,14 +162,18 @@ const MobileNav = () => {
                 })}
               </motion.div>
             </>
-          )}
+          ) : null}
           {siteMetadata.multiauthors === false && (
             <div className="px-12 py-4 text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100">
               {mainAuthor.map((author) => {
                 const { name, language, slug } = author
                 if (language === locale) {
                   return (
-                    <Link href={`/${locale}/about/${slug}`} onClick={onToggleNav} key={name}>
+                    <Link
+                      href={`/${locale}/about/${slug}`}
+                      onClick={useCallback(() => onToggleNav(), [onToggleNav])}
+                      key={name}
+                    >
                       {t('about')}
                     </Link>
                   )

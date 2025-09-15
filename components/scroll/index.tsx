@@ -2,15 +2,15 @@
 
 import siteMetadata from '@/data/siteMetadata'
 import { useTranslation } from 'app/[locale]/i18n/client'
-import { LocaleTypes } from 'app/[locale]/i18n/settings'
+import type { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { useParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
 import { AlgoliaButton } from 'pliny/search/AlgoliaButton'
-import { KBarButton } from '../search/KBarButton'
-import { CommentsIcon, ArrowTopIcon } from './icons'
+import { useCallback, useEffect, useState, type JSX } from 'react'
 import { SearchIcon } from '../search/icons'
+import { KBarButton } from '../search/KBarButton'
+import { ArrowTopIcon, CommentsIcon } from './icons'
 
-const ScrollTopAndComment = () => {
+const ScrollTopAndComment = (): JSX.Element | null => {
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, 'common')
   const [show, setShow] = useState<boolean>(false)
@@ -25,12 +25,12 @@ const ScrollTopAndComment = () => {
     return () => window.removeEventListener('scroll', handleWindowScroll)
   }, [])
 
-  const handleScrollTop = () => {
+  const handleScrollTop = useCallback(() => {
     window.scrollTo({ top: 0 })
-  }
-  const handleScrollToComment = () => {
+  }, [])
+  const handleScrollToComment = useCallback(() => {
     document.getElementById('comment')?.scrollIntoView()
-  }
+  }, [])
 
   if (
     siteMetadata.search &&
@@ -48,18 +48,18 @@ const ScrollTopAndComment = () => {
             <SearchIcon className="h-5 w-5" />
           </div>
         </SearchButtonWrapper>
-        {siteMetadata.comments?.provider && (
+        {siteMetadata.comments?.provider ? (
           <button
             aria-label={t('scrollcomment')}
-            onClick={handleScrollToComment}
+            onClick={useCallback(() => handleScrollToComment(), [handleScrollToComment])}
             className="rounded-full bg-gray-200 p-2 text-gray-500 transition-all hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600"
           >
             <CommentsIcon className="h-5 w-5" />
           </button>
-        )}
+        ) : null}
         <button
           aria-label={t('scrolltop')}
-          onClick={handleScrollTop}
+          onClick={useCallback(() => handleScrollTop(), [handleScrollTop])}
           className="rounded-full bg-gray-200 p-2 text-gray-500 transition-all hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600"
         >
           <ArrowTopIcon className="h-5 w-5" />
@@ -67,6 +67,8 @@ const ScrollTopAndComment = () => {
       </div>
     )
   }
+
+  return null
 }
 
 export default ScrollTopAndComment

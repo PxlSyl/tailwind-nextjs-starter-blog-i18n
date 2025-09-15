@@ -1,4 +1,6 @@
-export function CommentsIcon(props) {
+import type { JSX, SVGProps } from 'react'
+
+export function CommentsIcon(props: SVGProps<SVGSVGElement>): JSX.Element {
   return (
     <svg {...props} viewBox="0 0 20 20" fill="currentColor">
       <path
@@ -10,7 +12,7 @@ export function CommentsIcon(props) {
   )
 }
 
-export function ArrowTopIcon(props) {
+export function ArrowTopIcon(props: SVGProps<SVGSVGElement>): JSX.Element {
   return (
     <svg {...props} viewBox="0 0 20 20" fill="currentColor">
       <path

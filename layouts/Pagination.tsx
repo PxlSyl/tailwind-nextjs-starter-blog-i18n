@@ -1,5 +1,6 @@
 import { useTranslation } from 'app/[locale]/i18n/client'
-import { LocaleTypes } from 'app/[locale]/i18n/settings'
+import type { LocaleTypes } from 'app/[locale]/i18n/settings'
+import React, { useCallback } from 'react'
 
 interface PaginationProps {
   totalPages: number
@@ -12,22 +13,22 @@ export default function Pagination({
   currentPage,
   onPageChange,
   params: { locale },
-}: PaginationProps) {
+}: PaginationProps): React.JSX.Element {
   const { t } = useTranslation(locale, 'home')
   const prevPage = currentPage - 1 > 0
   const nextPage = currentPage + 1 <= totalPages
 
-  const handlePrevPage = () => {
+  const handlePrevPage = useCallback(() => {
     if (prevPage) {
       onPageChange(currentPage - 1)
     }
-  }
+  }, [prevPage, currentPage, onPageChange])
 
-  const handleNextPage = () => {
+  const handleNextPage = useCallback(() => {
     if (nextPage) {
       onPageChange(currentPage + 1)
     }
-  }
+  }, [nextPage, currentPage, onPageChange])
 
   return (
     <div className="space-y-2 pb-8 pt-6 md:space-y-5">
@@ -37,7 +38,7 @@ export default function Pagination({
             {t('prevp')}
           </button>
         )}
-        {prevPage && <button onClick={handlePrevPage}> {t('prevp')}</button>}
+        {prevPage ? <button onClick={handlePrevPage}>{t('prevp')}</button> : null}
         <span>
           {currentPage} of {totalPages}
         </span>
@@ -46,7 +47,7 @@ export default function Pagination({
             {t('nextp')}
           </button>
         )}
-        {nextPage && <button onClick={handleNextPage}>{t('nextp')}</button>}
+        {nextPage ? <button onClick={handleNextPage}>{t('nextp')}</button> : null}
       </nav>
     </div>
   )

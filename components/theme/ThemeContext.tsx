@@ -1,6 +1,6 @@
 'use client'
 
-import React, { createContext, useState, useContext, useEffect, useRef, useCallback } from 'react'
+import React, { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react'
 
 export enum Theme {
   LIGHT = 'light',
@@ -11,6 +11,7 @@ export enum Theme {
 interface ThemeContextProps {
   theme: Theme
   setTheme: (theme: Theme) => void
+  resolvedTheme: Theme.LIGHT | Theme.DARK
   mounted: boolean
 }
 
@@ -62,7 +63,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }, [theme, updateTheme])
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme: updateTheme, mounted }}>
+    <ThemeContext.Provider value={{ theme, setTheme: updateTheme, resolvedTheme, mounted }}>
       {children}
     </ThemeContext.Provider>
   )

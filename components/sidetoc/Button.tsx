@@ -1,7 +1,8 @@
+import type { JSX } from 'react'
 import { ArrowRightIcon } from './icon'
 import useSidebarStore from './store'
 
-const Button = () => {
+const Button = (): JSX.Element => {
   const { sidebarOpen, toggleSidebar } = useSidebarStore()
 
   return (

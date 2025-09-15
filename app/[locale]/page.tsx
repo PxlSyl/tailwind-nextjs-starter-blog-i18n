@@ -1,8 +1,9 @@
-import { sortPosts, allCoreContent } from 'pliny/utils/contentlayer'
-import { allBlogs } from 'contentlayer/generated'
 import FeaturedLayout from '@/layouts/FeaturedLayout'
 import HomeLayout from '@/layouts/HomeLayout'
-import { LocaleTypes } from './i18n/settings'
+import { allBlogs } from 'contentlayer/generated'
+import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
+import type { ReactElement } from 'react'
+import type { LocaleTypes } from './i18n/settings'
 
 interface PageProps {
   params: Promise<{
@@ -10,7 +11,7 @@ interface PageProps {
   }>
 }
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params }: PageProps): Promise<ReactElement> {
   const { locale } = await params
 
   const sortedPosts = sortPosts(allBlogs)

@@ -1,6 +1,6 @@
-import { SVGProps } from 'react'
+import type { ReactElement, SVGProps } from 'react'
 
-export function ArrowRightIcon(svgProps: SVGProps<SVGSVGElement>) {
+export function ArrowRightIcon(svgProps: SVGProps<SVGSVGElement>): ReactElement {
   return (
     <svg
       {...svgProps}

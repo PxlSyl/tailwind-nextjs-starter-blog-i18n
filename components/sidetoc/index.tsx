@@ -1,17 +1,17 @@
 'use client'
 
-import { useRef } from 'react'
+import type { Toc } from 'pliny/mdx-plugins'
+import { useRef, type JSX } from 'react'
 import { useOuterClick } from '../util/useOuterClick'
-import useSidebarStore from './store'
-import { Toc } from 'pliny/mdx-plugins'
-import TocBody from './TocBody'
 import Button from './Button'
+import useSidebarStore from './store'
+import TocBody from './TocBody'
 
 interface SidetocProps {
   toc: Toc
 }
 
-const Sidetoc = ({ toc }: SidetocProps) => {
+const Sidetoc = ({ toc }: SidetocProps): JSX.Element => {
   const { closeSidebar } = useSidebarStore()
   const menubarRef = useRef<HTMLDivElement>(null)
 

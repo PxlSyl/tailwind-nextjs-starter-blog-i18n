@@ -1,11 +1,21 @@
-import { useState, useEffect } from 'react'
 import { useForm } from '@formspree/react'
-import toast from 'react-hot-toast'
-import { useParams } from 'next/navigation'
-import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { useTranslation } from 'app/[locale]/i18n/client'
+import type { LocaleTypes } from 'app/[locale]/i18n/settings'
+import { useParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 
-export const useContactForm = () => {
+export const useContactForm = (): {
+  state: ReturnType<typeof useForm>[0]
+  handleSubmit: ReturnType<typeof useForm>[1]
+  name: string
+  email: string
+  message: string
+  handleNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  handleEmailChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  handleMessageChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
+  t: (key: string) => string
+} => {
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, 'common')
   const [state, handleSubmit, reset] = useForm('xdojkndq')

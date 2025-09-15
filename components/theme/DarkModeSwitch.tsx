@@ -1,5 +1,5 @@
+import { animated, useSpring } from '@react-spring/web'
 import * as React from 'react'
-import { useSpring, animated } from '@react-spring/web'
 
 export const defaultProperties = {
   dark: {
@@ -78,24 +78,24 @@ export const DarkModeSwitch: React.FC<Props> = ({
     transform: svg.transform,
     config: animationProperties.springConfig,
   })
-  
+
   const centerCircleProps = useSpring({
     r: circle.r,
     config: animationProperties.springConfig,
   })
-  
+
   const maskedCircleProps = useSpring({
     cx: mask.cx,
     cy: mask.cy,
     config: animationProperties.springConfig,
   })
-  
+
   const linesProps = useSpring({
     opacity: lines.opacity,
     config: animationProperties.springConfig,
   })
 
-  const toggle = () => onChange(!checked)
+  const toggle = React.useCallback(() => onChange(!checked), [onChange, checked])
 
   const uniqueMaskId = `circle-mask-${id}`
 
@@ -126,12 +126,7 @@ export const DarkModeSwitch: React.FC<Props> = ({
       >
         <mask id={uniqueMaskId}>
           <rect x="0" y="0" width="100%" height="100%" fill="white" />
-          <AnimatedCircle
-            cx={maskedCircleProps.cx}
-            cy={maskedCircleProps.cy}
-            r="9"
-            fill="black"
-          />
+          <AnimatedCircle cx={maskedCircleProps.cx} cy={maskedCircleProps.cy} r="9" fill="black" />
         </mask>
 
         <AnimatedCircle

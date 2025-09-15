@@ -1,7 +1,7 @@
 import { Inter } from 'next/font/google'
+import React, { type ReactNode } from 'react'
 import SectionContainer from './SectionContainer'
 import Footer from './navigation/Footer'
-import { ReactNode } from 'react'
 import Header from './navigation/Header'
 
 interface LayoutWrapperProps {
@@ -12,7 +12,7 @@ const inter = Inter({
   subsets: ['latin'],
 })
 
-const LayoutWrapper = ({ children }: LayoutWrapperProps) => {
+const LayoutWrapper = ({ children }: LayoutWrapperProps): React.JSX.Element => {
   return (
     <SectionContainer>
       <div className={`${inter.className} flex h-screen flex-col justify-between font-sans`}>

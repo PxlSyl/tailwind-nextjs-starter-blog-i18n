@@ -1,10 +1,11 @@
-import { Metadata } from 'next'
 import ListLayout from '@/layouts/ListLayout'
-import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
-import { allBlogs } from 'contentlayer/generated'
 import { genPageMetadata } from 'app/[locale]/seo'
+import { allBlogs } from 'contentlayer/generated'
+import type { Metadata } from 'next'
+import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
+import type { ReactElement } from 'react'
 import { createTranslation } from '../i18n/server'
-import { LocaleTypes } from '../i18n/settings'
+import type { LocaleTypes } from '../i18n/settings'
 
 interface PageProps {
   params: Promise<{
@@ -20,7 +21,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   })
 }
 
-export default async function BlogPage({ params }: PageProps) {
+export default async function BlogPage({ params }: PageProps): Promise<ReactElement> {
   const { locale } = await params
   const { t } = await createTranslation(locale, 'home')
   const posts = allCoreContent(sortPosts(allBlogs))

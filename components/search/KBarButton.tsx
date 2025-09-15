@@ -1,9 +1,15 @@
-import React, { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react'
 import { useKBar } from 'kbar'
+import React, {
+  useCallback,
+  type DetailedHTMLProps,
+  type HTMLAttributes,
+  type JSX,
+  type ReactNode,
+} from 'react'
 
-interface KbarButtonProps {
+interface KbarButtonProps
+  extends DetailedHTMLProps<HTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
   children: ReactNode
-  [key: string]: any
 }
 
 /**
@@ -11,13 +17,15 @@ interface KbarButtonProps {
  *
  * @return {*}
  */
-export const KBarButton: React.FC<
-  DetailedHTMLProps<HTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
-> = ({ children, ...rest }: KbarButtonProps) => {
+export const KBarButton: React.FC<KbarButtonProps> = ({ children, ...rest }): JSX.Element => {
   const { query } = useKBar()
 
+  const handleClick = useCallback(() => {
+    query.toggle()
+  }, [query])
+
   return (
-    <button {...rest} onClick={() => query.toggle()}>
+    <button {...rest} onClick={handleClick}>
       {children}
     </button>
   )

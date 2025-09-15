@@ -1,8 +1,15 @@
-import { MailIcon } from '../icons'
 import { ModalBody } from '@/components/formspree/CBody'
+import { MailIcon } from '../icons'
+
+interface FormState {
+  succeeded: boolean
+  submitting: boolean
+  errors: unknown | null
+  result: unknown | null
+}
 
 interface EmailFormProps {
-  state: any
+  state: FormState
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void
   name: string
   email: string

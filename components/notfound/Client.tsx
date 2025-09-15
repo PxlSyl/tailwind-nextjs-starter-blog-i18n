@@ -1,10 +1,12 @@
 'use client'
 
-import Button from './Button'
 import { useTranslation } from 'app/[locale]/i18n/client'
+import type { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { useParams } from 'next/navigation'
-import { LocaleTypes } from 'app/[locale]/i18n/settings'
-export default function NotFoundclient() {
+import type { JSX } from 'react'
+import Button from './Button'
+
+export default function NotFoundclient(): JSX.Element {
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, 'notfound')
   return (

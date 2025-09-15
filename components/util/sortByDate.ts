@@ -1,6 +1,10 @@
-export const sortByDate = (posts) => {
+interface Post {
+  date?: string
+  [key: string]: unknown
+}
+
+export const sortByDate = (posts: Post[]): Post[] => {
   if (!Array.isArray(posts)) {
-    console.error('sortByDate: posts is not an array')
     return []
   }
 

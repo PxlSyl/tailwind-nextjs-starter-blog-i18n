@@ -1,23 +1,34 @@
-import { ReactNode } from 'react'
-import Image from '@/components/mdxcomponents/Image'
-import Bleed from 'pliny/ui/Bleed'
-import { CoreContent } from 'pliny/utils/contentlayer'
-import type { Blog } from 'contentlayer/generated'
 import Comments from '@/components/comments/Comments'
 import WalineComments from '@/components/comments/walinecomponents/walineComments'
+import Image from '@/components/mdxcomponents/Image'
 import Link from '@/components/mdxcomponents/Link'
 import PageTitle from '@/components/PageTitle'
-import SectionContainer from '@/components/SectionContainer'
-import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/scroll'
+import SectionContainer from '@/components/SectionContainer'
 import { PostSeriesBox } from '@/components/seriescard'
 import Share from '@/components/share'
-import { LocaleTypes } from 'app/[locale]/i18n/settings'
-import { Toc } from 'pliny/mdx-plugins'
 import Sidetoc from '@/components/sidetoc'
+import siteMetadata from '@/data/siteMetadata'
+import type { LocaleTypes } from 'app/[locale]/i18n/settings'
+import type { Blog } from 'contentlayer/generated'
+import type { Toc } from 'pliny/mdx-plugins'
+import Bleed from 'pliny/ui/Bleed'
+import type { CoreContent } from 'pliny/utils/contentlayer'
+import React, { type ReactNode } from 'react'
 
 interface PostBannerProps {
-  content: CoreContent<Blog>
+  content: CoreContent<Blog> & {
+    series?: {
+      title: string
+      order: number
+      posts?: Array<{
+        title: string
+        slug: string
+        language: string
+        isCurrent: boolean
+      }>
+    }
+  }
   children: ReactNode
   next?: { slug: string; title: string }
   prev?: { slug: string; title: string }
@@ -30,7 +41,7 @@ export default function PostMinimal({
   prev,
   children,
   params: { locale },
-}: PostBannerProps) {
+}: PostBannerProps): React.JSX.Element {
   const { slug, title, images, series, toc } = content
   const tableOfContents: Toc = toc as unknown as Toc
   const displayImage =
@@ -55,22 +66,34 @@ export default function PostMinimal({
                 <PageTitle>{title}</PageTitle>
               </div>
             </div>
-            {series && (
+            {series && series.posts ? (
               <div className="not-prose mt-4">
-                <PostSeriesBox data={series} />
+                <PostSeriesBox
+                  data={
+                    series as {
+                      title: string
+                      posts: Array<{
+                        title: string
+                        slug: string
+                        language: string
+                        isCurrent: boolean
+                      }>
+                    }
+                  }
+                />
               </div>
-            )}
+            ) : null}
             <div className="prose max-w-none py-4 dark:prose-invert">{children}</div>
             <Share title={title} slug={slug} />
             <div className="pb-6 pt-6 text-center text-gray-700 dark:text-gray-300" id="comment">
               {siteMetadata.iswaline === true && <WalineComments />}
-              {siteMetadata.comments && siteMetadata.iscomments === true && (
+              {siteMetadata.comments && siteMetadata.iscomments === true ? (
                 <Comments slug={slug} />
-              )}
+              ) : null}
             </div>
             <footer>
               <div className="flex flex-col text-sm font-medium sm:flex-row sm:justify-between sm:text-base">
-                {prev && prev.slug && (
+                {prev && prev.slug ? (
                   <div className="pt-4 xl:pt-8">
                     <Link
                       href={`/${locale}/blog/${prev.slug}`}
@@ -80,8 +103,8 @@ export default function PostMinimal({
                       &larr; {prev.title}
                     </Link>
                   </div>
-                )}
-                {next && next.slug && (
+                ) : null}
+                {next && next.slug ? (
                   <div className="pt-4 xl:pt-8">
                     <Link
                       href={`/${locale}/blog/${next.slug}`}
@@ -91,7 +114,7 @@ export default function PostMinimal({
                       {next.title} &rarr;
                     </Link>
                   </div>
-                )}
+                ) : null}
               </div>
             </footer>
           </div>

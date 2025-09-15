@@ -1,15 +1,15 @@
-import { Metadata } from 'next'
+import { maindescription, maintitle } from '@/data/localeMetadata'
 import siteMetadata from '@/data/siteMetadata'
-import { maintitle, maindescription } from '@/data/localeMetadata'
-import { LocaleTypes } from './i18n/settings'
+import type { Metadata } from 'next'
+import type { LocaleTypes } from './i18n/settings'
 
 interface PageSEOProps {
   title: string
   description?: string
   image?: string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   params: { locale: LocaleTypes }
-  [key: string]: any
+  [key: string]: unknown
 }
 
 export function genPageMetadata({
@@ -28,7 +28,7 @@ export function genPageMetadata({
       url: './',
       siteName: maintitle[locale],
       images: image ? [image] : [siteMetadata.socialBanner],
-      locale: locale,
+      locale,
       type: 'website',
     },
     twitter: {

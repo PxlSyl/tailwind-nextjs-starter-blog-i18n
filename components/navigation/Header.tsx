@@ -1,20 +1,21 @@
 'use client'
 
-import { useParams, usePathname } from 'next/navigation'
-import siteMetadata from '@/data/siteMetadata'
 import headerNavLinks from '@/data/headerNavLinks'
 import Logo from '@/data/logo.svg'
-import Link from '../mdxcomponents/Link'
-import AuthorsMenu from './AuthorsMenu'
-import MobileNav from './MobileNav'
-import ThemeSwitch from '../theme/ThemeSwitch'
-import LangSwitch from '../langswitch'
-import SearchButton from '../search/SearchButton'
+import siteMetadata from '@/data/siteMetadata'
 import { useTranslation } from 'app/[locale]/i18n/client'
 import type { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { motion } from 'framer-motion'
+import { useParams, usePathname } from 'next/navigation'
+import type { JSX } from 'react'
+import LangSwitch from '../langswitch'
+import Link from '../mdxcomponents/Link'
+import SearchButton from '../search/SearchButton'
+import ThemeSwitch from '../theme/ThemeSwitch'
+import AuthorsMenu from './AuthorsMenu'
+import MobileNav from './MobileNav'
 
-const Header = () => {
+const Header = (): JSX.Element => {
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, 'common')
   const pathname = usePathname()
@@ -44,7 +45,7 @@ const Header = () => {
               return link.href !== '/'
             })
             .map((link) => {
-              const isSelected = pathname!.includes(link.href as string)
+              const isSelected = pathname.includes(link.href as string)
               return (
                 <Link
                   key={link.title}
@@ -59,13 +60,13 @@ const Header = () => {
                     } relative rounded-md px-2 py-1 font-medium transition-colors sm:block`}
                   >
                     <span className="relative z-10">{t(`${link.title.toLowerCase()}`)}</span>
-                    {isSelected && (
+                    {isSelected ? (
                       <motion.span
                         layoutId="tab"
                         transition={{ type: 'spring', duration: 0.4 }}
                         className="absolute inset-0 z-0 rounded-md bg-gray-100 dark:bg-gray-600"
-                      ></motion.span>
-                    )}
+                      />
+                    ) : null}
                   </div>
                 </Link>
               )

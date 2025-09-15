@@ -1,16 +1,14 @@
-import { useState, useEffect, FC, ReactNode } from 'react'
-import type { Action } from 'kbar'
-import { KBarProvider } from 'kbar'
+import { KBarProvider, type Action } from 'kbar'
 import { useRouter } from 'next/navigation.js'
-import { KBarModal } from './KBarModal'
-import { CoreContent, MDXDocument } from 'pliny/utils/contentlayer'
+import type { CoreContent, MDXDocument } from 'pliny/utils/contentlayer'
 import { formatDate } from 'pliny/utils/formatDate'
+import { useEffect, useState, type FC, type ReactNode } from 'react'
+import { KBarModal } from './KBarModal'
 
 export interface KBarSearchProps {
   searchDocumentsPath: string | false
   defaultActions?: Action[]
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onSearchDocumentsLoad?: (json: any) => Action[]
+  onSearchDocumentsLoad?: (json: unknown) => Action[]
 }
 
 export interface KBarConfig {
@@ -54,7 +52,7 @@ export const KBarSearchProvider: FC<{
           keywords: post?.summary || '',
           section: 'Content',
           subtitle: formatDate(post.date, post.language),
-          perform: () => router.push('/' + post.path),
+          perform: () => router.push(`/${post.path}`),
         })
       }
       return actions

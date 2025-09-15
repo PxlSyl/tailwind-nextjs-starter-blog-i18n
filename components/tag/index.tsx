@@ -1,16 +1,16 @@
 'use client'
 
-import { useCallback } from 'react'
-import { useParams } from 'next/navigation'
+import type { LocaleTypes } from 'app/[locale]/i18n/settings'
 import Link from 'next/link'
+import { useParams } from 'next/navigation'
+import React, { useCallback } from 'react'
 import { useTagStore } from '../util/useTagStore'
-import { LocaleTypes } from 'app/[locale]/i18n/settings'
 
 interface Props {
   text: string
 }
 
-const Tag = ({ text }: Props) => {
+const Tag = ({ text }: Props): React.JSX.Element => {
   const locale = useParams()?.locale as LocaleTypes
   const { setSelectedTag } = useTagStore()
 

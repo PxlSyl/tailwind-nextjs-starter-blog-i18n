@@ -1,11 +1,12 @@
 'use client'
 
-import TOCInline from 'pliny/ui/TOCInline'
 import { useTranslation } from 'app/[locale]/i18n/client'
-import { LocaleTypes } from 'app/[locale]/i18n/settings'
+import type { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { useParams } from 'next/navigation'
+import type { TocItem as OriginalTocItem, Toc } from 'pliny/mdx-plugins/remark-toc-headings'
+import TOCInline from 'pliny/ui/TOCInline'
+import React from 'react'
 import useSidebarStore from './store'
-import { Toc, TocItem as OriginalTocItem } from 'pliny/mdx-plugins/remark-toc-headings'
 
 interface TocBodyProps {
   toc: Toc
@@ -26,7 +27,7 @@ const filterToc = (toc: TocItem[]): TocItem[] => {
   })
 }
 
-const TocBody = ({ toc }: TocBodyProps) => {
+const TocBody = ({ toc }: TocBodyProps): React.JSX.Element | null => {
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, 'common')
   const { sidebarOpen } = useSidebarStore()

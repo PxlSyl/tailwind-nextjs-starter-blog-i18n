@@ -1,10 +1,11 @@
 import Link from '@/components/mdxcomponents/Link'
-import siteMetadata from '@/data/siteMetadata'
 import NewsletterForm from '@/components/newletter/NewsletterForm'
+import siteMetadata from '@/data/siteMetadata'
+import React from 'react'
 import { createTranslation } from '../app/[locale]/i18n/server'
-import { LocaleTypes } from '../app/[locale]/i18n/settings'
-import PostList from './home/PostList'
+import type { LocaleTypes } from '../app/[locale]/i18n/settings'
 import LayoutHeader from './home/LayoutHeader'
+import PostList from './home/PostList'
 
 interface Post {
   slug: string
@@ -23,7 +24,10 @@ interface HomeProps {
 
 const MAX_DISPLAY = 5
 
-export default async function HomeLayout({ posts, params: { locale } }: HomeProps) {
+export default async function HomeLayout({
+  posts,
+  params: { locale },
+}: HomeProps): Promise<React.JSX.Element> {
   const { t } = await createTranslation(locale, 'home')
   return (
     <>
@@ -42,11 +46,11 @@ export default async function HomeLayout({ posts, params: { locale } }: HomeProp
           </Link>
         </div>
       )}
-      {siteMetadata.newsletter?.provider && (
+      {siteMetadata.newsletter?.provider ? (
         <div className="flex items-center justify-center pt-4">
           <NewsletterForm />
         </div>
-      )}
+      ) : null}
     </>
   )
 }

@@ -1,16 +1,16 @@
 'use client'
 
-import React, { useRef, useState } from 'react'
 import { useTranslation } from 'app/[locale]/i18n/client'
+import type { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { useParams } from 'next/navigation'
-import { LocaleTypes } from 'app/[locale]/i18n/settings'
+import React, { useCallback, useRef, useState, type JSX } from 'react'
 
 export interface NewsletterFormProps {
   title?: string
   apiUrl?: string
 }
 
-const NewsletterForm = ({ apiUrl = '/api/newsletter' }: NewsletterFormProps) => {
+const NewsletterForm = ({ apiUrl = '/api/newsletter' }: NewsletterFormProps): JSX.Element => {
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, 'newsletter')
   const inputEl = useRef<HTMLInputElement>(null)
@@ -18,43 +18,51 @@ const NewsletterForm = ({ apiUrl = '/api/newsletter' }: NewsletterFormProps) => 
   const [message, setMessage] = useState<string>('')
   const [subscribed, setSubscribed] = useState<boolean>(false)
 
-  const subscribe = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const subscribe = useCallback(
+    async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault()
 
-    const emailValue = inputEl.current?.value
-    if (!emailValue) {
-      setError(true)
-      setMessage(t('messageError'))
-      return
-    }
+      const emailValue = inputEl.current?.value
+      if (!emailValue) {
+        setError(true)
+        setMessage(t('messageError'))
+        return
+      }
 
-    const res = await fetch(apiUrl, {
-      body: JSON.stringify({
-        email: emailValue,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-    })
+      const res = await fetch(apiUrl, {
+        body: JSON.stringify({
+          email: emailValue,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+      })
 
-    const { error } = await res.json()
-    if (error) {
-      setError(true)
-      setMessage(t('messageError'))
-    } else {
-      inputEl.current!.value = ''
-      setError(false)
-      setSubscribed(true)
-    }
-  }
+      const { error } = await res.json()
+      if (error) {
+        setError(true)
+        setMessage(t('messageError'))
+      } else {
+        if (inputEl.current) {
+          inputEl.current.value = ''
+        }
+        setError(false)
+        setSubscribed(true)
+      }
+    },
+    [apiUrl, t]
+  )
 
   return (
     <div>
       <div className="pb-1 text-lg font-semibold text-gray-800 dark:text-gray-100">
         {t('title')}
       </div>
-      <form className="flex flex-col sm:flex-row" onSubmit={subscribe}>
+      <form
+        className="flex flex-col sm:flex-row"
+        onSubmit={useCallback((e) => subscribe(e), [subscribe])}
+      >
         <div>
           <label htmlFor="email-input">
             <span className="sr-only">{t('mail')}</span>
@@ -86,9 +94,9 @@ const NewsletterForm = ({ apiUrl = '/api/newsletter' }: NewsletterFormProps) => 
           </button>
         </div>
       </form>
-      {error && (
+      {error ? (
         <div className="w-72 pt-2 text-sm text-red-500 dark:text-red-400 sm:w-96">{message}</div>
-      )}
+      ) : null}
     </div>
   )
 }

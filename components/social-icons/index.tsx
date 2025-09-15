@@ -1,19 +1,20 @@
+import siteMetadata from '@/data/siteMetadata'
+import React from 'react'
 import {
-  Mail,
-  Github,
   Facebook,
-  Youtube,
+  Github,
+  Instagram,
   Linkedin,
-  Twitter,
-  X,
+  Mail,
   Mastodon,
-  Whatsapp,
+  Reddit,
   Telegram,
   Threads,
-  Instagram,
-  Reddit,
+  Twitter,
+  Whatsapp,
+  X,
+  Youtube,
 } from './icons'
-import siteMetadata from '@/data/siteMetadata'
 
 const components = {
   mail: Mail,
@@ -37,32 +38,28 @@ type SocialIconProps = {
   size?: number
 }
 
-const SocialIcon = ({ kind, href, size = 8 }: SocialIconProps) => {
+const SocialIcon = ({ kind, href, size = 8 }: SocialIconProps): React.JSX.Element => {
   const SocialSvg = components[kind]
 
-  return (
+  return kind === 'mail' && !href && siteMetadata.formspree === true ? (
     <>
-      {kind === 'mail' && !href && siteMetadata.formspree === true ? (
-        <>
-          <span className="sr-only">{kind}</span>
-          <SocialSvg
-            className={`cursor-pointer fill-current text-gray-700 hover:text-primary-500 dark:text-gray-200 dark:hover:text-primary-400 h-${size} w-${size}`}
-          />
-        </>
-      ) : (
-        <a
-          className="text-sm text-gray-500 transition hover:text-gray-600"
-          target="_blank"
-          rel="noopener noreferrer"
-          href={href}
-        >
-          <span className="sr-only">{kind}</span>
-          <SocialSvg
-            className={`fill-current text-gray-700 hover:text-primary-500 dark:text-gray-200 dark:hover:text-primary-400 h-${size} w-${size}`}
-          />
-        </a>
-      )}
+      <span className="sr-only">{kind}</span>
+      <SocialSvg
+        className={`cursor-pointer fill-current text-gray-700 hover:text-primary-500 dark:text-gray-200 dark:hover:text-primary-400 h-${size} w-${size}`}
+      />
     </>
+  ) : (
+    <a
+      className="text-sm text-gray-500 transition hover:text-gray-600"
+      target="_blank"
+      rel="noopener noreferrer"
+      href={href}
+    >
+      <span className="sr-only">{kind}</span>
+      <SocialSvg
+        className={`fill-current text-gray-700 hover:text-primary-500 dark:text-gray-200 dark:hover:text-primary-400 h-${size} w-${size}`}
+      />
+    </a>
   )
 }
 

@@ -1,6 +1,5 @@
 'use client'
 
-import { Fragment, useEffect, useRef, useState } from 'react'
 import {
   Menu,
   MenuButton,
@@ -10,16 +9,16 @@ import {
   RadioGroup,
   Transition,
 } from '@headlessui/react'
+import { useTranslation } from 'app/[locale]/i18n/client'
+import type { LocaleTypes } from 'app/[locale]/i18n/settings'
+import { useParams } from 'next/navigation'
+import React, { Fragment, useCallback, useEffect, useRef, useState } from 'react'
+import { useOuterClick } from '../util/useOuterClick'
 import { DarkModeSwitch } from './DarkModeSwitch'
 import { Monitor, Moon, Sun } from './icons'
-import { useTheme } from './ThemeContext'
-import { useOuterClick } from '../util/useOuterClick'
-import { useParams } from 'next/navigation'
-import { LocaleTypes } from 'app/[locale]/i18n/settings'
-import { useTranslation } from 'app/[locale]/i18n/client'
-import { Theme } from './ThemeContext'
+import { Theme, useTheme } from './ThemeContext'
 
-const ThemeSwitch = () => {
+const ThemeSwitch = (): React.JSX.Element | null => {
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, 'common')
   const { theme, setTheme, mounted } = useTheme()
@@ -50,10 +49,33 @@ const ThemeSwitch = () => {
     }
   }, [theme])
 
-  const handleThemeChange = (newTheme: Theme) => {
-    setTheme(newTheme)
-    setMenuOpen(false)
-  }
+  const handleThemeChange = useCallback(
+    (newTheme: Theme) => {
+      setTheme(newTheme)
+      setMenuOpen(false)
+    },
+    [setTheme]
+  )
+
+  const handleDarkModeChange = useCallback((isChecked: boolean) => {
+    setDarkModeChecked(isChecked)
+  }, [])
+
+  const handleMenuToggle = useCallback(() => {
+    setMenuOpen(!menuOpen)
+  }, [menuOpen])
+
+  const handleLightTheme = useCallback(() => {
+    handleThemeChange(Theme.LIGHT)
+  }, [handleThemeChange])
+
+  const handleDarkTheme = useCallback(() => {
+    handleThemeChange(Theme.DARK)
+  }, [handleThemeChange])
+
+  const handleSystemTheme = useCallback(() => {
+    handleThemeChange(Theme.SYSTEM)
+  }, [handleThemeChange])
 
   if (!mounted) return null
 
@@ -63,8 +85,8 @@ const ThemeSwitch = () => {
         <MenuButton aria-label={t('theme')}>
           <DarkModeSwitch
             checked={darkModeChecked}
-            onChange={(isChecked) => setDarkModeChecked(isChecked)}
-            onClick={() => setMenuOpen(!menuOpen)}
+            onChange={handleDarkModeChange}
+            onClick={handleMenuToggle}
             size={24}
           />
         </MenuButton>
@@ -85,7 +107,7 @@ const ThemeSwitch = () => {
                   <MenuItem>
                     {({ focus }) => (
                       <button
-                        onClick={() => handleThemeChange(Theme.LIGHT)}
+                        onClick={handleLightTheme}
                         className={`${
                           focus
                             ? 'bg-gray-100 dark:bg-gray-600'
@@ -102,7 +124,7 @@ const ThemeSwitch = () => {
                   <MenuItem>
                     {({ focus }) => (
                       <button
-                        onClick={() => handleThemeChange(Theme.DARK)}
+                        onClick={handleDarkTheme}
                         className={`${
                           focus
                             ? 'bg-gray-100 dark:bg-gray-600'
@@ -119,7 +141,7 @@ const ThemeSwitch = () => {
                   <MenuItem>
                     {({ focus }) => (
                       <button
-                        onClick={() => handleThemeChange(Theme.SYSTEM)}
+                        onClick={handleSystemTheme}
                         className={`${
                           focus
                             ? 'bg-gray-100 dark:bg-gray-600'

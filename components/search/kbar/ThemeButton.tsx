@@ -1,4 +1,5 @@
-import { Theme } from '@/components/theme/ThemeContext'
+import type { Theme } from '@/components/theme/ThemeContext'
+import { useCallback, type JSX } from 'react'
 
 interface ThemeButtonProps {
   t: (key: string) => string
@@ -7,16 +8,27 @@ interface ThemeButtonProps {
   Icon: React.FC<React.SVGProps<SVGSVGElement>>
 }
 
-const ThemeButton: React.FC<ThemeButtonProps> = ({ t, handleThemeChange, theme, Icon }) => (
-  <button
-    className="flex flex-row py-2 hover:bg-primary-600 hover:text-white"
-    onClick={() => handleThemeChange(theme)}
-  >
-    <span className="ml-4 mr-2">
-      <Icon className="h-6 w-6" />
-    </span>
-    <div>{t(theme)}</div>
-  </button>
-)
+const ThemeButton: React.FC<ThemeButtonProps> = ({
+  t,
+  handleThemeChange,
+  theme,
+  Icon,
+}): JSX.Element => {
+  const handleClick = useCallback(() => {
+    handleThemeChange(theme)
+  }, [handleThemeChange, theme])
+
+  return (
+    <button
+      className="flex flex-row py-2 hover:bg-primary-600 hover:text-white"
+      onClick={handleClick}
+    >
+      <span className="ml-4 mr-2">
+        <Icon className="h-6 w-6" />
+      </span>
+      <div>{t(theme)}</div>
+    </button>
+  )
+}
 
 export default ThemeButton

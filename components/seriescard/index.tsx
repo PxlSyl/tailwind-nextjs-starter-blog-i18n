@@ -1,17 +1,29 @@
 'use client'
 
-import Link from 'next/link'
-import { Card, CardHeader, CardTitle, CardContent } from './seriesCard'
 import { useTranslation } from 'app/[locale]/i18n/client'
+import type { LocaleTypes } from 'app/[locale]/i18n/settings'
+import Link from 'next/link'
 import { useParams } from 'next/navigation'
-import { LocaleTypes } from 'app/[locale]/i18n/settings'
+import type { JSX } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from './seriesCard'
 
-export type PostSeriesProps = {
-  data: any
+interface SeriesPost {
+  slug: string
+  title: string
+  isCurrent: boolean
 }
 
-export const PostSeriesBox = ({ data }: PostSeriesProps) => {
-  const currentIndex = data.posts.findIndex((post: { isCurrent: any }) => post.isCurrent) + 1
+interface SeriesData {
+  title: string
+  posts: SeriesPost[]
+}
+
+export type PostSeriesProps = {
+  data: SeriesData
+}
+
+export const PostSeriesBox = ({ data }: PostSeriesProps): JSX.Element => {
+  const currentIndex = data.posts.findIndex((post: SeriesPost) => post.isCurrent) + 1
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, 'common')
 

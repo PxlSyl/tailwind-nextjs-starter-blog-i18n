@@ -15,13 +15,13 @@ const ResultItem: React.FC<ResultItemProps> = ({ item, active }) => (
     }`}
   >
     <div className="flex space-x-2">
-      {item.icon && <div className="mb-1 self-center">{item.icon}</div>}
+      {item.icon ? <div className="mb-1 self-center">{item.icon}</div> : null}
       <div className="block">
-        {item.subtitle && (
+        {item.subtitle ? (
           <div className={`${active ? 'text-gray-200' : 'text-gray-400'} text-xs`}>
             {item.subtitle}
           </div>
-        )}
+        ) : null}
         <div>{item.name}</div>
       </div>
     </div>

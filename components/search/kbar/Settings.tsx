@@ -26,7 +26,12 @@ const Settings: React.FC<SettingsProps> = ({ t, handleThemeChange, handleLinkCli
       <div className="ml-4 text-3xl font-semibold text-primary-400">{t('theme')}</div>
       <ThemeButton t={t} handleThemeChange={handleThemeChange} theme={Theme.LIGHT} Icon={Sun} />
       <ThemeButton t={t} handleThemeChange={handleThemeChange} theme={Theme.DARK} Icon={Moon} />
-      <ThemeButton t={t} handleThemeChange={handleThemeChange} theme={Theme.SYSTEM} Icon={Monitor} />
+      <ThemeButton
+        t={t}
+        handleThemeChange={handleThemeChange}
+        theme={Theme.SYSTEM}
+        Icon={Monitor}
+      />
     </div>
   </>
 )

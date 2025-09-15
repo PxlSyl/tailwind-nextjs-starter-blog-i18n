@@ -1,5 +1,5 @@
-import { SVGProps } from 'react'
-export function Sun(svgProps: SVGProps<SVGSVGElement>) {
+import React, { type SVGProps } from 'react'
+export function Sun(svgProps: SVGProps<SVGSVGElement>): React.JSX.Element {
   return (
     <svg {...svgProps} viewBox="0 0 20 20" fill="currentColor">
       <path
@@ -11,7 +11,7 @@ export function Sun(svgProps: SVGProps<SVGSVGElement>) {
   )
 }
 
-export function Moon(svgProps: SVGProps<SVGSVGElement>) {
+export function Moon(svgProps: SVGProps<SVGSVGElement>): React.JSX.Element {
   return (
     <svg {...svgProps} viewBox="0 0 20 20" fill="currentColor">
       <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
@@ -19,7 +19,7 @@ export function Moon(svgProps: SVGProps<SVGSVGElement>) {
   )
 }
 
-export function Monitor(svgProps: SVGProps<SVGSVGElement>) {
+export function Monitor(svgProps: SVGProps<SVGSVGElement>): React.JSX.Element {
   return (
     <svg
       {...svgProps}
@@ -30,9 +30,9 @@ export function Monitor(svgProps: SVGProps<SVGSVGElement>) {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <rect x="3" y="3" width="14" height="10" rx="2" ry="2"></rect>
-      <line x1="7" y1="17" x2="13" y2="17"></line>
-      <line x1="10" y1="13" x2="10" y2="17"></line>
+      <rect x="3" y="3" width="14" height="10" rx="2" ry="2" />
+      <line x1="7" y1="17" x2="13" y2="17" />
+      <line x1="10" y1="13" x2="10" y2="17" />
     </svg>
   )
 }

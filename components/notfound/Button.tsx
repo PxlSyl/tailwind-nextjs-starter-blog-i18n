@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import type { JSX } from 'react'
 
 type ButtonProps = {
   text: string
@@ -7,7 +8,7 @@ type ButtonProps = {
   rel?: string
 }
 
-const Button = ({ text, href }: ButtonProps) => {
+const Button = ({ text, href }: ButtonProps): JSX.Element => {
   return (
     <Link
       href={href}

@@ -11,9 +11,9 @@ const LayoutHeader: React.FC<LayoutHeaderProps> = ({ title, description }) => {
       <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-heading-400 dark:text-heading-400 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
         {title}
       </h1>
-      {description && (
+      {description ? (
         <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">{description}</p>
-      )}
+      ) : null}
     </div>
   )
 }
