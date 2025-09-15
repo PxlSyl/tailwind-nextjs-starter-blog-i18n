@@ -1,10 +1,5 @@
 {
   "buildCommand": "yarn build",
   "devCommand": "yarn dev",
-  "installCommand": "yarn install",
-  "functions": {
-    "app/api/**/*.ts": {
-      "runtime": "nodejs22.x"
-    }
-  }
+  "installCommand": "yarn install"
 }
