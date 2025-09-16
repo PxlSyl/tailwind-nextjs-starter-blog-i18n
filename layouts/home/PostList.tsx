@@ -33,14 +33,14 @@ const PostList: React.FC<PostListProps> = ({ posts, locale, t, maxDisplay }) => 
               <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
                 <dl>
                   <dt className="sr-only">{t('pub')}</dt>
-                  <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+                  <dd className="text-base leading-6 font-medium text-gray-500 dark:text-gray-400">
                     <time dateTime={date}>{formatDate(date, locale)}</time>
                   </dd>
                 </dl>
                 <div className="space-y-5 xl:col-span-3">
                   <div className="space-y-6">
                     <div>
-                      <h2 className="text-2xl font-bold leading-8 tracking-tight">
+                      <h2 className="text-2xl leading-8 font-bold tracking-tight">
                         <Link
                           href={`/${locale}/blog/${slug}`}
                           className="text-gray-900 dark:text-gray-100"
@@ -62,7 +62,7 @@ const PostList: React.FC<PostListProps> = ({ posts, locale, t, maxDisplay }) => 
                         : summary}
                     </div>
                   </div>
-                  <div className="text-base font-medium leading-6">
+                  <div className="text-base leading-6 font-medium">
                     <Link
                       href={`/${locale}/blog/${slug}`}
                       className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"

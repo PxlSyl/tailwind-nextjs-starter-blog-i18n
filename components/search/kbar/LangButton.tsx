@@ -19,10 +19,10 @@ const LangButton: React.FC<LangButtonProps> = ({
 
   return (
     <button
-      className="group flex flex-row items-center py-2 hover:bg-primary-600 hover:text-white"
+      className="group hover:bg-primary-600 flex cursor-pointer flex-row items-center py-2 hover:text-white"
       onClick={handleClick}
     >
-      <span className="ml-4 mr-2 w-8 rounded-md bg-black px-1 text-white group-hover:bg-white group-hover:text-primary-500 dark:bg-white dark:text-black">
+      <span className="group-hover:text-primary-500 mr-2 ml-4 w-8 rounded-md bg-black px-1 text-white group-hover:bg-white dark:bg-white dark:text-black">
         {locale}
       </span>
       <div>{t(lang)}</div>

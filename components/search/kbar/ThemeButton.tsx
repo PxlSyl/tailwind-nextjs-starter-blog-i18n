@@ -20,10 +20,10 @@ const ThemeButton: React.FC<ThemeButtonProps> = ({
 
   return (
     <button
-      className="flex flex-row py-2 hover:bg-primary-600 hover:text-white"
+      className="hover:bg-primary-600 flex cursor-pointer flex-row py-2 hover:text-white"
       onClick={handleClick}
     >
-      <span className="ml-4 mr-2">
+      <span className="mr-2 ml-4">
         <Icon className="h-6 w-6" />
       </span>
       <div>{t(theme)}</div>

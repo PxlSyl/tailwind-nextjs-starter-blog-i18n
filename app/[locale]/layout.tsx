@@ -7,6 +7,7 @@ import Header from '@/components/navigation/Header'
 import { SearchProvider } from '@/components/search/SearchProvider'
 import SectionContainer from '@/components/SectionContainer'
 import { ThemeProvider } from '@/components/theme/ThemeContext'
+import ThemeScript from '@/components/theme/ThemeScript'
 import { maindescription, maintitle } from '@/data/localeMetadata'
 import siteMetadata from '@/data/siteMetadata'
 import { dir } from 'i18next'
@@ -105,6 +106,7 @@ export default async function RootLayout({
       <body className="bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white">
         <TwSizeIndicator />
         <ThemeProvider>
+          <ThemeScript />
           <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
           <SectionContainer>
             <div className="flex h-screen flex-col justify-between font-sans">

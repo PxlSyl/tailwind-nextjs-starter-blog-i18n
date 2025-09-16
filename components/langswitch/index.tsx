@@ -72,14 +72,14 @@ const LangSwitch = (): JSX.Element => {
         {({ open }) => (
           <div>
             <MenuButton
-              className="inline-flex rounded-md px-1 py-2 font-bold leading-5 text-gray-700 shadow-sm dark:text-white"
+              className="inline-flex cursor-pointer rounded-md px-1 py-2 leading-5 font-bold text-gray-700 shadow-sm dark:text-white"
               aria-haspopup="true"
               aria-expanded={open}
               onClick={handleMenuToggle}
             >
               {currentLocale}
               <ChevronDownIcon
-                className={`ml-1 mt-1 transform transition-transform duration-300 ${open ? 'rotate-180' : 'rotate-0'}`}
+                className={`mt-1 ml-1 transform transition-transform duration-300 ${open ? 'rotate-180' : 'rotate-0'}`}
               />
             </MenuButton>
             <Transition
@@ -92,7 +92,7 @@ const LangSwitch = (): JSX.Element => {
               leaveTo="opacity-0 scale-95 translate-y-[10px]"
             >
               <MenuItems
-                className="absolute right-0 z-50 mt-2 w-12 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800"
+                className="ring-opacity-5 absolute right-0 z-50 mt-2 w-12 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black focus:outline-none dark:bg-gray-800"
                 aria-orientation="vertical"
                 onBlur={handleMenuBlur}
               >
@@ -112,7 +112,7 @@ const LangSwitch = (): JSX.Element => {
                                 focus
                                   ? 'bg-gray-100 dark:bg-gray-600'
                                   : 'hover:bg-gray-100 dark:hover:bg-gray-600'
-                              } rounded-md px-4 py-2 text-sm text-gray-700 hover:text-primary-500 dark:text-white dark:hover:text-primary-500`}
+                              } hover:text-primary-500 dark:hover:text-primary-500 cursor-pointer rounded-md px-4 py-2 text-sm text-gray-700 dark:text-white`}
                               role="menuitem"
                               style={{ display: 'block', width: '100%', textDecoration: 'none' }}
                             >

@@ -72,13 +72,13 @@ const MobileNav = (): JSX.Element => {
         </svg>
       </button>
       <div
-        className={`fixed left-0 top-0 z-10 my-auto h-full w-full transform overflow-y-auto bg-white opacity-95 duration-300 ease-in-out dark:bg-gray-950 dark:opacity-[0.98] ${
+        className={`fixed top-0 left-0 z-10 my-auto h-full w-full transform overflow-y-auto bg-white opacity-95 duration-300 ease-in-out dark:bg-gray-950 dark:opacity-[0.98] ${
           navShow ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
         <div className="flex justify-end">
           <button
-            className="mr-8 mt-11 h-8 w-8"
+            className="mt-11 mr-8 h-8 w-8"
             aria-label="Toggle Menu"
             onClick={useCallback(() => onToggleNav(), [onToggleNav])}
           >

@@ -14,7 +14,7 @@ const ContentSecurityPolicy = `
   connect-src * statichunt.com;
   font-src 'self';
   frame-src giscus.app https://www.youtube.com/ https://www.youtube-nocookie.com/
-`;
+`
 
 const securityHeaders = [
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
@@ -47,7 +47,7 @@ const securityHeaders = [
     key: 'Permissions-Policy',
     value: 'camera=(), microphone=(), geolocation=()',
   },
-];
+]
 
 /**
  * @type {import('next/dist/next-server/server/config').NextConfig}

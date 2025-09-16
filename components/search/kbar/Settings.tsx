@@ -13,17 +13,17 @@ interface SettingsProps {
 
 const Settings: React.FC<SettingsProps> = ({ t, handleThemeChange, handleLinkClick }) => (
   <>
-    <div className="mb-5 ml-4 mt-5 flex flex-row items-center text-3xl font-semibold text-heading-400">
+    <div className="text-heading-400 mt-5 mb-5 ml-4 flex flex-row items-center text-3xl font-semibold">
       <span>
         <SettingsIcon className="mr-1 h-6 w-6" />
       </span>
       <div>{t('settings')}</div>
     </div>
-    <div className="my-auto mb-20 mt-10 flex max-h-[230px] flex-col space-y-4 overflow-y-auto">
-      <div className="ml-4 text-3xl font-semibold text-primary-400">{t('language')}</div>
+    <div className="my-auto mt-10 mb-20 flex max-h-[230px] flex-col space-y-4 overflow-y-auto">
+      <div className="text-primary-400 ml-4 text-3xl font-semibold">{t('language')}</div>
       <LangButton t={t} handleLinkClick={handleLinkClick} locale={fallbackLng} lang="english" />
       <LangButton t={t} handleLinkClick={handleLinkClick} locale={secondLng} lang="french" />
-      <div className="ml-4 text-3xl font-semibold text-primary-400">{t('theme')}</div>
+      <div className="text-primary-400 ml-4 text-3xl font-semibold">{t('theme')}</div>
       <ThemeButton t={t} handleThemeChange={handleThemeChange} theme={Theme.LIGHT} Icon={Sun} />
       <ThemeButton t={t} handleThemeChange={handleThemeChange} theme={Theme.DARK} Icon={Moon} />
       <ThemeButton

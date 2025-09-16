@@ -100,7 +100,7 @@ const ThemeSwitch = (): React.JSX.Element | null => {
           leaveFrom="opacity-100 scale-100 translate-y-0"
           leaveTo="opacity-0 scale-95 translate-y-[10px]"
         >
-          <MenuItems className="absolute right-0 z-50 mt-2 w-32 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800">
+          <MenuItems className="ring-opacity-5 absolute right-0 z-50 mt-2 w-32 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black focus:outline-none dark:bg-gray-800">
             <RadioGroup value={theme} onChange={handleThemeChange}>
               <div className="p-1">
                 <Radio value={Theme.LIGHT}>
@@ -112,7 +112,7 @@ const ThemeSwitch = (): React.JSX.Element | null => {
                           focus
                             ? 'bg-gray-100 dark:bg-gray-600'
                             : 'hover:bg-gray-100 dark:hover:bg-gray-600'
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm hover:text-primary-500 dark:hover:text-primary-500`}
+                        } group hover:text-primary-500 dark:hover:text-primary-500 flex w-full cursor-pointer items-center rounded-md px-2 py-2 text-sm`}
                       >
                         <Sun className="h-6 w-6" />
                         <span className="ml-2">{t('light')}</span>
@@ -129,7 +129,7 @@ const ThemeSwitch = (): React.JSX.Element | null => {
                           focus
                             ? 'bg-gray-100 dark:bg-gray-600'
                             : 'hover:bg-gray-100 dark:hover:bg-gray-600'
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm hover:text-primary-500 dark:hover:text-primary-500`}
+                        } group hover:text-primary-500 dark:hover:text-primary-500 flex w-full cursor-pointer items-center rounded-md px-2 py-2 text-sm`}
                       >
                         <Moon className="h-6 w-6" />
                         <span className="ml-2">{t('dark')}</span>
@@ -146,7 +146,7 @@ const ThemeSwitch = (): React.JSX.Element | null => {
                           focus
                             ? 'bg-gray-100 dark:bg-gray-600'
                             : 'hover:bg-gray-100 dark:hover:bg-gray-600'
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm hover:text-primary-500 dark:hover:text-primary-500`}
+                        } group hover:text-primary-500 dark:hover:text-primary-500 flex w-full cursor-pointer items-center rounded-md px-2 py-2 text-sm`}
                       >
                         <Monitor className="h-6 w-6" />
                         <span className="ml-2">{t('system')}</span>

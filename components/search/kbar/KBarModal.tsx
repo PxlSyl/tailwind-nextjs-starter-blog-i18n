@@ -9,11 +9,12 @@ import {
   KBarPortal,
   KBarPositioner,
   KBarSearch,
+  useKBar,
   useRegisterActions,
   type Action,
 } from 'kbar'
 import { useParams, usePathname, useRouter } from 'next/navigation'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Toaster } from 'react-hot-toast'
 import { MailIcon, SearchIcon, SettingsIcon } from '../icons'
 import Button from './Button'
@@ -33,8 +34,16 @@ export const KBarModal: React.FC<KBarModalProps> = ({ actions, isLoading }) => {
   const pathname = usePathname()
   const router = useRouter()
   const setSelectedTag = useTagStore((state) => state.setSelectedTag)
+  const { query } = useKBar()
 
   useRegisterActions(actions, [actions])
+
+  useEffect(() => {
+    const inputElement = document.querySelector('[data-kbar-search]') as HTMLInputElement
+    if (inputElement) {
+      query.inputRefSetter(inputElement)
+    }
+  }, [query])
 
   const {
     state,
@@ -103,6 +112,10 @@ export const KBarModal: React.FC<KBarModalProps> = ({ actions, isLoading }) => {
 
   const handleEmailButtonClick = useCallback(() => toggleShowEmail(), [])
   const handleSettingsButtonClick = useCallback(() => toggleSettings(), [])
+
+  // Handle back button clicks
+  const handleBackFromEmail = useCallback(() => setShowEmailForm(false), [])
+  const handleBackFromSettings = useCallback(() => setShowSettings(false), [])
   const handleCopyButtonClick = useCallback(() => copyUrl(), [])
   const handleSettingsThemeChange = useCallback(
     (newTheme: string) => handleThemeChange(newTheme),
@@ -132,18 +145,19 @@ export const KBarModal: React.FC<KBarModalProps> = ({ actions, isLoading }) => {
                   <div className="h-8 w-full bg-transparent" />
                 ) : (
                   <KBarSearch
+                    data-kbar-search
                     defaultPlaceholder={t('kbarplaceholder')}
                     className="h-8 w-full bg-transparent text-gray-600 placeholder-gray-400 focus:outline-none dark:text-gray-200 dark:placeholder-gray-500"
                   />
                 )}
-                <kbd className="inline-block whitespace-nowrap rounded border border-gray-400 px-1.5 align-middle text-xs font-medium leading-4 tracking-wide text-gray-400">
+                <kbd className="inline-block rounded border border-gray-400 px-1.5 align-middle text-xs leading-4 font-medium tracking-wide whitespace-nowrap text-gray-400">
                   ESC
                 </kbd>
               </div>
               <div className="mb-1 ml-2 flex items-center space-x-2">
                 {!showSettings && (
                   <Button
-                    onClick={handleEmailButtonClick}
+                    onClick={showEmailForm ? handleBackFromEmail : handleEmailButtonClick}
                     show={showEmailForm}
                     icon={mailIcon}
                     label={t('contact')}
@@ -152,7 +166,7 @@ export const KBarModal: React.FC<KBarModalProps> = ({ actions, isLoading }) => {
                 )}
                 {!showEmailForm && (
                   <Button
-                    onClick={handleSettingsButtonClick}
+                    onClick={showSettings ? handleBackFromSettings : handleSettingsButtonClick}
                     show={showSettings}
                     icon={settingsIcon}
                     label={t('settings')}

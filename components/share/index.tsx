@@ -47,7 +47,7 @@ const Share = ({ title, description, slug, className }: ShareProps): JSX.Element
   return (
     <div className="m-4 mt-8 flex flex-col items-center justify-center pt-4 sm:flex-row">
       <div className="mb-4 sm:mb-0">
-        <p className="text-highlighted dark:text-darkmode-highlighted mr-3 px-4 font-bold text-primary-500 sm:border-r-2">
+        <p className="text-highlighted dark:text-darkmode-highlighted text-primary-500 mr-3 px-4 font-bold sm:border-r-2">
           {t('share')}
         </p>
       </div>
@@ -114,7 +114,7 @@ const Share = ({ title, description, slug, className }: ShareProps): JSX.Element
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
               onClick={handleCopy}
-              className="fill-current text-gray-700 outline-none hover:text-primary-500 focus:outline-none dark:text-gray-200 dark:hover:text-primary-400"
+              className="hover:text-primary-500 dark:hover:text-primary-400 fill-current text-gray-700 outline-none focus:outline-none dark:text-gray-200"
             >
               <svg height="24" viewBox="0 0 24 24" width="24">
                 <path d="M0 0h24v24H0z" fill="none" />
@@ -122,7 +122,7 @@ const Share = ({ title, description, slug, className }: ShareProps): JSX.Element
               </svg>
             </button>
             {showMenu ? (
-              <div className="absolute right-0 top-8 w-32 rounded-md bg-white p-2 text-center shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800">
+              <div className="ring-opacity-5 absolute top-8 right-0 w-32 rounded-md bg-white p-2 text-center shadow-lg ring-1 ring-black focus:outline-none dark:bg-gray-800">
                 <p className={`${copied ? 'text-primary-500 dark:text-primary-400' : ''}`}>
                   {copied ? t('urlcopied') : t('copyurl')}
                 </p>

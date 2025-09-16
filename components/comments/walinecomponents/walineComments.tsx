@@ -37,13 +37,13 @@ export default function WalineComments(): ReactElement {
     <>
       {!loadComments && (
         <button
-          className="mb-6 rounded bg-primary-500 p-2 text-white hover:opacity-80 dark:hover:opacity-80"
+          className="bg-primary-500 mb-6 rounded p-2 text-white hover:opacity-80 dark:hover:opacity-80"
           onClick={handleLoadComments}
         >
           {t('comment')}
         </button>
       )}
-      {loadComments ? <div className="mb-6 mt-6" id="waline" /> : null}
+      {loadComments ? <div className="mt-6 mb-6" id="waline" /> : null}
     </>
   )
 }

@@ -68,7 +68,7 @@ const NewsletterForm = ({ apiUrl = '/api/newsletter' }: NewsletterFormProps): JS
             <span className="sr-only">{t('mail')}</span>
             <input
               autoComplete="email"
-              className="w-72 rounded-md px-4 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-primary-600 dark:bg-black"
+              className="focus:ring-primary-600 w-72 rounded-md px-4 focus:border-transparent focus:ring-2 focus:outline-none dark:bg-black"
               id="email-input"
               name="email"
               placeholder={`${subscribed ? t('placeholderSuccess') : t('placeholderDefault')}`}
@@ -79,23 +79,23 @@ const NewsletterForm = ({ apiUrl = '/api/newsletter' }: NewsletterFormProps): JS
             />
           </label>
         </div>
-        <div className="mt-2 flex w-full rounded-md shadow-sm sm:ml-3 sm:mt-0">
+        <div className="mt-2 flex w-full rounded-md shadow-sm sm:mt-0 sm:ml-3">
           <button
-            className={`group relative inline-flex items-center justify-center overflow-hidden rounded-md bg-primary-500 px-4 py-1.5 text-xs font-normal text-white transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:shadow-blue-500/30 dark:bg-primary-500 dark:hover:shadow-purple-500/30 ${subscribed ? 'cursor-default' : ''}`}
+            className={`group bg-primary-500 dark:bg-primary-500 relative inline-flex items-center justify-center overflow-hidden rounded-md px-4 py-1.5 text-xs font-normal text-white transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:shadow-blue-500/30 dark:hover:shadow-purple-500/30 ${subscribed ? 'cursor-default' : ''}`}
             type="submit"
             disabled={subscribed}
           >
             <span className="relative z-50 text-lg text-white">
               {subscribed ? t('buttonSuccess') : t('buttonDefault')}
             </span>
-            <div className="absolute inset-0 flex h-full w-full justify-center [transform:skew(-13deg)_translateX(-100%)] group-hover:duration-1000 group-hover:[transform:skew(-13deg)_translateX(100%)]">
+            <div className="absolute inset-0 flex h-full w-full [transform:skew(-13deg)_translateX(-100%)] justify-center group-hover:[transform:skew(-13deg)_translateX(100%)] group-hover:duration-1000">
               <div className="relative h-full w-8 bg-white/20" />
             </div>
           </button>
         </div>
       </form>
       {error ? (
-        <div className="w-72 pt-2 text-sm text-red-500 dark:text-red-400 sm:w-96">{message}</div>
+        <div className="w-72 pt-2 text-sm text-red-500 sm:w-96 dark:text-red-400">{message}</div>
       ) : null}
     </div>
   )

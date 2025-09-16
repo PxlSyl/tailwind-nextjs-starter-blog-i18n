@@ -69,7 +69,7 @@ const AuthorsMenu = ({ className }: AuthorsMenuProps): JSX.Element => {
             <div
               className={`${
                 focus ? 'bg-gray-100 dark:bg-gray-600' : 'hover:bg-gray-100 dark:hover:bg-gray-600'
-              } group flex w-full items-center rounded-md px-2 py-2 text-sm hover:text-primary-500 dark:hover:text-primary-500`}
+              } group hover:text-primary-500 dark:hover:text-primary-500 flex w-full cursor-pointer items-center rounded-md px-2 py-2 text-sm`}
             >
               <div className="mr-2">
                 <Image
@@ -96,10 +96,10 @@ const AuthorsMenu = ({ className }: AuthorsMenuProps): JSX.Element => {
 
   return siteMetadata.multiauthors ? (
     <div ref={menubarRef} className={className}>
-      <Menu as="div" className="relative inline-block text-left font-medium leading-5">
+      <Menu as="div" className="relative inline-block text-left leading-5 font-medium">
         <div>
           <MenuButton
-            className="flex transform-gpu items-center space-x-1 transition-transform duration-300"
+            className="flex transform-gpu cursor-pointer items-center space-x-1 transition-transform duration-300"
             onClick={useCallback(() => toggleMenu(), [toggleMenu])}
           >
             <div
@@ -131,7 +131,7 @@ const AuthorsMenu = ({ className }: AuthorsMenuProps): JSX.Element => {
         >
           <div>
             <MenuItems
-              className="absolute right-0 z-50 mt-2 w-40 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800"
+              className="ring-opacity-5 absolute right-0 z-50 mt-2 w-40 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black focus:outline-none dark:bg-gray-800"
               as="div"
             >
               <RadioGroup>
@@ -163,7 +163,7 @@ const AuthorsMenu = ({ className }: AuthorsMenuProps): JSX.Element => {
               <motion.span
                 layoutId="tab"
                 transition={{ type: 'spring', duration: 0.4 }}
-                className="absolute inset-0 z-0 rounded-md bg-heading-500"
+                className="bg-heading-500 absolute inset-0 z-0 rounded-md"
               />
             ) : null}
           </Link>

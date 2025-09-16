@@ -41,10 +41,10 @@ const ScrollTopAndComment = (): JSX.Element | null => {
 
     return (
       <div
-        className={`fixed bottom-8 right-8 z-50 hidden flex-col gap-3 ${show ? 'md:flex' : 'md:hidden'}`}
+        className={`fixed right-8 bottom-8 z-50 hidden flex-col gap-3 ${show ? 'md:flex' : 'md:hidden'}`}
       >
         <SearchButtonWrapper aria-label="Search">
-          <div className="rounded-full bg-gray-200 p-2 text-gray-500 transition-all hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600">
+          <div className="cursor-pointer rounded-full bg-gray-200 p-2 text-gray-500 transition-all hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600">
             <SearchIcon className="h-5 w-5" />
           </div>
         </SearchButtonWrapper>
@@ -52,7 +52,7 @@ const ScrollTopAndComment = (): JSX.Element | null => {
           <button
             aria-label={t('scrollcomment')}
             onClick={useCallback(() => handleScrollToComment(), [handleScrollToComment])}
-            className="rounded-full bg-gray-200 p-2 text-gray-500 transition-all hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600"
+            className="cursor-pointer rounded-full bg-gray-200 p-2 text-gray-500 transition-all hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600"
           >
             <CommentsIcon className="h-5 w-5" />
           </button>
@@ -60,7 +60,7 @@ const ScrollTopAndComment = (): JSX.Element | null => {
         <button
           aria-label={t('scrolltop')}
           onClick={useCallback(() => handleScrollTop(), [handleScrollTop])}
-          className="rounded-full bg-gray-200 p-2 text-gray-500 transition-all hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600"
+          className="cursor-pointer rounded-full bg-gray-200 p-2 text-gray-500 transition-all hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600"
         >
           <ArrowTopIcon className="h-5 w-5" />
         </button>

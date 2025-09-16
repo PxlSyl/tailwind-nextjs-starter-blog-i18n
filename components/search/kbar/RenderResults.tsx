@@ -15,7 +15,7 @@ const RenderResults = (): JSX.Element => {
       <div>
         {typeof item === 'string' ? (
           <div className="pt-3">
-            <div className="block border-t border-gray-100 px-4 pb-2 pt-6 text-xs font-semibold uppercase text-primary-600 dark:border-gray-800">
+            <div className="text-primary-600 block border-t border-gray-100 px-4 pt-6 pb-2 text-xs font-semibold uppercase dark:border-gray-800">
               {item}
             </div>
           </div>

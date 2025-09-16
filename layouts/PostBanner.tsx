@@ -83,9 +83,9 @@ export default function PostMinimal({
                 />
               </div>
             ) : null}
-            <div className="prose max-w-none py-4 dark:prose-invert">{children}</div>
+            <div className="prose dark:prose-invert max-w-none py-4">{children}</div>
             <Share title={title} slug={slug} />
-            <div className="pb-6 pt-6 text-center text-gray-700 dark:text-gray-300" id="comment">
+            <div className="pt-6 pb-6 text-center text-gray-700 dark:text-gray-300" id="comment">
               {siteMetadata.iswaline === true && <WalineComments />}
               {siteMetadata.comments && siteMetadata.iscomments === true ? (
                 <Comments slug={slug} />
