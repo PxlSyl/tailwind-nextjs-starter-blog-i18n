@@ -1,4 +1,4 @@
-@reference "./tailwind.css";
+/* Prism CSS - Code highlighting styles */
 
 /**
  * CSS Styles for code highlighting.
@@ -9,36 +9,68 @@
 
 /* Code title styles */
 .remark-code-title {
-  @apply rounded-t bg-gray-700 dark:bg-gray-800 px-5 py-3 font-mono text-sm font-bold text-gray-200;
+  border-top-left-radius: 0.375rem;
+  border-top-right-radius: 0.375rem;
+  background-color: rgb(55 65 81);
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: rgb(229 231 235);
+}
+
+.dark .remark-code-title {
+  background-color: rgb(31 41 55);
 }
 
 .remark-code-title+div>pre {
-  @apply mt-0 rounded-t-none;
+  margin-top: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 
 /* Code block styles */
 .code-highlight {
-  @apply float-left min-w-full;
+  float: left;
+  min-width: 100%;
 }
 
 .code-line {
-  @apply -mx-4 block border-l-4 border-transparent pl-4 pr-4;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  display: block;
+  border-left-width: 4px;
+  border-left-color: transparent;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .code-line.inserted {
-  @apply bg-green-500 bg-opacity-20;
+  background-color: rgb(34 197 94 / 0.2);
 }
 
 .code-line.deleted {
-  @apply bg-red-500 bg-opacity-20;
+  background-color: rgb(239 68 68 / 0.2);
 }
 
 .highlight-line {
-  @apply -mx-4 border-l-4 border-primary-500 bg-gray-700 bg-opacity-50;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  border-left-width: 4px;
+  border-left-color: rgb(236 72 153);
+  background-color: rgb(55 65 81 / 0.5);
 }
 
 .line-number::before {
-  @apply mr-4 -ml-2 inline-block w-4 text-right text-gray-400;
+  margin-right: 1rem;
+  margin-left: -0.5rem;
+  display: inline-block;
+  width: 1rem;
+  text-align: right;
+  color: rgb(156 163 175);
   content: attr(line);
 }
 

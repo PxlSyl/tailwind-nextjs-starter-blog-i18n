@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation'
 import { useEffect } from 'react'
 
-export default function ThemeScript() {
+export default function ThemeScript(): null {
   const pathname = usePathname()
 
   useEffect(() => {
